@@ -4,6 +4,8 @@
   "description": "Ui for salty dog salinity sensor",
   "main": "index.js",
   "scripts": {
+    "react-dev": "webpack -d --watch",
+    "server-dev": "nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
@@ -19,7 +21,6 @@
   "dependencies": {
     "axios": "^0.20.0",
     "@babel/cli": "^7.0.0",
-    "@babel/core": "^7.0.0",
     "cors": "^2.8.5",
     "css-loader": "^5.0.0",
     "dotenv": "^8.2.0",
@@ -34,6 +35,10 @@
     "style-loader": "^2.0.0"
   },
   "devDependencies": {
+    "@babel/core": "^7.12.0",
+    "@babel/preset-env": "^7.12.0",
+    "@babel/preset-react": "^7.10.4",
+    "babel-loader": "^8.1.0",
     "eslint": "^7.11.0",
     "eslint-config-airbnb": "^18.2.0",
     "eslint-plugin-import": "^2.22.1",
