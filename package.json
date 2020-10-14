@@ -1,0 +1,36 @@
+{
+  "name": "saltydogui",
+  "version": "1.0.0",
+  "description": "Ui for salty dog salinity sensor",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bohemus307/SaltyDogUI.git"
+  },
+  "author": "Joshua Oxner",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bohemus307/SaltyDogUI/issues"
+  },
+  "homepage": "https://github.com/Bohemus307/SaltyDogUI#readme",
+  "dependencies": {
+    "axios": "^0.20.0",
+    "cors": "^2.8.5",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "fs": "0.0.1-security",
+    "morgan": "^1.10.0",
+    "nodemon": "^2.0.5",
+    "path": "^0.12.7",
+    "react": "^16.14.0",
+    "react-dom": "^16.14.0",
+    "react-router-dom": "^5.2.0"
+  },
+  "devDependencies": {
+    "webpack": "^5.1.0",
+    "webpack-cli": "^4.0.0"
+  }
+}
