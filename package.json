@@ -19,8 +19,8 @@
   },
   "homepage": "https://github.com/Bohemus307/SaltyDogUI#readme",
   "dependencies": {
-    "axios": "^0.20.0",
     "@babel/cli": "^7.0.0",
+    "axios": "^0.20.0",
     "cors": "^2.8.5",
     "css-loader": "^5.0.0",
     "dotenv": "^8.2.0",
@@ -32,6 +32,7 @@
     "react": "^16.14.0",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
+    "react-scripts": "^3.4.3",
     "style-loader": "^2.0.0"
   },
   "devDependencies": {
