@@ -3,13 +3,11 @@ import {
   BrowserRouter as Router,
   Switch,
   Route,
-  Link,
+  NavLink,
   Redirect,
   useHistory,
   useLocation,
 } from 'react-router-dom';
-
-import LoginPage from '../Components/Login.jsx';
 
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
@@ -31,22 +29,22 @@ export default function App() {
     <Router>
       <div>
         <AuthButton />
-
+        
         <ul>
           <li>
-            <Link to="/public">Public Page</Link>
+            <NavLink to="/public" exact>Public Page</NavLink>
           </li>
           <li>
-            <Link to="/protected">Protected Page</Link>
+            <NavLink to="/protected" >Protected Page</NavLink>
           </li>
         </ul>
 
         <Switch>
-          <Route path="/public">
-            <PublicPage />
-          </Route>
           <Route path="/login">
             <LoginPage />
+          </Route>
+          <Route path="/public">
+            <PublicPage />
           </Route>
           <PrivateRoute path="/protected">
             <ProtectedPage />
@@ -117,24 +115,24 @@ function ProtectedPage() {
   return <h3>Protected</h3>;
 }
 
-// function LoginPage() {
-//   const history = useHistory();
-//   const location = useLocation();
+function LoginPage() {
+  const history = useHistory();
+  const location = useLocation();
 
-//   const { from } = location.state || { from: { pathname: '/' } };
-//   const login = () => {
-//     fakeAuth.authenticate(() => {
-//       history.replace(from);
-//     });
-//   };
+  const { from } = location.state || { from: { pathname: '/' } };
+  const login = () => {
+    fakeAuth.authenticate(() => {
+      history.replace(from);
+    });
+  };
 
-//   return (
-//     <div>
-//       <p>
-//         You must log in to view the page at
-//         {from.pathname}
-//       </p>
-//       <button onClick={login}>Log in</button>
-//     </div>
-//   );
-// }
+  return (
+    <div>
+      <p>
+        You must log in to view the page at
+        {from.pathname}
+      </p>
+      <button onClick={login}>Login</button>
+    </div>
+  );
+}

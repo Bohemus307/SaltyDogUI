@@ -14,6 +14,15 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-app.use('/data', Router);
+// app.use('/data', Router);
+
+// for redirect of refresh
+app.get('/*', function(req, res) {
+  res.sendFile(path.join(__dirname, '/../../public/index.html'), function(err) {
+    if (err) {
+      res.status(500).send(err)
+    }
+  })
+})
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
