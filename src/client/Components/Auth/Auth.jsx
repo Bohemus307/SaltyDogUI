@@ -1,7 +1,8 @@
 import React from 'react';
-import { Input } from '../UI/Input/Input.jsx';
+// import { Input } from '../UI/Input/Input.jsx';
 
 import classes from './Auth.css';
+import Logo from '../Logo/Logo.jsx';
 
 class Auth extends React.Component {
   constructor() {
@@ -56,13 +57,14 @@ class Auth extends React.Component {
     }, {});
 
     return (
-      <div className={classes.body} id="login">
+      <div className={classes.Login} id="login">
+        <Logo />
         <form name="form-login">
-          <span className={classes.fontawesome_user} />
-          <input type="text" id="user" placeholder="Username" />
-          <span className={classes.fontawesome_lock} />
-          <input type="password" id="password" placeholder="Password" />
-          <input type="submit" value="Login" />
+          <span />
+          <input className={classes.Login} type="text" id="user" placeholder="Username" />
+          <span />
+          <input className={classes.Login} type="password" id="password" placeholder="Password" />
+          <input className={classes.Login} type="submit" value="Login" />
         </form>
       </div>
     );

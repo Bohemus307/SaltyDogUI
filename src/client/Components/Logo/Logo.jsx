@@ -1,11 +1,10 @@
 import React from 'react';
 
 import classes from './Logo.css';
-import HeronLogo from '../../../../public/images/heronlogosquare.png';
 
-const Logo = (props) => (
-  <div className={classes.Logo} style={{ height: props.height }}>
-    <img src={HeronLogo} alt="My Burger" />
+const Logo = () => (
+  <div className={classes.Logo}>
+    <img className={classes.Logo_Image} src="/images/heronlogosquare.png" alt="Logo" />
   </div>
 );
 
