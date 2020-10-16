@@ -9,6 +9,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 
+import Auth from '../Components/Auth/Auth.jsx';
+
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
 // page, you must first login. Pretty standard stuff.
@@ -29,19 +31,19 @@ export default function App() {
     <Router>
       <div>
         <AuthButton />
-        
         <ul>
           <li>
             <NavLink to="/public" exact>Public Page</NavLink>
           </li>
           <li>
-            <NavLink to="/protected" >Protected Page</NavLink>
+            <NavLink to="/protected">Protected Page</NavLink>
           </li>
         </ul>
 
         <Switch>
           <Route path="/login">
-            <LoginPage />
+            {/* <LoginPage /> */}
+            <Auth />
           </Route>
           <Route path="/public">
             <PublicPage />

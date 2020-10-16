@@ -17,12 +17,12 @@ app.use(express.json());
 // app.use('/data', Router);
 
 // for redirect of refresh
-app.get('/*', function(req, res) {
-  res.sendFile(path.join(__dirname, '/../../public/index.html'), function(err) {
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
     if (err) {
-      res.status(500).send(err)
+      res.status(500).send(err);
     }
-  })
-})
+  });
+});
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

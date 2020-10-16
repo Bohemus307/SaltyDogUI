@@ -18,6 +18,7 @@ module.exports = {
     'react',
   ],
   rules: {
-    "import/extensions": "always"
+    'import/extensions': 0,
+    'react/jsx-props-no-spreading': 'off',
   },
 };
