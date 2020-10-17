@@ -1,4 +1,5 @@
 body {
+  font-family: 'Montserrat', sans-serif;
   background: #2c3338;
   color: #606468;
   font: 87.5%/1.5em 'Open Sans', sans-serif;
@@ -19,8 +20,6 @@ p {
 }
 
 after { clear: both; }
-
-
 
 #login {
   margin: 50px auto;

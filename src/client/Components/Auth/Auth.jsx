@@ -57,15 +57,20 @@ class Auth extends React.Component {
     }, {});
 
     return (
-      <div className={classes.Login} id="login">
-        <Logo />
-        <form name="form-login">
-          <span />
-          <input className={classes.Login} type="text" id="user" placeholder="Username" />
-          <span />
-          <input className={classes.Login} type="password" id="password" placeholder="Password" />
-          <input className={classes.Login} type="submit" value="Login" />
-        </form>
+      <div className={classes.Auth}>
+        <div className={classes.Logo_Div}>
+          <Logo />
+          <span className={classes.Salty_Label}>Salty Dog Salinity Sensor</span>
+        </div>
+        <div id="login">
+          <form name="form-login">
+            <span />
+            <input type="text" id="user" placeholder="Username" />
+            <span />
+            <input type="password" id="password" placeholder="Password" />
+            <input type="submit" value="Login" />
+          </form>
+        </div>
       </div>
     );
   }
