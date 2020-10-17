@@ -1,15 +1,14 @@
 .Auth {
   display: flex;
   flex-direction: column;
-  align-items: center;
 }
 
 .Logo_Div {
   display: flex;
   flex-direction: row;
+  justify-content: center;
   align-items: center;
-  align-content: center;
-  width: 90%;
+  width: 100%;
 }
 
 .Salty_Div {
