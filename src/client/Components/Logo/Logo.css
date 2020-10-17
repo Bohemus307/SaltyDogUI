@@ -1,10 +1,8 @@
 
 .Logo {
   height: 400px;
-  margin: 50px auto;
   display: flex;
   flex-direction: column;
-  align-items: center;
   align-content: center;
   
 }
