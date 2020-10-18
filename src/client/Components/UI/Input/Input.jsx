@@ -3,43 +3,52 @@ import PropTypes from 'prop-types';
 
 import classes from './Input.css';
 
-const Input = (props) => {
+const Input = ({
+  invalid,
+  shouldValidate,
+  elementType,
+  changed,
+  elementConfig,
+  value,
+  touched,
+  label,
+}) => {
   let inputElement = null;
   const inputClasses = [classes.InputElement];
 
-  if (props.invalid && props.shouldValidate) {
+  if (invalid && shouldValidate) {
     inputClasses.push(classes.Invalid);
   }
 
-  switch (props.elementType) {
+  switch (elementType) {
     case ('input'):
       inputElement = (
         <input
-          onChange={props.changed}
+          onChange={changed}
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
+          {...elementConfig}
+          value={value}
         />
       );
       break;
     case ('textarea'):
       inputElement = (
         <textarea
-          onChange={props.changed}
+          onChange={changed}
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
+          {...elementConfig}
+          value={value}
         />
       );
       break;
     case ('select'):
       inputElement = (
         <select
-          onChange={props.changed}
+          onChange={changed}
           className={inputClasses.join(' ')}
-          value={props.value}
+          value={value}
         >
-          {props.elementConfig.options.map((option) => (
+          {elementConfig.options.map((option) => (
             <option key={option.value} value={option.value}>
               {option.displayValue}
             </option>
@@ -50,22 +59,22 @@ const Input = (props) => {
     default:
       inputElement = (
         <input
-          onChange={props.changed}
+          onChange={changed}
           className={inputClasses.join(' ')}
-          {...props.elementConfig}
-          value={props.value}
+          {...elementConfig}
+          value={value}
         />
       );
   }
   let validationError = null;
-  if (props.invalid && props.touched) {
+  if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
 
   return (
     <div className={classes.Input}>
       <img className={classes.InputImage} src="/images/id-card.png" alt="username" title="username" />
-      <label className={classes.Label}>{props.label}</label>
+      <label htmlFor="input-element" className={classes.Label}>{label}</label>
       {inputElement}
       {validationError}
     </div>
@@ -74,12 +83,13 @@ const Input = (props) => {
 
 Input.propTypes = {
   invalid: PropTypes.bool.isRequired,
-  shouldValidate: PropTypes.bool.isRequired,
+  shouldValidate: PropTypes.shape.isRequired,
   elementType: PropTypes.string.isRequired,
-  changed: PropTypes.bool.isRequired,
+  changed: PropTypes.func.isRequired,
   elementConfig: PropTypes.string.isRequired,
   value: PropTypes.string.isRequired,
-  
+  touched: PropTypes.bool.isRequired,
+  label: PropTypes.string.isRequired,
 };
 
 export default Input;

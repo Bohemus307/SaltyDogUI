@@ -4,7 +4,7 @@ import React from 'react';
 import classes from './Auth.css';
 import Logo from '../Logo/Logo.jsx';
 import Input from '../UI/Input/Input.jsx';
-import Spinner from '../UI/Spinner/Spinner.js';
+import Spinner from '../UI/Spinner/Spinner.jsx';
 
 class Auth extends React.Component {
   constructor() {
@@ -45,19 +45,59 @@ class Auth extends React.Component {
     };
   }
 
+  checkValidity = (value, rules) => {
+    let isValid = true;
+
+    if (rules.required) {
+      isValid = value.trim() !== '' && isValid;
+    }
+
+    if (rules.minLength) {
+      isValid = value.length >= rules.minLength && isValid;
+    }
+
+    if (rules.maxLength) {
+      isValid = value.length <= rules.maxLength && isValid;
+    }
+
+    return isValid;
+  }
+
+  inputChangedHandler = (event, inputIdentifier) => {
+    const updatedOrderForm = { 
+      ...this.state.orderForm 
+    };
+    // deeper clone
+    const updatedFormELement = { 
+      ...updatedOrderForm[inputIdentifier] 
+    };
+    updatedFormELement.value = event.target.value;
+    updatedFormELement.valid = this.checkValidity(updatedFormELement.value, updatedFormELement.validation);
+    updatedFormELement.touched = true;
+    updatedOrderForm[inputIdentifier] = updatedFormELement;
+    console.log(updatedFormELement)
+    this.setState({
+      orderForm: updatedOrderForm
+    });
+  }
+
+
   render() {
     const { controls } = this.state;
     const keys = Object.keys(controls);
     const values = Object.values(controls);
 
-    const formElementsArray = keys.reduce((obj, key, idx) => {
-      let object = obj;
-      object = {
-        id: object[key],
+    const formElementsArray = keys.reduce((arr, key, idx) => {
+    
+      const object = {
+        id: key,
         config: values[idx],
       };
-      return object;
-    }, {});
+      arr.push(object);
+      return arr;
+    }, []);
+
+    console.log(formElementsArray);
     let form = (
       <form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
@@ -75,7 +115,10 @@ class Auth extends React.Component {
         {/* <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button> */}
       </form>
     );
-    if (this.state.loading) {
+
+    const { loading } = this.state;
+
+    if (loading) {
       form = <Spinner />;
     }
 
@@ -85,6 +128,7 @@ class Auth extends React.Component {
           <Logo />
           <span className={classes.Salty_Label}>Heron Farms</span>
         </div>
+        {form}
         <div id="login">
           <form name="form-login">
             <span>
