@@ -3,6 +3,8 @@ import React from 'react';
 
 import classes from './Auth.css';
 import Logo from '../Logo/Logo.jsx';
+import Input from '../UI/Input/Input.jsx';
+import Spinner from '../UI/Spinner/Spinner.js';
 
 class Auth extends React.Component {
   constructor() {
@@ -39,6 +41,7 @@ class Auth extends React.Component {
           touched: false,
         },
       },
+      loading: true,
     };
   }
 
@@ -55,6 +58,26 @@ class Auth extends React.Component {
       };
       return object;
     }, {});
+    let form = (
+      <form onSubmit={this.orderHandler}>
+        {formElementsArray.map((formElement) => (
+          <Input
+            key={formElement.id}
+            elementType={formElement.config.elementType}
+            elementConfig={formElement.config.elementConfig}
+            value={formElement.config.value}
+            changed={(event) => this.inputChangedHandler(event, formElement.id)}
+            invalid={!formElement.config.valid}
+            shouldValidate={formElement.config.validation}
+            touched={formElement.config.touched}
+          />
+        ))}
+        {/* <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button> */}
+      </form>
+    );
+    if (this.state.loading) {
+      form = <Spinner />;
+    }
 
     return (
       <div className={classes.Auth}>
@@ -64,9 +87,23 @@ class Auth extends React.Component {
         </div>
         <div id="login">
           <form name="form-login">
-            <span />
+            <span>
+              <img
+                className={classes.InputImage}
+                src="/images/id-card.png"
+                alt="Username"
+                title="username"
+              />
+            </span>
             <input type="text" id="user" placeholder="Username" />
-            <span />
+            <span>
+              <img
+                className={classes.InputImage}
+                src="/images/password.png"
+                alt="Password"
+                title="password"
+              />
+            </span>
             <input type="password" id="password" placeholder="Password" />
             <input type="submit" value="Login" />
           </form>

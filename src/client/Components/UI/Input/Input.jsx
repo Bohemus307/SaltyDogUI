@@ -64,6 +64,7 @@ const Input = (props) => {
 
   return (
     <div className={classes.Input}>
+      <img className={classes.InputImage} src="/images/id-card.png" alt="username" title="username" />
       <label className={classes.Label}>{props.label}</label>
       {inputElement}
       {validationError}
@@ -71,8 +72,14 @@ const Input = (props) => {
   );
 };
 
-// Input.propTypes = {
-//   : PropTypes.string.isRequired
-// };
+Input.propTypes = {
+  invalid: PropTypes.bool.isRequired,
+  shouldValidate: PropTypes.bool.isRequired,
+  elementType: PropTypes.string.isRequired,
+  changed: PropTypes.bool.isRequired,
+  elementConfig: PropTypes.string.isRequired,
+  value: PropTypes.string.isRequired,
+  
+};
 
 export default Input;
