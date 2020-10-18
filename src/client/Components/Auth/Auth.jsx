@@ -17,6 +17,7 @@ class Auth extends React.Component {
           elementConfig: {
             type: 'email',
             placeholder: 'Email Address',
+            image: "/images/id-card.png",
           },
           value: '',
           validation: {
@@ -31,6 +32,7 @@ class Auth extends React.Component {
           elementConfig: {
             type: 'password',
             placeholder: 'Password...',
+            image: "/images/password.png",
           },
           value: '',
           validation: {
@@ -41,7 +43,7 @@ class Auth extends React.Component {
           touched: false,
         },
       },
-      loading: true,
+      loading: false,
     };
   }
 
@@ -96,9 +98,9 @@ class Auth extends React.Component {
       arr.push(object);
       return arr;
     }, []);
-
+  console.log(formElementsArray)
     let form = (
-      <form onSubmit={this.orderHandler}>
+      <form className={classes.Form} onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
@@ -109,18 +111,18 @@ class Auth extends React.Component {
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
-            label={formElement.key}
+            label={formElement.config.elementConfig.image}
           />
         ))}
         {/* <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button> */}
       </form>
     );
 
-    // const { loading } = this.state;
+    const { loading } = this.state;
 
-    // if (loading) {
-    //   form = <Spinner />;
-    // }
+    if (loading) {
+      form = <Spinner />;
+    }
 
     return (
       <div className={classes.Auth}>

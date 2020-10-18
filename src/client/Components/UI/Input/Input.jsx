@@ -73,8 +73,9 @@ const Input = ({
 
   return (
     <div className={classes.Input}>
-      <img className={classes.InputImage} src="/images/id-card.png" alt="username" title="username" />
-      <label htmlFor="input-element" className={classes.Label}>{label}</label>
+      <span className={classes.FormSpan}>
+        <img className={classes.InputImage} src={label} alt="username" title="username" />
+      </span>
       {inputElement}
       {validationError}
     </div>
@@ -89,7 +90,7 @@ Input.propTypes = {
   elementConfig: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,
   touched: PropTypes.bool.isRequired,
-  label: PropTypes.string,
+  label: PropTypes.string.isRequired,
 };
 
 export default Input;
