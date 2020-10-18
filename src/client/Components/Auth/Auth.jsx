@@ -97,7 +97,6 @@ class Auth extends React.Component {
       return arr;
     }, []);
 
-    console.log(formElementsArray);
     let form = (
       <form onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
@@ -110,17 +109,18 @@ class Auth extends React.Component {
             invalid={!formElement.config.valid}
             shouldValidate={formElement.config.validation}
             touched={formElement.config.touched}
+            label={formElement.key}
           />
         ))}
         {/* <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button> */}
       </form>
     );
 
-    const { loading } = this.state;
+    // const { loading } = this.state;
 
-    if (loading) {
-      form = <Spinner />;
-    }
+    // if (loading) {
+    //   form = <Spinner />;
+    // }
 
     return (
       <div className={classes.Auth}>

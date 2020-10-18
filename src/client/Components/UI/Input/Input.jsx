@@ -83,13 +83,13 @@ const Input = ({
 
 Input.propTypes = {
   invalid: PropTypes.bool.isRequired,
-  shouldValidate: PropTypes.shape.isRequired,
+  shouldValidate: PropTypes.object.isRequired,
   elementType: PropTypes.string.isRequired,
   changed: PropTypes.func.isRequired,
-  elementConfig: PropTypes.string.isRequired,
+  elementConfig: PropTypes.object.isRequired,
   value: PropTypes.string.isRequired,
   touched: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
+  label: PropTypes.string,
 };
 
 export default Input;
