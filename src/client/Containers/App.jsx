@@ -42,8 +42,8 @@ export default function App() {
 
         <Switch>
           <Route path="/login">
-            {/* <LoginPage /> */}
-            <Auth />
+            <LoginPage />
+            {/* <Auth /> */}
           </Route>
           <Route path="/public">
             <PublicPage />
@@ -71,13 +71,13 @@ const fakeAuth = {
 
 function AuthButton() {
   const history = useHistory();
-
+  console.log(fakeAuth.isAuthenticated)
   return fakeAuth.isAuthenticated ? (
     <p>
       Welcome!
       {' '}
       <button
-        type="submit"
+        type="button"
         onClick={() => {
           fakeAuth.signout(() => history.push('/'));
         }}
@@ -127,6 +127,7 @@ function LoginPage() {
     fakeAuth.authenticate(() => {
       history.replace(from);
     });
+    console.log(fakeAuth.isAuthenticated)
   };
 
   return (

@@ -122,7 +122,7 @@ class Auth extends React.Component {
           />
         ))}
         {/* <input type="submit" value="Login" /> */}
-        <button type="submit" onClick={login}>Login</button>
+        <button type="submit">Login</button>
       </form>
     );
     const { loading } = this.state;
