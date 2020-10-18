@@ -77,6 +77,7 @@ function AuthButton() {
       Welcome!
       {' '}
       <button
+        type="submit"
         onClick={() => {
           fakeAuth.signout(() => history.push('/'));
         }}
@@ -134,7 +135,7 @@ function LoginPage() {
         You must log in to view the page at
         {from.pathname}
       </p>
-      <button onClick={login}>Login</button>
+      <button type="submit" onClick={login}>Login</button>
     </div>
   );
 }

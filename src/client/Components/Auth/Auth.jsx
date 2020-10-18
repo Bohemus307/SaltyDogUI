@@ -1,5 +1,13 @@
 import React from 'react';
-// import { Input } from '../UI/Input/Input.jsx';
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  NavLink,
+  Redirect,
+  useHistory,
+  useLocation,
+} from 'react-router-dom';
 
 import classes from './Auth.css';
 import Logo from '../Logo/Logo.jsx';
@@ -98,7 +106,6 @@ class Auth extends React.Component {
       return arr;
     }, []);
 
-  console.log(formElementsArray)
     let form = (
       <form name="form-login" className={classes.Form} onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
@@ -114,16 +121,15 @@ class Auth extends React.Component {
             label={formElement.config.elementConfig.image}
           />
         ))}
-        <input type="submit" value="Login" />
+        {/* <input type="submit" value="Login" /> */}
+        <button type="submit" onClick={login}>Login</button>
       </form>
     );
-
     const { loading } = this.state;
-
     if (loading) {
       form = <Spinner />;
     }
-
+    
     return (
       <div className={classes.Auth}>
         <div className={classes.Logo_Div}>
