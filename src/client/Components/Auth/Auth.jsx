@@ -60,12 +60,7 @@ class Auth extends React.Component {
       <div className={classes.Auth}>
         <div className={classes.Logo_Div}>
           <Logo />
-          <div className={classes.Salty_Div}>
-            <span className={classes.Salty_Label}>Salty</span>
-            <span className={classes.Salty_Label}>Dog</span>
-            <span className={classes.Salty_Label}>Salinity</span>
-            <span className={classes.Salty_Label}>Sensor</span>
-          </div>
+          <span className={classes.Salty_Label}>Heron Farms</span>
         </div>
         <div id="login">
           <form name="form-login">

@@ -4,7 +4,7 @@
   "description": "Ui for salty dog salinity sensor",
   "main": "index.js",
   "scripts": {
-    "react-dev": "webpack --config webpack.config.js --watch",
+    "react-dev": "webpack --mode development --config webpack.config.js --watch --progress",
     "server-dev": "nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
