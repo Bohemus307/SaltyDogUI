@@ -30,11 +30,6 @@
   margin: 10px;
 }
 
-.InputImage {
-  margin-top: 5px;
-  height: 40px;
-}
-
 .Form {
   margin: auto;
   padding: 22px 22px 22px 22px;
@@ -43,4 +38,19 @@
   background: #282e33;
   border-top: 3px solid #434a52;
   border-bottom: 3px solid #434a52;
+}
+
+.Submit {
+  background: #b5cd60;
+  border: 0;
+  width: 100%;
+  height: 40px;
+  border-radius: 3px;
+  color: white;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.Submit :hover {
+  background: #16aa56;
 }

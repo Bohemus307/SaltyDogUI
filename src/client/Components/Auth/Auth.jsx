@@ -90,7 +90,6 @@ class Auth extends React.Component {
     const values = Object.values(controls);
 
     const formElementsArray = keys.reduce((arr, key, idx) => {
-    
       const object = {
         id: key,
         config: values[idx],
@@ -98,9 +97,10 @@ class Auth extends React.Component {
       arr.push(object);
       return arr;
     }, []);
+
   console.log(formElementsArray)
     let form = (
-      <form className={classes.Form} onSubmit={this.orderHandler}>
+      <form name="form-login" className={classes.Form} onSubmit={this.orderHandler}>
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
@@ -114,7 +114,7 @@ class Auth extends React.Component {
             label={formElement.config.elementConfig.image}
           />
         ))}
-        {/* <Button btnType="Success" clicked={this.orderHandler}>ORDER</Button> */}
+        <input type="submit" value="Login" />
       </form>
     );
 
@@ -130,29 +130,8 @@ class Auth extends React.Component {
           <Logo />
           <span className={classes.Salty_Label}>Heron Farms</span>
         </div>
-        {form}
         <div id="login">
-          <form name="form-login">
-            <span>
-              <img
-                className={classes.InputImage}
-                src="/images/id-card.png"
-                alt="Username"
-                title="username"
-              />
-            </span>
-            <input type="text" id="user" placeholder="Username" />
-            <span>
-              <img
-                className={classes.InputImage}
-                src="/images/password.png"
-                alt="Password"
-                title="password"
-              />
-            </span>
-            <input type="password" id="password" placeholder="Password" />
-            <input type="submit" value="Login" />
-          </form>
+        {form}
         </div>
       </div>
     );

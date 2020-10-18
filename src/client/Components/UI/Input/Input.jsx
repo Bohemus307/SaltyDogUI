@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import classes from './Input.css';
+import Aux from '../../../Hoc/Aux/Aux.jsx';
 
 const Input = ({
   invalid,
@@ -72,13 +73,13 @@ const Input = ({
   }
 
   return (
-    <div className={classes.Input}>
+    <Aux>
       <span className={classes.FormSpan}>
         <img className={classes.InputImage} src={label} alt="username" title="username" />
       </span>
       {inputElement}
       {validationError}
-    </div>
+    </Aux>
   );
 };
 
