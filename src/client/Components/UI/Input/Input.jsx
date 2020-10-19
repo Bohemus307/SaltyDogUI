@@ -20,7 +20,6 @@ const Input = ({
   if (invalid && shouldValidate) {
     inputClasses.push(classes.Invalid);
   }
-
   switch (elementType) {
     case ('input'):
       inputElement = (

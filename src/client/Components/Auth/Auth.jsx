@@ -55,6 +55,10 @@ class Auth extends React.Component {
     };
   }
 
+  loginHandler = () => {
+    console.log('login attempt');
+  }
+
   checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -75,7 +79,7 @@ class Auth extends React.Component {
 
   inputChangedHandler = (event, inputIdentifier) => {
     const updatedOrderForm = { 
-      ...this.state.orderForm 
+      ...this.state.controls 
     };
     // deeper clone
     const updatedFormELement = { 
@@ -85,9 +89,12 @@ class Auth extends React.Component {
     updatedFormELement.valid = this.checkValidity(updatedFormELement.value, updatedFormELement.validation);
     updatedFormELement.touched = true;
     updatedOrderForm[inputIdentifier] = updatedFormELement;
-    console.log(updatedFormELement)
+    
+    const formIsValid = true;
+    
+    
     this.setState({
-      orderForm: updatedOrderForm
+      controls: updatedOrderForm
     });
   }
 
@@ -105,9 +112,9 @@ class Auth extends React.Component {
       arr.push(object);
       return arr;
     }, []);
-
+  
     let form = (
-      <form name="form-login" className={classes.Form} onSubmit={this.orderHandler}>
+      <form name="form-login" className={classes.Form} onSubmit={this.loginHandler}> 
         {formElementsArray.map((formElement) => (
           <Input
             key={formElement.id}
