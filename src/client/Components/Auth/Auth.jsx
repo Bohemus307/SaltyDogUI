@@ -46,11 +46,13 @@ class Auth extends React.Component {
           validation: {
             required: true,
             minLength: 7,
+            maxLength: 12,
           },
           valid: false,
           touched: false,
         },
       },
+      formIsValid: false,
       loading: false,
     };
   }
@@ -58,7 +60,7 @@ class Auth extends React.Component {
   loginHandler = () => {
     console.log('login attempt');
   }
-
+  // rules for inputs
   checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -78,23 +80,26 @@ class Auth extends React.Component {
   }
 
   inputChangedHandler = (event, inputIdentifier) => {
-    const updatedOrderForm = { 
+    const updatedLoginForm = { 
       ...this.state.controls 
     };
     // deeper clone
     const updatedFormELement = { 
-      ...updatedOrderForm[inputIdentifier] 
+      ...updatedLoginForm[inputIdentifier] 
     };
     updatedFormELement.value = event.target.value;
     updatedFormELement.valid = this.checkValidity(updatedFormELement.value, updatedFormELement.validation);
     updatedFormELement.touched = true;
-    updatedOrderForm[inputIdentifier] = updatedFormELement;
+    updatedLoginForm[inputIdentifier] = updatedFormELement;
     
-    const formIsValid = true;
-    
-    
+   let formIsValid = true;
+    for (let inputIdentifiers in updatedLoginForm) {
+      formIsValid = updatedLoginForm[inputIdentifier].valid && formIsValid
+    }
+
     this.setState({
-      controls: updatedOrderForm
+      controls: updatedLoginForm,
+      formIsValid: formIsValid
     });
   }
 
@@ -129,7 +134,7 @@ class Auth extends React.Component {
           />
         ))}
         {/* <input type="submit" value="Login" /> */}
-        <button type="submit">Login</button>
+        <button type="submit" disabled={this.state.formIsValid}>Login</button>
       </form>
     );
     const { loading } = this.state;

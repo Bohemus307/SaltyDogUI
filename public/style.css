@@ -60,9 +60,12 @@ button[type="submit"] {
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
+
 #login form input[type="submit"]:hover {
   background: #16aa56;
 }
-button[type="submit"]:hover {
-  background: #16aa56;
+
+button[type="submit"]:disabled {
+  background: salmon;
+  cursor: not-allowed;
 }
