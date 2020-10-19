@@ -4,9 +4,6 @@ import {
   Switch,
   Route,
   NavLink,
-  Redirect,
-  useHistory,
-  useLocation,
 } from 'react-router-dom';
 
 import Login from './Components/Login/Login.jsx';
@@ -15,6 +12,7 @@ import Home from './Components/Home/Home.jsx';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
 import { AuthContext } from './Components/Context/Auth.jsx';
 import SignUp from './Components/SignUp/SignUp.jsx';
+import NavBar from './Components/NavBar/NavBar.jsx';
 
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
@@ -44,17 +42,7 @@ export default function App() {
     <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
-          <ul>
-            <li>
-              <NavLink to="/">Home</NavLink>
-            </li>
-            <li>
-              <NavLink to="/login">Login</NavLink>
-            </li>
-            <li>
-              <NavLink to="/dashboard">Dashboard</NavLink>
-            </li>
-          </ul>
+          <NavBar />
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
@@ -64,79 +52,5 @@ export default function App() {
         </div>
       </Router>
     </AuthContext.Provider>
-  );
-}
-
-const fakeAuth = {
-  isAuthenticated: false,
-  authenticate(cb) {
-    fakeAuth.isAuthenticated = true;
-    setTimeout(cb, 100); // fake async
-  },
-  signout(cb) {
-    fakeAuth.isAuthenticated = false;
-    setTimeout(cb, 100);
-  },
-};
-
-function AuthButton() {
-  const history = useHistory();
-  return fakeAuth.isAuthenticated ? (
-    <p>
-      Welcome!
-      {' '}
-      <button
-        type="button"
-        onClick={() => {
-          fakeAuth.signout(() => history.push('/'));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
-  ) : (
-    <p>You are not logged in.</p>
-  );
-}
-
-// A wrapper for <Route> that redirects to the login
-// screen if you're not yet authenticated.
-// function PrivateRoute({ children, ...rest }) {
-//   return (
-//     <Route
-//       {...rest}
-//       render={({ location }) => (fakeAuth.isAuthenticated ? (
-//         children
-//       ) : (
-//         <Redirect
-//           to={{
-//             pathname: '/',
-//             state: { from: location },
-//           }}
-//         />
-//       ))}
-//     />
-//   );
-// }
-
-function LoginPage() {
-  const history = useHistory();
-  const location = useLocation();
-
-  const { from } = location.state || { from: { pathname: '/' } };
-  const login = () => {
-    fakeAuth.authenticate(() => {
-      history.replace(from);
-    });
-  };
-
-  return (
-    <div>
-      <p>
-        You must log in to view the page at
-        {from.pathname}
-      </p>
-      <button type="submit" onClick={login}>Login</button>
-    </div>
   );
 }

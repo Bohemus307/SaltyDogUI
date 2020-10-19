@@ -185,14 +185,13 @@ class Login extends React.Component {
     if (loading) {
       form = <Spinner />;
     }
-    console.log(this.props)
   
-    const referer = this.props.location.state.referer || '/';
-    // if not logged in
-    let { isLoggedIn } = this.state
-    if (isLoggedIn) {
-      return <Redirect to={referer} />;
-    }
+    // const referer = this.props.location.state.referer || '/';
+    // // if not logged in
+    // let { isLoggedIn } = this.state
+    // if (isLoggedIn) {
+    //   return <Redirect to={referer} />;
+    // }
   
     return (
       <div className={classes.Auth}>
