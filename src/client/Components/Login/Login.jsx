@@ -163,6 +163,7 @@ class Auth extends React.Component {
         <div id="login">
         {form}
         </div>
+        <NavLink to="/signup">Don't have an account?</NavLink>
       </div>
     );
   }

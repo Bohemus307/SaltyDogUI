@@ -14,6 +14,7 @@ import DashBoard from './Containers/DashBoard/DashBoard.jsx';
 import Home from './Components/Home/Home.jsx';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
 import { AuthContext } from './Components/Context/Auth.jsx';
+import SignUp from './Components/SignUp/SignUp.jsx';
 
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
@@ -49,6 +50,7 @@ export default function App() {
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
+            <Route path="/signup" component={SignUp} />
             <PrivateRoute path="/dashboard" component={DashBoard} />
           </Switch>
         </div>
