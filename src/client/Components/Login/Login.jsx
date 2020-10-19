@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import classes from './Auth.css';
+import classes from './Login.css';
 import Logo from '../Logo/Logo.jsx';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
@@ -57,12 +57,13 @@ class Auth extends React.Component {
     };
   }
 
-  loginHandler = () => {
-    console.log('login attempt');
-  }
-  // rules for inputs
+  // rules for input content
   checkValidity = (value, rules) => {
     let isValid = true;
+
+    if (!rules) {
+      return true;
+    }
 
     if (rules.required) {
       isValid = value.trim() !== '' && isValid;
@@ -76,6 +77,16 @@ class Auth extends React.Component {
       isValid = value.length <= rules.maxLength && isValid;
     }
 
+    if (rules.isEmail) {
+      const pattern = /[a-z0-9!#$%&'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&'*+/=?^_`{|}~-]+)*@(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?/;
+      isValid = pattern.test(value) && isValid
+    }
+
+    if (rules.isNumeric) {
+      const pattern = /^\d+$/;
+      isValid = pattern.test(value) && isValid
+    }
+
     return isValid;
   }
 
@@ -83,7 +94,7 @@ class Auth extends React.Component {
     const updatedLoginForm = { 
       ...this.state.controls 
     };
-    // deeper clone
+    // deeper clone of login form
     const updatedFormELement = { 
       ...updatedLoginForm[inputIdentifier] 
     };
@@ -109,6 +120,7 @@ class Auth extends React.Component {
     const keys = Object.keys(controls);
     const values = Object.values(controls);
 
+    // array of objects from controls in state
     const formElementsArray = keys.reduce((arr, key, idx) => {
       const object = {
         id: key,
@@ -117,7 +129,7 @@ class Auth extends React.Component {
       arr.push(object);
       return arr;
     }, []);
-  
+    // login form
     let form = (
       <form name="form-login" className={classes.Form} onSubmit={this.loginHandler}> 
         {formElementsArray.map((formElement) => (
