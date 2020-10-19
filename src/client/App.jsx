@@ -9,7 +9,8 @@ import {
   useLocation,
 } from 'react-router-dom';
 
-import Auth from '../Components/Auth/Auth.jsx';
+import Auth from './Components/Auth/Auth.jsx';
+import Home from './Components/Home/Home.jsx';
 
 // This example has 3 pages: a public page, a protected
 // page, and a login screen. In order to see the protected
@@ -30,26 +31,27 @@ export default function App() {
   return (
     <Router>
       <div>
-        <AuthButton />
         <ul>
           <li>
-            <NavLink to="/public" exact>Public Page</NavLink>
+            <NavLink to="/">Home</NavLink>
           </li>
           <li>
-            <NavLink to="/protected">Protected Page</NavLink>
+            <NavLink to="/login">Login</NavLink>
+          </li>
+          <li>
+            <NavLink to="/protected">Dashboard</NavLink>
           </li>
         </ul>
-
         <Switch>
-          <Route path="/login">
-            <LoginPage />
-            {/* <Auth /> */}
+          <Route exact path="/">
+            <Home />
           </Route>
-          <Route path="/public">
-            <PublicPage />
+          <Route path="/login">
+            {/* <LoginPage /> */}
+            <Auth />
           </Route>
           <PrivateRoute path="/protected">
-            <ProtectedPage />
+            <DashBoard />
           </PrivateRoute>
         </Switch>
       </div>
@@ -69,26 +71,25 @@ const fakeAuth = {
   },
 };
 
-function AuthButton() {
-  const history = useHistory();
-  console.log(fakeAuth.isAuthenticated)
-  return fakeAuth.isAuthenticated ? (
-    <p>
-      Welcome!
-      {' '}
-      <button
-        type="button"
-        onClick={() => {
-          fakeAuth.signout(() => history.push('/'));
-        }}
-      >
-        Sign out
-      </button>
-    </p>
-  ) : (
-    <p>You are not logged in.</p>
-  );
-}
+// function AuthButton() {
+//   const history = useHistory();
+//   return fakeAuth.isAuthenticated ? (
+//     <p>
+//       Welcome!
+//       {' '}
+//       <button
+//         type="button"
+//         onClick={() => {
+//           fakeAuth.signout(() => history.push('/'));
+//         }}
+//       >
+//         Sign out
+//       </button>
+//     </p>
+//   ) : (
+//     <p>You are not logged in.</p>
+//   );
+// }
 
 // A wrapper for <Route> that redirects to the login
 // screen if you're not yet authenticated.
@@ -101,7 +102,7 @@ function PrivateRoute({ children, ...rest }) {
       ) : (
         <Redirect
           to={{
-            pathname: '/login',
+            pathname: '/',
             state: { from: location },
           }}
         />
@@ -110,33 +111,28 @@ function PrivateRoute({ children, ...rest }) {
   );
 }
 
-function PublicPage() {
-  return <h3>Public</h3>;
+function DashBoard() {
+  return <div>Hello from dashboard</div>;
 }
 
-function ProtectedPage() {
-  return <h3>Protected</h3>;
-}
+// function LoginPage() {
+//   const history = useHistory();
+//   const location = useLocation();
 
-function LoginPage() {
-  const history = useHistory();
-  const location = useLocation();
+//   const { from } = location.state || { from: { pathname: '/' } };
+//   const login = () => {
+//     fakeAuth.authenticate(() => {
+//       history.replace(from);
+//     });
+//   };
 
-  const { from } = location.state || { from: { pathname: '/' } };
-  const login = () => {
-    fakeAuth.authenticate(() => {
-      history.replace(from);
-    });
-    console.log(fakeAuth.isAuthenticated)
-  };
-
-  return (
-    <div>
-      <p>
-        You must log in to view the page at
-        {from.pathname}
-      </p>
-      <button type="submit" onClick={login}>Login</button>
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       <p>
+//         You must log in to view the page at
+//         {from.pathname}
+//       </p>
+//       <button type="submit" onClick={login}>Login</button>
+//     </div>
+//   );
+// }
