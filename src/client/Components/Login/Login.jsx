@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -8,14 +8,16 @@ import {
   useHistory,
   useLocation,
 } from 'react-router-dom';
+import axios from 'axios';
+import { useAuth } from "../Context/Auth.jsx";
 
 import classes from './Login.css';
 import Logo from '../Logo/Logo.jsx';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 
-class Auth extends React.Component {
-  constructor() {
+class Login extends React.Component {
+  constructor(props) {
     super();
 
     this.state = {
@@ -54,9 +56,37 @@ class Auth extends React.Component {
       },
       formIsValid: false,
       loading: false,
+      isLoggedIn: false,
+      authToken: null,
+      isError: false
     };
   }
 
+  setAuthToken = () => {
+    let email = this.state.controls.email.value;
+    let password = this.state.controls.password.value;
+
+    axios.post("/auth", {
+      email: email,
+      password: password
+    }).then(result => {
+      if (result.status === 200) {
+        console.log(result.data)
+        useAuth(result.data);
+        this.setState({
+          isLoggedIn: true
+        })
+      } else {
+        this.setState({
+          isError: true
+        })
+      }
+    }).catch(error => {
+      console.log(error)
+    });
+  }
+
+  
   // rules for input content
   checkValidity = (value, rules) => {
     let isValid = true;
@@ -116,6 +146,7 @@ class Auth extends React.Component {
 
 
   render() {
+  
     const { controls } = this.state;
     const keys = Object.keys(controls);
     const values = Object.values(controls);
@@ -149,11 +180,20 @@ class Auth extends React.Component {
         <button type="submit" disabled={this.state.formIsValid}>Login</button>
       </form>
     );
+    //if loading 
     const { loading } = this.state;
     if (loading) {
       form = <Spinner />;
     }
-    
+    console.log(this.props)
+  
+    const referer = this.props.location.state.referer || '/';
+    // if not logged in
+    let { isLoggedIn } = this.state
+    if (isLoggedIn) {
+      return <Redirect to={referer} />;
+    }
+  
     return (
       <div className={classes.Auth}>
         <div className={classes.Logo_Div}>
@@ -169,4 +209,4 @@ class Auth extends React.Component {
   }
 }
 
-export default Auth;
+export default Login;

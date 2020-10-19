@@ -3,18 +3,20 @@ import { Route, Redirect } from 'react-router-dom';
 import { useAuth } from '../Context/Auth.jsx';
 
 function PrivateRoute({ component: Component, ...rest }) {
-  const isAuthenticated = useAuth();
+  const { authTokens } = useAuth();
 
   return (
     <Route
       {...rest}
-      render={(props) => (isAuthenticated ? (
+      render={(props) => (authTokens ? (
         <Component {...props} />
       ) : (
-        <Redirect to="/login" />
+        <Redirect to={{ pathname: '/login', state: { referer: props.location } }} />
       ))}
     />
   );
 }
 
 export default PrivateRoute;
+
+// change isAuthenticated to Authtokens once axios is complete

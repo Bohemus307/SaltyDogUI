@@ -1,7 +1,7 @@
 import React from 'react';
 
 class DashBoard extends React.Component {
-  constructor() {
+  constructor(props) {
     super();
 
     this.state = {
@@ -9,9 +9,17 @@ class DashBoard extends React.Component {
     };
   }
 
+  logOut = () => {
+    const { setAuthTokens } = useAuth();
+    setAuthTokens();
+  }
+
   render() {
+
     return (
-      <div>dashboard for now...</div>
+      <div>dashboard for now...
+      <button onClick={logOut}>Log out</button>
+      </div>
     );
   }
 }

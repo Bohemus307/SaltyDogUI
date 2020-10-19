@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter as Router,
   Switch,
@@ -32,8 +32,16 @@ import SignUp from './Components/SignUp/SignUp.jsx';
 // just *before* logging in, the public page.
 
 export default function App() {
+  const existingTokens = JSON.parse(localStorage.getItem('tokens'));
+  const [authTokens, setAuthTokens] = useState(existingTokens);
+
+  const setTokens = (data) => {
+    localStorage.setItem('tokens', JSON.stringify(data));
+    setAuthTokens(data);
+  };
+
   return (
-    <AuthContext.Provider value={false}>
+    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
           <ul>
