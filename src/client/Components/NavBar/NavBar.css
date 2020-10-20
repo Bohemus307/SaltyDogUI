@@ -1,7 +1,17 @@
 .Nav_Div {
+  font-family: futura-pt-bold;
+  font-weight: 700;
+  color: #606468;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
-  
 }
 
+.Nav_Item {
+  display: flex;
+  flex-direction: column;
+}
+
+.Nav_Image {
+  height: 42px;
+}
