@@ -47,7 +47,8 @@ export default function App() {
             <Route exact path="/" component={Home} />
             <Route path="/login" component={Login} />
             <Route path="/signup" component={SignUp} />
-            <PrivateRoute path="/dashboard" component={DashBoard} />
+            <Route path="/dashboard" component={DashBoard} />
+            {/* <PrivateRoute path="/dashboard" component={DashBoard} /> */}
           </Switch>
         </div>
       </Router>

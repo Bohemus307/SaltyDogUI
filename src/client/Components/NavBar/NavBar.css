@@ -6,7 +6,6 @@
   font-family: futura-pt-bold;
   font-weight: 700;
   width: 100%;
-  border: 2px solid #606468;
   border-radius: 5px;
 }
 
@@ -26,12 +25,20 @@
 
 .Nav_Image {
   height: 32px;
-
 }
 
 .Nav_Logo {
   height: 100%;
-  background-color: whitesmoke;
-  border-radius: 9px;
+  background-color: #606468;
   margin: 10px 10px;
+  border-radius: 9px;
+  background: #282e33;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+}
+
+.Logo {
+  display: flex;
+  flex-direction: column;
+  padding: 3px 3px;
 }

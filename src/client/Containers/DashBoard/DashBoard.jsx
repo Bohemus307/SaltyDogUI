@@ -18,7 +18,7 @@ class DashBoard extends React.Component {
 
     return (
       <div>dashboard for now...
-      <button onClick={logOut}>Log out</button>
+      <button onClick={this.logOut}>Log out</button>
       </div>
     );
   }

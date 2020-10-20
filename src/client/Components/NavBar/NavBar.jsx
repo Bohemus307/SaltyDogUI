@@ -9,8 +9,9 @@ import Logo from '../Logo/Logo.jsx';
 const NavBar = () => (
   <div className={classes.Nav_Div}>
     <div className={classes.Nav_Logo}>
-      <NavLink to="/">
-        <Logo height="55px" />
+      <NavLink className={classes.Logo} to="/" style={{ textDecoration: 'none', color: '#606468' }}>
+        <Logo height="45px" />
+        Heron Farms
       </NavLink>
     </div>
     <div className={classes.Nav_Items}>
