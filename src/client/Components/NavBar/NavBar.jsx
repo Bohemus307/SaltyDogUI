@@ -9,19 +9,23 @@ import Logo from '../Logo/Logo.jsx';
 const NavBar = () => (
   <div className={classes.Nav_Div}>
     <div className={classes.Nav_Logo}>
-      <Logo height="75px" />
+      <NavLink to="/">
+        <Logo height="55px" />
+      </NavLink>
     </div>
-    <div className={classes.Nav_Item}>
-      <img className={classes.Nav_Image} src="/images/home.svg" alt="Home" />
-      <NavLink style={{ textDecoration: 'none', color: '#606468' }} to="/">Home</NavLink>
-    </div>
-    <div className={classes.Nav_Item}>
-      <img className={classes.Nav_Image} src="/images/enter.svg" alt="Login" />
-      <NavLink style={{ textDecoration: 'none', color: '#606468' }} to="/login">Login</NavLink>
-    </div>
-    <div className={classes.Nav_Item}>
-      <img className={classes.Nav_Image} src="/images/dashboard.svg" alt="DashBoard" />
-      <NavLink style={{ textDecoration: 'none', color: '#606468' }} to="/dashboard">Dashboard</NavLink>
+    <div className={classes.Nav_Items}>
+      <NavLink className={classes.Nav_Link} style={{ textDecoration: 'none', color: '#606468' }} to="/">
+        <img className={classes.Nav_Image} src="/images/home.svg" alt="Home" />
+        Home
+      </NavLink>
+      <NavLink className={classes.Nav_Link} style={{ textDecoration: 'none', color: '#606468' }} to="/login">
+        <img className={classes.Nav_Image} src="/images/enter.svg" alt="Login" />
+        Login
+      </NavLink>
+      <NavLink className={classes.Nav_Link} style={{ textDecoration: 'none', color: '#606468' }} to="/dashboard">
+        <img className={classes.Nav_Image} src="/images/dashboard.svg" alt="DashBoard" />
+        Dashboard
+      </NavLink>
     </div>
   </div>
 );

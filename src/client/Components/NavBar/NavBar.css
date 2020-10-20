@@ -1,25 +1,37 @@
 .Nav_Div {
-  margin-bottom: 40px;
-  padding-top: 10px;
-  font-family: futura-pt-bold;
-  font-weight: 700;
-  width: 100%;
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  margin-bottom: 40px;
+  font-family: futura-pt-bold;
+  font-weight: 700;
+  width: 100%;
   border: 2px solid #606468;
   border-radius: 5px;
 }
 
-.Nav_Logo {
-  
-}
-
-.Nav_Item {
+.Nav_Link {
   display: flex;
   flex-direction: column;
+  padding: 0px 80px;
+}
+
+.Nav_Items {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  align-content: space-around;
+  width: 100%;
 }
 
 .Nav_Image {
-  height: 42px;
+  height: 32px;
+
+}
+
+.Nav_Logo {
+  height: 100%;
+  background-color: whitesmoke;
+  border-radius: 9px;
+  margin: 10px 10px;
 }
