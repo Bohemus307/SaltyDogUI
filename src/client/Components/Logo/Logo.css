@@ -1,16 +1,7 @@
 
 .Logo {
-  height: 300px;
   display: flex;
   flex-direction: column;
   align-content: center;
   overflow: hidden;
-}
-
-.Logo_Image {
-  height: 100%;
-  padding: 12px 12px 12px 12px;
-  border-radius: 5px;
-  background: transparent no-repeat center;
-  background-size: cover;
 }

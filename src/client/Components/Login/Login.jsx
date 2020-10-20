@@ -196,7 +196,7 @@ class Login extends React.Component {
     return (
       <div className={classes.Auth}>
         <div className={classes.Logo_Div}>
-          <Logo />
+          <Logo  height="300px" />
           <span className={classes.Salty_Label}>Heron Farms</span>
         </div>
         <div id="login">

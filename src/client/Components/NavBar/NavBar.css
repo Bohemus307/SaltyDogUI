@@ -1,10 +1,17 @@
 .Nav_Div {
+  margin-bottom: 40px;
+  padding: 10px 10px;
   font-family: futura-pt-bold;
   font-weight: 700;
-  color: #606468;
   width: 100%;
   display: flex;
   justify-content: space-evenly;
+  border: 2px solid #606468;
+  border-radius: 5px;
+}
+
+.Nav_Logo {
+  padding: none;
 }
 
 .Nav_Item {
