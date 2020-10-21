@@ -168,7 +168,7 @@ const SignUp = () => {
   return (
     <div>
       <Modal show={signedIn} modalClosed={() => setSignedIn(false)}>
-        <div>
+        <div className={classes.Form_Div}>
           {form}
         </div>
       </Modal>

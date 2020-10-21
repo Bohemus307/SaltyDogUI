@@ -1,7 +1,9 @@
 .Signup_Form {
-  display: flex;
-  flex-direction: column;
   margin: auto;
   padding: 22px 22px 22px 22px;
+  width: 90%;
+}
+
+.Form_Div {
   width: 90%;
 }

@@ -4,6 +4,13 @@
   align-items: center;
 }
 
+.Login {
+  margin: 70px auto;
+  width: 320px;
+  position: relative;
+  right: 24px;
+}
+
 .Logo_Div {
   width: 320px;
   display: flex;

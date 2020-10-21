@@ -226,7 +226,7 @@ class Login extends React.Component {
           <Logo  height="300px" />
           <span className={classes.Salty_Label}>Heron Farms</span>
         </div>
-        <div id="login">
+        <div className={classes.Login}>
         {form}
         </div>
         <NavLink className={classes.Signup} to="/signup">Don't have an account?</NavLink>
