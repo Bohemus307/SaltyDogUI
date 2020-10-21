@@ -46,47 +46,50 @@ const SignUp = () => {
   //     isLoggedIn: false,
   //     authToken: null,
   //     isError: false
-  const [inputElements, setInputElement] = useState([
+  const [inputElements, setInputElement] = useState(
     {
-      key: 'email',
-      elementType: 'input',
-      elementConfig: {
-        type: 'email',
-        placeholder: 'Email Address',
-        image: '/images/id-card.png',
+      email: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'email',
+          placeholder: 'Email Address',
+          image: '/images/id-card.png',
+        },
         value: '',
         validation: {
           required: true,
           isEmail: true,
         },
+        valid: false,
+        touched: false,
       },
-      valid: false,
-      touched: false,
-    },
-    {
-      key: 'password',
-      elementType: 'input',
-      elementConfig: {
-        type: 'password',
-        placeholder: 'Password...',
-        image: '/images/password.png',
+      password: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'password',
+          placeholder: 'Password...',
+          image: '/images/password.png',
+        },
         value: '',
         validation: {
           required: true,
           minLength: 7,
           maxLength: 12,
         },
+        valid: false,
+        touched: false,
       },
-      valid: false,
-      touched: false,
     },
-  ]);
+  );
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedLoginForm = {
       ...inputElements,
     };
-      // deeper clone of login form
+    console.log(inputIdentifier);
+    console.log('uLF', updatedLoginForm);
+
+    // deeper clone of login form
     const updatedFormELement = {
       ...updatedLoginForm[inputIdentifier],
     };
@@ -133,20 +136,33 @@ const SignUp = () => {
   };
 
   console.log(inputElements);
+  // const { controls } = inputElements;
+  const keys = Object.keys(inputElements);
+  const values = Object.values(inputElements);
+
+  // array of objects from controls in state
+  const inputElementsArray = keys.reduce((arr, key, idx) => {
+    const object = {
+      id: key,
+      config: values[idx],
+    };
+    arr.push(object);
+    return arr;
+  }, []);
 
   const form = (
     <form name="form-login" className={classes.Form} onSubmit={loginHandler}>
-      {inputElements.map((inputElement) => (
+      {inputElementsArray.map((inputElement) => (
         <Input
-          key={inputElement.elementConfig.type}
-          elementType={inputElement.elementType}
-          elementConfig={inputElement.elementConfig}
-          value={inputElement.elementConfig.value}
-          changed={(event) => inputChangedHandler(event, inputElement.key)}
-          invalid={!inputElement.valid}
-          shouldValidate={inputElement.elementConfig.validation}
-          touched={inputElement.touched}
-          label={inputElement.elementConfig.image}
+          key={inputElement.id}
+          elementType={inputElement.config.elementType}
+          elementConfig={inputElement.config.elementConfig}
+          value={inputElement.config.value}
+          changed={(event) => inputChangedHandler(event, inputElement.id)}
+          invalid={!inputElement.config.valid}
+          shouldValidate={inputElement.config.validation}
+          touched={inputElement.config.touched}
+          label={inputElement.config.elementConfig.image}
         />
       ))}
       {/* <input type="submit" value="Login" /> */}
