@@ -202,7 +202,7 @@ class Login extends React.Component {
         <div id="login">
         {form}
         </div>
-        <NavLink to="/signup">Don't have an account?</NavLink>
+        <NavLink className={classes.Signup} to="/signup">Don't have an account?</NavLink>
       </div>
     );
   }

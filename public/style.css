@@ -50,6 +50,7 @@ after { clear: both; }
   cursor: pointer;
   transition: background 0.3s ease-in-out;
 }
+
 button[type="submit"] {
   background: #b5cd60;
   border: 0;
@@ -61,7 +62,7 @@ button[type="submit"] {
   transition: background 0.3s ease-in-out;
 }
 
-#login form input[type="submit"]:hover {
+button[type="submit"]:hover {
   background: #16aa56;
 }
 

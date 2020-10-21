@@ -1,0 +1,15 @@
+.Signup_Div {
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+}
+
+.Signup_Form {
+  margin: auto;
+  padding: 22px 22px 22px 22px;
+  width: 100%;
+  border-radius: 25px;
+  background: #282e33;
+  border-top: 3px solid #434a52;
+  border-bottom: 3px solid #434a52;
+}

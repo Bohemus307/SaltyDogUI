@@ -1,4 +1,5 @@
 .Nav_Div {
+  background: #282e33;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -29,12 +30,7 @@
 
 .Nav_Logo {
   height: 100%;
-  background-color: #606468;
   margin: 10px 10px;
-  border-radius: 9px;
-  background: #282e33;
-  border-top: 3px solid #434a52;
-  border-bottom: 3px solid #434a52;
 }
 
 .Logo {

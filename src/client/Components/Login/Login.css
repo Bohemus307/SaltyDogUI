@@ -54,3 +54,10 @@
 .Submit :hover {
   background: #16aa56;
 }
+
+.Signup {
+  text-decoration: none;
+  color: #434a52;
+  font-size: larger;
+  font-weight: bold;
+}
