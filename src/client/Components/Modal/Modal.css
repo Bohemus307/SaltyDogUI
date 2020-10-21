@@ -1,4 +1,8 @@
 .Modal {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
   position: fixed;
   z-index: 500;
   background-color: #434a52;

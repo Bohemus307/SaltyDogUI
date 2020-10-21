@@ -46,7 +46,7 @@ const SignUp = () => {
   //     isLoggedIn: false,
   //     authToken: null,
   //     isError: false
-  const [inputElements, setInputElement] = useState(
+  const [inputElements, setInputElements] = useState(
     {
       email: {
         elementType: 'input',
@@ -86,15 +86,11 @@ const SignUp = () => {
     const updatedLoginForm = {
       ...inputElements,
     };
-    console.log(inputIdentifier);
-    console.log('uLF', updatedLoginForm);
 
     // deeper clone of login form
     const updatedFormELement = {
       ...updatedLoginForm[inputIdentifier],
     };
-
-    console.log('uFE', updatedFormELement);
 
     updatedFormELement.value = event.target.value;
     updatedFormELement.valid = checkValidity(
@@ -111,6 +107,8 @@ const SignUp = () => {
     }
 
     setValid(valid);
+
+    setInputElements(updatedLoginForm);
   };
 
   const [loading, setLoading] = useState(false);
@@ -124,18 +122,14 @@ const SignUp = () => {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
     }
 
-    console.log('formdata:', formData);
-
     const user = {
       Email: '',
       password: '',
       token: true,
       data: formData,
     };
-    console.log('user', user);
   };
 
-  console.log(inputElements);
   // const { controls } = inputElements;
   const keys = Object.keys(inputElements);
   const values = Object.values(inputElements);
@@ -151,7 +145,7 @@ const SignUp = () => {
   }, []);
 
   const form = (
-    <form name="form-login" className={classes.Form} onSubmit={loginHandler}>
+    <form name="form-signup" className={classes.Signup_Form} onSubmit={loginHandler}>
       {inputElementsArray.map((inputElement) => (
         <Input
           key={inputElement.id}
@@ -174,7 +168,9 @@ const SignUp = () => {
   return (
     <div>
       <Modal show={signedIn} modalClosed={() => setSignedIn(false)}>
-        {form}
+        <div>
+          {form}
+        </div>
       </Modal>
     </div>
   );
