@@ -144,6 +144,33 @@ class Login extends React.Component {
     });
   }
 
+  loginHandler = ( event ) => {
+    event.preventDefault()
+    // request 
+    this.setState({ loading: true })
+
+    const formData = {};
+    for (let formElementIdentifier in this.state.controls) {
+      formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value;
+    }
+
+    const User = {
+      Email: '',
+      password: '',
+      token: true
+    }
+
+    // axios.post('/orders.json', order)
+    // .then(response => {
+    //   this.setState({ loading:false });
+    //   this.props.history.push('/');
+
+    // })
+    // .catch((error) => {
+    //   this.setState({ loading:false });
+    // })
+  }
+
 
   render() {
   

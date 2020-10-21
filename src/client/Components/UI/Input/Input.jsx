@@ -70,7 +70,7 @@ const Input = ({
   if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
-
+  
   return (
     <Aux>
       <span className={classes.FormSpan}>
