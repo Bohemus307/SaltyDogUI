@@ -22,7 +22,7 @@ class DashBoard extends React.Component {
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>
         <button onClick={this.logOut}>Log out</button>
-          Menu
+          
         </div>
         <div className={classes.Main_Div}>
           Main
