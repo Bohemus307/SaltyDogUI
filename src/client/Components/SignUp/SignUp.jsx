@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Input from '../UI/Input/Input.jsx';
 
@@ -192,6 +192,12 @@ const SignUp = () => {
     return arr;
   }, []);
 
+  // redirects to login on click outside modal
+  const history = useHistory();
+  const handleClick = () => {
+    history.push('/login');
+  };
+
   const form = (
     <form name="form-signup" className={classes.Signup_Form} onSubmit={loginHandler}>
       {inputElementsArray.map((inputElement) => (
@@ -215,7 +221,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <Modal show={signedIn} modalClosed={() => setSignedIn(false)}>
+      <Modal show={signedIn} modalClosed={handleClick}>
         <div className={classes.Form_Div}>
           <h1 style={{ marginBottom: '0px', marginLeft: '20px' }}>
             Create Account

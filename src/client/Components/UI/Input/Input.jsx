@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import classes from './Input.css';
 import Aux from '../../../Hoc/Aux/Aux.jsx';
@@ -70,7 +70,7 @@ const Input = ({
   if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
-  
+
   return (
     <Aux>
       <span className={classes.FormSpan}>
@@ -83,14 +83,14 @@ const Input = ({
 };
 
 Input.propTypes = {
-  invalid: PropTypes.bool.isRequired,
-  shouldValidate: PropTypes.object.isRequired,
-  elementType: PropTypes.string.isRequired,
-  changed: PropTypes.func.isRequired,
-  elementConfig: PropTypes.object.isRequired,
-  value: PropTypes.string.isRequired,
-  touched: PropTypes.bool.isRequired,
-  label: PropTypes.string.isRequired,
+  invalid: propTypes.bool.isRequired,
+  shouldValidate: propTypes.object.isRequired,
+  elementType: propTypes.string.isRequired,
+  changed: propTypes.func.isRequired,
+  elementConfig: propTypes.object.isRequired,
+  value: propTypes.string.isRequired,
+  touched: propTypes.bool.isRequired,
+  label: propTypes.string.isRequired,
 };
 
 export default Input;

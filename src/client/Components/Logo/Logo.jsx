@@ -1,5 +1,5 @@
 import React from 'react';
-import PropTypes from 'prop-types';
+import propTypes from 'prop-types';
 
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
@@ -10,7 +10,7 @@ const Logo = ({ height }) => (
 );
 
 Logo.propTypes = {
-  height: PropTypes.string.isRequired,
+  height: propTypes.string.isRequired,
 };
 
 export default Logo;
