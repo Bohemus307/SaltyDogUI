@@ -1,6 +1,7 @@
 import React from 'react';
 
 import classes from './DashBoard.css';
+import Menu from '../../Components/Menu/Menu.jsx';
 
 class DashBoard extends React.Component {
   constructor(props) {
@@ -11,7 +12,7 @@ class DashBoard extends React.Component {
     };
   }
 
-  logOut = () => {
+  logOutHandler = () => {
     const { setAuthTokens } = useAuth();
     setAuthTokens();
   }
@@ -21,7 +22,7 @@ class DashBoard extends React.Component {
     return (
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>
-          <button onClick={this.logOut}>Log out</button>
+          <Menu  logout={ this.logOutHandler } />
         </div>
         <div className={classes.Main_Div}>
           Main

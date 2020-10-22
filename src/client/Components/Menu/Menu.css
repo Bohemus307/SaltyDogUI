@@ -1,0 +1,41 @@
+.Menu {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-top: 30px;
+  height: 100%;
+}
+
+.Menu_Link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
+  color: #606468;
+}
+
+.Menu_Image {
+  height: 40px;
+  padding-right: 40px;
+}
+
+.Menu_Item {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+  border-radius: 9px;
+  width: 100%;
+  height: 7%;
+  margin: 40px;
+}
+
+.Menu_Item:hover {
+  background-image: linear-gradient(to left, #00BFFF, #8A2BE2); 
+}
+
+.Logout {
+  font-family: futura-pt-bold;
+  font-size: 23px;
+  font-weight: 700;
+}

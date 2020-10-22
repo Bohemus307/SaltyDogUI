@@ -1,0 +1,22 @@
+/* .Menu_Item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 50px 50px;
+ 
+} */
+
+/* .Menu_Item:hover {
+  background-image: linear-gradient(to left, #00BFFF, #8A2BE2); 
+} */
+
+.Menu_Image {
+  height: 40px;
+  padding-right: 40px;
+}
+
+.Menu_Span {
+  font-family: futura-pt-bold;
+  font-size: 23px;
+  font-weight: 700;
+}
