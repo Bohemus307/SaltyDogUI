@@ -1,0 +1,23 @@
+.DashBoard {
+  display: grid;
+  grid-template-areas:
+    'menu main main main main';
+  height: 100%;
+}
+
+/* .DashBoard > div {
+  text-align: center;
+  font-size: 30px;
+} */
+
+.Menu_Div {
+  background: #282e33;
+  grid-area: menu;
+  height: 100vh;
+}
+
+.Main_Div {
+  background-color: #606468;
+  grid-area: main; 
+  height: 100vh;
+}

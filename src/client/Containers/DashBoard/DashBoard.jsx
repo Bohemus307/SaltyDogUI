@@ -1,5 +1,7 @@
 import React from 'react';
 
+import classes from './DashBoard.css';
+
 class DashBoard extends React.Component {
   constructor(props) {
     super();
@@ -17,8 +19,15 @@ class DashBoard extends React.Component {
   render() {
 
     return (
-      <div>dashboard for now...
-      <button onClick={this.logOut}>Log out</button>
+      <div className={classes.DashBoard}>
+        <div className={classes.Menu_Div}>
+        <button onClick={this.logOut}>Log out</button>
+          Menu
+        </div>
+        <div className={classes.Main_Div}>
+          Main
+        </div>
+      
       </div>
     );
   }
