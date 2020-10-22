@@ -2,6 +2,7 @@
   display: grid;
   grid-template-areas:
     'menu main main main main';
+  grid-template-columns: 300px auto auto auto auto;
   height: 100%;
 }
 
@@ -16,3 +17,13 @@
   grid-area: main; 
   height: 100vh;
 }
+/* 
+background-image: linear-gradient(to left, #00BFFF, #8A2BE2); <=== blue to purple 
+
+background-image: linear-gradient(to left, #ff0066, #FF4500); <=== pink to red
+
+background-image: linear-gradient(to top right, 	#00CED1, #00FF7F); <=== green to turq
+
+background-image: linear-gradient(to bottom left,#FF69B4, #9932CC); <== pink to purple
+
+*/

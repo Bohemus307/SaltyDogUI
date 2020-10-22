@@ -21,8 +21,7 @@ class DashBoard extends React.Component {
     return (
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>
-        <button onClick={this.logOut}>Log out</button>
-          
+          <button onClick={this.logOut}>Log out</button>
         </div>
         <div className={classes.Main_Div}>
           Main

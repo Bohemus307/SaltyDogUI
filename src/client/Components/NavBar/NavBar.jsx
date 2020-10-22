@@ -10,8 +10,8 @@ const NavBar = () => (
   <div className={classes.Nav_Div}>
     <div className={classes.Nav_Logo}>
       <NavLink className={classes.Logo} to="/">
-        <Logo height="70px" />
-        Heron Farms
+        <Logo height="60px" />
+        <span style={{ color: '#202020' }}>Heron Farms</span>
       </NavLink>
     </div>
     <div className={classes.Nav_Items}>
