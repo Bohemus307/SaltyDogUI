@@ -7,3 +7,11 @@
 .Form_Div {
   width: 90%;
 }
+
+.Redirect {
+  text-decoration: none;
+  font-family: futura-pt-bold;
+  color: #606468;
+  position: relative;
+  top: 10px;
+}

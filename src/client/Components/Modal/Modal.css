@@ -8,13 +8,14 @@
   background-color: #434a52;
   height: 50%;
   width: 80%;
-  border: 1px solid #282e33;
-  box-shadow: 1px 1px 1px whitesmoke;
+  /* border: 1px solid #282e33; */
+  box-shadow: 1px 1px 1px #282e33;
   padding: 16px;
   left: 15%;
   top: 30%;
   box-sizing: border-box;
   transition: all 0.3s ease-out;
+  border-radius: 9px;
 }
 
 @media (min-width: 600px) {

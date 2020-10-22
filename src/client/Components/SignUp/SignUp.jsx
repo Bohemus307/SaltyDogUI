@@ -152,13 +152,14 @@ const SignUp = () => {
     for (const inputIdentifiers in updatedLoginForm) {
       valid = updatedLoginForm[inputIdentifier].valid && formIsValid;
     }
-
+    console.log('valid', valid);
     setValid(valid);
 
     setInputElements(updatedLoginForm);
   };
 
   const [loading, setLoading] = useState(false);
+
   const loginHandler = (event) => {
     event.preventDefault();
     // request
@@ -208,7 +209,7 @@ const SignUp = () => {
       ))}
       {/* <input type="submit" value="Login" /> */}
       <button type="submit">Login</button>
-      <Link to="/login">Already have an account?</Link>
+      <Link className={classes.Redirect} to="/login">Already have an account?</Link>
     </form>
   );
 
@@ -216,6 +217,9 @@ const SignUp = () => {
     <div>
       <Modal show={signedIn} modalClosed={() => setSignedIn(false)}>
         <div className={classes.Form_Div}>
+          <h1 style={{ marginBottom: '0px', marginLeft: '20px' }}>
+            Create Account
+          </h1>
           {form}
         </div>
       </Modal>
