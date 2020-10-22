@@ -48,12 +48,26 @@ const SignUp = () => {
   //     isError: false
   const [inputElements, setInputElements] = useState(
     {
+      Name: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'Name',
+          placeholder: 'Full Name',
+          image: '/images/user.svg',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
       email: {
         elementType: 'input',
         elementConfig: {
           type: 'email',
           placeholder: 'Email Address',
-          image: '/images/id-card.png',
+          image: '/images/address.svg',
         },
         value: '',
         validation: {
@@ -63,11 +77,44 @@ const SignUp = () => {
         valid: false,
         touched: false,
       },
+      EmployeeNumber: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'EmployeeNumber',
+          placeholder: 'Employee Number',
+          image: '/images/id-card.png',
+        },
+        value: '',
+        validation: {
+          required: true,
+          isId: true, // need to add check for this in verify method
+          minLength: 6,
+          maxLength: 6,
+        },
+        valid: false,
+        touched: false,
+      },
       password: {
         elementType: 'input',
         elementConfig: {
           type: 'password',
           placeholder: 'Password...',
+          image: '/images/password.png',
+        },
+        value: '',
+        validation: {
+          required: true,
+          minLength: 7,
+          maxLength: 12,
+        },
+        valid: false,
+        touched: false,
+      },
+      passwordVerify: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'password',
+          placeholder: 'Password Again...',
           image: '/images/password.png',
         },
         value: '',
