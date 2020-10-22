@@ -12,15 +12,12 @@
 }
 
 .Logo_Div {
-  width: 320px;
   display: flex;
   flex-direction: column;
   align-items: center;
   padding: 22px 22px 22px 22px;
   border-radius: 25px;
   background: #282e33;
-  border-top: 3px solid #434a52;
-  border-bottom: 3px solid #434a52;
 }
 
 .Salty_Div {
@@ -43,8 +40,7 @@
   width: 100%;
   border-radius: 25px;
   background: #282e33;
-  border-top: 3px solid #434a52;
-  border-bottom: 3px solid #434a52;
+ 
 }
 
 .Submit {
