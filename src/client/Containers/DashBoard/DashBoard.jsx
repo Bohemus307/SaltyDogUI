@@ -9,7 +9,8 @@ class DashBoard extends React.Component {
     super();
 
     this.state = {
-
+      open: false,
+      value: 'Overview',
     };
   }
 
@@ -18,15 +19,23 @@ class DashBoard extends React.Component {
     setAuthTokens();
   }
 
-  render() {
+  menuClickHandler = (value) => {
+    console.log('div clicked', value);
+    this.setState({
+      open: true,
+      value: value,
+    })
+  }
 
+  render() {
+    console.log(this.state)
     return (
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>
-          <Menu  logout={ this.logOutHandler } />
+          <Menu  displayItem={ this.menuClickHandler } />
         </div>
         <div className={classes.Main_Div}>
-          <Main />
+          <Main displayItem={this.state.value} />
         </div>
       
       </div>

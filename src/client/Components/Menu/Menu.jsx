@@ -5,14 +5,14 @@ import classes from './Menu.css';
 
 import MenuItem from '../MenuItem/MenuItem.jsx';
 
-const Menu = ({ logout }) => {
+const Menu = ({ displayItem }) => {
   const [menuItems, setMenuItems] = useState([
     {
       key: 'Overview',
       image: '/images/overview.svg',
       alt: 'Overview',
       title: 'Overview',
-      clicked: false,
+      clicked: true,
     },
     {
       key: 'Ph',
@@ -41,35 +41,44 @@ const Menu = ({ logout }) => {
       image: '/images/alert.svg',
       alt: 'Alerts',
       title: 'System Alerts',
+      clicked: false,
     },
   ]);
 
-  const menuClickHandler = (value) => {
-    // console.log('clicked menu item', value);
-    const elementsIndex = menuItems.findIndex((element) => element.key === value);
+  const clickHandler = (value) => {
+    // check menuitems for true value already
+    let newArray = [...menuItems];
+    newArray.map((item) => {
+      if (item.clicked === true) {
+        item.clicked = false;
+        console.log('new items', newArray);
+        return newArray;
+      }
+      setMenuItems(newArray);
+    });
 
-    const newMenuItems = [...menuItems];
-    newMenuItems[elementsIndex] = {
-      ...newMenuItems[elementsIndex],
-      clicked: !newMenuItems[elementsIndex].clicked,
+    const elementsIndex = menuItems.findIndex((element) => element.key === value);
+    const newestArray = [...menuItems];
+
+    newestArray[elementsIndex] = {
+      ...newestArray[elementsIndex],
+      clicked: !newestArray[elementsIndex].clicked,
     };
 
-    setMenuItems(newMenuItems);
-
-    console.log(menuItems);
+    setMenuItems(newestArray);
   };
 
   const menu = (
     menuItems.map((item) => (
-      <div key={item.key} className={classes.Menu_Item}>
+      <div key={item.key} className={classes.Menu_Item} style={{ backgroundImage: item.clicked ? 'linear-gradient(to left, #00BFFF, #8A2BE2)' : 'none' }}>
         <MenuItem
           key={item.key}
           image={item.image}
           alt={item.alt}
           title={item.title}
-          click={menuClickHandler}
           value={item.key}
-          clicked={item.clicked}
+          click={clickHandler}
+          displayItem={displayItem}
         />
       </div>
     ))
@@ -89,7 +98,7 @@ const Menu = ({ logout }) => {
 };
 
 Menu.propTypes = {
-  logout: propTypes.func.isRequired,
+  displayItem: propTypes.func.isRequired,
 };
 
 export default Menu;
