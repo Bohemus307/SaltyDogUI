@@ -45,10 +45,19 @@ const Menu = ({ logout }) => {
   ]);
 
   const menuClickHandler = (value) => {
-    console.log('clicked menu item', value)
-    
+    // console.log('clicked menu item', value);
+    const elementsIndex = menuItems.findIndex((element) => element.key === value);
 
-  }
+    const newMenuItems = [...menuItems];
+    newMenuItems[elementsIndex] = {
+      ...newMenuItems[elementsIndex],
+      clicked: !newMenuItems[elementsIndex].clicked,
+    };
+
+    setMenuItems(newMenuItems);
+
+    console.log(menuItems);
+  };
 
   const menu = (
     menuItems.map((item) => (
@@ -60,6 +69,7 @@ const Menu = ({ logout }) => {
           title={item.title}
           click={menuClickHandler}
           value={item.key}
+          clicked={item.clicked}
         />
       </div>
     ))
