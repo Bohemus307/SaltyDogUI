@@ -11,6 +11,18 @@ p {
   line-height: 1.5em;
 }
 
+h2 {
+  font-family: futura-pt-bold;
+  font-weight: 700;
+  font-size: 32px;
+  color: #282828;
+  display: list-item;                                        
+  list-style-type: disc;      
+  list-style-position: inside;
+  margin-left: 20px;
+  margin-top: 60px;
+}
+
 after { clear: both; }
 
 button[type="submit"] {

@@ -12,18 +12,21 @@ const Menu = ({ logout }) => {
       image: '/images/overview.svg',
       alt: 'Overview',
       title: 'Overview',
+      clicked: false,
     },
     {
       key: 'Ph',
       image: '/images/sensor.svg',
       alt: 'Ph reading',
       title: 'Ph Sensor',
+      clicked: false,
     },
     {
       key: 'EC',
       image: '/images/sensor.svg',
       alt: 'Overview',
       title: 'EC Sensor',
+      clicked: false,
     },
 
     {
@@ -31,6 +34,7 @@ const Menu = ({ logout }) => {
       image: '/images/sensor.svg',
       alt: 'dissolvedoxygen',
       title: 'DO Sensor',
+      clicked: false,
     },
     {
       key: 'Alerts',
@@ -40,6 +44,12 @@ const Menu = ({ logout }) => {
     },
   ]);
 
+  const menuClickHandler = (value) => {
+    console.log('clicked menu item', value)
+    
+
+  }
+
   const menu = (
     menuItems.map((item) => (
       <div key={item.key} className={classes.Menu_Item}>
@@ -48,6 +58,8 @@ const Menu = ({ logout }) => {
           image={item.image}
           alt={item.alt}
           title={item.title}
+          click={menuClickHandler}
+          value={item.key}
         />
       </div>
     ))

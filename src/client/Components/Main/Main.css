@@ -8,7 +8,41 @@
 .Sensor_Wrapper {
   display: flex;
   flex-direction: row;
-  align-items: center;
   justify-content: center;
   width: 100%;
+  height: 60%;
+}
+
+.Sensor {
+  background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
+  width: 26%;
+  height: 60%;
+  padding: 20px;
+  margin: 20px 15px;
+  border-radius: 9px;
+}
+
+.Data_Wrapper {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  height: 80%;
+  width: 100%;
+}
+
+.Chart {
+  background-image: linear-gradient(to bottom right, #ff0066, #FF4500);
+  width: 30%;
+  height: 80%;
+  margin-left: 8px;
+  margin-right: 20px;
+  border-radius: 9px;
+}
+
+.Feed {
+  background-image: linear-gradient(to top right,#FF69B4, #9932CC); 
+  width: 60%;
+  height: 80%;
+  border-radius: 9px;
+  margin-left: 10px;
 }

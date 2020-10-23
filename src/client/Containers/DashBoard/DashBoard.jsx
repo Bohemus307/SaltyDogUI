@@ -2,6 +2,7 @@ import React from 'react';
 
 import classes from './DashBoard.css';
 import Menu from '../../Components/Menu/Menu.jsx';
+import Main from '../../Components/Main/Main.jsx';
 
 class DashBoard extends React.Component {
   constructor(props) {
@@ -25,7 +26,7 @@ class DashBoard extends React.Component {
           <Menu  logout={ this.logOutHandler } />
         </div>
         <div className={classes.Main_Div}>
-          Main
+          <Main />
         </div>
       
       </div>
