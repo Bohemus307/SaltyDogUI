@@ -1,24 +1,14 @@
-
-[![Contributors][contributors-shield]][contributors-url]
-[![Forks][forks-shield]][forks-url]
-[![Stargazers][stars-shield]][stars-url]
-[![Issues][issues-shield]][issues-url]
-[![MIT License][license-shield]][license-url]
-[![LinkedIn][linkedin-shield]][linkedin-url]
-
-
-
 <!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/bohemus307/SaltyDogUI">
-    <img src="images/heronlogo.png" alt="Logo" width="80" height="80">
+    <img src="public/images/heronlogo.png" alt="Logo" width="80" height="80">
   </a>
 
   <h3 align="center">SaltyDog UI</h3>
 
   <p align="center">
-    The user interface software for a salinity sensor that checks nutrient water in Heron Farms indoor grow spaces. It Use Atlas scientific sensors and communicates trhough wifi to an AWS thing instance where it transmits data via and API call to our application here. This User interface uses React and GraphQL with an Express Server that utilizes a PG Database instance with Timescale DB organizing the time series data.
+    The user interface software for a salinity sensor that tracks EC PH and DO levels in nutrient saltwater in a Heron Farms indoor grow spaces. It Use Atlas scientific sensors and communicates trhough wifi to an AWS thing instance where it transmits data via and API call to our application here. This User interface uses React and GraphQL with an Express Server that utilizes a PG Database instance with Timescale DB organizing the time series data.
     <br />
     <a href="https://github.com/bohemus307/SaltyDogUI"><strong>Explore the docs »</strong></a>
     <br />
