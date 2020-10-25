@@ -47,11 +47,11 @@ const Menu = ({ displayItem }) => {
 
   const clickHandler = (value) => {
     // check menuitems for true value already
-    let newArray = [...menuItems];
+    const newArray = [...menuItems];
     newArray.map((item) => {
       if (item.clicked === true) {
-        item.clicked = false;
-        console.log('new items', newArray);
+        const newItem = item;
+        newItem.clicked = false;
         return newArray;
       }
       setMenuItems(newArray);

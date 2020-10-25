@@ -20,7 +20,6 @@ class DashBoard extends React.Component {
   }
 
   menuClickHandler = (value) => {
-    console.log('div clicked', value);
     this.setState({
       open: true,
       value: value,
@@ -28,7 +27,6 @@ class DashBoard extends React.Component {
   }
 
   render() {
-    console.log(this.state)
     return (
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>

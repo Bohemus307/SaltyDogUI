@@ -1,24 +1,47 @@
-import React from 'react';
+import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import classes from './Main.css';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
+import Sensor from '../Sensor/Sensor.jsx';
+
 const Main = ({ displayItem }) => {
-  console.log(displayItem)
+  const [sensors, setSensor] = useState([
+    {
+      type: 'PH',
+      unitOfMeasure: null,
+      connected: false,
+      location: 'saltyDog',
+    },
+    {
+      type: 'EC',
+      unitOfMeasure: 'mS/cm',
+      connected: false,
+      location: 'saltyDog',
+    },
+    {
+      type: 'EC',
+      unitOfMeasure: 'mg/L',
+      connected: false,
+      location: 'saltyDog',
+    },
+  ]);
+
+  const currentSensors = (
+    sensors.map((sensor) => (
+      <div className={classes.Sensor}>
+        <Sensor type={sensor.type} loading={false} />
+      </div>
+    ))
+  );
+
   let mainElement = null;
 
   const overview = (
     <Aux>
       <h2>Overview</h2>
       <div className={classes.Sensor_Wrapper}>
-        <div className={classes.Sensor}>
-          Sensor Component
-        </div>
-        <div className={classes.Sensor}>
-          Sensor Component
-        </div>
-        <div className={classes.Sensor}>
-          Sensor Component
-        </div>
+        {currentSensors}
       </div>
       <div className={classes.Data_Wrapper}>
         <div className={classes.Chart}>
@@ -72,6 +95,10 @@ const Main = ({ displayItem }) => {
       {mainElement}
     </div>
   );
+};
+
+Main.propTypes = {
+  displayItem: propTypes.string.isRequired,
 };
 
 export default Main;
