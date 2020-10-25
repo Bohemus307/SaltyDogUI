@@ -4,6 +4,7 @@ import classes from './Main.css';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
 import Sensor from '../Sensor/Sensor.jsx';
+import SensorOverview from '../SensorOverview/SensorOverview.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
@@ -30,7 +31,12 @@ const Main = ({ displayItem }) => {
   const currentSensors = (
     sensors.map((sensor) => (
       <div key={sensor.type} className={classes.Sensor}>
-        <Sensor key={sensor.type} type={sensor.type} loading={false} />
+        <Sensor
+          key={sensor.type}
+          type={sensor.type}
+          loading={false}
+          unitOfMeasure={sensor.unitOfMeasure}
+        />
       </div>
     ))
   );
@@ -60,23 +66,17 @@ const Main = ({ displayItem }) => {
       break;
     case ('Ph'):
       mainElement = (
-        <div>
-          ph sensor
-        </div>
+        <SensorOverview type="Ph" loading={false} unitOfMeasure={null} />
       );
       break;
     case ('EC'):
       mainElement = (
-        <div>
-          EC sensor
-        </div>
+        <SensorOverview type="Ec" loading={false} unitOfMeasure="mS/cm" />
       );
       break;
     case ('DO'):
       mainElement = (
-        <div>
-          DO sensor
-        </div>
+        <SensorOverview type="Do" loading={false} unitOfMeasure="mg/L" />
       );
       break;
     case ('Alerts'):

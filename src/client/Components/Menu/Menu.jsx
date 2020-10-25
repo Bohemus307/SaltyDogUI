@@ -52,20 +52,15 @@ const Menu = ({ displayItem }) => {
       if (item.clicked === true) {
         const newItem = item;
         newItem.clicked = false;
-        return newArray;
       }
-      setMenuItems(newArray);
+      return newArray;
     });
-
     const elementsIndex = menuItems.findIndex((element) => element.key === value);
-    const newestArray = [...menuItems];
-
-    newestArray[elementsIndex] = {
-      ...newestArray[elementsIndex],
-      clicked: !newestArray[elementsIndex].clicked,
+    newArray[elementsIndex] = {
+      ...newArray[elementsIndex],
+      clicked: !newArray[elementsIndex].clicked,
     };
-
-    setMenuItems(newestArray);
+    setMenuItems(newArray);
   };
 
   const menu = (

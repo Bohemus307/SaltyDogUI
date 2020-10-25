@@ -5,7 +5,7 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
-const Sensor = ({ type, loading }) => {
+const Sensor = ({ type, loading, unitOfMeasure }) => {
   const [currentData, setData] = useState(6.986);
 
   if (loading === true) {
@@ -21,13 +21,12 @@ const Sensor = ({ type, loading }) => {
       </div>
       <div className={classes.Sensor_Data}>
         {currentData}
+        {unitOfMeasure}
       </div>
     </Aux>
   );
   return (
-    <div>
-      {sensor}
-    </div>
+    sensor
   );
 };
 Sensor.propTypes = {
