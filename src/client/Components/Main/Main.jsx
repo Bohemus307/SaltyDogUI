@@ -20,7 +20,7 @@ const Main = ({ displayItem }) => {
       location: 'saltyDog',
     },
     {
-      type: 'EC',
+      type: 'DO',
       unitOfMeasure: 'mg/L',
       connected: false,
       location: 'saltyDog',
@@ -29,8 +29,8 @@ const Main = ({ displayItem }) => {
 
   const currentSensors = (
     sensors.map((sensor) => (
-      <div className={classes.Sensor}>
-        <Sensor type={sensor.type} loading={false} />
+      <div key={sensor.type} className={classes.Sensor}>
+        <Sensor key={sensor.type} type={sensor.type} loading={false} />
       </div>
     ))
   );

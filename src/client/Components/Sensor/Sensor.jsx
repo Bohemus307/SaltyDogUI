@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
+import classes from './Sensor.css';
 
 const Sensor = ({ type, loading }) => {
   const [currentData, setData] = useState(6.986);
@@ -15,10 +16,10 @@ const Sensor = ({ type, loading }) => {
 
   const sensor = (
     <Aux>
-      <div>
+      <div className={classes.Sensor_Type}>
         {type}
       </div>
-      <div>
+      <div className={classes.Sensor_Data}>
         {currentData}
       </div>
     </Aux>
