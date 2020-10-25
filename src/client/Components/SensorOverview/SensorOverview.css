@@ -12,7 +12,6 @@
   display: flex;
   flex-direction: row;
   background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
-  width: 26%;
   padding: 20px;
   border-radius: 9px;
   box-shadow: 2px 4px;
