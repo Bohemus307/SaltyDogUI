@@ -2,53 +2,61 @@ import React, { useState } from 'react';
 import propTypes from 'prop-types';
 
 import Input from '../UI/Input/Input.jsx';
+import Spinner from '../UI/Spinner/Spinner.jsx';
+import classes from './DataExport.css';
 
 const DataExport = () => {
-  const [inputElements, setInputs] = useState([
+  const [inputElements, setInputs] = useState(
     {
-      Start: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'Start',
-          placeholder: 'Start Date: 12/12/12',
-          image: '/images/user.svg',
+      exportForm: {
+        Start: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'Start',
+            placeholder: 'Start Date: 12/12/12',
+            image: '/images/user.svg',
+          },
+          value: '',
+          validation: {
+            required: true,
+          },
+          valid: false,
+          touched: false,
         },
-        value: '',
-        validation: {
-          required: true,
+        End: {
+          elementType: 'input',
+          elementConfig: {
+            type: 'End',
+            placeholder: 'End Date: 12/12/12',
+            image: '/images/user.svg',
+          },
+          value: '',
+          validation: {
+            required: true,
+          },
+          valid: false,
+          touched: false,
         },
-        valid: false,
-        touched: false,
-      },
-      End: {
-        elementType: 'input',
-        elementConfig: {
-          type: 'End',
-          placeholder: 'End Date: 12/12/12',
-          image: '/images/user.svg',
+        exportMethod: {
+          elementType: 'select',
+          elementConfig: {
+            options: [
+              { value: '.CSV', displayValue: 'CSV' },
+              { value: 'JSON', displayValue: 'JSON' },
+            ],
+            image: '/images/user.svg',
+          },
+          value: '',
+          valid: false,
+          validation: {
+            required: false,
+          },
+          touched: false,
         },
-        value: '',
-        validation: {
-          required: true,
-        },
-        valid: false,
-        touched: false,
-      },
-      exportMethod: {
-        elementType: 'select',
-        elementConfig: {
-          options: [
-            { value: '.CSV', displayValue: 'CSV' },
-            { value: 'JSON', displayValue: 'JSON' },
-          ],
-        },
-        value: '',
-        valid: false,
-        touched: false,
       },
       loading: false,
     },
-  ]);
+  );
   const checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -66,17 +74,18 @@ const DataExport = () => {
 
     return isValid;
   };
-
+  // will export data to csv or json type file needs to open a save as modal
   const exportHandler = () => {
     console.log('exported');
   };
+
   // const { controls } = inputElements;
-  const keys = Object.keys(inputElements);
-  const values = Object.values(inputElements);
+  const keys = Object.keys(inputElements.exportForm);
+  const values = Object.values(inputElements.exportForm);
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
-      ...inputElements,
+      ...inputElements.exportForm,
     };
     // deeper clone
     const updatedFormELement = {
@@ -102,7 +111,7 @@ const DataExport = () => {
     arr.push(object);
     return arr;
   }, []);
-
+  console.log(inputElementsArray);
   let form = (
     <form onSubmit={exportHandler}>
       {inputElementsArray.map((formElement) => (
@@ -115,12 +124,13 @@ const DataExport = () => {
           invalid={!formElement.config.valid}
           shouldValidate={formElement.config.validation}
           touched={formElement.config.touched}
+          label={formElement.config.elementConfig.image}
         />
       ))}
-      <button btnType="Export" clicked={exportHandler}>Export</button>
+      <button type="button" onClick={exportHandler}>Export</button>
     </form>
   );
-  if (this.state.loading) {
+  if (inputElements.loading) {
     form = <Spinner />;
   }
   return (
@@ -132,7 +142,6 @@ const DataExport = () => {
 };
 
 DataExport.propTypes = {
-  name: propTypes.string.isRequired,
 };
 
 export default DataExport;

@@ -3,6 +3,7 @@ import propTypes from 'prop-types';
 
 import classes from './SensorOverview.css';
 import Sensor from '../Sensor/Sensor.jsx';
+import DataExport from '../DataExport/DataExport.jsx';
 
 export default function SensorOverview({ type, loading, unitOfMeasure }) {
   const [feedData, setFeedData] = useState([
@@ -56,6 +57,7 @@ export default function SensorOverview({ type, loading, unitOfMeasure }) {
           </div>
         ))}
       </div>
+      <DataExport />
     </div>
   );
 }
