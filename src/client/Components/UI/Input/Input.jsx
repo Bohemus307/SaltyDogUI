@@ -13,6 +13,7 @@ const Input = ({
   value,
   touched,
   label,
+  alt,
 }) => {
   let inputElement = null;
   const inputClasses = [classes.InputElement];
@@ -46,6 +47,7 @@ const Input = ({
         <select
           onChange={changed}
           className={inputClasses.join(' ')}
+          {...elementConfig}
           value={value}
         >
           {elementConfig.options.map((option) => (
@@ -70,11 +72,16 @@ const Input = ({
   if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
-
+  console.log(elementType);
   return (
     <Aux>
       <span className={classes.FormSpan}>
-        <img className={classes.InputImage} src={label} alt="username" title="username" />
+        <img
+          className={classes.InputImage}
+          src={label}
+          alt={alt}
+          title={alt}
+        />
       </span>
       {inputElement}
       {validationError}
@@ -91,6 +98,11 @@ Input.propTypes = {
   value: propTypes.string.isRequired,
   touched: propTypes.bool.isRequired,
   label: propTypes.string.isRequired,
+  alt: propTypes.string,
+};
+
+Input.defaultProps = {
+  alt: 'Input image',
 };
 
 export default Input;

@@ -1,0 +1,18 @@
+.Data_Export {
+  display: flex;
+  flex-direction: column;
+  border-radius: 9px;
+  margin: 3px 3px;
+}
+
+.Export {
+  width: 400px;
+}
+
+.Export_Form {
+  margin: auto;
+  width: 100%;
+  padding: 22px 22px 22px 22px;
+  border-radius: 25px;
+  background: #282e33;
+}

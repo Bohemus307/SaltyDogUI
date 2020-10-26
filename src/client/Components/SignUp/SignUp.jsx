@@ -191,7 +191,7 @@ const SignUp = () => {
     arr.push(object);
     return arr;
   }, []);
-
+  console.log(inputElementsArray)
   // redirects to login on click outside modal
   const history = useHistory();
   const handleClick = () => {

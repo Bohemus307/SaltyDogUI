@@ -5,6 +5,16 @@ import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
 
+// config:
+// elementConfig: {type: "Name", placeholder: "Full Name", image: "/images/user.svg"}
+// elementType: "input"
+// touched: false
+// valid: false
+// validation: {required: true}
+// value: ""
+// __proto__: Object
+// id: "Name"
+
 const DataExport = () => {
   const [inputElements, setInputs] = useState(
     {
@@ -15,6 +25,7 @@ const DataExport = () => {
             type: 'Start',
             placeholder: 'Start Date: 12/12/12',
             image: '/images/user.svg',
+            alt: 'Start Date',
           },
           value: '',
           validation: {
@@ -28,7 +39,8 @@ const DataExport = () => {
           elementConfig: {
             type: 'End',
             placeholder: 'End Date: 12/12/12',
-            image: '/images/user.svg',
+            image: '/images/sensor.svg',
+            alt: 'End Date',
           },
           value: '',
           validation: {
@@ -44,7 +56,8 @@ const DataExport = () => {
               { value: '.CSV', displayValue: 'CSV' },
               { value: 'JSON', displayValue: 'JSON' },
             ],
-            image: '/images/user.svg',
+            image: '/images/alert.svg',
+            alt: 'File Type',
           },
           value: '',
           valid: false,
@@ -98,7 +111,6 @@ const DataExport = () => {
     );
     updatedFormELement.touched = true;
     updatedExportForm[inputIdentifier] = updatedFormELement;
-
     setInputs(updatedExportForm);
   };
 
@@ -113,7 +125,7 @@ const DataExport = () => {
   }, []);
   console.log(inputElementsArray);
   let form = (
-    <form onSubmit={exportHandler}>
+    <form onSubmit={exportHandler} className={classes.Export_Form}>
       {inputElementsArray.map((formElement) => (
         <Input
           key={formElement.id}
@@ -125,18 +137,22 @@ const DataExport = () => {
           shouldValidate={formElement.config.validation}
           touched={formElement.config.touched}
           label={formElement.config.elementConfig.image}
+          alt={formElement.config.elementConfig.alt}
         />
       ))}
-      <button type="button" onClick={exportHandler}>Export</button>
+      <button type="submit" onClick={exportHandler}>Export</button>
     </form>
   );
   if (inputElements.loading) {
     form = <Spinner />;
   }
+
   return (
-    <div className={classes.ContactData}>
+    <div className={classes.Data_Export}>
       <h4>Export Data</h4>
-      {form}
+      <div className={classes.Export}>
+        {form}
+      </div>
     </div>
   );
 };

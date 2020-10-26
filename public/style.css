@@ -20,7 +20,15 @@ h2 {
   list-style-type: disc;      
   list-style-position: inside;
   margin-left: 20px;
-  margin-top: 60px;
+  margin-top: 30px;
+}
+
+h4 {
+  font-family: futura-pt-bold;
+  font-weight: 700;
+  font-size: 32px;
+  color: #282828;
+  margin: 20px 5px;
 }
 
 after { clear: both; }
