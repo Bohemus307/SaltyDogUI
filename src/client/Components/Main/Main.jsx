@@ -5,6 +5,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 
 import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
+import Alerts from '../Alerts/Alerts.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
@@ -81,7 +82,7 @@ const Main = ({ displayItem }) => {
     case ('Alerts'):
       mainElement = (
         <div>
-          Alerts
+          <Alerts />
         </div>
       );
       break;

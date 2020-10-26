@@ -18,7 +18,6 @@ const Sensor = ({ type, loading, unitOfMeasure }) => {
     <Aux>
       <div className={classes.Sensor_Type}>
         {type}
-        :
       </div>
       <div className={classes.Sensor_Data}>
         {currentData}

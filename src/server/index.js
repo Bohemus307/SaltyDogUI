@@ -14,9 +14,7 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-// app.use('/data', Router);
-
-// for redirect of refresh
+// for redirect of refresh in spa
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
     if (err) {
@@ -24,5 +22,7 @@ app.get('/*', (req, res) => {
     }
   });
 });
+
+// app.use('/data', Router);
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

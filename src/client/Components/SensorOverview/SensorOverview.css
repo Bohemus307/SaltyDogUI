@@ -1,7 +1,7 @@
 .Overview {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+  align-items: center;
   height: 90%;
   width: 100%;
   margin-left: 5vw;
@@ -11,6 +11,7 @@
 .Sensor_Div {
   display: flex;
   flex-direction: row;
+  align-self: start;
   background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
   padding: 15px 10px;
   border-radius: 9px;
@@ -23,14 +24,14 @@
   flex-direction: column-reverse;
   align-items: center;
   height: 50%;
-  width: 70%;
-  margin: 10px 0px;
+  width: 60%;
+  margin: 20px 0px;
   padding: 15px 10px;
   background-image: linear-gradient(to left, #00BFFF, #8A2BE2);
   border-radius: 9px;
   box-shadow: 1px 2px;
   color: #282e33;
-  overflow-y: scroll;
+  overflow-y: auto;
   scrollbar-color: dark; /* red is for the thumb and yellow is for the track */
 }
 
