@@ -1,9 +1,10 @@
 .Overview {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   height: 90%;
   width: 100%;
+  margin-left: 5vw;
   
 }
 
@@ -11,7 +12,7 @@
   display: flex;
   flex-direction: row;
   background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
-  padding: 20px;
+  padding: 15px 10px;
   border-radius: 9px;
   box-shadow: 1px 2px;
   color: #282e33;
@@ -23,7 +24,7 @@
   align-items: center;
   height: 50%;
   width: 70%;
-  margin: 10px 10px;
+  margin: 10px 0px;
   padding: 15px 10px;
   background-image: linear-gradient(to left, #00BFFF, #8A2BE2);
   border-radius: 9px;

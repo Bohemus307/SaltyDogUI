@@ -72,7 +72,6 @@ const Input = ({
   if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
-  console.log(elementType);
   return (
     <Aux>
       <span className={classes.FormSpan}>

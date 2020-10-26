@@ -24,7 +24,7 @@ const DataExport = () => {
           elementConfig: {
             type: 'Start',
             placeholder: 'Start Date: 12/12/12',
-            image: '/images/user.svg',
+            image: '/images/start.svg',
             alt: 'Start Date',
           },
           value: '',
@@ -39,7 +39,7 @@ const DataExport = () => {
           elementConfig: {
             type: 'End',
             placeholder: 'End Date: 12/12/12',
-            image: '/images/sensor.svg',
+            image: '/images/start.svg',
             alt: 'End Date',
           },
           value: '',
@@ -56,7 +56,7 @@ const DataExport = () => {
               { value: '.CSV', displayValue: 'CSV' },
               { value: 'JSON', displayValue: 'JSON' },
             ],
-            image: '/images/alert.svg',
+            image: '/images/csv.svg',
             alt: 'File Type',
           },
           value: '',
@@ -123,7 +123,7 @@ const DataExport = () => {
     arr.push(object);
     return arr;
   }, []);
-  console.log(inputElementsArray);
+
   let form = (
     <form onSubmit={exportHandler} className={classes.Export_Form}>
       {inputElementsArray.map((formElement) => (
