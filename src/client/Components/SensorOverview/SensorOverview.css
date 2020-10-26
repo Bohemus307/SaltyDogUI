@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
   height: 90%;
   width: 100%;
   
@@ -14,7 +13,7 @@
   background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
   padding: 20px;
   border-radius: 9px;
-  box-shadow: 2px 4px;
+  box-shadow: 1px 2px;
   color: #282e33;
 }
 
@@ -28,8 +27,10 @@
   padding: 15px 10px;
   background-image: linear-gradient(to left, #00BFFF, #8A2BE2);
   border-radius: 9px;
-  box-shadow: 2px 4px;
+  box-shadow: 1px 2px;
   color: #282e33;
+  overflow-y: scroll;
+  scrollbar-color: dark; /* red is for the thumb and yellow is for the track */
 }
 
 .Data_Reading {

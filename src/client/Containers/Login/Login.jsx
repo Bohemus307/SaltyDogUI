@@ -9,12 +9,12 @@ import {
   useLocation,
 } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from "../Context/Auth.jsx";
+import { useAuth } from "../../Components/Context/Auth.jsx";
 
 import classes from './Login.css';
-import Logo from '../Logo/Logo.jsx';
-import Input from '../UI/Input/Input.jsx';
-import Spinner from '../UI/Spinner/Spinner.jsx';
+import Logo from '../../Components/Logo/Logo.jsx';
+import Input from '../../Components/UI/Input/Input.jsx';
+import Spinner from '../../Components/UI/Spinner/Spinner.jsx';
 
 class Login extends React.Component {
   constructor(props) {

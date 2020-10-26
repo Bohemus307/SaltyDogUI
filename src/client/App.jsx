@@ -6,7 +6,7 @@ import {
   NavLink,
 } from 'react-router-dom';
 
-import Login from './Components/Login/Login.jsx';
+import Login from './Containers/Login/Login.jsx';
 import DashBoard from './Containers/DashBoard/DashBoard.jsx';
 import Home from './Components/Home/Home.jsx';
 import PrivateRoute from './Components/PrivateRoute/PrivateRoute.jsx';
