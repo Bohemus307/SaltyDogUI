@@ -52,3 +52,59 @@ button[type="submit"]:disabled {
   background: salmon;
   cursor: not-allowed;
 }
+
+.range-slider {
+  margin: 0;
+  padding: 0;
+  border: 0;
+  outline: none;
+  background: transparent;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 100%;
+  height: 0;
+  pointer-events: none; // Prevent mouse interaction on the range slider.
+}
+
+.range-slider::-webkit-slider-runnable-track {
+  cursor: default;
+  height: 1px; /* Required for Samsung internet based browsers */
+  outline: 0;
+  -webkit-appearance: none;
+
+  /* Add custom styles here.. */
+}
+.range-slider::-moz-range-track {
+  cursor: default;
+  -moz-appearance: none;
+  outline: 0;
+  height: 1px;
+
+  /* Add custom styles here.. */
+}
+
+.range-slider::-webkit-slider-thumb {
+  -webkit-appearance: none;  
+  /* Reset appearance so we can apply backgrounds/borders etc. */
+  pointer-events: auto; 
+ /* Re-enable pointer events so the handles can be used. */
+}
+
+.range-slider:-moz-range-thumb {
+ -moz-appearance: none;
+ /* Reset appearance so we can apply backgrounds/borders etc. */
+ pointer-events: auto;
+ /* Re-enable pointer events so the handles can be used. */
+}
+
+/* absolutely positioned div */
+.price-slider-progress { 
+  height: 9px;
+  width: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+  --track-background: linear-gradient(to right, transparent var(--low), var(--range-color) 0, var(--range-color) var(--high), transparent 0) no-repeat 0 100% / 100% 100%;
+  --range-color: #a8739d;
+  background: var(--track-background);
+}
