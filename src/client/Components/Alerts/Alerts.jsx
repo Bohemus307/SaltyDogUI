@@ -16,7 +16,19 @@ const Alerts = () => {
     setParentVal(val);
   });
 
-  const sliderProps = useMemo(
+  const slider1Props = useMemo(
+    () => ({
+      min: 0,
+      max: 100,
+      value: parentVal,
+      step: 1,
+      label: 'Alerts slider',
+      onChange: (e) => sliderValueChanged(e),
+    }),
+    [parentVal],
+  );
+
+  const slider2Props = useMemo(
     () => ({
       min: 0,
       max: 100,
@@ -34,7 +46,8 @@ const Alerts = () => {
         PARENT VALUE:
         {parentVal}
       </h1>
-      <RangeSlider {...sliderProps} classes="additional-css-classes" />
+      <RangeSlider {...slider1Props} classes="additional-css-classes" />
+      <RangeSlider {...slider2Props} classes="additional-css-classes" />
     </div>
   );
 };

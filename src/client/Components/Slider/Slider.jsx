@@ -17,22 +17,6 @@ const RangeSlider = ({
   // so basically after dragging the slider and then release the mouse then we will call the parent onChange, otherwise parent function will get call each and every change
   const [mouseState, setMouseState] = useState(null);
 
-  const [minVal, setMinVal] = useState(0);
-  const [maxVal, setMaxVal] = useState(100);
-
-  const getProgressStyle = () => {
-    const { minVal, maxVal } = this.props;
-    const { currentMin, currentMax } = this.state;
-
-    const low = Math.round(100 * ((currentMin - min) / (max - min))) - 0.5;
-    const high = Math.round(100 * ((currentMax - min) / (max - min))) + 0.5;
-
-    return {
-      '--low': `${low}%`,
-      '--high': `${high}%`,
-    };
-  };
-
   useEffect(() => {
     setSliderVal(value); // set new value when value gets changed, even when first render
   }, [value]);
@@ -48,7 +32,7 @@ const RangeSlider = ({
   }, [mouseState]);
 
   return (
-    <div className="range-slider">
+    <div>
       <p>{label}</p>
       <h3>
         value:
