@@ -19,6 +19,7 @@ const Alerts = () => {
       step: 1,
       label: 'phMin',
       locked: false,
+      alarm: false,
     },
     {
       key: 'phMaxSlider',
@@ -28,6 +29,7 @@ const Alerts = () => {
       step: 1,
       label: 'phMax',
       locked: false,
+      alarm: false,
     },
     {
       key: 'ecMinSlider',
@@ -37,6 +39,7 @@ const Alerts = () => {
       step: 1,
       label: 'ecMin',
       locked: false,
+      alarm: false,
     },
     {
       key: 'ecMaxSlider',
@@ -46,6 +49,7 @@ const Alerts = () => {
       step: 1,
       label: 'ecMax',
       locked: false,
+      alarm: false,
     },
     {
       key: 'doMinSlider',
@@ -55,6 +59,7 @@ const Alerts = () => {
       step: 1,
       label: 'doMin',
       locked: false,
+      alarm: false,
     },
     {
       key: 'doMaxSlider',
@@ -64,11 +69,12 @@ const Alerts = () => {
       step: 1,
       label: 'doMax',
       locked: false,
+      alarm: false,
     },
   ]);
 
-  const sliderValueChanged = useCallback((val) => {
-    console.log('NEW VALUE', val);
+  const sliderValueChanged = useCallback((val, key) => {
+    console.log('NEW VALUE', val, key);
     // setParentVal(val);
   });
 
@@ -93,7 +99,7 @@ const Alerts = () => {
           value: parentVal,
           step: slider.step,
           label: slider.label,
-          onChange: (e) => sliderValueChanged(e),
+          onChange: (e, key) => sliderValueChanged(e, key),
         }),
         [parentVal],
       );

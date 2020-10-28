@@ -27,7 +27,7 @@ const RangeSlider = ({
 
   useEffect(() => {
     if (mouseState === 'up') {
-      onChange(sliderVal);// when mouse is up then call the parent onChange
+      onChange(sliderVal, label);// when mouse is up then call the parent onChange
     }
   }, [mouseState]);
 
