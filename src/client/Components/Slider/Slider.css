@@ -1,0 +1,9 @@
+.Slider_Div {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 40%;
+  padding: 20px 20px;
+  margin: 10px 10px;
+}

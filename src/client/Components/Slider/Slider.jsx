@@ -5,6 +5,7 @@ import React, {
   useEffect,
 } from 'react';
 import propTypes from 'prop-types';
+import styles from './Slider.css';
 
 // destructive props
 const RangeSlider = ({
@@ -32,7 +33,7 @@ const RangeSlider = ({
   }, [mouseState]);
 
   return (
-    <div>
+    <div className={styles.Slider_Div}>
       <p>{label}</p>
       <h3>
         value:
@@ -42,7 +43,7 @@ const RangeSlider = ({
         type="range"
         value={sliderVal}
         {...sliderProps}
-        className={`slider ${classes}`}
+        className={classes}
         id="myRange"
         onChange={changeCallback}
         onMouseDown={() => setMouseState('down')} // When mouse down set the mouseState to 'down'

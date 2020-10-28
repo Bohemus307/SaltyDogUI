@@ -7,12 +7,14 @@ import React, {
 import classes from './Alerts.css';
 
 import RangeSlider from '../Slider/Slider.jsx';
+import Aux from '../../Hoc/Aux/Aux.jsx';
 
 const Alerts = () => {
-  const [parentVal, setParentVal] = useState(10);
+  const [parentVal, setParentVal] = useState(50);
   const [sliders, setSliders] = useState([
     {
       key: 'phMinSlider',
+      buttonKey: 1,
       min: 0,
       max: 100,
       value: 0,
@@ -23,6 +25,7 @@ const Alerts = () => {
     },
     {
       key: 'phMaxSlider',
+      buttonKey: 2,
       min: 0,
       max: 100,
       value: 0,
@@ -33,6 +36,7 @@ const Alerts = () => {
     },
     {
       key: 'ecMinSlider',
+      buttonKey: 3,
       min: 0,
       max: 100,
       value: 0,
@@ -43,6 +47,7 @@ const Alerts = () => {
     },
     {
       key: 'ecMaxSlider',
+      buttonKey: 4,
       min: 0,
       max: 100,
       value: 0,
@@ -53,6 +58,7 @@ const Alerts = () => {
     },
     {
       key: 'doMinSlider',
+      buttonKey: 5,
       min: 0,
       max: 100,
       value: 0,
@@ -63,6 +69,7 @@ const Alerts = () => {
     },
     {
       key: 'doMaxSlider',
+      buttonKey: 6,
       min: 0,
       max: 100,
       value: 0,
@@ -73,27 +80,21 @@ const Alerts = () => {
     },
   ]);
 
+  const lockSlider = useCallback((label) => {
+    console.log('LOCKED SLIDER', label);
+    // setParentVal(val);
+  });
+
   const sliderValueChanged = useCallback((val, key) => {
     console.log('NEW VALUE', val, key);
     // setParentVal(val);
   });
 
-  const sliderProps = useMemo(
-    () => ({
-      min: 0,
-      max: 100,
-      value: parentVal,
-      step: 1,
-      label: 'Alerts slider',
-      onChange: (e) => sliderValueChanged(e),
-    }),
-    [parentVal],
-  );
-  const sliderArray = [...sliders];
   const sliderList = (
-    sliderArray.map((slider) => {
+    sliders.map((slider) => {
       const slideProps = useMemo(
         () => ({
+          divid: slider.buttonKey,
           min: slider.min,
           max: slider.max,
           value: parentVal,
@@ -103,18 +104,17 @@ const Alerts = () => {
         }),
         [parentVal],
       );
-      return <RangeSlider key={slider.value} {...slideProps} />
+      return (
+        <Aux key={slideProps.divid}>
+          <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
+          <button type="button" name="Lock" onClick={() => lockSlider(slideProps.label)}>Lock</button>
+        </Aux>
+      );
     })
   );
 
-  console.log(sliderProps)
   return (
     <div className={classes.Alerts}>
-      <h1>
-        PARENT VALUE:
-        {parentVal}
-      </h1>
-      {/* <RangeSlider {...sliderProps} classes="additional-css-classes" /> */}
       {sliderList}
     </div>
   );
