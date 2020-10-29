@@ -6,6 +6,8 @@ const config = require('../../config');
 
 const Router = require('./Router/router');
 
+const db = require('../database/connection');
+
 const app = express();
 
 const PORT = config.app.port;
@@ -23,6 +25,6 @@ app.get('/*', (req, res) => {
   });
 });
 
-// app.use('/data', Router);
+app.use('/data', Router);
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));
