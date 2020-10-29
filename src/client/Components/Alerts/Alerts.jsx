@@ -108,11 +108,12 @@ const Alerts = () => {
         <Aux key={slideProps.divkey}>
           <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
           <button
+            aria-label="lock slider"
             className={classes.Lock_Button}
             style={{
-              backgroundImage: 'url(' + '/images/padlock.svg' + ')',
+              backgroundImage: 'url( /images/padlock.svg )',
               backgroundPosition: 'center',
-              backgroundSize: '60px auto',
+              backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
             }}
             type="button"
