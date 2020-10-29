@@ -107,7 +107,19 @@ const Alerts = () => {
       return (
         <Aux key={slideProps.divid}>
           <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
-          <button type="button" name="Lock" onClick={() => lockSlider(slideProps.label)}>Lock</button>
+          <button
+            style={{
+              backgroundImage: 'url(' + '/images/padlock.svg' + ')',
+              backgroundPosition: 'center',
+              backgroundSize: 'cover',
+              backgroundRepeat: 'no-repeat',
+            }}
+            type="button"
+            name="Lock"
+            onClick={() => lockSlider(slideProps.label)}
+          >
+            Lock
+          </button>
         </Aux>
       );
     })
