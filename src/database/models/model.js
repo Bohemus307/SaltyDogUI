@@ -7,7 +7,7 @@ const users = () => {
     _id SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     userName VARCHAR (80) NOT NULL,
-    employee VARCHAR (7) NOT NULL,
+    employeeId VARCHAR (7) NOT NULL,
     password VARCHAR (10) NOT NULL,
     token VARCHAR (1000) NOT NULL
    )`;

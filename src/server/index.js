@@ -1,30 +1,60 @@
 const express = require('express');
+const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
 const config = require('../../config');
 
-const Router = require('./Router/router');
+//const Router = require('./Router/router');
 
-const db = require('../database/connection');
+//const db = require('../database/connection');
 
 const app = express();
 
 const PORT = config.app.port;
+
 app.use(express.static(path.join(__dirname, '/../../public')));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
-// for redirect of refresh in spa
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
+const typeDefs = gql`
+  type Query {
+    Users: [Users]
+    Sensors: [Sensors]
+  }
 
-app.use('/data', Router);
+  type Users {
+    userName: String
+    email: String
+    employeeId: Int 
+  }
+
+  type Sensors {
+    id: Int
+    
+  }
+`;
+
+const resolvers = {
+  Query: {
+    Users: () => 'Hello world!',
+  },
+};
+
+const server = new ApolloServer({ typeDefs, resolvers });
+
+server.applyMiddleware({ app });
+
+// // for redirect of refresh in spa
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
+
+// app.use('/data', Router);
 
 app.listen(PORT, () => console.log(`listening on port ${PORT}`));

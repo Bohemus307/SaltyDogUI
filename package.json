@@ -20,6 +20,7 @@
   "homepage": "https://github.com/Bohemus307/SaltyDogUI#readme",
   "dependencies": {
     "@babel/cli": "^7.0.0",
+    "apollo-server-express": "^2.18.2",
     "axios": "^0.20.0",
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
