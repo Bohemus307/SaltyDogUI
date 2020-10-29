@@ -17,7 +17,7 @@ const Alerts = () => {
       divKey: 1,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'phMin',
       locked: false,
@@ -28,7 +28,7 @@ const Alerts = () => {
       divKey: 2,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'phMax',
       locked: false,
@@ -39,7 +39,7 @@ const Alerts = () => {
       divKey: 3,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'ecMin',
       locked: false,
@@ -50,7 +50,7 @@ const Alerts = () => {
       divKey: 4,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'ecMax',
       locked: false,
@@ -61,7 +61,7 @@ const Alerts = () => {
       divKey: 5,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'doMin',
       locked: false,
@@ -72,7 +72,7 @@ const Alerts = () => {
       divKey: 6,
       min: 0,
       max: 100,
-      value: 0,
+      value: 50,
       step: 1,
       label: 'doMax',
       locked: false,
@@ -81,13 +81,33 @@ const Alerts = () => {
   ]);
 
   const lockSlider = useCallback((label) => {
-    console.log('LOCKED SLIDER', label);
-    // setParentVal(val);
-  });
+    // console.log('LOCKED SLIDER', label);
+    // get index of item with key = label
+    const index = sliders.map((slider) => slider.label).indexOf(label);
+    const expr = sliders[index].locked;
+    const newSliders = [...sliders];
+    // swtich for true false
+    switch (expr) {
+      case true:
+        newSliders[index].locked = false;
+        break;
+      case false:
+        newSliders[index].locked = true;
+        break;
+      default:
+        console.log('lock must be broken');
+    }
+    setSliders(newSliders);
+  },
+  [sliders]);
 
   const sliderValueChanged = useCallback((val, key) => {
     console.log('NEW VALUE', val, key);
-    // setParentVal(val);
+    // change value in sliders based on label and new value
+    const index = sliders.map((slider) => slider.label).indexOf(key);
+    const newSliders = [...sliders];
+    newSliders[index].value = val;
+    setSliders(newSliders);
   });
 
   const sliderList = (
@@ -97,16 +117,21 @@ const Alerts = () => {
           divkey: slider.divKey,
           min: slider.min,
           max: slider.max,
-          value: parentVal,
+          value: slider.value,
           step: slider.step,
           label: slider.label,
           onChange: (e, key) => sliderValueChanged(e, key),
         }),
-        [parentVal],
+        [sliders],
       );
       return (
         <div className={classes.Value_Div} key={slideProps.divkey}>
-          <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
+          <RangeSlider
+            classes={classes.Slider}
+            key={slider.label}
+            {...slideProps}
+            disabled={slider.locked}
+          />
           <button
             aria-label="lock slider"
             className={classes.Lock_Button}
