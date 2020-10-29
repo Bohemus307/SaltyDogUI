@@ -102,7 +102,7 @@ const Alerts = () => {
   [sliders]);
 
   const sliderValueChanged = useCallback((val, key) => {
-    console.log('NEW VALUE', val, key);
+    // console.log('NEW VALUE', val, key);
     // change value in sliders based on label and new value
     const index = sliders.map((slider) => slider.label).indexOf(key);
     const newSliders = [...sliders];

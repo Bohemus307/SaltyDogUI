@@ -133,7 +133,6 @@ const SignUp = () => {
     const updatedLoginForm = {
       ...inputElements,
     };
-
     // deeper clone of login form
     const updatedFormELement = {
       ...updatedLoginForm[inputIdentifier],
@@ -152,7 +151,7 @@ const SignUp = () => {
     for (const inputIdentifiers in updatedLoginForm) {
       valid = updatedLoginForm[inputIdentifier].valid && formIsValid;
     }
-    console.log('valid', valid);
+
     setValid(valid);
 
     setInputElements(updatedLoginForm);
@@ -163,12 +162,14 @@ const SignUp = () => {
   const loginHandler = (event) => {
     event.preventDefault();
     // request
-    setLoading(true);
+    // setLoading(true);
 
     const formData = {};
     for (const formElementIdentifier in inputElements) {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
     }
+    
+    console.log(formData);
 
     const user = {
       Email: '',
@@ -176,6 +177,7 @@ const SignUp = () => {
       token: true,
       data: formData,
     };
+
   };
 
   // const { controls } = inputElements;
@@ -213,7 +215,7 @@ const SignUp = () => {
         />
       ))}
       {/* <input type="submit" value="Login" /> */}
-      <button type="submit">Login</button>
+      <button type="submit" onSubmit={loginHandler}>Login</button>
       <Link className={classes.Redirect} to="/login">Already have an account?</Link>
     </form>
   );
