@@ -6,3 +6,9 @@
   color: #282828;
 }
 
+.Lock_Button {
+  width: 8%;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+}

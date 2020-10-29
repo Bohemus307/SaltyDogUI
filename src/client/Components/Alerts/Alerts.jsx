@@ -14,7 +14,7 @@ const Alerts = () => {
   const [sliders, setSliders] = useState([
     {
       key: 'phMinSlider',
-      buttonKey: 1,
+      divKey: 1,
       min: 0,
       max: 100,
       value: 0,
@@ -25,7 +25,7 @@ const Alerts = () => {
     },
     {
       key: 'phMaxSlider',
-      buttonKey: 2,
+      divKey: 2,
       min: 0,
       max: 100,
       value: 0,
@@ -36,7 +36,7 @@ const Alerts = () => {
     },
     {
       key: 'ecMinSlider',
-      buttonKey: 3,
+      divKey: 3,
       min: 0,
       max: 100,
       value: 0,
@@ -47,7 +47,7 @@ const Alerts = () => {
     },
     {
       key: 'ecMaxSlider',
-      buttonKey: 4,
+      divKey: 4,
       min: 0,
       max: 100,
       value: 0,
@@ -58,7 +58,7 @@ const Alerts = () => {
     },
     {
       key: 'doMinSlider',
-      buttonKey: 5,
+      divKey: 5,
       min: 0,
       max: 100,
       value: 0,
@@ -69,7 +69,7 @@ const Alerts = () => {
     },
     {
       key: 'doMaxSlider',
-      buttonKey: 6,
+      divKey: 6,
       min: 0,
       max: 100,
       value: 0,
@@ -94,7 +94,7 @@ const Alerts = () => {
     sliders.map((slider) => {
       const slideProps = useMemo(
         () => ({
-          divid: slider.buttonKey,
+          divkey: slider.divKey,
           min: slider.min,
           max: slider.max,
           value: parentVal,
@@ -105,21 +105,20 @@ const Alerts = () => {
         [parentVal],
       );
       return (
-        <Aux key={slideProps.divid}>
+        <Aux key={slideProps.divkey}>
           <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
           <button
+            className={classes.Lock_Button}
             style={{
               backgroundImage: 'url(' + '/images/padlock.svg' + ')',
               backgroundPosition: 'center',
-              backgroundSize: 'cover',
+              backgroundSize: '60px auto',
               backgroundRepeat: 'no-repeat',
             }}
             type="button"
             name="Lock"
             onClick={() => lockSlider(slideProps.label)}
-          >
-            Lock
-          </button>
+          />
         </Aux>
       );
     })
