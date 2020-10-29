@@ -105,7 +105,7 @@ const Alerts = () => {
         [parentVal],
       );
       return (
-        <Aux key={slideProps.divkey}>
+        <div className={classes.Value_Div} key={slideProps.divkey}>
           <RangeSlider classes={classes.Slider} key={slider.label} {...slideProps} />
           <button
             aria-label="lock slider"
@@ -120,7 +120,7 @@ const Alerts = () => {
             name="Lock"
             onClick={() => lockSlider(slideProps.label)}
           />
-        </Aux>
+        </div>
       );
     })
   );

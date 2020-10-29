@@ -34,11 +34,21 @@ const RangeSlider = ({
 
   return (
     <div className={styles.Slider_Div}>
-      <p>{label}</p>
-      <h3>
-        value:
-        { sliderVal }
-      </h3>
+      <div className={styles.Label_Div}>
+        <p style={{
+          backgroundColor: '#b5cd60',
+          borderRadius: '9px',
+          margin: '0px 10px',
+          padding: '0px 5px',
+        }}
+        >
+          {label}
+        </p>
+        <h3>
+          value:
+          { sliderVal }
+        </h3>
+      </div>
       <input
         type="range"
         value={sliderVal}

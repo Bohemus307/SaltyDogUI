@@ -1,13 +1,19 @@
 .Alerts {
   display: flex;
-  flex-direction: row;
   flex-wrap: wrap;
   width: 100%;
   color: #282828;
 }
 
+.Value_Div {
+  display: flex;
+  align-items: center;
+  width: 50%;
+}
+
 .Lock_Button {
-  width: 8%;
+  width: 15%;
+  height: 50%;
   border: none;
   background-color: transparent;
   cursor: pointer;
