@@ -215,7 +215,7 @@ const SignUp = () => {
         />
       ))}
       {/* <input type="submit" value="Login" /> */}
-      <button type="submit" onSubmit={loginHandler}>Login</button>
+      <button type="submit" onSubmit={loginHandler}>Sign Up</button>
       <Link className={classes.Redirect} to="/login">Already have an account?</Link>
     </form>
   );

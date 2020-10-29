@@ -63,27 +63,28 @@ class Login extends React.Component {
   }
 
   setAuthToken = () => {
+    console.log('token set');
+    
     let email = this.state.controls.email.value;
     let password = this.state.controls.password.value;
-
-    axios.post("/auth", {
-      email: email,
-      password: password
-    }).then(result => {
-      if (result.status === 200) {
-        console.log(result.data)
-        useAuth(result.data);
-        this.setState({
-          isLoggedIn: true
-        })
-      } else {
-        this.setState({
-          isError: true
-        })
-      }
-    }).catch(error => {
-      console.log(error)
-    });
+    // axios.post("/auth", {
+    //   email: email,
+    //   password: password
+    // }).then(result => {
+    //   if (result.status === 200) {
+    //     console.log(result.data)
+    //     useAuth(result.data);
+    //     this.setState({
+    //       isLoggedIn: true
+    //     })
+    //   } else {
+    //     this.setState({
+    //       isError: true
+    //     })
+    //   }
+    // }).catch(error => {
+    //   console.log(error)
+    // });
   }
 
   
@@ -147,13 +148,13 @@ class Login extends React.Component {
   loginHandler = ( event ) => {
     event.preventDefault()
     // request 
-    this.setState({ loading: true })
+    //this.setState({ loading: true })
 
     const formData = {};
     for (let formElementIdentifier in this.state.controls) {
       formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value;
     }
-
+   
     const User = {
       Email: '',
       password: '',
@@ -204,7 +205,7 @@ class Login extends React.Component {
           />
         ))}
         {/* <input type="submit" value="Login" /> */}
-        <button type="submit" disabled={this.state.formIsValid}>Login</button>
+        <button type="submit" disabled={!this.state.formIsValid}>Login</button>
       </form>
     );
     //if loading 

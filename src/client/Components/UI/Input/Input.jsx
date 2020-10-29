@@ -69,6 +69,7 @@ const Input = ({
       );
   }
   let validationError = null;
+
   if (invalid && touched) {
     validationError = <p>Please enter a valid value!</p>;
   }
