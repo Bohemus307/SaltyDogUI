@@ -1,43 +1,45 @@
-const path = require('path');
 const db = require('../connection.js');
 
-// build model for users
-const users = () => {
-  const sqlString = `CREATE TABLE Users (
-    _id SERIAL PRIMARY KEY,
-    userId INT NOT NULL,
-    userName VARCHAR (80) NOT NULL,
-    employeeId VARCHAR (7) NOT NULL,
-    password VARCHAR (10) NOT NULL,
-    token VARCHAR (1000) NOT NULL
-   )`;
+module.exports = {
+  getUserById: (userId) => {
+    const sqlString = 'SELECT * FROM Artists WHERE artistId = $1';
 
-  return db.query('DROP TABLE IF EXISTS Users')
-    .then(() => db.query(sqlString));
-};
+    return db.query(sqlString, [userId]);
+  },
 
-// build model for sensors
-const sensors = () => {
-  const sqlString = `CREATE TABLE Sensors (
-    _id SERIAL PRIMARY KEY,
-    sensorId INT NOT NULL,
-    sensorName VARCHAR(80),
-    location VARCHAR (10) NOT NULL,
-    date_col DATE,
-    timestamp_col TIMESTAMP,
-   )`;
+  // getRelatedArtists: (artistId) => {
+  //   console.log(artistId);
+  //   const sqlString = `SELECT
+  //   a.artistname AS main_artist,
+  //   b.artistname AS related_artist_name,
+  //   b.bio AS related_artist_bio,
+  //   b.avatar AS related_artist_avatar
+  //   FROM relatedartists AS ra
+  //   JOIN artists as a ON ra.artistid1 = a.artistid
+  //   JOIN artists as b ON ra.artistid2 = b.artistid
+  //   WHERE a.artistid = $1`;
 
-  return db.query('DROP TABLE IF EXISTS Sensors')
-    .then(() => db.query(sqlString));
-};
+  //   return db.query(sqlString, [artistId]);
+  // },
 
-const sensorValues = () => {
-  const sqlString = `CREATE TABLE SensorValues(
-    sensor_id SERIAL PRIMARY KEY,
-    sensorId1 INT,
-    value INT,
-    )`;
+  addNewUser: (newUser) => {
+    const sqlString = 'INSERT INTO Users(newUser) VALUES ($1)';
 
-  return db.query('DROP TABLE IF EXISTS SensorValues')
-    .then(() => db.query(sqlString));
+    return db.query(sqlString, [newUser]);
+  },
+
+  deleteUserById: (userId) => {
+    const sqlString = 'DELETE FROM Users WHERE userId = $1';
+
+    return db.query(sqlString, [userId]);
+  },
+
+  updateUserById: ({
+    userId, userName, employeeId, password, token,
+  }) => {
+    const sqlString = 'UPDATE Artists SET userId = $1, userName = $2, employeeId = $3 password = $4, token = $5, WHERE userId = $1';
+
+    return db.query(sqlString, [userId, userName, employeeId, password, token]);
+  },
+
 };

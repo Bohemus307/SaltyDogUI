@@ -1,0 +1,35 @@
+const typeDefs = gql`
+  type Query {
+    user(id: ID!): User
+    sensor(id: ID!): Sensor
+    sensors: [Sensor]
+    users: [User]
+  }
+
+  type User {
+    id: ID!
+    userName: String
+    email: String
+    employeeId: Int 
+    password: String
+    token: Boolean
+  }
+
+  type Sensor {
+    id: ID!
+    name: String
+    location: String
+    values: [Value]
+  }
+
+  type Value {
+    id: ID!
+    time: String
+    sensor: Sensor
+    value: Int
+  }
+
+  # type Mutation {
+  #   addUser(userName: String, email: String, employeeId: Int, id: Int, password: String token: Boolean ): Users
+  # }
+`;

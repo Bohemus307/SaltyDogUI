@@ -28,6 +28,7 @@
     "fs": "0.0.1-security",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.5",
+    "notarealdb": "^0.2.2",
     "path": "^0.12.7",
     "pg": "^8.4.2",
     "prop-types": "^15.7.2",
