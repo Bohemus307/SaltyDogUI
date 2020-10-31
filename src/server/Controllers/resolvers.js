@@ -1,4 +1,4 @@
-const db = require('../../data');
+const db = require('../../../db');
 
 const Query = {
   user: (root, { id }) => db.user.get(id),
@@ -8,7 +8,7 @@ const Query = {
 };
 
 const User = {
-  username: (user) => db.users.get(user.userName),
+  userName: (user) => db.users.get(user.userName),
 };
 
 const Value = {

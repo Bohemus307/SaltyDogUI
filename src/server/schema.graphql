@@ -1,8 +1,9 @@
-const typeDefs = gql`
   type Query {
     user(id: ID!): User
     sensor(id: ID!): Sensor
     sensors: [Sensor]
+    value(id: ID!): Value
+    values: [Value]
     users: [User]
   }
 
@@ -32,4 +33,3 @@ const typeDefs = gql`
   # type Mutation {
   #   addUser(userName: String, email: String, employeeId: Int, id: Int, password: String token: Boolean ): Users
   # }
-`;
