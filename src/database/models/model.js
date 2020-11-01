@@ -21,8 +21,8 @@ module.exports = {
 
   //   return db.query(sqlString, [artistId]);
   // },
+
   addNewUser: (newUser) => {
-    console.log('new user: ', newUser);
     const values = Object.values(newUser);
     const sqlString = 'INSERT INTO Users(userId, userName, email, employeeId, password, token) VALUES ($1, $2, $3, $4, $5, $6)';
     return db.query(sqlString, [...values]);
