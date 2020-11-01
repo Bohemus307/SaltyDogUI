@@ -3,16 +3,17 @@ const db = require('../connection.js');
 
 // build model for users
 const users = () => {
-  const sqlString = `CREATE TABLE Users (
+  const sqlString = `CREATE TABLE users (
     _id SERIAL PRIMARY KEY,
-    userId INT NOT NULL,
+    userId VARCHAR (20) NOT NULL,
     userName VARCHAR (80) NOT NULL,
     employeeId VARCHAR (15) NOT NULL,
+    email VARCHAR (35) NOT NULL,
     password VARCHAR (10) NOT NULL,
     token VARCHAR (1000) NOT NULL
    )`;
 
-  return db.query('DROP TABLE IF EXISTS Users')
+  return db.query('DROP TABLE IF EXISTS users')
     .then(() => db.query(sqlString));
 };
 
@@ -24,7 +25,7 @@ const sensors = () => {
     sensorName VARCHAR(80),
     location VARCHAR (10) NOT NULL,
     date_col DATE,
-    timestamp_col TIMESTAMP,
+    timestamp_col TIMESTAMP
    )`;
 
   return db.query('DROP TABLE IF EXISTS Sensors')
@@ -35,7 +36,7 @@ const values = () => {
   const sqlString = `CREATE TABLE Values(
     sensor_id SERIAL PRIMARY KEY,
     sensorId1 INT,
-    value INT,
+    value INT
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')
