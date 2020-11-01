@@ -7,7 +7,7 @@ const users = () => {
     _id SERIAL PRIMARY KEY,
     userId INT NOT NULL,
     userName VARCHAR (80) NOT NULL,
-    employeeId VARCHAR (7) NOT NULL,
+    employeeId VARCHAR (15) NOT NULL,
     password VARCHAR (10) NOT NULL,
     token VARCHAR (1000) NOT NULL
    )`;
@@ -31,15 +31,23 @@ const sensors = () => {
     .then(() => db.query(sqlString));
 };
 
-const sensorValues = () => {
-  const sqlString = `CREATE TABLE SensorValues(
+const values = () => {
+  const sqlString = `CREATE TABLE Values(
     sensor_id SERIAL PRIMARY KEY,
     sensorId1 INT,
     value INT,
     )`;
 
-  return db.query('DROP TABLE IF EXISTS SensorValues')
+  return db.query('DROP TABLE IF EXISTS Values')
     .then(() => db.query(sqlString));
 };
 
-module.exports = { users, sensors, sensorValues };
+// const addNewUser = (newUser) => {
+//   console.log('newUser', newUser);
+//   const sqlString = 'INSERT INTO Users(newUser) VALUES ($1)';
+//   return db.query(sqlString, [newUser]);
+// };
+
+module.exports = {
+  users, sensors, values,
+};

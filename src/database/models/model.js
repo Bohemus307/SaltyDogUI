@@ -21,10 +21,8 @@ module.exports = {
 
   //   return db.query(sqlString, [artistId]);
   // },
-
   addNewUser: (newUser) => {
     const sqlString = 'INSERT INTO Users(newUser) VALUES ($1)';
-
     return db.query(sqlString, [newUser]);
   },
 
