@@ -4,8 +4,10 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
-const Router = require('express-promise-router');
+const Router = require('./Router/router');
+// const Router = require('express-promise-router');
 const config = require('../../config');
+const db = require('../database/connection');
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.use(express.json());
 // });
 // // router setup
 // const router = new Router();
-// app.use('/data', router);
+app.use('/data', Router);
 
 // app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 

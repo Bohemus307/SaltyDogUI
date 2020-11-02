@@ -20,14 +20,14 @@
     id: ID!
     name: String
     location: String
-    values: [Value]
+    readings: [Value]
   }
 
   type Value {
     id: ID!
     time: String
     sensor: Sensor
-    value: Int
+    data: Int
   }
 
   # type Mutation {

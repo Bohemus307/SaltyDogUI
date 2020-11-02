@@ -1,80 +1,80 @@
 [
   {
     "id": "rJKAbDd_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 7
+    "data": 7
   },
   {
     "id": "rJKAbDd_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 7
+    "data": 7
   },
   {
     "id": "rJKAbDd_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 7
+    "data": 7
   },
   {
     "id": "rJKAbDd_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 7
+    "data": 7
   },
   {
     "id": "SJRAZDu_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 6
+    "data": 6
   },
   {
     "id": "SJRAZDu_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 6
+    "data": 6
   },
   {
     "id": "SJRAZDu_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 6
+    "data": 6
   },
   {
     "id": "SJRAZDu_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 6
+    "data": 6
   },
   {
     "id": "SJRAZDu_z",
-    "sensorId": "HJRa-DOuG",
+    "sensor": "HJRa-DOuG",
     "time": "12/12/12",
-    "value": 6
+    "data": 6
   },
   {
     "id": "rkz1GwOOM",
-    "sensorId": "SJV0-wdOM",
+    "sensor": "SJV0-wdOM",
     "time": "12/12/12",
-    "value": 5
+    "data": 5
   },
   {
     "id": "rkz1GwOOM",
-    "sensorId": "SJV0-wdOM",
+    "sensor": "SJV0-wdOM",
     "time": "12/12/12",
-    "value": 5
+    "data": 5
   },
   {
     "id": "rkz1GwOOM",
-    "sensorId": "SJV0-wdOM",
+    "sensor": "SJV0-wdOM",
     "time": "12/12/12",
-    "value": 5
+    "data": 5
   },
   {
     "id": "rkz1GwOOM",
-    "sensorId": "SJV0-wdOM",
+    "sensor": "SJV0-wdOM",
     "time": "12/12/12",
-    "value": 5
+    "data": 5
   }
 ]

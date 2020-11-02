@@ -1,7 +1,7 @@
 const router = require('express').Router();
-// const controllers = require('../controllers/controllers.js');
+const controllers = require('../Controllers/controllers');
 
-// router.get('/allFeedData', controllers.getAllDataForFeed);
+router.post('/addUser', controllers.addNewArtist);
 
 // router.delete('/data', );
 

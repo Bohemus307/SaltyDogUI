@@ -10,7 +10,7 @@ const dev = {
     host: process.env.DEV_DB_HOST || 'localhost',
     port: parseInt(process.env.DEV_DB_PORT, 10) || 5432,
     database: process.env.DEV_DB_NAME || 'saltydog1',
-    user: process.env.USER,
+    user: 'postgres',
     password: null,
   },
   cache: {

@@ -1,9 +1,10 @@
 const db = require('../../../db');
 
 const Query = {
-  user: (root, { id }) => db.user.get(id),
+  user: (root, { id }) => db.users.get(id),
   sensor: (root, { id }) => db.sensors.get(id),
-  value: (root, { id }) => db.values.get(id),
+  sensors: () => db.sensors.list(),
+  users: () => db.users.list(),
   values: () => db.values.list(),
 };
 
@@ -16,8 +17,8 @@ const Value = {
 };
 
 const Sensor = {
-  values: (sensor) => db.values.list()
-    .filter((values) => values.sensorId === sensor.id),
+  readings: (sensor) => db.values.list()
+    .filter((readings) => readings.sensor === sensor.id),
 };
 
 module.exports = {
