@@ -10,6 +10,7 @@ import {
 } from 'react-router-dom';
 import axios from 'axios';
 import { useAuth } from "../../Components/Context/Auth.jsx";
+import { login} from '../../Components/Auth/auth';
 
 import classes from './Login.css';
 import Logo from '../../Components/Logo/Logo.jsx';
@@ -62,32 +63,7 @@ class Login extends React.Component {
     };
   }
 
-  setAuthToken = () => {
-    console.log('token set');
-    
-    let email = this.state.controls.email.value;
-    let password = this.state.controls.password.value;
-    // axios.post("/auth", {
-    //   email: email,
-    //   password: password
-    // }).then(result => {
-    //   if (result.status === 200) {
-    //     console.log(result.data)
-    //     useAuth(result.data);
-    //     this.setState({
-    //       isLoggedIn: true
-    //     })
-    //   } else {
-    //     this.setState({
-    //       isError: true
-    //     })
-    //   }
-    // }).catch(error => {
-    //   console.log(error)
-    // });
-  }
 
-  
   // rules for input content
   checkValidity = (value, rules) => {
     let isValid = true;
@@ -154,22 +130,22 @@ class Login extends React.Component {
     for (let formElementIdentifier in this.state.controls) {
       formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value;
     }
-   
-    const User = {
-      Email: '',
-      password: '',
-      token: true
-    }
 
-    // axios.post('/orders.json', order)
-    // .then(response => {
-    //   this.setState({ loading:false });
-    //   this.props.history.push('/');
+    console.log(formdata)
 
-    // })
-    // .catch((error) => {
-    //   this.setState({ loading:false });
-    // })
+    const email = formData.email;
+    const password = formData.password
+    login(email, password).then((ok) => {
+      if (ok) {
+        this.setState({ isloggedIn: true });
+        this.router.history.push('/dashboard');
+      } else {
+        this.setState({
+          isError: true
+        })
+      }
+    })
+
   }
 
 

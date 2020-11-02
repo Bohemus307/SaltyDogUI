@@ -30,16 +30,16 @@ import NavBar from './Components/NavBar/NavBar.jsx';
 // just *before* logging in, the public page.
 
 export default function App() {
-  const existingTokens = JSON.parse(localStorage.getItem('tokens'));
-  const [authTokens, setAuthTokens] = useState(existingTokens);
+  // const existingTokens = JSON.parse(localStorage.getItem('tokens'));
+  // const [authTokens, setAuthTokens] = useState(existingTokens);
 
-  const setTokens = (data) => {
-    localStorage.setItem('tokens', JSON.stringify(data));
-    setAuthTokens(data);
-  };
+  // const setTokens = (data) => {
+  //   localStorage.setItem('tokens', JSON.stringify(data));
+  //   setAuthTokens(data);
+  // };
 
   return (
-    <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
+    // <AuthContext.Provider value={{ authTokens, setAuthTokens: setTokens }}>
       <Router>
         <div>
           <NavBar />
@@ -52,6 +52,6 @@ export default function App() {
           </Switch>
         </div>
       </Router>
-    </AuthContext.Provider>
+    // </AuthContext.Provider>
   );
 }
