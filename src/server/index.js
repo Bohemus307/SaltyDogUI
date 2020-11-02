@@ -9,7 +9,8 @@ const path = require('path');
 const cors = require('cors');
 const Router = require('./Router/router');
 const config = require('../../config');
-const db = require('../database/connection');
+//const db = require('../database/connection');
+const db = require('../../db');
 
 const jwtSecret = Buffer.from('Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt', 'base64');
 
@@ -38,7 +39,6 @@ app.use(express.json());
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  console.log('in back end', email, password);
   const user = db.users.list().find((user) => user.email === email);
   if (!(user && user.password === password)) {
     res.sendStatus(401);

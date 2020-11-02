@@ -129,19 +129,16 @@ class Login extends React.Component {
       formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value;
     }
 
-    console.log(formData)
-
     const email = formData.email;
     const password = formData.password;
     login(email, password).then((ok) => {
       if (ok) {
         this.setState({ isloggedIn: true });
-        this.router.history.push('/dashboard');
+        this.props.history.push('/dashboard');
       } else {
-        // this.setState({
-        //   isError: true
-        // })
-        console.log('error in request')
+        this.setState({
+          isError: true
+        })
       }
     })
 
@@ -149,7 +146,7 @@ class Login extends React.Component {
 
 
   render() {
-  
+    
     const { controls } = this.state;
     const keys = Object.keys(controls);
     const values = Object.values(controls);
