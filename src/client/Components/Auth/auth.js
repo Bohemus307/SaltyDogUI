@@ -1,5 +1,6 @@
 // NOTE: this example keeps the access token in LocalStorage just because it's simpler
 // but in a real application you may want to use cookies instead for better security
+import 'regenerator-runtime/runtime'
 
 const accessTokenKey = 'accessToken';
 
@@ -8,7 +9,7 @@ export function getAccessToken() {
 }
 
 export async function login(email, password) {
-  const response = await fetch('http://localhost:9000/login', {
+  const response = await fetch('http://localhost:3030/login', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },
     body: JSON.stringify({ email, password }),

@@ -38,6 +38,7 @@ app.use(express.json());
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
+  console.log('in back end', email, password);
   const user = db.users.list().find((user) => user.email === email);
   if (!(user && user.password === password)) {
     res.sendStatus(401);

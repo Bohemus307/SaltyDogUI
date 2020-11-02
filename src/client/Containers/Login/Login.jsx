@@ -9,7 +9,6 @@ import {
   useLocation,
 } from 'react-router-dom';
 import axios from 'axios';
-import { useAuth } from "../../Components/Context/Auth.jsx";
 import { login} from '../../Components/Auth/auth';
 
 import classes from './Login.css';
@@ -114,7 +113,6 @@ class Login extends React.Component {
     for (let inputIdentifiers in updatedLoginForm) {
       formIsValid = updatedLoginForm[inputIdentifier].valid && formIsValid
     }
-
     this.setState({
       controls: updatedLoginForm,
       formIsValid: formIsValid
@@ -131,18 +129,19 @@ class Login extends React.Component {
       formData[formElementIdentifier] = this.state.controls[formElementIdentifier].value;
     }
 
-    console.log(formdata)
+    console.log(formData)
 
     const email = formData.email;
-    const password = formData.password
+    const password = formData.password;
     login(email, password).then((ok) => {
       if (ok) {
         this.setState({ isloggedIn: true });
         this.router.history.push('/dashboard');
       } else {
-        this.setState({
-          isError: true
-        })
+        // this.setState({
+        //   isError: true
+        // })
+        console.log('error in request')
       }
     })
 
