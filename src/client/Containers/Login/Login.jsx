@@ -9,7 +9,7 @@ import {
   useLocation,
 } from 'react-router-dom';
 import axios from 'axios';
-import { login} from '../../Components/Auth/auth';
+import { login } from '../../Components/Auth/auth';
 
 import classes from './Login.css';
 import Logo from '../../Components/Logo/Logo.jsx';
@@ -134,7 +134,7 @@ class Login extends React.Component {
     login(email, password).then((ok) => {
       if (ok) {
         this.setState({ isloggedIn: true });
-        this.props.history.push('/dashboard');
+        this.props.history.replace('/dashboard'); 
       } else {
         this.setState({
           isError: true
@@ -146,7 +146,6 @@ class Login extends React.Component {
 
 
   render() {
-    
     const { controls } = this.state;
     const keys = Object.keys(controls);
     const values = Object.values(controls);
