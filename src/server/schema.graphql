@@ -9,6 +9,8 @@
 
   type Mutation {
     createUser(input: CreateUserInput): User
+    createSensor(input: CreateSensorInput): Sensor
+    createValue(input: CreateValueInput): Value
   }
 
   type User {
@@ -38,4 +40,16 @@
     email: String
     companyId: String 
     password: String
+  }
+
+  input CreateSensorInput {
+    name: String
+    location: String
+  }
+
+  input CreateValueInput {
+    time: String
+    sensor: String
+    location: String
+    data: Int
   }

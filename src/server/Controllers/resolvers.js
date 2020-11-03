@@ -13,6 +13,14 @@ const Mutation = {
     const id = db.users.create({ ...input });
     return db.users.get(id);
   },
+  createSensor: (root, { input }) => {
+    const id = db.sensors.create({ ...input });
+    return db.sensors.get(id);
+  },
+  createValue: (root, { input }) => {
+    const id = db.values.create({ ...input });
+    return db.values.get(id);
+  },
 };
 
 const Value = {
