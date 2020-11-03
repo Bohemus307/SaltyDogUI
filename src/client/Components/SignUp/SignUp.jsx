@@ -168,15 +168,8 @@ const SignUp = () => {
     for (const formElementIdentifier in inputElements) {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
     }
-    
-    console.log(formData);
 
-    const user = {
-      Email: '',
-      password: '',
-      token: true,
-      data: formData,
-    };
+    console.log(formData);
 
   };
 
