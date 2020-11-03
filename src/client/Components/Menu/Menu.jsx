@@ -4,6 +4,7 @@ import propTypes from 'prop-types';
 import classes from './Menu.css';
 
 import MenuItem from '../MenuItem/MenuItem.jsx';
+import { logout } from '../Auth/auth.js';
 
 const Menu = ({ displayItem }) => {
   const [menuItems, setMenuItems] = useState([
@@ -84,8 +85,8 @@ const Menu = ({ displayItem }) => {
       {menu}
       <div className={classes.Menu_Item}>
         <NavLink className={classes.Menu_Link} to="/login">
-          <img className={classes.Menu_Image} src="/images/logout.svg" alt="LogOut" />
-          <span className={classes.Logout}>Log Out</span>
+          <img className={classes.Menu_Image} onClick={logout} src="/images/logout.svg" alt="LogOut" />
+          <span className={classes.Logout} onClick={logout}>Log Out</span>
         </NavLink>
       </div>
     </div>

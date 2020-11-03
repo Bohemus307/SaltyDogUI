@@ -13,7 +13,10 @@ const Mutation = {
     const id = db.users.create({ ...input });
     return db.users.get(id);
   },
-  createSensor: (root, { input }) => {
+  createSensor: (root, { input }, { user }) => {
+    if (!user) {
+      throw new Error('Unauthorized!');
+    }
     const id = db.sensors.create({ ...input });
     return db.sensors.get(id);
   },

@@ -1,5 +1,5 @@
 // NOTE: this example keeps the access token in LocalStorage just because it's simpler
-// but in a real application you may want to use cookies instead for better security
+// want to use cookies instead for better security
 import 'regenerator-runtime/runtime';
 
 const accessTokenKey = 'accessToken';
@@ -26,5 +26,6 @@ export function isLoggedIn() {
 }
 
 export function logout() {
+  console.log('logged out');
   localStorage.removeItem(accessTokenKey);
 }

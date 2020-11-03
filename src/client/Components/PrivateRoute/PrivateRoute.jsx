@@ -1,39 +1,19 @@
 import React from 'react';
 import { Route, Redirect } from 'react-router-dom';
+import propTypes from 'prop-types';
+
 import { isLoggedIn } from '../Auth/auth';
 
-// function PrivateRoute({ component: Component, ...rest }) {
-//   const { authTokens } = isLoggedIn();
+const PrivateRoute = ({ path, exact, component }) => {
+  const condition = isLoggedIn();
 
-//   return (
-//     <Route
-//       {...rest}
-//       render={(props) => (authTokens ? (
-//         <Component {...props} />
-//       ) : (
-//         <Redirect to={{ pathname: '/login', state: { referer: props.location } }} />
-//       ))}
-//     />
-//   );
-// }
-function PrivateRoute({ children, ...rest }) {
-  return (
-    <Route
-      {...rest}
-      render={({ location }) => (isLoggedIn() ? (
-        children
-      ) : (
-        <Redirect
-          to={{
-            pathname: '/login',
-            state: { from: location },
-          }}
-        />
-      ))}
-    />
-  );
-}
+  return condition ? (<Route path={path} exact={exact} component={component} />)
+    : (<Redirect to="/login" />);
+};
+
+PrivateRoute.propTypes = {
+  path: propTypes.string.isRequired,
+  component: propTypes.func.isRequired,
+};
 
 export default PrivateRoute;
-
-// change isAuthenticated to Authtokens once axios is complete
