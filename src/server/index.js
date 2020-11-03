@@ -3,7 +3,7 @@ const express = require('express');
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
-// const { ApolloServer, gql } = require('apollo-server-express');
+const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
@@ -53,13 +53,13 @@ app.post('/login', (req, res) => {
 
 // app.use('/data', router);
 
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+// app.listen(PORT, () => console.log(`listening on port ${PORT}`));
 
-// // graphQL connect
-// const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
-// const resolvers = require('./Controllers/resolvers');
+// graphQL connect
+const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
+const resolvers = require('./Controllers/resolvers');
 
-// const server = new ApolloServer({ typeDefs, resolvers });
-// server.applyMiddleware({ app, path: '/graphql' });
+const server = new ApolloServer({ typeDefs, resolvers });
+server.applyMiddleware({ app, path: '/graphql' });
 
-// app.listen({ port: 4000 }, () => console.log(`Now browse to http://localhost:4000${server.graphqlPath}`));
+app.listen({ port: 4000 }, () => console.log(`Now browse to http://localhost:4000${server.graphqlPath}`));

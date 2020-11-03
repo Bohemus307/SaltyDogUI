@@ -17,7 +17,6 @@ import { isLoggedIn } from '../Auth/auth';
 //   );
 // }
 function PrivateRoute({ children, ...rest }) {
-  
   return (
     <Route
       {...rest}

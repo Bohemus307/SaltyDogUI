@@ -1,13 +1,13 @@
 [
   {
-    "userName": "james",
+    "username": "james",
     "id": "BJrp-DudG",
     "email": "alice@facegle.io",
     "password": "alice12345",
     "companyId": "HJRa-DOuG"
   },
   {
-    "userName": "john",
+    "username": "john",
     "id": "ry9pbwdOz",
     "email": "bob@goobook.co",
     "password": "bob12345",

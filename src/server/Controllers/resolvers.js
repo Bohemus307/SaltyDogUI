@@ -8,8 +8,11 @@ const Query = {
   values: () => db.values.list(),
 };
 
-const User = {
-  userName: (user) => db.users.get(user.userName),
+const Mutation = {
+  createUser: (root, { input }) => {
+    const id = db.users.create({ ...input });
+    return db.users.get(id);
+  },
 };
 
 const Value = {
@@ -22,5 +25,5 @@ const Sensor = {
 };
 
 module.exports = {
-  Query, Sensor, Value, User,
+  Query, Sensor, Value, Mutation,
 };
