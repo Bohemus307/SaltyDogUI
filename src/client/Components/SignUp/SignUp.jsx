@@ -3,10 +3,10 @@ import { Link, useHistory } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Input from '../UI/Input/Input.jsx';
 
-import { createUser } from '../../request';
+import { createAccount } from '../Auth/auth';
 import classes from './SignUp.css';
 
-const SignUp = () => {
+const SignUp = (props) => {
   const [signedIn, setSignedIn] = useState(true);
 
   const [formIsValid, setValid] = useState(false);
@@ -177,10 +177,15 @@ const SignUp = () => {
         password: formData.password,
         companyId: 'SJV0-wdOM',
       };
-      console.log('new user', newUser);
 
-      createUser(newUser)
-        .then(() => console.log('response success'));
+      createAccount(newUser).then((ok) => {
+        if (ok) {
+          alert('Your Signed Up Now Login');
+          props.history.replace('/login');
+        } else {
+          console.error('errored in sign up request');
+        }
+      });
     }
   };
 

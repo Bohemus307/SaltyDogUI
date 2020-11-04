@@ -29,23 +29,35 @@ app.use(cors());
 app.use(express.json());
 
 // for redirect of refresh in front end
-// app.get('/*', (req, res) => {
-//   res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
-//     if (err) {
-//       res.status(500).send(err);
-//     }
-//   });
-// });
+app.get('/*', (req, res) => {
+  res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
+    if (err) {
+      res.status(500).send(err);
+    }
+  });
+});
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  const user = db.users.list().find((user) => user.email === email);
-  if (!(user && user.password === password)) {
+  const userVerify = db.users.list().find((user) => user.email === email);
+  if (!(userVerify && userVerify.password === password)) {
     res.sendStatus(401);
     return;
   }
   const token = jwt.sign({ sub: user.id }, jwtSecret);
   res.send({ token });
+});
+
+app.post('/signup', (req, res) => {
+  const newUser = req.body.user;
+  console.log(newUser);
+  const userVerify = db.users.list().find((user) => user.email === newUser.email);
+  if (userVerify) {
+    res.sendStatus(401);
+    return;
+  }
+  const makeUser = db.users.create({ ...newUser });
+  res.sendStatus(200).json({ newUSer: makeUser });
 });
 
 // router setup

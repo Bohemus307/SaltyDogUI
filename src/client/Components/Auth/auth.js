@@ -21,6 +21,18 @@ export async function login(email, password) {
   return response.ok;
 }
 
+export async function createAccount(user) {
+  const response = await fetch('http://localhost:3030/signup', {
+    method: 'POST',
+    headers: { 'content-type': 'application/json' },
+    body: JSON.stringify({ user }),
+  });
+  if (response.ok) {
+    console.log('successful signup');
+  }
+  return response.ok;
+}
+
 export function isLoggedIn() {
   return !!localStorage.getItem(accessTokenKey);
 }

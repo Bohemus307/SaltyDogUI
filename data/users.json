@@ -19,5 +19,12 @@
     "email": "j@j.com",
     "companyId": "SJV0-wdOM",
     "password": "asdfgh"
+  },
+  {
+    "id": "Bk-Cj7gFw",
+    "username": "jimbo",
+    "email": "jim@jim.com",
+    "password": "jim123",
+    "companyId": "SJV0-wdOM"
   }
 ]
