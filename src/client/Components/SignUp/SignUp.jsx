@@ -180,7 +180,7 @@ const SignUp = (props) => {
 
       createAccount(newUser).then((ok) => {
         if (ok) {
-          alert('Your Signed Up Now Login');
+          alert('Your Signed Up, Now Login');
           props.history.replace('/login');
         } else {
           console.error('errored in sign up request');

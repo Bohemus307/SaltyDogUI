@@ -39,8 +39,8 @@ app.get('/*', (req, res) => {
 
 app.post('/login', (req, res) => {
   const { email, password } = req.body;
-  const userVerify = db.users.list().find((user) => user.email === email);
-  if (!(userVerify && userVerify.password === password)) {
+  const user = db.users.list().find((user) => user.email === email);
+  if (!(user && user.password === password)) {
     res.sendStatus(401);
     return;
   }
@@ -50,7 +50,6 @@ app.post('/login', (req, res) => {
 
 app.post('/signup', (req, res) => {
   const newUser = req.body.user;
-  console.log(newUser);
   const userVerify = db.users.list().find((user) => user.email === newUser.email);
   if (userVerify) {
     res.sendStatus(401);
