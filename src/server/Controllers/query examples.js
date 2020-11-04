@@ -10,7 +10,7 @@
 
 // gets you data from single sensor by id
 
-// query sensorQUery($id: ID!) {
+// query sensorQuery($id: ID!) {
 //   sensor(id: $id){
 //   id
 //     readings {

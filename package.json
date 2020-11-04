@@ -21,6 +21,7 @@
   "homepage": "https://github.com/Bohemus307/SaltyDogUI#readme",
   "dependencies": {
     "@babel/cli": "^7.0.0",
+    "apollo-boost": "^0.4.9",
     "apollo-server-express": "^2.18.2",
     "axios": "^0.20.0",
     "body-parser": "^1.19.0",
@@ -30,6 +31,8 @@
     "express-jwt": "^6.0.0",
     "express-promise-router": "^4.0.1",
     "fs": "0.0.1-security",
+    "graphql": "^15.4.0",
+    "graphql-tag": "^2.11.0",
     "jsonwebtoken": "^8.5.1",
     "morgan": "^1.10.0",
     "nodemon": "^2.0.5",

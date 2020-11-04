@@ -3,6 +3,7 @@ import { Link, useHistory } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Input from '../UI/Input/Input.jsx';
 
+import { createUser } from '../../request';
 import classes from './SignUp.css';
 
 const SignUp = () => {
@@ -169,8 +170,18 @@ const SignUp = () => {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
     }
 
-    console.log(formData);
+    if (formData.password === formData.passwordVerify) {
+      const newUser = {
+        username: formData.Name,
+        email: formData.email,
+        password: formData.password,
+        companyId: 'SJV0-wdOM',
+      };
+      console.log('new user', newUser);
 
+      createUser(newUser)
+        .then(() => console.log('response success'));
+    }
   };
 
   // const { controls } = inputElements;
