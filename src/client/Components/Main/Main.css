@@ -36,7 +36,7 @@
 .Chart {
   background-image: linear-gradient(to bottom right, #ff0066, #FF4500);
   width: 30%;
-  height: 80%;
+  height: 60%;
   margin-left: 8px;
   margin-right: 20px;
   border-radius: 9px;
@@ -47,7 +47,7 @@
 .Feed {
   background-image: linear-gradient(to top right,#FF69B4, #9932CC); 
   width: 60%;
-  height: 80%;
+  height: 60%;
   border-radius: 9px;
   margin-left: 10px;
   box-shadow: 1px 2px;

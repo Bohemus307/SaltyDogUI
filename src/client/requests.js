@@ -25,25 +25,6 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-const userDetailFragment = gql`
-  fragment userDetail on User {
-    username
-    email
-    companyId
-    password
-  }
-`;
-
-// gets user data by id
-const userQuery = gql`
-  query userQuery($id: ID!) {
-    user(id: $id ) {
-      ...userDetail
-    }
-  }
-  ${userDetailFragment}
-`;
-
 // needs checked for single value by id
 const valueQuery = gql`{
   value {
@@ -67,14 +48,6 @@ const sensorQuery = gql`query sensorQuery($id: ID!) {
 }
 `;
 
-const createUserMutation = gql`mutation CreateUser($input: CreateUSerInput) {
-  user: createUser(input: $input) {
-    ...userDetail
-  }
-  ${userDetailFragment}
-}
-`;
-
 export const loadValue = async (id) => {
   const { data: { value } } = await client.query({ query: valueQuery, variables: { id } });
   return value;
@@ -83,21 +56,6 @@ export const loadValue = async (id) => {
 export const loadSensorData = async (id) => {
   const { data: { sensor } } = await client.query({ query: sensorQuery, variables: { id } });
   return sensor;
-};
-
-export const createUser = async (input) => {
-  const { data: { user } } = await client.mutate({
-    mutation: createUserMutation,
-    variables: { input },
-    update: (cache, { data }) => {
-      cache.writeQuery({
-        query: userQuery,
-        variables: { id: data.user.id },
-        data,
-      });
-    },
-  });
-  return user;
 };
 
 // alternate fetch example for testing

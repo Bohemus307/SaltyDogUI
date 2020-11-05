@@ -1,8 +1,8 @@
 .DashBoard {
   display: grid;
   grid-template-areas:
-    'menu main main main main';
-  grid-template-columns: 300px auto auto auto auto;
+    'menu main';
+  grid-template-columns: 300px 75%;
   height: 100%;
 }
 
