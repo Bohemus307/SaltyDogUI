@@ -6,7 +6,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
 const Sensor = ({ type, loading, unitOfMeasure }) => {
-  const [currentData, setData] = useState(6.986);
+  const [currentData, setData] = useState([6.986]);
 
   if (loading === true) {
     return (

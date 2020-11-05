@@ -38,8 +38,12 @@
   flex-direction: column;
   padding: 3px 3px;
   background-color: #606468;
-  border-radius: 50%;
   text-decoration: none;
   text-align: center;
   color: #606468;
+}
+
+.Image {
+  height: 100px;
+  width: 100%;
 }

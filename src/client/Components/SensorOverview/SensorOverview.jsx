@@ -46,14 +46,14 @@ export default function SensorOverview({ type, loading, unitOfMeasure }) {
       <div className={classes.Sensor_Feed}>
         {feedData.map((item, index) => (
           <div key={index} className={classes.Data_Reading}>
-            Current Reading:
-            <span>
+            <span style={{ marginRight: '5%' }}> Current Reading: </span>
+            <span style={{ marginRight: '5%' }}>
               (
               {item.value}
               {unitOfMeasure}
               )
             </span>
-            <span>{item.time}</span>
+            <span style={{ marginRight: '5%' }}>{item.time}</span>
           </div>
         ))}
       </div>

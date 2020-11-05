@@ -1,12 +1,15 @@
 .Data_Export {
   display: flex;
   flex-direction: column;
+  justify-content: center;
+  width: 80%;
   border-radius: 9px;
   margin: 3px 3px;
 }
 
 .Export {
-  width: 400px;
+  display: flex;
+  width: 100%;
 }
 
 .Export_Form {

@@ -74,7 +74,7 @@ const Input = ({
     validationError = <p>Please enter a valid value!</p>;
   }
   return (
-    <Aux>
+    <div className={classes.Input_Div}>
       <span className={classes.FormSpan}>
         <img
           className={classes.InputImage}
@@ -85,7 +85,7 @@ const Input = ({
       </span>
       {inputElement}
       {validationError}
-    </Aux>
+    </div>
   );
 };
 

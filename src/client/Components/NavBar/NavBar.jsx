@@ -10,8 +10,7 @@ const NavBar = () => (
   <div className={classes.Nav_Div}>
     <div className={classes.Nav_Logo}>
       <NavLink className={classes.Logo} to="/">
-        <Logo height="70px" />
-        {/* <span style={{ color: '#202020' }}>Heron Farms</span> */}
+        <img className={classes.Image} src="/images/heronlogo.png" alt="logo" name="logo" />
       </NavLink>
     </div>
     <div className={classes.Nav_Items}>

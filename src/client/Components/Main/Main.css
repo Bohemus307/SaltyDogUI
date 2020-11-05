@@ -17,7 +17,7 @@
 .Sensor {
   display: flex;
   flex-direction: row;
-  background-image: linear-gradient(to top right, 	#00CED1, #00FF7F);
+  background-image: linear-gradient(to left, rgb(0, 191, 255), rgb(138, 43, 226));
   padding: 20px;
   margin: 20px 15px;
   border-radius: 9px;

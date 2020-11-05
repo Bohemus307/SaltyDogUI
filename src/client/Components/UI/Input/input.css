@@ -24,6 +24,10 @@
   height: 50px;
 }
 
+.Input_Div {
+  width: 100%;
+}
+
 .InputImage {
   margin-top: 5px;
   height: 40px;
@@ -41,7 +45,7 @@
   color: #a9a9a9;
   margin-bottom: 1em;
   padding: 0 16px;
-  width: 70%;
+  width: 90%;
   height: 50px;
 }
 
