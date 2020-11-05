@@ -1,5 +1,6 @@
 const fs = require('fs');
 const express = require('express');
+const http = require('http');
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const bodyParser = require('body-parser');
@@ -67,9 +68,20 @@ app.post('/signup', (req, res) => {
 const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
 
-const context = ({ req }) => ({ user: req.user && db.users.get(req.user.sub) });
+function context({ req, connection }) {
+  if (req && req.user) {
+    return { userId: req.user.sub };
+  }
+  if (connection && connection.context && connection.context.accesstoken) {
+    const decodedToken = jwt.verify(connection.context.accesstoken, jwtSecret);
+    return { userId: decodedToken.sub };
+  }
+  return {};
+}
 const server = new ApolloServer({ typeDefs, resolvers, context });
 server.applyMiddleware({ app, path: '/graphql' });
 
-// app.listen({ port: 4000 }, () => console.log(`Now browse to http://localhost:4000${server.graphqlPath}`));
-app.listen(PORT, () => console.log(`listening on port ${PORT}`));
+const httpServer = http.createServer(app);
+server.installSubscriptionHandlers(httpServer);
+
+httpServer.listen(PORT, () => console.log(`Server started on port ${PORT}`));
