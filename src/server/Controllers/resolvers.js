@@ -1,19 +1,23 @@
+const { PubSub } = require('graphql-subscriptions');
 const db = require('../../../db');
 
+const pubSub = new PubSub();
+
+const MESSAGE_ADDED = 'MESSAGE_ADDED';
+
+function requireAuth(userId) {
+  if (!userId) {
+    throw new Error('Unauthorized');
+  }
+}
+
 const Query = {
-  user: (root, { id }) => db.users.get(id),
   sensor: (root, { id }) => db.sensors.get(id),
   sensors: () => db.sensors.list(),
-  users: () => db.users.list(),
   values: () => db.values.list(),
 };
 
 const Mutation = {
-  createUser: (root, { input }) => {
-    const id = db.users.create({ ...input });
-    return db.users.get(id);
-  },
-
   createSensor: (root, { input }, { user }) => {
     if (!user) {
       throw new Error('Unauthorized!');
@@ -37,6 +41,12 @@ const Sensor = {
     .filter((readings) => readings.sensor === sensor.id),
 };
 
+const Subscription = {
+  sensorConnect: {
+    subscribe: (_root, _args, { userId }) => pubSub.asyncIterator(MESSAGE_ADDED),
+  },
+};
+
 module.exports = {
-  Query, Sensor, Value, Mutation,
+  Query, Sensor, Value, Mutation, Subscription,
 };

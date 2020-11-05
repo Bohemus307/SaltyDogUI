@@ -1,24 +1,17 @@
   type Query {
-    user(id: ID!): User
     sensor(id: ID!): Sensor
     sensors: [Sensor]
     value(id: ID!): Value
     values: [Value]
-    users: [User]
   }
 
   type Mutation {
-    createUser(input: CreateUserInput): User
     createSensor(input: CreateSensorInput): Sensor
     createValue(input: CreateValueInput): Value
   }
 
-  type User {
-    id: ID!
-    username: String
-    email: String
-    companyId: String
-    password: String
+  type Subscription {
+    sensorConnect: Sensor
   }
 
   type Sensor {
@@ -33,13 +26,6 @@
     time: String
     sensor: Sensor
     data: Int
-  }
-
-  input CreateUserInput {
-    username: String
-    email: String
-    companyId: String 
-    password: String
   }
 
   input CreateSensorInput {

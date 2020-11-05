@@ -1,11 +1,22 @@
 // NOTE: this example keeps the access token in LocalStorage just because it's simpler
 // want to use cookies instead for better security
 import 'regenerator-runtime/runtime';
+import jwtDecode from 'jwt-decode';
 
 const accessTokenKey = 'accessToken';
 
+const getUserFromToken = (token) => jwtDecode(token).sub;
+
 export function getAccessToken() {
   return localStorage.getItem(accessTokenKey);
+}
+
+export function getLoggedInUser() {
+  const token = getAccessToken();
+  if (!token) {
+    return null;
+  }
+  return getUserFromToken(token);
 }
 
 export async function login(email, password) {

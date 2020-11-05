@@ -53,7 +53,7 @@ const SignUp = (props) => {
         elementType: 'input',
         elementConfig: {
           type: 'Name',
-          placeholder: 'Full Name',
+          placeholder: 'Name...',
           image: '/images/user.svg',
         },
         value: '',
@@ -67,7 +67,7 @@ const SignUp = (props) => {
         elementType: 'input',
         elementConfig: {
           type: 'email',
-          placeholder: 'Email Address',
+          placeholder: 'Email Address...',
           image: '/images/address.svg',
         },
         value: '',
@@ -81,8 +81,8 @@ const SignUp = (props) => {
       EmployeeNumber: {
         elementType: 'input',
         elementConfig: {
-          type: 'EmployeeNumber',
-          placeholder: 'Employee Number',
+          type: 'Employee Access Number',
+          placeholder: 'Employee Access Number...',
           image: '/images/id-card.png',
         },
         value: '',
