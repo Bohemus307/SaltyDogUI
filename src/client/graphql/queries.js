@@ -45,9 +45,9 @@ export const loadSensorData = async (id) => {
   return sensor;
 };
 
-export const onMessageAdded = async (handleMessage) => {
+export const onValueAdded = async (handleValue) => {
   const observable = client.subscribe({ query: sensorConnectSubscription });
   return observable.subscribe(({ data }) => {
-    handleMessage(data.messageAdded);
+    handleValue(data.valueAdded);
   });
 };
