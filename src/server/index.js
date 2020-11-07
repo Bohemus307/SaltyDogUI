@@ -8,10 +8,10 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
-// const Router = require('./Router/router');
 const config = require('../../config');
-// const db = require('../database/connection');
-const db = require('../../db');
+const db = require('../database/connection');
+const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
+// const db = require('../../db');
 
 const jwtSecret = Buffer.from('Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt', 'base64');
 
@@ -39,13 +39,27 @@ app.get('/*', (req, res) => {
 });
 
 app.post('/login', (req, res) => {
-  const { email, password } = req.body;
-  const user = db.users.list().find((user) => user.email === email);
-  if (!(user && user.password === password)) {
-    res.sendStatus(401);
-    return;
+  const { email, password, userName } = req.body;
+  if (email === undefined || password === undefined) {
+    res.status(400).json({
+      message: 'Bad request - must include Email and Password',
+    });
   }
-  const token = jwt.sign({ sub: user.id }, jwtSecret);
+
+  const emailCheck = getUserByEmail(email);
+  if (!emailCheck) {
+    res.status(401).json({
+      message: 'Bad request - Email address is incorrect',
+    });
+  }
+
+  const passwordCheck = getUserByPassword(userName);
+  if (!passwordCheck) {
+    res.status(401).json({
+      message: 'Bad request - Password is incorrect',
+    });
+  }
+  const token = jwt.sign({ sub: userName }, jwtSecret);
   res.send({ token });
 });
 
@@ -59,10 +73,6 @@ app.post('/signup', (req, res) => {
   const makeUser = db.users.create({ ...newUser });
   res.sendStatus(200).json({ newUSer: makeUser });
 });
-
-// router setup
-// const router = new Router();
-// app.use('/data', router);
 
 // graphQL connect
 const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));

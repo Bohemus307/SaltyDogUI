@@ -17,9 +17,14 @@ module.exports = {
   // },
 
   // crud for users
-  getUserById: (userId) => {
-    const sqlString = 'SELECT * FROM Users WHERE userId = $1';
-    return db.query(sqlString, [userId]);
+  getUserByEmail: (email) => {
+    const sqlString = 'SELECT * FROM Users WHERE email = $1';
+    return db.query(sqlString, [email]);
+  },
+
+  getUserByPassword: (password) => {
+    const sqlString = 'SELECT * FROM Users WHERE password = $1';
+    return db.query(sqlString, [password]);
   },
 
   addNewUser: (newUser) => {
