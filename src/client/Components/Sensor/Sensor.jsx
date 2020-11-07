@@ -23,7 +23,9 @@ const Sensor = ({
       <Spinner />
     );
   }
-  let { sensor: { readings } } = data;
+  const { sensor: { readings } } = data;
+
+  console.log(readings[0]);
 
   const sensor1 = (
     <Aux>

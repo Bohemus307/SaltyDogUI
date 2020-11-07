@@ -23,9 +23,7 @@ const sensors = () => {
     _id SERIAL PRIMARY KEY,
     sensorId INT NOT NULL,
     sensorName VARCHAR(80),
-    location VARCHAR (10) NOT NULL,
-    date_col DATE,
-    timestamp_col TIMESTAMP
+    location VARCHAR (10) NOT NULL
    )`;
 
   return db.query('DROP TABLE IF EXISTS Sensors')
@@ -36,7 +34,10 @@ const values = () => {
   const sqlString = `CREATE TABLE Values(
     sensor_id SERIAL PRIMARY KEY,
     sensorId1 INT,
-    value INT
+    valueId VARCHAR (20) NOT NULL,
+    value INT,
+    date_col DATE,
+    timestamp_col TIMESTAMP
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')

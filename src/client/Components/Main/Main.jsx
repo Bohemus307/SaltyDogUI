@@ -11,18 +11,21 @@ const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
     {
       type: 'PH',
+      id: 'BJenjRROw',
       unitOfMeasure: null,
       connected: false,
       location: 'saltyDog',
     },
     {
       type: 'EC',
+      id: 'HJRa-DOuG',
       unitOfMeasure: 'mS/cm',
       connected: false,
       location: 'saltyDog',
     },
     {
       type: 'DO',
+      id: 'SJV0-wdOM',
       unitOfMeasure: 'mg/L',
       connected: false,
       location: 'saltyDog',
@@ -33,7 +36,7 @@ const Main = ({ displayItem }) => {
     sensors.map((sensor) => (
       <div key={sensor.type} className={classes.Sensor}>
         <Sensor
-          id="SJV0-wdOM"
+          id={sensor.id}
           key={sensor.type}
           type={sensor.type}
           unitOfMeasure={sensor.unitOfMeasure}
@@ -67,17 +70,17 @@ const Main = ({ displayItem }) => {
       break;
     case ('Ph'):
       mainElement = (
-        <SensorOverview type="Ph" loading={false} unitOfMeasure={null} />
+        <SensorOverview id="BJenjRROw" type="Ph" loading={false} unitOfMeasure={null} />
       );
       break;
     case ('EC'):
       mainElement = (
-        <SensorOverview type="Ec" loading={false} unitOfMeasure="mS/cm" />
+        <SensorOverview id="HJRa-DOuG" type="Ec" loading={false} unitOfMeasure="mS/cm" />
       );
       break;
     case ('DO'):
       mainElement = (
-        <SensorOverview type="Do" loading={false} unitOfMeasure="mg/L" />
+        <SensorOverview id="SJV0-wdOM" type="Do" loading={false} unitOfMeasure="mg/L" />
       );
       break;
     case ('Alerts'):

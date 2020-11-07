@@ -1,12 +1,6 @@
 const db = require('../connection.js');
 
 module.exports = {
-  getUserById: (userId) => {
-    const sqlString = 'SELECT * FROM Artists WHERE artistId = $1';
-
-    return db.query(sqlString, [userId]);
-  },
-
   // getRelatedArtists: (artistId) => {
   //   console.log(artistId);
   //   const sqlString = `SELECT
@@ -22,6 +16,12 @@ module.exports = {
   //   return db.query(sqlString, [artistId]);
   // },
 
+  // crud for users
+  getUserById: (userId) => {
+    const sqlString = 'SELECT * FROM Users WHERE userId = $1';
+    return db.query(sqlString, [userId]);
+  },
+
   addNewUser: (newUser) => {
     const values = Object.values(newUser);
     const sqlString = 'INSERT INTO Users(userId, userName, email, employeeId, password, token) VALUES ($1, $2, $3, $4, $5, $6)';
@@ -30,7 +30,6 @@ module.exports = {
 
   deleteUserById: (userId) => {
     const sqlString = 'DELETE FROM Users WHERE userId = $1';
-
     return db.query(sqlString, [userId]);
   },
 
@@ -42,4 +41,52 @@ module.exports = {
     return db.query(sqlString, [userId, userName, employeeId, password, token]);
   },
 
+  // crud for values
+  getValueById: (valueId) => {
+    const sqlString = 'SELECT * FROM Values WHERE valueId = $1';
+    return db.query(sqlString, [valueId]);
+  },
+
+  addNewValue: (newValue) => {
+    const values = Object.values(newValue);
+    const sqlString = 'INSERT INTO Values(sensorId1, valueId, value) VALUES ($1, $2, $3)';
+    return db.query(sqlString, [...values]);
+  },
+
+  deleteValueById: (valueId) => {
+    const sqlString = 'DELETE FROM Values WHERE valueId = $1';
+    return db.query(sqlString, [valueId]);
+  },
+
+  updateValueById: ({
+    sensorId1, valueId, value,
+  }) => {
+    const sqlString = 'UPDATE Values SET sensorId1 = $1, valueId = $2, value = $3 WHERE valueId = $1';
+    return db.query(sqlString, [sensorId1, valueId, value]);
+  },
+
+  // crud for sensors
+  getSensorById: (sensorId) => {
+    const sqlString = 'SELECT * FROM Sensors WHERE sesnorId = $1';
+    return db.query(sqlString, [sensorId]);
+  },
+
+  addSensorUser: (newSensor) => {
+    const values = Object.values(newSensor);
+    const sqlString = 'INSERT INTO Users(sensorId, sensorName, location) VALUES ($1, $2, $3)';
+    return db.query(sqlString, [...values]);
+  },
+
+  deleteSensorById: (sensorId) => {
+    const sqlString = 'DELETE FROM Sensors WHERE sesnsorId = $1';
+    return db.query(sqlString, [sensorId]);
+  },
+
+  updateSensorById: ({
+    sensorId, sensorName, location,
+  }) => {
+    const sqlString = 'UPDATE Artists SET sensorId = $1, sensorName = $2, location = $3 WHERE sensorId = $1';
+
+    return db.query(sqlString, [sensorId, sensorName, location]);
+  },
 };

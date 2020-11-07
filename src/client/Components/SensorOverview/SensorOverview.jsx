@@ -8,40 +8,7 @@ import Sensor from '../Sensor/Sensor.jsx';
 import DataExport from '../DataExport/DataExport.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 
-export default function SensorOverview({ type, unitOfMeasure }) {
-  const [feedData, setFeedData] = useState([
-    {
-      value: 6,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-    {
-      value: 7,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-    {
-      value: 6,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-    {
-      value: 5,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-    {
-      value: 6,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-    {
-      value: 7,
-      time: new Date().toISOString(),
-      UOM: unitOfMeasure,
-    },
-  ]);
-  const id = 'SJV0-wdOM';
+export default function SensorOverview({ id, type, unitOfMeasure }) {
 
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
@@ -86,6 +53,7 @@ export default function SensorOverview({ type, unitOfMeasure }) {
 SensorOverview.propTypes = {
   type: propTypes.string.isRequired,
   unitOfMeasure: propTypes.string,
+  id: propTypes.string.isRequired,
 };
 
 SensorOverview.defaultProps = {
