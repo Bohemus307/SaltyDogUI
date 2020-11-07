@@ -1,7 +1,7 @@
 .Overview {
   display: flex;
   flex-direction: column;
-  align-items: center;
+  align-items: flex-start;
   height: 90%;
   width: 100%;
   margin-left: 5vw;
@@ -14,6 +14,7 @@
   align-self: start;
   background-image: linear-gradient(to left, rgb(0, 191, 255), rgb(138, 43, 226));
   padding: 15px 10px;
+  margin-top: 15px;
   border-radius: 9px;
   box-shadow: 1px 2px;
   color: #282e33;
@@ -24,7 +25,7 @@
   flex-direction: column-reverse;
   align-items: flex-start;
   height: 50%;
-  width: 100%;
+  width: 80%;
   margin: 20px 0px;
   padding: 15px 10px;
   /* background-image: linear-gradient(to left, #00BFFF, #8A2BE2); */

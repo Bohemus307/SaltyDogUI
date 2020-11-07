@@ -46,6 +46,7 @@ const Main = ({ displayItem }) => {
 
   const overview = (
     <Aux>
+      <h2>{displayItem}</h2>
       <div className={classes.Sensor_Wrapper}>
         {currentSensors}
       </div>
@@ -92,7 +93,6 @@ const Main = ({ displayItem }) => {
 
   return (
     <div className={classes.Main}>
-      <h2>{displayItem}</h2>
       {mainElement}
     </div>
   );
