@@ -1,9 +1,4 @@
-const { PubSub } = require('graphql-subscriptions');
 const db = require('../../../db');
-
-const pubSub = new PubSub();
-
-const MESSAGE_ADDED = 'MESSAGE_ADDED';
 
 // function requireAuth(userId) {
 //   if (!userId) {
@@ -41,12 +36,6 @@ const Sensor = {
     .filter((readings) => readings.sensor === sensor.id),
 };
 
-const Subscription = {
-  sensorConnect: {
-    subscribe: (_root, _args, { userId }) => pubSub.asyncIterator(MESSAGE_ADDED),
-  },
-};
-
 module.exports = {
-  Query, Sensor, Value, Mutation, Subscription,
+  Query, Sensor, Value, Mutation,
 };

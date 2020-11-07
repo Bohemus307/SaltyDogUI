@@ -36,7 +36,6 @@ const Main = ({ displayItem }) => {
           id="SJV0-wdOM"
           key={sensor.type}
           type={sensor.type}
-          loading={false}
           unitOfMeasure={sensor.unitOfMeasure}
         />
       </div>

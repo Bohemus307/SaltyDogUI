@@ -10,10 +10,6 @@
     createValue(input: CreateValueInput): Value
   }
 
-  type Subscription {
-    sensorConnect: Sensor
-  }
-
   type Sensor {
     id: ID!
     name: String

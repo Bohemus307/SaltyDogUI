@@ -5,7 +5,7 @@ import classes from './SensorOverview.css';
 import Sensor from '../Sensor/Sensor.jsx';
 import DataExport from '../DataExport/DataExport.jsx';
 
-export default function SensorOverview({ type, loading, unitOfMeasure }) {
+export default function SensorOverview({ type, unitOfMeasure }) {
   const [feedData, setFeedData] = useState([
     {
       value: 6,
@@ -41,7 +41,7 @@ export default function SensorOverview({ type, loading, unitOfMeasure }) {
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
-        <Sensor type={type} loading={loading} unitOfMeasure={unitOfMeasure} id="SJV0-wdOM" />
+        <Sensor type={type} unitOfMeasure={unitOfMeasure} id="SJV0-wdOM" />
       </div>
       <div className={classes.Sensor_Feed}>
         {feedData.map((item, index) => (
@@ -64,7 +64,6 @@ export default function SensorOverview({ type, loading, unitOfMeasure }) {
 
 SensorOverview.propTypes = {
   type: propTypes.string.isRequired,
-  loading: propTypes.bool.isRequired,
   unitOfMeasure: propTypes.string,
 };
 

@@ -8,43 +8,44 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
 const Sensor = ({
-  id, type, loading, unitOfMeasure,
+  id, type, unitOfMeasure,
 }) => {
   // const [currentData, setData] = useState([6.986]);
-  const { isloading, error, data } = useQuery(sensorQuery, {
+  const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
     // pollInterval: 500,
   });
 
-  if (isloading) return null;
+  if (loading) return null;
   if (error) return `Error! ${error}`;
 
-  if (isloading === true) {
+  if (loading === true) {
     return (
       <Spinner />
     );
   }
-  console.log('data', data);
+  let { sensor: { readings } } = data;
 
-  const sensor = (
+  console.log(readings);
+  const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
         {type}
       </div>
       <div className={classes.Sensor_Data}>
-        {data}
+        {readings[0].data}
         {unitOfMeasure}
       </div>
     </Aux>
   );
+
   return (
-    sensor
+    sensor1
   );
 };
 
 Sensor.propTypes = {
   type: propTypes.string.isRequired,
-  loading: propTypes.bool.isRequired,
 };
 
 export default Sensor;

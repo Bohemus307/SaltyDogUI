@@ -17,26 +17,14 @@ export const sensorQuery = gql`
   query sensorQuery($id: ID!) {
   sensor(id: $id){
     id
+    name
     readings {
       id
+      time 
       data
     }
   }
 }
-`;
-
-export const sensorConnectSubscription = gql`
-  subscription {
-    sensorConnect{
-      id
-      name
-      location
-      readings {
-        id
-        data
-      }
-    }
-  }
 `;
 
 export const loadValue = async (id) => {
@@ -49,9 +37,3 @@ export const loadSensorData = async (id) => {
   return sensor;
 };
 
-export const onValueAdded = async (handleValue) => {
-  const observable = client.subscribe({ query: sensorConnectSubscription });
-  return observable.subscribe(({ data }) => {
-    handleValue(data.valueAdded);
-  });
-};
