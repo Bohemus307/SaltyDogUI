@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
-import { sensorQuery, onValueAdded } from '../../graphql/queries';
+import { sensorQuery } from '../../graphql/queries';
 
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
@@ -10,7 +10,6 @@ import classes from './Sensor.css';
 const Sensor = ({
   id, type, unitOfMeasure,
 }) => {
-  // const [currentData, setData] = useState([6.986]);
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
     // pollInterval: 500,
@@ -26,7 +25,6 @@ const Sensor = ({
   }
   let { sensor: { readings } } = data;
 
-  console.log(readings);
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
