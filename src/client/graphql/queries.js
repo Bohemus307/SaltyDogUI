@@ -2,7 +2,7 @@ import gql from 'graphql-tag';
 import client from './client';
 
 // needs checked for single value by id
-const valueQuery = gql`{
+export const valueQuery = gql`{
   values {
     id
     time
@@ -13,9 +13,10 @@ const valueQuery = gql`{
 `;
 
 // gets data from single sensor by id
-const sensorQuery = gql`query sensorQuery($id: ID!) {
+export const sensorQuery = gql`
+  query sensorQuery($id: ID!) {
   sensor(id: $id){
-  id
+    id
     readings {
       id
       data
@@ -24,13 +25,16 @@ const sensorQuery = gql`query sensorQuery($id: ID!) {
 }
 `;
 
-const sensorConnectSubscription = gql`
+export const sensorConnectSubscription = gql`
   subscription {
     sensorConnect{
       id
       name
       location
-      readings
+      readings {
+        id
+        data
+      }
     }
   }
 `;

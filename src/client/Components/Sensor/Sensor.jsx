@@ -1,32 +1,30 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
+import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
-import { loadSensorData, onValueAdded } from '../../graphql/queries';
+import { sensorQuery, onValueAdded } from '../../graphql/queries';
 
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
-const Sensor = ({ type, loading, unitOfMeasure }) => {
-  const [currentData, setData] = useState([6.986]);
-  subscription = null;
+const Sensor = ({
+  id, type, loading, unitOfMeasure,
+}) => {
+  // const [currentData, setData] = useState([6.986]);
+  const { isloading, error, data } = useQuery(sensorQuery, {
+    variables: { id },
+    // pollInterval: 500,
+  });
 
-  if (loading === true) {
+  if (isloading) return null;
+  if (error) return `Error! ${error}`;
+
+  if (isloading === true) {
     return (
       <Spinner />
     );
   }
-
-  useEffect(() => {
-    const id = 'HJRa-DOuG';
-    const values = loadSensorData();
-    setData([...values]);
-    this.subscription = onValueAdded((value) => {
-      setData([...currentData.concat(value)]);
-    });
-    return () => {
-      this.subscription.unsubscribe();
-    };
-  });
+  console.log('data', data);
 
   const sensor = (
     <Aux>
@@ -34,7 +32,7 @@ const Sensor = ({ type, loading, unitOfMeasure }) => {
         {type}
       </div>
       <div className={classes.Sensor_Data}>
-        {currentData}
+        {data}
         {unitOfMeasure}
       </div>
     </Aux>
@@ -43,8 +41,10 @@ const Sensor = ({ type, loading, unitOfMeasure }) => {
     sensor
   );
 };
+
 Sensor.propTypes = {
   type: propTypes.string.isRequired,
   loading: propTypes.bool.isRequired,
 };
+
 export default Sensor;

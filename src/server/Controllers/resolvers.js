@@ -5,11 +5,11 @@ const pubSub = new PubSub();
 
 const MESSAGE_ADDED = 'MESSAGE_ADDED';
 
-function requireAuth(userId) {
-  if (!userId) {
-    throw new Error('Unauthorized');
-  }
-}
+// function requireAuth(userId) {
+//   if (!userId) {
+//     throw new Error('Unauthorized');
+//   }
+// }
 
 const Query = {
   sensor: (root, { id }) => db.sensors.get(id),

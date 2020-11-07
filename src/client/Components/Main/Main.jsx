@@ -33,6 +33,7 @@ const Main = ({ displayItem }) => {
     sensors.map((sensor) => (
       <div key={sensor.type} className={classes.Sensor}>
         <Sensor
+          id="SJV0-wdOM"
           key={sensor.type}
           type={sensor.type}
           loading={false}

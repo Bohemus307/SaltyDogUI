@@ -6,19 +6,7 @@ import { getMainDefinition } from 'apollo-utilities';
 import { getAccessToken, isLoggedIn } from '../Components/Auth/auth';
 
 const httpUrl = 'http://localhost:3030/graphql';
-const wsUrl = 'http://localhost:3030/graphql';
-
-// const authLink =
-//   new ApolloLink((operation, forward) => {
-//   if (isLoggedIn()) {
-//     operation.setContext({
-//       headers: {
-//         authorization: `Bearer ${getAccessToken()}`,
-//       },
-//     });
-//   }
-//   return forward(operation);
-// });
+const wsUrl = 'ws://localhost:3030/graphql';
 
 const httpLink = ApolloLink.from([
   new ApolloLink((operation, forward) => {

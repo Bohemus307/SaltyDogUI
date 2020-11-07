@@ -41,7 +41,7 @@ export default function SensorOverview({ type, loading, unitOfMeasure }) {
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
-        <Sensor type={type} loading={loading} unitOfMeasure={unitOfMeasure} />
+        <Sensor type={type} loading={loading} unitOfMeasure={unitOfMeasure} id="SJV0-wdOM" />
       </div>
       <div className={classes.Sensor_Feed}>
         {feedData.map((item, index) => (
