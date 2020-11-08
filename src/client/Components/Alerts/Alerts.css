@@ -2,8 +2,10 @@
   height: 100%;
   display: flex;
   flex-wrap: wrap;
+  height: 60%;
   width: 100%;
   color: #282828;
+  margin-bottom: 80px;
 }
 
 .Value_Div {

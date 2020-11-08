@@ -38,10 +38,10 @@ const Menu = ({ displayItem }) => {
       clicked: false,
     },
     {
-      key: 'Alerts',
-      image: '/images/alert.svg',
-      alt: 'Alerts',
-      title: 'System Alerts',
+      key: 'Moisture',
+      image: '/images/sensor.svg',
+      alt: 'Moisture',
+      title: 'Mo Sensor',
       clicked: false,
     },
   ]);

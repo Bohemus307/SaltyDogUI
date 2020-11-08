@@ -30,6 +30,13 @@ const Main = ({ displayItem }) => {
       connected: false,
       location: 'saltyDog',
     },
+    {
+      type: 'Mo',
+      id: 'SJV0-wdOM',
+      unitOfMeasure: 'VWC',
+      connected: false,
+      location: 'farm-row-1',
+    },
   ]);
 
   const currentSensors = (
@@ -83,11 +90,9 @@ const Main = ({ displayItem }) => {
         <SensorOverview id="SJV0-wdOM" type="Do" loading={false} unitOfMeasure="mg/L" />
       );
       break;
-    case ('Alerts'):
+    case ('Moisture'):
       mainElement = (
-        <div>
-          <Alerts />
-        </div>
+        <SensorOverview id="SJV0-wd" type="Moisture" loading={false} unitOfMeasure="VWC" />
       );
       break;
     default:

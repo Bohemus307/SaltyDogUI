@@ -1,80 +1,33 @@
 import React, {
   useCallback,
   useState,
-  useEffect,
   useMemo,
 } from 'react';
+import propTypes from 'prop-types';
 import classes from './Alerts.css';
-
 import RangeSlider from '../Slider/Slider.jsx';
-import Aux from '../../Hoc/Aux/Aux.jsx';
 
-const Alerts = () => {
-  const [parentVal, setParentVal] = useState(50);
+const Alerts = ({ type }) => {
   const [sliders, setSliders] = useState([
     {
-      key: 'phMinSlider',
+      key: 'MinSlider',
       divKey: 1,
       min: 0,
       max: 100,
       value: 50,
       step: 1,
-      label: 'PH Min',
+      label: ' Min',
       locked: false,
       alarm: false,
     },
     {
-      key: 'phMaxSlider',
+      key: 'MaxSlider',
       divKey: 2,
       min: 0,
       max: 100,
       value: 50,
       step: 1,
-      label: 'PH Max',
-      locked: false,
-      alarm: false,
-    },
-    {
-      key: 'ecMinSlider',
-      divKey: 3,
-      min: 0,
-      max: 100,
-      value: 50,
-      step: 1,
-      label: 'EC Min',
-      locked: false,
-      alarm: false,
-    },
-    {
-      key: 'ecMaxSlider',
-      divKey: 4,
-      min: 0,
-      max: 100,
-      value: 50,
-      step: 1,
-      label: 'EC Max',
-      locked: false,
-      alarm: false,
-    },
-    {
-      key: 'doMinSlider',
-      divKey: 5,
-      min: 0,
-      max: 100,
-      value: 50,
-      step: 1,
-      label: 'DO Min',
-      locked: false,
-      alarm: false,
-    },
-    {
-      key: 'doMaxSlider',
-      divKey: 6,
-      min: 0,
-      max: 100,
-      value: 50,
-      step: 1,
-      label: 'DO Max',
+      label: ' Max',
       locked: false,
       alarm: false,
     },
@@ -128,6 +81,7 @@ const Alerts = () => {
         <div className={classes.Value_Div} key={slideProps.divkey}>
           <RangeSlider
             classes={classes.Slider}
+            type={type}
             key={slider.label}
             {...slideProps}
             disabled={slider.locked}
@@ -155,6 +109,10 @@ const Alerts = () => {
       {sliderList}
     </div>
   );
+};
+
+Alerts.propTypes = {
+  type: propTypes.string.isRequired,
 };
 
 export default Alerts;

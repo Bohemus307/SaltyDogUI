@@ -9,7 +9,7 @@ import styles from './Slider.css';
 
 // destructive props
 const RangeSlider = ({
-  classes, label, onChange, value, ...slideProps
+  classes, label, onChange, value, type, ...slideProps
 }) => {
   // set initial value to 0 this will change inside useEffect in first render also | or you can directly set useState(value)
   const [sliderVal, setSliderVal] = useState(0);
@@ -41,6 +41,7 @@ const RangeSlider = ({
           padding: '0px 5px',
         }}
         >
+          {type}
           {label}
         </p>
         <h3>

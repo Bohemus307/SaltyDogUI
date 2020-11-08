@@ -7,9 +7,9 @@ import classes from './SensorOverview.css';
 import Sensor from '../Sensor/Sensor.jsx';
 import DataExport from '../DataExport/DataExport.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
+import Alerts from '../Alerts/Alerts.jsx';
 
 export default function SensorOverview({ id, type, unitOfMeasure }) {
-
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
     // pollInterval: 500,
@@ -46,6 +46,8 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
         ))}
       </div>
       <DataExport />
+      <h3>Set Alerts</h3>
+      <Alerts type={type} />
     </div>
   );
 }
