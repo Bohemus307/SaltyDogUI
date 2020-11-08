@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
 import { sensorQuery } from '../../graphql/queries';

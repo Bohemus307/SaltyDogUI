@@ -4,7 +4,6 @@ import {
 } from 'react-router-dom';
 
 import classes from './NavBar.css';
-import Logo from '../Logo/Logo.jsx';
 
 const NavBar = () => (
   <div className={classes.Nav_Div}>

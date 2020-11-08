@@ -83,10 +83,10 @@ const Menu = ({ displayItem }) => {
   return (
     <div className={classes.Menu}>
       {menu}
-      <div className={classes.Menu_Item}>
+      <div className={classes.Menu_Item} onClick={logout} role="button" onKeyPress={logout} tabIndex={0}>
         <NavLink className={classes.Menu_Link} to="/login">
-          <img className={classes.Menu_Image} onClick={logout} src="/images/logout.svg" alt="LogOut" />
-          <span className={classes.Logout} onClick={logout}>Log Out</span>
+          <img className={classes.Menu_Image} src="/images/logout.svg" alt="LogOut" />
+          <span className={classes.Logout}>Log Out</span>
         </NavLink>
       </div>
     </div>

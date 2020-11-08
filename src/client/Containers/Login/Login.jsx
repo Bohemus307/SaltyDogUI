@@ -121,8 +121,6 @@ class Login extends React.Component {
 
   loginHandler = ( event ) => {
     event.preventDefault()
-    // request 
-    //this.setState({ loading: true })
 
     const formData = {};
     for (let formElementIdentifier in this.state.controls) {
@@ -131,7 +129,8 @@ class Login extends React.Component {
 
     const email = formData.email;
     const password = formData.password;
-    login(email, password).then((ok) => {
+    login(email, password)
+      .then((ok) => {
       if (ok) {
         this.setState({ isloggedIn: true });
         this.props.history.replace('/dashboard'); 

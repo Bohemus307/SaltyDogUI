@@ -2,7 +2,6 @@ import React from 'react';
 import propTypes from 'prop-types';
 
 import classes from './Input.css';
-import Aux from '../../../Hoc/Aux/Aux.jsx';
 
 const Input = ({
   invalid,

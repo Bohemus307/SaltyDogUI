@@ -5,7 +5,7 @@ import classes from './Modal.css';
 import Backdrop from '../Backdrop/Backdrop.jsx';
 
 class Modal extends Component {
-  shouldComponentUpdate(nextProps, nextState, { show, children }) {
+  shouldComponentUpdate(nextProps, { show, children }) {
     return nextProps.show !== show || nextProps.children !== children;
   }
 

@@ -6,7 +6,8 @@ import Input from '../UI/Input/Input.jsx';
 import { createAccount } from '../Auth/auth';
 import classes from './SignUp.css';
 
-const SignUp = (props) => {
+const SignUp = () => {
+  const history = useHistory();
   const [signedIn, setSignedIn] = useState(true);
 
   const [formIsValid, setValid] = useState(false);
@@ -42,11 +43,7 @@ const SignUp = (props) => {
 
     return isValid;
   };
-  // formIsValid: false,
-  //     loading: false,
-  //     isLoggedIn: false,
-  //     authToken: null,
-  //     isError: false
+
   const [inputElements, setInputElements] = useState(
     {
       Name: {
@@ -182,7 +179,7 @@ const SignUp = (props) => {
         .then((ok) => {
           if (ok) {
             alert('Your Signed Up, Now Login');
-            props.history.replace('/login');
+            history.replace('/login');
           } else {
             console.error('errored in sign up request');
           }
@@ -206,7 +203,6 @@ const SignUp = (props) => {
     return arr;
   }, []);
   // redirects to login on click outside modal
-  const history = useHistory();
   const handleClick = () => {
     history.push('/login');
   };

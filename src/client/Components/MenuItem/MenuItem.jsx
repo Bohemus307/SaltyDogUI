@@ -14,7 +14,13 @@ const MenuItem = ({
 
   return (
     <Aux>
-      <img value={value} className={classes.Menu_Image} src={image} alt={alt} onClick={() => clickBoth(value)} />
+      <img
+        value={value}
+        className={classes.Menu_Image}
+        src={image}
+        alt={alt}
+        onClick={() => clickBoth(value)}
+      />
       <span value={value} className={classes.Menu_Span} onClick={() => clickBoth(value)}>
         {' '}
         {title}

@@ -4,7 +4,6 @@ import React, {
   useState,
   useEffect,
 } from 'react';
-import propTypes from 'prop-types';
 import styles from './Slider.css';
 
 // destructive props

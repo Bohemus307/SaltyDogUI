@@ -1,19 +1,8 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
 
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
-
-// config:
-// elementConfig: {type: "Name", placeholder: "Full Name", image: "/images/user.svg"}
-// elementType: "input"
-// touched: false
-// valid: false
-// validation: {required: true}
-// value: ""
-// __proto__: Object
-// id: "Name"
 
 const DataExport = () => {
   const [inputElements, setInputs] = useState(
