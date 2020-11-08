@@ -47,7 +47,7 @@ class Login extends React.Component {
           value: '',
           validation: {
             required: true,
-            minLength: 7,
+            minLength: 5,
             maxLength: 12,
           },
           valid: false,

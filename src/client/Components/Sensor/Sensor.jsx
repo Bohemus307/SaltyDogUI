@@ -25,8 +25,6 @@ const Sensor = ({
   }
   const { sensor: { readings } } = data;
 
-  console.log(readings[0]);
-
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>

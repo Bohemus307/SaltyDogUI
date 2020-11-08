@@ -172,20 +172,23 @@ const SignUp = (props) => {
 
     if (formData.password === formData.passwordVerify) {
       const newUser = {
-        username: formData.Name,
+        userName: formData.Name,
         email: formData.email,
         password: formData.password,
-        companyId: 'SJV0-wdOM',
+        employeeId: 'SJV0-wdOM',
       };
 
-      createAccount(newUser).then((ok) => {
-        if (ok) {
-          alert('Your Signed Up, Now Login');
-          props.history.replace('/login');
-        } else {
-          console.error('errored in sign up request');
-        }
-      });
+      createAccount(newUser)
+        .then((ok) => {
+          if (ok) {
+            alert('Your Signed Up, Now Login');
+            props.history.replace('/login');
+          } else {
+            console.error('errored in sign up request');
+          }
+        });
+    } else {
+      console.log('Passwords do not match');
     }
   };
 

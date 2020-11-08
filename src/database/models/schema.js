@@ -1,4 +1,3 @@
-const path = require('path');
 const db = require('../connection.js');
 
 // build model for users
@@ -8,9 +7,8 @@ const users = () => {
     userId VARCHAR (20) NOT NULL,
     userName VARCHAR (80) NOT NULL,
     employeeId VARCHAR (15) NOT NULL,
-    email VARCHAR (35) NOT NULL,
-    password VARCHAR (10) NOT NULL,
-    token VARCHAR (1000) NOT NULL
+    email VARCHAR (35) UNIQUE,
+    password VARCHAR (10) NOT NULL
    )`;
 
   return db.query('DROP TABLE IF EXISTS users')
@@ -43,12 +41,6 @@ const values = () => {
   return db.query('DROP TABLE IF EXISTS Values')
     .then(() => db.query(sqlString));
 };
-
-// const addNewUser = (newUser) => {
-//   console.log('newUser', newUser);
-//   const sqlString = 'INSERT INTO Users(newUser) VALUES ($1)';
-//   return db.query(sqlString, [newUser]);
-// };
 
 module.exports = {
   users, sensors, values,

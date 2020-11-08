@@ -13,7 +13,7 @@ const db = require('../database/connection');
 const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
 // const db = require('../../db');
 
-const jwtSecret = Buffer.from('Zn8Q5tyZ/G1MHltc4F/gTkVJMlrbKiZt', 'base64');
+const jwtSecret = Buffer.from(config.app.secret, 'base64');
 
 const app = express();
 app.use(cors(), bodyParser.json(), expressJwt({
@@ -65,13 +65,20 @@ app.post('/login', (req, res) => {
 
 app.post('/signup', (req, res) => {
   const newUser = req.body.user;
-  const userVerify = db.users.list().find((user) => user.email === newUser.email);
-  if (userVerify) {
-    res.sendStatus(401);
-    return;
+  if (newUser === undefined) {
+    res.status(400).json({
+      message: 'Bad request - must include all form fields',
+    });
   }
-  const makeUser = db.users.create({ ...newUser });
-  res.sendStatus(200).json({ newUSer: makeUser });
+  newUser.userId = 'asdfghjkl';
+
+  addNewUser({ ...newUser })
+    // .then((user) => res.sendStatus(200).json({ newUser: user }))
+    .then((user) => console.log('new user', user))
+    .catch((err) => res.status(400).json({
+      message: 'Failed to Signup User',
+      error: err,
+    }));
 });
 
 // graphQL connect
@@ -88,6 +95,7 @@ function context({ req, connection }) {
   }
   return {};
 }
+
 const server = new ApolloServer({ typeDefs, resolvers, context });
 server.applyMiddleware({ app, path: '/graphql' });
 
