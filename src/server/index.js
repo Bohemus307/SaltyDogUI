@@ -3,6 +3,7 @@ const express = require('express');
 const http = require('http');
 const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
+const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
 const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
@@ -38,23 +39,22 @@ app.get('/*', (req, res) => {
   });
 });
 
-app.post('/login', (req, res) => {
+app.post('/login', async (req, res) => {
   const { email, password, userName } = req.body;
-  if (email === undefined || password === undefined) {
+  if (email.length === 0 || password.length === 0) {
     res.status(400).json({
       message: 'Bad request - must include Email and Password',
     });
   }
 
-  const emailCheck = getUserByEmail(email);
-  if (!emailCheck) {
+  const emailCheck = await getUserByEmail(email);
+  if (emailCheck.rows.length === 0) {
     res.status(401).json({
-      message: 'Bad request - Email address is incorrect',
+      message: 'Bad request - Email is incorrect',
     });
   }
-
-  const passwordCheck = getUserByPassword(userName);
-  if (!passwordCheck) {
+  const passwordCheck = await getUserByPassword(password);
+  if (passwordCheck.rows.length === 0) {
     res.status(401).json({
       message: 'Bad request - Password is incorrect',
     });
@@ -63,22 +63,24 @@ app.post('/login', (req, res) => {
   res.send({ token });
 });
 
-app.post('/signup', (req, res) => {
-  const newUser = req.body.user;
-  if (newUser === undefined) {
+app.post('/signup', async (req, res) => {
+  try {
+    const newUser = req.body.user;
+    if (newUser === undefined) {
+      res.status(400).json({
+        message: 'Bad request - must include all form fields',
+      });
+    }
+    newUser.userId = 'asdfghjkl';
+    newUser.password = await bcrypt.hash(req.body.password, 5);
+    const addUser = await addNewUser({ ...newUser });
+    res.sendStatus(200).json({ newUser: addUser });
+  } catch (err) {
     res.status(400).json({
-      message: 'Bad request - must include all form fields',
-    });
-  }
-  newUser.userId = 'asdfghjkl';
-
-  addNewUser({ ...newUser })
-    // .then((user) => res.sendStatus(200).json({ newUser: user }))
-    .then((user) => console.log('new user', user))
-    .catch((err) => res.status(400).json({
       message: 'Failed to Signup User',
       error: err,
-    }));
+    });
+  }
 });
 
 // graphQL connect

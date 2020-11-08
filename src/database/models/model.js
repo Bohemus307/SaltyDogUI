@@ -19,7 +19,8 @@ module.exports = {
   // crud for users
   getUserByEmail: (email) => {
     const sqlString = 'SELECT * FROM Users WHERE email = $1';
-    return db.query(sqlString, [email]);
+    return db.query(sqlString, [email])
+      .catch((e) => console.error(e.stack));
   },
 
   getUserByPassword: (password) => {
