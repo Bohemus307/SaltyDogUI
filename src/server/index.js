@@ -40,27 +40,33 @@ app.get('/*', (req, res) => {
 });
 
 app.post('/login', async (req, res) => {
-  const { email, password, userName } = req.body;
-  if (email.length === 0 || password.length === 0) {
-    res.status(400).json({
-      message: 'Bad request - must include Email and Password',
-    });
-  }
-
-  const emailCheck = await getUserByEmail(email);
-  if (emailCheck.rows.length === 0) {
+  try {
+    const { email, password, userName } = req.body;
+    if (email.length === 0 || password.length === 0) {
+      res.status(400).json({
+        message: 'Bad request - must include Email and Password',
+      });
+    }
+    const emailCheck = await getUserByEmail(email);
+    if (emailCheck.rows.length === 0) {
+      res.status(401).json({
+        message: 'Bad request - Email is incorrect',
+      });
+    }
+    const passwordCheck = await getUserByPassword(password);
+    if (passwordCheck.rows.length === 0) {
+      res.status(401).json({
+        message: 'Bad request - Password is incorrect',
+      });
+    }
+    const token = jwt.sign({ sub: userName }, jwtSecret);
+    res.send({ token });
+  } catch (err) {
     res.status(401).json({
-      message: 'Bad request - Email is incorrect',
+      message: 'Failed to Login User',
+      error: err,
     });
   }
-  const passwordCheck = await getUserByPassword(password);
-  if (passwordCheck.rows.length === 0) {
-    res.status(401).json({
-      message: 'Bad request - Password is incorrect',
-    });
-  }
-  const token = jwt.sign({ sub: userName }, jwtSecret);
-  res.send({ token });
 });
 
 app.post('/signup', async (req, res) => {

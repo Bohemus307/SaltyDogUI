@@ -30,18 +30,22 @@ const sensors = () => {
 
 const values = () => {
   const sqlString = `CREATE TABLE Values(
-    sensor_id SERIAL PRIMARY KEY,
+    time TIMESTAMPTZ NOT NULL,
     sensorId1 INT,
-    valueId VARCHAR (20) NOT NULL,
-    value INT,
-    date_col DATE,
-    timestamp_col TIMESTAMP
+    readingId VARCHAR (20) NOT NULL,
+    reading INT,
+    date_col DATE NOT NULL
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')
     .then(() => db.query(sqlString));
 };
 
+const hyperTable = () => {
+  const sqlString = 'SELECT create_hypertable(Values, time, chunk_time_interval => INTERVAL 1 day)';
+  db.query(sqlString);
+};
+
 module.exports = {
-  users, sensors, values,
+  users, sensors, values, hyperTable,
 };
