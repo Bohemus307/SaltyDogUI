@@ -12,8 +12,25 @@ function getRandomReading(min, max) {
   return (Math.floor(rand * power) / power).toFixed(2);
 }
 
+function randomDate(date1, date2) {
+  function randomValueBetween(min, max) {
+    return Math.random() * (max - min) + min;
+  }
+  const newDate1 = date1 || '01-01-2020';
+  const newDate2 = date2 || new Date().toISOString();
+  const begindate = new Date(newDate1).getTime();
+  const enddate = new Date(newDate2).getTime();
+  if (begindate > enddate) {
+    return new Date(randomValueBetween(begindate, enddate)).toISOString();
+  }
+  return new Date(randomValueBetween(begindate, enddate)).toISOString();
+}
+
+// const today = new Date(Date.now());
+// today.toISOString().substring(0, 10);
+
 const writeArtists = fs.createWriteStream('readings.csv');
-writeArtists.write('sensorId,readingId,reading\n', 'utf8');
+writeArtists.write('time,sensorId1,readingId,reading,date\n', 'utf8');
 
 function writeUsers(artiststream, encoding, callback) {
   let i = 1000;
@@ -23,11 +40,12 @@ function writeUsers(artiststream, encoding, callback) {
     do {
       i -= 1;
       id += 1;
-      const sensorId = 'BJenjRROw';
-      const sensorName = 'Ph-sensor-1';
+      const sensorId1 = 'BJenjRROw';
       const readingId = id;
       const reading = getRandomReading(5.00, 7.99);
-      const data = `${sensorId},${readingId},${sensorName},${reading}\n`;
+      const time = randomDate('01-01-2020', '12-24-2020', 1, 12);
+      const date = time.substring(0, 10);
+      const data = `${time},${sensorId1},${readingId},${reading},${date}\n`;
       if (i === 0) {
         artiststream.write(data, encoding, callback);
       } else {

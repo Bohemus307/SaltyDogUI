@@ -1,3 +1,4 @@
+const path = require('path');
 const db = require('../connection.js');
 
 // build model for users
@@ -31,11 +32,10 @@ const sensors = () => {
 const values = () => {
   const sqlString = `CREATE TABLE Values(
     time TIMESTAMPTZ NOT NULL,
-    sensorId1 INT,
+    sensorId1 VARCHAR(15) NOT NULL,
     readingId VARCHAR (20) NOT NULL,
-    reading DOUBLE PRECISION,
-    date_col DATE NOT NULL,
-    UNIQUE (time, date)
+    reading DOUBLE PRECISION NOT NULL,
+    date DATE NOT NULL
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')
@@ -43,10 +43,32 @@ const values = () => {
 };
 
 const hyperTable = () => {
-  const sqlString = 'SELECT create_hypertable(Values, time, chunk_time_interval => INTERVAL 1 day)';
+  const sqlString = `SELECT create_hypertable('Values', 'time', chunk_time_interval => INTERVAL '1 day')`;
   db.query(sqlString);
 };
 
+const seedPgDatabase = () => {
+  const pathToCSV = process.env.NODE_ENV === 'prod' ? '/home/bitnami/seed_files/artists.csv' : path.resolve(__dirname, '../../../readings.csv');
+  const delimiter = ',';
+  const sqlString = `COPY values(time, sensorId1, readingId, reading, date) FROM '${pathToCSV}' DELIMITER '${delimiter}' CSV HEADER`;
+  return db.query(sqlString);
+};
+
+const indexSensorId = () => {
+  const sqlString = 'CREATE INDEX idx_sensorId1 ON values(sensorId1)';
+
+  return db.query(sqlString);
+};
+
+values()
+  .then(() => console.log('Created table values'))
+  .then(hyperTable)
+  .then(() => console.log('Created hypertable now importing data'))
+  .then(seedPgDatabase)
+  .then(() => console.log('Imported all records now creating index on sensorId'))
+  .then(indexSensorId)
+  .catch((err) => console.log(err));
+
 module.exports = {
-  users, sensors, values, hyperTable,
+  users, sensors, values, hyperTable, seedPgDatabase,
 };
