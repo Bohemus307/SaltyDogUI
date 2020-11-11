@@ -6,11 +6,11 @@ const fs = require('fs');
 //     readingId VARCHAR (20) NOT NULL,
 //     reading INT,
 //     date_col DATE NOT NULL
-const getRandomReading = (min, max) => {
-  let fixedMin = Number.parseFloat(min).toFixed(2);
-  let fixedMax = Number.parseFloat(max).toFixed(2);
-  return Math.floor(Math.random() * (fixedMax - fixedMin) + fixedMin); 
-};
+function getRandomReading(min, max) {
+  const rand = Math.random() * (max - min) + min;
+  const power = Math.exp(10).toFixed(2);
+  return (Math.floor(rand * power) / power).toFixed(2);
+}
 
 const writeArtists = fs.createWriteStream('readings.csv');
 writeArtists.write('sensorId,readingId,reading\n', 'utf8');
@@ -26,7 +26,7 @@ function writeUsers(artiststream, encoding, callback) {
       const sensorId = 'BJenjRROw';
       const sensorName = 'Ph-sensor-1';
       const readingId = id;
-      const reading = getRandomReading(5.89, 7.98);
+      const reading = getRandomReading(5.00, 7.99);
       const data = `${sensorId},${readingId},${sensorName},${reading}\n`;
       if (i === 0) {
         artiststream.write(data, encoding, callback);
