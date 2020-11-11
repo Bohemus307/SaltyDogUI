@@ -1,23 +1,33 @@
 const fs = require('fs');
 
 // const { Aritst, artistSchema } = require('../models/artists.js');
+// time TIMESTAMPTZ NOT NULL,
+//     sensorId1 INT,
+//     readingId VARCHAR (20) NOT NULL,
+//     reading INT,
+//     date_col DATE NOT NULL
+const getRandomReading = (min, max) => {
+  let fixedMin = Number.parseFloat(min).toFixed(2);
+  let fixedMax = Number.parseFloat(max).toFixed(2);
+  return Math.floor(Math.random() * (fixedMax - fixedMin) + fixedMin); 
+};
 
 const writeArtists = fs.createWriteStream('readings.csv');
-writeArtists.write('artistId,artistName,avatar,bio\n', 'utf8');
+writeArtists.write('sensorId,readingId,reading\n', 'utf8');
 
 function writeUsers(artiststream, encoding, callback) {
-  let i = 10000000;
+  let i = 1000;
   let id = 0;
   function write() {
     let ok = true;
     do {
       i -= 1;
       id += 1;
-      const artistName = faker.internet.userName();
-      // eslint-disable-next-line quotes
-      const avatar = faker.image.avatar();
-      const bio = 'Artist';
-      const data = `${id},${artistName},${avatar},${bio}\n`;
+      const sensorId = 'BJenjRROw';
+      const sensorName = 'Ph-sensor-1';
+      const readingId = id;
+      const reading = getRandomReading(5.89, 7.98);
+      const data = `${sensorId},${readingId},${sensorName},${reading}\n`;
       if (i === 0) {
         artiststream.write(data, encoding, callback);
       } else {

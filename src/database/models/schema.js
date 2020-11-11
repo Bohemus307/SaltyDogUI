@@ -33,8 +33,9 @@ const values = () => {
     time TIMESTAMPTZ NOT NULL,
     sensorId1 INT,
     readingId VARCHAR (20) NOT NULL,
-    reading INT,
-    date_col DATE NOT NULL
+    reading DOUBLE PRECISION,
+    date_col DATE NOT NULL,
+    UNIQUE (time, date)
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')
