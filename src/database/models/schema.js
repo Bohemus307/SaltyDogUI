@@ -22,7 +22,7 @@ const sensors = () => {
     _id SERIAL PRIMARY KEY,
     sensorId1 VARCHAR(15) NOT NULL,
     sensorName VARCHAR(80),
-    location VARCHAR (10) NOT NULL
+    location VARCHAR (100) NOT NULL
    )`;
 
   return db.query('DROP TABLE IF EXISTS Sensors')
@@ -43,32 +43,32 @@ const values = () => {
 };
 
 const hyperTable = () => {
-  const sqlString = `SELECT create_hypertable('Values', 'time', chunk_time_interval => INTERVAL '1 day')`;
+  const sqlString = 'SELECT create_hypertable(\'Values\', \'time\', chunk_time_interval => INTERVAL \'1 day\')';
   db.query(sqlString);
 };
 
 const seedPgDatabase = () => {
-  const pathToCSV = process.env.NODE_ENV === 'prod' ? '/home/bitnami/seed_files/artists.csv' : path.resolve(__dirname, '../../../readings.csv');
+  const pathToCSV = process.env.NODE_ENV === 'prod' ? '/home/bitnami/seed_files/readings.csv' : path.resolve(__dirname, '../../../readings.csv');
   const delimiter = ',';
   const sqlString = `COPY values(time, sensorId1, readingId, reading, date) FROM '${pathToCSV}' DELIMITER '${delimiter}' CSV HEADER`;
   return db.query(sqlString);
 };
 
-const indexSensorId = () => {
+const indexSensorId1 = () => {
   const sqlString = 'CREATE INDEX idx_sensorId1 ON values(sensorId1)';
 
   return db.query(sqlString);
 };
 
-values()
-  .then(users)
-  .then(sensors)
-  .then(() => console.log('Created table values users and sensors'))
-  .then(hyperTable)
-  .then(() => console.log('Created hypertable now importing data'))
-  .then(seedPgDatabase)
-  .then(() => console.log('Imported all records now creating index on sensorId'))
-  .then(indexSensorId)
+// values()
+//   .then(users)
+//   .then(sensors)
+//   .then(() => console.log('Created table values users and sensors'))
+//   .then(hyperTable)
+//   .then(() => console.log('Created hypertable now importing data'))
+seedPgDatabase()
+  .then(() => console.log('Imported all records now creating index on sensorId1'))
+  // .then(indexSensorId1)
   .catch((err) => console.log(err));
 
 module.exports = {

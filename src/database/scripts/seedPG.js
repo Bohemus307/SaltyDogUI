@@ -40,9 +40,9 @@ function writeUsers(artiststream, encoding, callback) {
     do {
       i -= 1;
       id += 1;
-      const sensorId1 = 'BJenjRROw';
+      const sensorId1 = 'SJV0-wdOM';
       const readingId = id;
-      const reading = getRandomReading(5.00, 7.99);
+      const reading = getRandomReading(0.5, 3);
       const time = randomDate('01-01-2020', '12-24-2020', 1, 12);
       const date = time.substring(0, 10);
       const data = `${time},${sensorId1},${readingId},${reading},${date}\n`;

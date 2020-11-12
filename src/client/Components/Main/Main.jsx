@@ -10,29 +10,29 @@ import Alerts from '../Alerts/Alerts.jsx';
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
     {
-      type: 'PH',
+      type: 'PH-1',
       id: 'BJenjRROw',
       unitOfMeasure: null,
       connected: false,
-      location: 'saltyDog',
+      location: 'salt-water-tank-1',
     },
     {
-      type: 'EC',
+      type: 'EC-1',
       id: 'HJRa-DOuG',
       unitOfMeasure: 'mS/cm',
       connected: false,
-      location: 'saltyDog',
+      location: 'salt-water-tank-1',
     },
     {
-      type: 'DO',
+      type: 'DO-1',
       id: 'SJV0-wdOM',
       unitOfMeasure: 'mg/L',
       connected: false,
-      location: 'saltyDog',
+      location: 'salt-water-tank-1',
     },
     {
       type: 'Mo',
-      id: 'SJV0-wdOM',
+      id: 'AVR0-MODw',
       unitOfMeasure: 'VWC',
       connected: false,
       location: 'farm-row-1',

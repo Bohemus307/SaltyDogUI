@@ -38,7 +38,7 @@ module.exports = {
 
   // crud for values
   getValuesBySensorId: (sensorId) => {
-    const sqlString = 'SELECT * FROM Values WHERE sensorId = $1';
+    const sqlString = 'SELECT * FROM Values WHERE sensorId1 = $1';
     return db.query(sqlString, [sensorId])
       .catch((e) => console.error(e.stack));
   },
@@ -71,7 +71,7 @@ module.exports = {
 
   // crud for sensors
   getSensorById: (sensorId) => {
-    const sqlString = 'SELECT * FROM Sensors WHERE sesnorId = $1';
+    const sqlString = 'SELECT * FROM Sensors WHERE sensorId1 = $1';
     return db.query(sqlString, [sensorId])
       .catch((e) => console.error(e.stack));
   },
@@ -84,13 +84,13 @@ module.exports = {
 
   addNewSensor: (newSensor) => {
     const values = Object.values(newSensor);
-    const sqlString = 'INSERT INTO Sensors(sensorId, sensorName, location) VALUES ($1, $2, $3)';
+    const sqlString = 'INSERT INTO Sensors(sensorId1, sensorName, location) VALUES ($1, $2, $3)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
   },
 
   deleteSensorById: (sensorId) => {
-    const sqlString = 'DELETE FROM Sensors WHERE sesnsorId = $1';
+    const sqlString = 'DELETE FROM Sensors WHERE sensorId = $1';
     return db.query(sqlString, [sensorId])
       .catch((e) => console.error(e.stack));
   },
