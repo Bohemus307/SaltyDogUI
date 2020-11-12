@@ -1,4 +1,5 @@
 const db = require('../../../db');
+const model = require('../../database/models/model.js');
 
 // function requireAuth(userId) {
 //   if (!userId) {
@@ -7,9 +8,9 @@ const db = require('../../../db');
 // }
 
 const Query = {
-  sensor: (root, { id }) => db.sensors.get(id),
-  sensors: () => db.sensors.list(),
-  values: () => db.values.list(),
+  sensor: (root, { id }) => model.getSensorById(id), // gets sensor by id
+  sensors: () => model.getSensors(), // all sensors
+  values: () => model.getValues(), // all values
 };
 
 const Mutation = {
@@ -17,13 +18,13 @@ const Mutation = {
     if (!user) {
       throw new Error('Unauthorized!');
     }
-    const id = db.sensors.create({ ...input });
-    return db.sensors.get(id);
+    const id = model.addNewSensor({ ...input });
+    return model.getSensorById(id);
   },
 
   createValue: (root, { input }) => {
-    const id = db.values.create({ ...input });
-    return db.values.get(id);
+    const id = model.addNewValue({ ...input });
+    return model.getValueById(id);
   },
 };
 
@@ -32,8 +33,8 @@ const Value = {
 };
 
 const Sensor = {
-  readings: (sensor) => db.values.list()
-    .filter((readings) => readings.sensor === sensor.id),
+  readings: (sensorId) => model.getValuesBySensorId(sensorId)
+    .filter((readings) => readings.sensor === sensorId),
 };
 
 module.exports = {

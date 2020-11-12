@@ -1,21 +1,6 @@
 const db = require('../connection.js');
 
 module.exports = {
-  // getRelatedArtists: (artistId) => {
-  //   console.log(artistId);
-  //   const sqlString = `SELECT
-  //   a.artistname AS main_artist,
-  //   b.artistname AS related_artist_name,
-  //   b.bio AS related_artist_bio,
-  //   b.avatar AS related_artist_avatar
-  //   FROM relatedartists AS ra
-  //   JOIN artists as a ON ra.artistid1 = a.artistid
-  //   JOIN artists as b ON ra.artistid2 = b.artistid
-  //   WHERE a.artistid = $1`;
-
-  //   return db.query(sqlString, [artistId]);
-  // },
-
   // crud for users
   getUserByEmail: (email) => {
     const sqlString = 'SELECT * FROM Users WHERE email = $1';
@@ -52,9 +37,15 @@ module.exports = {
   },
 
   // crud for values
-  getValueById: (valueId) => {
-    const sqlString = 'SELECT * FROM Values WHERE valueId = $1';
-    return db.query(sqlString, [valueId])
+  getValuesBySensorId: (sensorId) => {
+    const sqlString = 'SELECT * FROM Values WHERE sensorId = $1';
+    return db.query(sqlString, [sensorId])
+      .catch((e) => console.error(e.stack));
+  },
+
+  getValues: () => {
+    const sqlString = 'SELECT * FROM Values';
+    return db.query(sqlString)
       .catch((e) => console.error(e.stack));
   },
 
@@ -85,7 +76,13 @@ module.exports = {
       .catch((e) => console.error(e.stack));
   },
 
-  addSensorUser: (newSensor) => {
+  getSensors: () => {
+    const sqlString = 'SELECT * FROM Sensors';
+    return db.query(sqlString)
+      .catch((e) => console.error(e.stack));
+  },
+
+  addNewSensor: (newSensor) => {
     const values = Object.values(newSensor);
     const sqlString = 'INSERT INTO Users(sensorId, sensorName, location) VALUES ($1, $2, $3)';
     return db.query(sqlString, [...values])
@@ -106,3 +103,18 @@ module.exports = {
       .catch((e) => console.error(e.stack));
   },
 };
+
+// getRelatedArtists: (artistId) => {
+//   console.log(artistId);
+//   const sqlString = `SELECT
+//   a.artistname AS main_artist,
+//   b.artistname AS related_artist_name,
+//   b.bio AS related_artist_bio,
+//   b.avatar AS related_artist_avatar
+//   FROM relatedartists AS ra
+//   JOIN artists as a ON ra.artistid1 = a.artistid
+//   JOIN artists as b ON ra.artistid2 = b.artistid
+//   WHERE a.artistid = $1`;
+
+//   return db.query(sqlString, [artistId]);
+// },

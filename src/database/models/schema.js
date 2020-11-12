@@ -61,7 +61,9 @@ const indexSensorId = () => {
 };
 
 values()
-  .then(() => console.log('Created table values'))
+  .then(users)
+  .then(sensors)
+  .then(() => console.log('Created table values users and sensors'))
   .then(hyperTable)
   .then(() => console.log('Created hypertable now importing data'))
   .then(seedPgDatabase)

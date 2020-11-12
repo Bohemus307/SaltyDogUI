@@ -33,7 +33,7 @@ const writeArtists = fs.createWriteStream('readings.csv');
 writeArtists.write('time,sensorId1,readingId,reading,date\n', 'utf8');
 
 function writeUsers(artiststream, encoding, callback) {
-  let i = 1000;
+  let i = 1000000;
   let id = 0;
   function write() {
     let ok = true;
