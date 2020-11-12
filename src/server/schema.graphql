@@ -12,16 +12,18 @@
 
   type Sensor {
     id: ID!
-    name: String
+    sensorName: String
     location: String
     readings: [Value]
   }
 
   type Value {
-    id: ID!
-    time: String
+    id: ID
     sensor: Sensor
-    data: Int
+    readingid: ID!
+    time: String
+    reading: Int
+    date: String
   }
 
   input CreateSensorInput {

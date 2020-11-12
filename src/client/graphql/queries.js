@@ -4,7 +4,7 @@ import client from './client';
 // needs checked for single value by id
 export const valueQuery = gql`{
   values {
-    id
+    sensorid1
     time
     sensor
     data
@@ -15,13 +15,13 @@ export const valueQuery = gql`{
 // gets data from single sensor by id
 export const sensorQuery = gql`
   query sensorQuery($id: ID!) {
-  sensor(id: $id){
-    id
-    name
+  sensor(sensorid1: $id){
+    sensorid1
+    sensorName
     readings {
-      id
+      readingId
       time 
-      data
+      reading
     }
   }
 }
@@ -36,4 +36,3 @@ export const loadSensorData = async (id) => {
   const { data: { sensor } } = await client.query({ query: sensorQuery, variables: { id } });
   return sensor;
 };
-

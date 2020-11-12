@@ -37,13 +37,13 @@ const Menu = ({ displayItem }) => {
       title: 'DO Sensor',
       clicked: false,
     },
-    {
-      key: 'Moisture',
-      image: '/images/sensor.svg',
-      alt: 'Moisture',
-      title: 'Mo Sensor',
-      clicked: false,
-    },
+    // {
+    //   key: 'Moisture',
+    //   image: '/images/sensor.svg',
+    //   alt: 'Moisture',
+    //   title: 'Mo Sensor',
+    //   clicked: false,
+    // },
   ]);
 
   const clickHandler = (value) => {

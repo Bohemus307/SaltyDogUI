@@ -31,13 +31,13 @@ app.use(cors());
 app.use(express.json());
 
 // for redirect of refresh in front end
-app.get('/*', (req, res) => {
-  res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
-    if (err) {
-      res.status(500).send(err);
-    }
-  });
-});
+// app.get('/*', (req, res) => {
+//   res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
+//     if (err) {
+//       res.status(500).send(err);
+//     }
+//   });
+// });
 
 app.post('/login', async (req, res) => {
   try {

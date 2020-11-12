@@ -10,11 +10,12 @@ import classes from './Sensor.css';
 const Sensor = ({
   id, type, unitOfMeasure,
 }) => {
+  console.log('id', id);
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
     // pollInterval: 500,
   });
-
+  console.log('data', data);
   if (loading) return null;
   if (error) return `Error! ${error}`;
 
@@ -37,9 +38,7 @@ const Sensor = ({
     </Aux>
   );
 
-  return (
-    sensor1
-  );
+  return (sensor1);
 };
 
 Sensor.propTypes = {

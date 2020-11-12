@@ -8,9 +8,11 @@ const model = require('../../database/models/model.js');
 // }
 
 const Query = {
-  sensor: (root, { id }) => model.getSensorById(id), // gets sensor by id
-  sensors: () => model.getSensors(), // all sensors
-  values: () => model.getValues(), // all values
+  sensor: (root, {id}) => db.sensors.get(id), // gets values by sensorId1
+  // sensors: () => model.getSensors(), // all sensors
+  // values: () => model.getValues(), // all values
+  sensors: () => db.sensors.list(),
+  values: () => db.values.list(),
 };
 
 const Mutation = {
@@ -33,8 +35,9 @@ const Value = {
 };
 
 const Sensor = {
-  readings: (sensorId) => model.getValuesBySensorId(sensorId)
-    .filter((readings) => readings.sensor === sensorId),
+  // readings: (id) => model.getValuesBySensorId(id),
+  readings: (sensor) => db.values.list()
+    .filter((readings) => readings.sensor === sensor.id),
 };
 
 module.exports = {

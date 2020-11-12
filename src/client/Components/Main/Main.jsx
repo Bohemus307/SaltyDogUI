@@ -30,13 +30,13 @@ const Main = ({ displayItem }) => {
       connected: false,
       location: 'salt-water-tank-1',
     },
-    {
-      type: 'Mo',
-      id: 'AVR0-MODw',
-      unitOfMeasure: 'VWC',
-      connected: false,
-      location: 'farm-row-1',
-    },
+    // {
+    //   type: 'Mo',
+    //   id: 'AVR0-MODw',
+    //   unitOfMeasure: 'VWC',
+    //   connected: false,
+    //   location: 'farm-row-1',
+    // },
   ]);
 
   const currentSensors = (
@@ -90,10 +90,10 @@ const Main = ({ displayItem }) => {
         <SensorOverview id="SJV0-wdOM" type="Do" loading={false} unitOfMeasure="mg/L" />
       );
       break;
-    case ('Moisture'):
-      mainElement = (
-        <SensorOverview id="SJV0-wd" type="Moisture" loading={false} unitOfMeasure="VWC" />
-      );
+      // case ('Moisture'):
+      //   mainElement = (
+      //     <SensorOverview id="SJV0-wd" type="Moisture" loading={false} unitOfMeasure="VWC" />
+      //   );
       break;
     default:
       mainElement = overview;
