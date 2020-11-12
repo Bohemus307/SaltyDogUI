@@ -84,7 +84,7 @@ module.exports = {
 
   addNewSensor: (newSensor) => {
     const values = Object.values(newSensor);
-    const sqlString = 'INSERT INTO Users(sensorId, sensorName, location) VALUES ($1, $2, $3)';
+    const sqlString = 'INSERT INTO Sensors(sensorId, sensorName, location) VALUES ($1, $2, $3)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
   },

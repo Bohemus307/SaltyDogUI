@@ -20,7 +20,7 @@ const users = () => {
 const sensors = () => {
   const sqlString = `CREATE TABLE Sensors (
     _id SERIAL PRIMARY KEY,
-    sensorId INT NOT NULL,
+    sensorId1 VARCHAR(15) NOT NULL,
     sensorName VARCHAR(80),
     location VARCHAR (10) NOT NULL
    )`;
