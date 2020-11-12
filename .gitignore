@@ -1,9 +1,7 @@
 node_modules
 
-# ignore env
 .env
 
-.csv
 bundle.js.LICENSE.txt
 
 readings.csv
