@@ -9,9 +9,11 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
+const { Client } = require('pg');
 const config = require('../../config');
 const db = require('../database/connection');
 const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
+
 // const db = require('../../db');
 
 const jwtSecret = Buffer.from(config.app.secret, 'base64');
@@ -29,6 +31,7 @@ app.use(express.static(path.join(__dirname, '/../../public')));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
+// app.use(postgraphile);
 
 // for redirect of refresh in front end
 // app.get('/*', (req, res) => {
@@ -93,7 +96,9 @@ app.post('/signup', async (req, res) => {
 const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
 
-function context({ req, connection }) {
+const client = new Client(config.db);
+
+async function context({ req, connection }) {
   if (req && req.user) {
     return { userId: req.user.sub };
   }
@@ -101,7 +106,10 @@ function context({ req, connection }) {
     const decodedToken = jwt.verify(connection.context.accesstoken, jwtSecret);
     return { userId: decodedToken.sub };
   }
-  return {};
+
+  return {
+    db: await client.connect(),
+  };
 }
 
 const server = new ApolloServer({ typeDefs, resolvers, context });

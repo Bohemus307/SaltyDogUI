@@ -35,8 +35,7 @@ const values = () => {
     correlateID VARCHAR (20) NOT NULL,
     time TIMESTAMPTZ NOT NULL,
     reading DOUBLE PRECISION NOT NULL,
-    date DATE NOT NULL,
-    UNIQUE (correlateId, time)
+    date DATE NOT NULL
     )`;
 
   return db.query('DROP TABLE IF EXISTS Values')
@@ -65,15 +64,17 @@ const indexValueCorrelateIdSensor = () => {
   return db.query(sqlString);
 };
 
-sensors()
-  .then(() => console.log('Created table values users and sensors'))
-  .then(values)
-  .then(hyperTable)
-  .then(() => console.log('Created hypertable now importing data'))
-  .then(seedPgDatabase)
-  .then(() => console.log('Imported all records now creating index on correlateId'))
-  .then(indexValueCorrelateIdValue)
-  .then(indexValueCorrelateIdSensor)
+// sensors()
+//   .then(() => console.log('Created table values users and sensors'))
+//   .then(values)
+// values()
+//   .then(() => console.log('Created table values users and sensors'))
+//   .then(hyperTable)
+//   .then(() => console.log('Created hypertable now importing data'))
+seedPgDatabase()
+  // .then(() => console.log('Imported all records now creating index on correlateId'))
+  // .then(indexValueCorrelateIdValue)
+  // .then(indexValueCorrelateIdSensor)
   .then(() => console.log('Success on script !!!!'))
   .catch((err) => console.log(err));
 

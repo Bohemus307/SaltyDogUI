@@ -37,9 +37,9 @@ module.exports = {
   },
 
   // crud for values
-  getValuesBySensorId: (sensorId) => {
-    const sqlString = 'SELECT * FROM Values WHERE sensorId1 = $1';
-    return db.query(sqlString, [sensorId])
+  getValuesByCorrelateId: (id) => {
+    const sqlString = 'SELECT * FROM Values WHERE correlateID = $1';
+    return db.query(sqlString, [id])
       .catch((e) => console.error(e.stack));
   },
 
@@ -49,16 +49,22 @@ module.exports = {
       .catch((e) => console.error(e.stack));
   },
 
+  getValuesByDate: (date) => {
+    const sqlString = 'SELECT * FROM Values Where date = $1';
+    return db.query(sqlString, [date])
+      .catch((e) => console.error(e.stack));
+  },
+
   addNewValue: (newValue) => {
     const values = Object.values(newValue);
-    const sqlString = 'INSERT INTO Values(sensorId1, valueId, value) VALUES ($1, $2, $3)';
+    const sqlString = 'INSERT INTO Values(correlateID, time, reading, date) VALUES ($1, $2, $3, $4)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
   },
 
-  deleteValueById: (valueId) => {
-    const sqlString = 'DELETE FROM Values WHERE valueId = $1';
-    return db.query(sqlString, [valueId]);
+  deleteValueById: (id) => {
+    const sqlString = 'DELETE FROM Values WHERE correlateID = $1';
+    return db.query(sqlString, [id]);
   },
 
   updateValueById: ({
@@ -70,9 +76,9 @@ module.exports = {
   },
 
   // crud for sensors
-  getSensorById: (sensorId) => {
-    const sqlString = 'SELECT * FROM Sensors WHERE sensorId1 = $1';
-    return db.query(sqlString, [sensorId])
+  getSensorById: (id) => {
+    const sqlString = 'SELECT * FROM Sensors WHERE correlateid = $1';
+    return db.query(sqlString, [id])
       .catch((e) => console.error(e.stack));
   },
 
@@ -84,7 +90,7 @@ module.exports = {
 
   addNewSensor: (newSensor) => {
     const values = Object.values(newSensor);
-    const sqlString = 'INSERT INTO Sensors(sensorId1, sensorName, location) VALUES ($1, $2, $3)';
+    const sqlString = 'INSERT INTO Sensors(correlateID, sensorName, location) VALUES ($1, $2, $3)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
   },

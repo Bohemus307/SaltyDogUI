@@ -20,43 +20,37 @@ function randomDate(date1, date2) {
   return new Date(randomValueBetween(begindate, enddate)).toISOString();
 }
 
-const dataSeed = (sensorId) => {
-  const writeArtists = fs.createWriteStream(`readings-${sensorId}.csv`);
-  writeArtists.write('time,correlateId,reading,date\n', 'utf8');
+const writeArtists = fs.createWriteStream('readings.csv');
+writeArtists.write('time,correlateId,reading,date\n', 'utf8');
 
-  function writeUsers(artiststream, encoding, callback) {
-    let i = 1000000;
-    function write() {
-      let ok = true;
-      do {
-        i -= 1;
-        const correlateId = sensorId;
-        const reading = getRandomReading(5, 10);
-        const time = randomDate('01-01-2020', '12-24-2020', 1, 12);
-        const date = time.substring(0, 10);
-        const data = `${time},${correlateId},${reading},${date}\n`;
-        if (i === 0) {
-          artiststream.write(data, encoding, callback);
-        } else {
+function writeUsers(artiststream, encoding, callback) {
+  let i = 100000;
+  function write() {
+    let ok = true;
+    do {
+      i -= 1;
+      const correlateId = 'BJenjRROw';
+      const reading = getRandomReading(3, 8);
+      const time = randomDate('01-01-2020', '12-24-2020', 1, 12);
+      const date = time.substring(0, 10);
+      const data = `${time},${correlateId},${reading},${date}\n`;
+      if (i === 0) {
+        artiststream.write(data, encoding, callback);
+      } else {
         // see if we should continue, or wait
         // don't pass the callback, because we're not done yet.
-          ok = artiststream.write(data, encoding);
-        }
-      } while (i > 0 && ok);
-      if (i > 0) {
+        ok = artiststream.write(data, encoding);
+      }
+    } while (i > 0 && ok);
+    if (i > 0) {
       // had to stop early!
       // write some more once it drains
-        artiststream.once('drain', write);
-      }
+      artiststream.once('drain', write);
     }
-    write();
   }
+  write();
+}
 
-  writeUsers(writeArtists, 'utf-8', () => {
-    writeArtists.end();
-  });
-};
-
-module.exports = {
-  dataSeed,
-};
+writeUsers(writeArtists, 'utf-8', () => {
+  writeArtists.end();
+});
