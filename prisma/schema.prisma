@@ -8,6 +8,16 @@ datasource db {
   url      = env("DATABASE_URL")
 }
 
+model sensors {
+  sensor_id   Int      @id @default(autoincrement()) @db.Integer
+  correlateid String   @db.VarChar(20)
+  sensorname  String?  @db.VarChar(80)
+  location    String   @db.VarChar(100)
+  values      values[]
+
+  @@unique([correlateid, sensorname], name: "sensors_correlateid_sensorname_key")
+}
+
 model users {
   id         Int     @id @default(autoincrement()) @map("_id") @db.Integer
   userid     String  @db.VarChar(20)
@@ -17,19 +27,12 @@ model users {
   password   String  @db.VarChar(10)
 }
 
-model sensors {
-  id          Int     @id @default(autoincrement()) @map("_id") @db.Integer
-  correlateid String  @db.VarChar(20)
-  sensorname  String? @db.VarChar(80)
-  location    String  @db.VarChar(100)
-
-  @@unique([correlateid, sensorname], name: "sensors_correlateid_sensorname_key")
-}
-
 model values {
   id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
+  sensor_id   Int      @default(autoincrement()) @db.Integer
   correlateid String   @db.VarChar(20)
-  time        DateTime @db.Date
+  time        DateTime @db.Timestamp(6)
   reading     Float    @db.DoublePrecision
   date        DateTime @db.Date
+  sensors     sensors  @relation(fields: [sensor_id], references: [sensor_id])
 }

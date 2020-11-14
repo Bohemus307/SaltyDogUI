@@ -4,7 +4,7 @@ const dataSeed = require('../scripts/seedPG.js');
 
 // build model for users
 const users = () => {
-  const sqlString = `CREATE TABLE Users (
+  const sqlString = `CREATE TABLE users (
     _id SERIAL PRIMARY KEY,
     userId VARCHAR (20) NOT NULL,
     userName VARCHAR (80) NOT NULL,
@@ -13,34 +13,36 @@ const users = () => {
     password VARCHAR (10) NOT NULL
    )`;
 
-  return db.query('DROP TABLE IF EXISTS Users')
+  return db.query('DROP TABLE IF EXISTS users')
     .then(() => db.query(sqlString));
 };
 
 // build model for sensors
 const sensors = () => {
-  const sqlString = `CREATE TABLE Sensors (
-    _id SERIAL PRIMARY KEY,
-    correlateID VARCHAR (20) NOT NULL,
+  const sqlString = `CREATE TABLE sensors (
+    sensor_id SERIAL PRIMARY KEY,
+    correlateId VARCHAR (20) NOT NULL,
     sensorName VARCHAR(80),
     location VARCHAR (100) NOT NULL,
     UNIQUE (correlateId, sensorName)
    )`;
 
-  return db.query('DROP TABLE IF EXISTS Sensors')
+  return db.query('DROP TABLE IF EXISTS sensors')
     .then(() => db.query(sqlString));
 };
 
 const values = () => {
-  const sqlString = `CREATE TABLE Values(
+  const sqlString = `CREATE TABLE values(
     _id SERIAL PRIMARY KEY,
-    correlateID VARCHAR (20) NOT NULL,
-    time DATETIME NOT NULL,
+    sensor_id SERIAL,
+    correlateId VARCHAR (20) NOT NULL,
+    time TIMESTAMP NOT NULL,
     reading DOUBLE PRECISION NOT NULL,
-    date DATE NOT NULL
+    date DATE NOT NULL,
+    FOREIGN KEY(sensor_id) REFERENCES sensors(sensor_id)
     )`;
 
-  return db.query('DROP TABLE IF EXISTS Values')
+  return db.query('DROP TABLE IF EXISTS values')
     .then(() => db.query(sqlString));
 };
 
