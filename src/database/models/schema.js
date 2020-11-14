@@ -20,6 +20,7 @@ const users = () => {
 // build model for sensors
 const sensors = () => {
   const sqlString = `CREATE TABLE Sensors (
+    _id SERIAL PRIMARY KEY,
     correlateID VARCHAR (20) NOT NULL,
     sensorName VARCHAR(80),
     location VARCHAR (100) NOT NULL,
@@ -32,8 +33,9 @@ const sensors = () => {
 
 const values = () => {
   const sqlString = `CREATE TABLE Values(
+    _id SERIAL PRIMARY KEY,
     correlateID VARCHAR (20) NOT NULL,
-    time TIMESTAMPTZ NOT NULL,
+    time DATETIME NOT NULL,
     reading DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL
     )`;

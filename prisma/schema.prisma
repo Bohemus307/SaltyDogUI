@@ -1,11 +1,35 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["nativeTypes"]
+}
 
 datasource db {
   provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
-generator client {
-  provider = "prisma-client-js"
+model users {
+  id         Int     @id @default(autoincrement()) @map("_id") @db.Integer
+  userid     String  @db.VarChar(20)
+  username   String  @db.VarChar(80)
+  employeeid String  @db.VarChar(15)
+  email      String? @unique @db.VarChar(35)
+  password   String  @db.VarChar(10)
+}
+
+model sensors {
+  id          Int     @id @default(autoincrement()) @map("_id") @db.Integer
+  correlateid String  @db.VarChar(20)
+  sensorname  String? @db.VarChar(80)
+  location    String  @db.VarChar(100)
+
+  @@unique([correlateid, sensorname], name: "sensors_correlateid_sensorname_key")
+}
+
+model values {
+  id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
+  correlateid String   @db.VarChar(20)
+  time        DateTime @db.Date
+  reading     Float    @db.DoublePrecision
+  date        DateTime @db.Date
 }
