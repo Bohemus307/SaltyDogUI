@@ -21,10 +21,9 @@ const users = () => {
 const sensors = () => {
   const sqlString = `CREATE TABLE sensors (
     sensor_id SERIAL PRIMARY KEY,
-    correlateId VARCHAR (20) NOT NULL,
-    sensorName VARCHAR(80),
-    location VARCHAR (100) NOT NULL,
-    UNIQUE (correlateId, sensorName)
+    correlateId VARCHAR (20) NOT NULL UNIQUE,
+    sensorName VARCHAR(80) NOT NULL UNIQUE,
+    location VARCHAR (100) NOT NULL
    )`;
 
   return db.query('DROP TABLE IF EXISTS sensors')
@@ -39,7 +38,7 @@ const values = () => {
     time TIMESTAMP NOT NULL,
     reading DOUBLE PRECISION NOT NULL,
     date DATE NOT NULL,
-    FOREIGN KEY(sensor_id) REFERENCES sensors(sensor_id)
+    FOREIGN KEY(correlateId) REFERENCES sensors(correlateId)
     )`;
 
   return db.query('DROP TABLE IF EXISTS values')
@@ -59,12 +58,12 @@ const seedPgDatabase = () => {
 };
 
 const indexValueCorrelateIdValue = () => {
-  const sqlString = 'CREATE INDEX idx_correlateID ON values(correlateID)';
+  const sqlString = 'CREATE INDEX idx_correlateId ON values(correlateID)';
   return db.query(sqlString);
 };
 
 const indexValueCorrelateIdSensor = () => {
-  const sqlString = 'CREATE INDEX idx_correlateID ON sensors(correlateID)';
+  const sqlString = 'CREATE INDEX idx_correlateId ON sensors(correlateID)';
   return db.query(sqlString);
 };
 
