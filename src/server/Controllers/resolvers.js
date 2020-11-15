@@ -8,12 +8,9 @@ const models = require('../../database/models/model.js');
 // }
 
 const Query = {
-  sensor: async (parent, args, { id }) => await models.getSensorById(id),
-  // sensor: async (root, { id }) => {
-  //   model.getSensorById(id)
-  //     .then((data) => data.rows)
-  //     .catch((err) => console.log(err));
-  // }, // gets values by sensorId1
+  sensor: async (parent, args, context, { id }) => context.prisma.sesnor.findOne({
+    where: { correlateid: id },
+  }),
   sensors: () => models.getSensors(), // all sensors
   values: () => models.getValues(), // all values
   // sensor: (root, { id }) => db.sensors.get(id), // gets values by sensorId1
