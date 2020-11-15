@@ -29,8 +29,8 @@ function writeUsers(artiststream, encoding, callback) {
     let ok = true;
     do {
       i -= 1;
-      const correlateId = 'BJenjRROw';
-      const reading = getRandomReading(3, 8);
+      const correlateId = 'SJV0-wdOM';
+      const reading = getRandomReading(0.5, 3.5);
       const time = randomDate('01-01-2020', '12-24-2020', 1, 12);
       const date = time.substring(0, 10);
       const data = `${time},${correlateId},${reading},${date}\n`;
