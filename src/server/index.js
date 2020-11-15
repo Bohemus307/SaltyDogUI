@@ -9,9 +9,10 @@ const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
 const cors = require('cors');
-const { Client } = require('pg');
+const { PrismaClient } = require('@prisma/client');
 const config = require('../../config');
 const db = require('../database/connection');
+
 const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
 
 // const db = require('../../db');
@@ -96,7 +97,7 @@ app.post('/signup', async (req, res) => {
 const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
 
-const client = new Client(config.db);
+const prisma = new PrismaClient();
 
 async function context({ req, connection }) {
   if (req && req.user) {
@@ -108,7 +109,7 @@ async function context({ req, connection }) {
   }
 
   return {
-    db: await client.connect(),
+    prisma: PrismaClient,
   };
 }
 

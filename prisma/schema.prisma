@@ -10,12 +10,10 @@ datasource db {
 
 model sensors {
   sensor_id   Int      @id @default(autoincrement()) @db.Integer
-  correlateid String   @db.VarChar(20)
-  sensorname  String?  @db.VarChar(80)
+  correlateid String   @unique @db.VarChar(20)
+  sensorname  String   @unique @db.VarChar(80)
   location    String   @db.VarChar(100)
   values      values[]
-
-  @@unique([correlateid, sensorname], name: "sensors_correlateid_sensorname_key")
 }
 
 model users {
@@ -34,5 +32,5 @@ model values {
   time        DateTime @db.Timestamp(6)
   reading     Float    @db.DoublePrecision
   date        DateTime @db.Date
-  sensors     sensors  @relation(fields: [sensor_id], references: [sensor_id])
+  sensors     sensors  @relation(fields: [correlateid], references: [correlateid])
 }
