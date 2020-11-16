@@ -109,7 +109,7 @@ async function context({ req, connection }) {
   }
 
   return {
-    prisma: PrismaClient,
+    prisma,
   };
 }
 

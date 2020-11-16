@@ -11,18 +11,20 @@
   }
 
   type Sensor {
+    sensor_id: Int
     correlateid: ID!
     sensorname: String
     location: String
-    readings: [Value]
+    values: [Value]
   }
 
   type Value {
+    sensor_id: Int
     correlateid: ID!
-    sensor: Sensor
     time: String
-    reading: Int
+    reading: Float
     date: String
+    sensor: Sensor
   }
 
   input CreateSensorInput {
