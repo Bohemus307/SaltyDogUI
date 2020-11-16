@@ -35,10 +35,6 @@ const Mutation = {
   },
 };
 
-const Value = {
-  // sensor: (sensor) => db.sensors.get(sensor.companyId),
-};
-
 const Sensor = {
   values: async (parent, { correlateid }, context) => {
     const result = await context.prisma.values.findMany({ orderBy: { time: 'asc' }, where: { correlateid } });
@@ -47,5 +43,5 @@ const Sensor = {
 };
 
 module.exports = {
-  Query, Sensor, Value, Mutation,
+  Query, Sensor, Mutation,
 };

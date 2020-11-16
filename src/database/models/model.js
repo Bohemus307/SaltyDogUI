@@ -38,7 +38,7 @@ module.exports = {
 
   // crud for values
   getValuesByCorrelateId: (id) => {
-    const sqlString = 'SELECT * FROM Values WHERE correlateID = $1';
+    const sqlString = 'SELECT * FROM Values WHERE correlateid = $1';
     return db.query(sqlString, [id])
       .catch((e) => console.error(e.stack));
   },
@@ -57,7 +57,7 @@ module.exports = {
 
   addNewValue: (newValue) => {
     const values = Object.values(newValue);
-    const sqlString = 'INSERT INTO Values(correlateID, time, reading, date) VALUES ($1, $2, $3, $4)';
+    const sqlString = 'INSERT INTO Values(correlateid, time, reading, date) VALUES ($1, $2, $3, $4)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
   },
@@ -70,7 +70,7 @@ module.exports = {
   updateValueById: ({
     sensorId1, valueId, value,
   }) => {
-    const sqlString = 'UPDATE Values SET sensorId1 = $1, valueId = $2, value = $3 WHERE valueId = $1';
+    const sqlString = 'UPDATE Values SET correlateid = $1, reading = $2, time = $3 date = $4 WHERE correlateid = $1';
     return db.query(sqlString, [sensorId1, valueId, value])
       .catch((e) => console.error(e.stack));
   },
@@ -95,17 +95,17 @@ module.exports = {
       .catch((e) => console.error(e.stack));
   },
 
-  deleteSensorById: (sensorId) => {
-    const sqlString = 'DELETE FROM Sensors WHERE sensorId = $1';
-    return db.query(sqlString, [sensorId])
+  deleteSensorById: (correlateid) => {
+    const sqlString = 'DELETE FROM Sensors WHERE corrrelateid = $1';
+    return db.query(sqlString, [correlateid])
       .catch((e) => console.error(e.stack));
   },
 
   updateSensorById: ({
-    sensorId, sensorName, location,
+    sensor_id, sensorName, location,
   }) => {
     const sqlString = 'UPDATE Artists SET sensorId = $1, sensorName = $2, location = $3 WHERE sensorId = $1';
-    return db.query(sqlString, [sensorId, sensorName, location])
+    return db.query(sqlString, [sensor_id, sensorName, location])
       .catch((e) => console.error(e.stack));
   },
 };
