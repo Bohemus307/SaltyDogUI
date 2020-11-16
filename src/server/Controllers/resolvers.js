@@ -5,13 +5,16 @@
 // }
 
 const Query = {
-  sensor: async (parent, { correlateid }, context) => {
-    console.log(correlateid);
-    context.prisma.sensors.findOne({ where: { correlateid } });
+  sensor: async (parent, { sensor_id }, context) => {
+    const result = await context.prisma.sensors.findOne({ where: { sensor_id } });
+    return result;
   },
   sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
   values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
-  // sensor: (root, { id }) => db.sensors.get(id), // gets values by sensorId1
+  value: async (root, { sensor_id }, context) => {
+    const result = await context.prisma.values.findOne({ where: { sensor_id } });
+    return result;
+  }, // gets values by sensorId1
   // sensors: () => db.sensors.list(),
   // values: () => db.values.list(),
 };
@@ -32,7 +35,7 @@ const Mutation = {
 };
 
 const Value = {
-  sensor: (sensor) => db.sensors.get(sensor.companyId),
+  // sensor: (sensor) => db.sensors.get(sensor.companyId),
 };
 
 const Sensor = {
