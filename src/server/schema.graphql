@@ -1,5 +1,5 @@
   type Query {
-    sensor(sensor_id: ID!): Sensor
+    sensor(correlateid: ID!): Sensor
     sensors: [Sensor]
     value(sensor_id: ID!): Value
     values: [Value]
@@ -12,7 +12,7 @@
 
   type Sensor {
     sensor_id: ID!
-    correlateid: String
+    correlateid: ID!
     sensorname: String
     location: String
     values: [Value]
@@ -20,7 +20,7 @@
 
   type Value {
     sensor_id: ID!
-    correlateid: String
+    correlateid: ID!
     time: String
     reading: Float
     date: String

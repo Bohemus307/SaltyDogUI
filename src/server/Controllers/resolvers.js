@@ -5,16 +5,17 @@
 // }
 
 const Query = {
-  sensor: async (parent, { sensor_id }, context) => {
-    const result = await context.prisma.sensors.findOne({ where: { sensor_id } });
+  sensor: async (parent, { correlateid }, context) => {
+    const result = await context.prisma.sensors.findOne({ where: { correlateid } });
     return result;
   },
   sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
   values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
   value: async (root, { sensor_id }, context) => {
-    const result = await context.prisma.values.findOne({ where: { sensor_id } });
+    const id = parseInt(sensor_id, 2);
+    const result = await context.prisma.values.findOne({ where: { sensor_id: id } });
     return result;
-  }, // gets values by sensorId1
+  }, // gets values by sensor_Id
   // sensors: () => db.sensors.list(),
   // values: () => db.values.list(),
 };
@@ -39,10 +40,10 @@ const Value = {
 };
 
 const Sensor = {
-  // readings: (id) => model.getValuesBySensorId(id),
-  // readings: (sensor) => db.values.list()
-  //   .filter((readings) => readings.sensor === sensor.id),
-  values: () => console.log('sensor ran'),
+  values: async (parent, { correlateid }, context) => {
+    const result = await context.prisma.values.findMany({ orderBy: { time: 'asc' }, where: { correlateid } });
+    return result;
+  },
 };
 
 module.exports = {
