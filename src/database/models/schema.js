@@ -33,7 +33,7 @@ const sensors = () => {
 const values = () => {
   const sqlString = `CREATE TABLE values(
     _id SERIAL PRIMARY KEY,
-    sensor_id SERIAL,
+    reading_id SERIAL UNIQUE,
     correlateId VARCHAR (20) NOT NULL,
     time TIMESTAMP NOT NULL,
     reading DOUBLE PRECISION NOT NULL,
@@ -84,3 +84,5 @@ seedPgDatabase()
 module.exports = {
   users, sensors, values, hyperTable, seedPgDatabase,
 };
+
+

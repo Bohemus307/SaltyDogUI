@@ -11,13 +11,12 @@ const Query = {
   },
   sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
   values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
-  value: async (root, { sensor_id }, context) => {
-    const id = parseInt(sensor_id, 2);
-    const result = await context.prisma.values.findOne({ where: { sensor_id: id } });
+  value: async (root, { reading_id }, context) => {
+    const id = parseInt(reading_id);
+    console.log(id);
+    const result = await context.prisma.values.findOne({ where: { reading_id: id } });
     return result;
   }, // gets values by sensor_Id
-  // sensors: () => db.sensors.list(),
-  // values: () => db.values.list(),
 };
 
 const Mutation = {

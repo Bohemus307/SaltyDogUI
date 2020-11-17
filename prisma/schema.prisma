@@ -27,7 +27,7 @@ model users {
 
 model values {
   id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
-  sensor_id   Int      @default(autoincrement()) @db.Integer
+  reading_id  Int      @unique @default(dbgenerated()) @db.Integer
   correlateid String   @db.VarChar(20)
   time        DateTime @db.Timestamp(6)
   reading     Float    @db.DoublePrecision
