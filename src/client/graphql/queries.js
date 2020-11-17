@@ -2,28 +2,42 @@ import gql from 'graphql-tag';
 import client from './client';
 
 // needs checked for single value by id
-export const valueQuery = gql`{
-  values {
-    sensorid1
-    time
-    sensor
-    data
+export const valueQuery = gql`
+ query valueQuery($id: ID!) {
+  value(reading_id: $id){
+   reading
+   reading_id
+   correlateid
+   date
+   time
+  }
+ }
+`;
+
+export const sensorQuery = gql`
+  query sensorQuery($id: ID!) {
+  sensor(correlateid: $id){
+   correlateid
+   sensor_id
+   sensorname
+   location
+   values {
+     reading_id
+     correlateid
+     reading
+     time
+     date
+   }
   }
 }
 `;
 
-// gets data from single sensor by id
-export const sensorQuery = gql`
-  query sensorQuery($id: ID!) {
-  sensor(sensorid1: $id){
-    sensorid1
-    sensorName
-    readings {
-      readingId
-      time 
-      reading
+export const getSensors = gql`{
+    sensors {
+      correlateid
+      sensorname
+      sensor_id
     }
-  }
 }
 `;
 

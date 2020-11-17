@@ -32,7 +32,6 @@ app.use(express.static(path.join(__dirname, '/../../public')));
 app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
-// app.use(postgraphile);
 
 // for redirect of refresh in front end
 // app.get('/*', (req, res) => {
@@ -101,13 +100,18 @@ const prisma = new PrismaClient();
 
 async function context({ req, connection }) {
   if (req && req.user) {
-    return { userId: req.user.sub };
+    return {
+      userId: req.user.sub,
+      prisma,
+    };
   }
   if (connection && connection.context && connection.context.accesstoken) {
     const decodedToken = jwt.verify(connection.context.accesstoken, jwtSecret);
-    return { userId: decodedToken.sub };
+    return {
+      userId: decodedToken.sub,
+      prisma,
+    };
   }
-
   return {
     prisma,
   };

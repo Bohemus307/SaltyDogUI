@@ -1,7 +1,7 @@
 import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
-import { sensorQuery } from '../../graphql/queries';
+import { sensorQuery } from '../../graphql/queries.js';
 
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
@@ -11,20 +11,23 @@ const Sensor = ({
   id, type, unitOfMeasure,
 }) => {
   console.log('id', id);
+
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
+    notifyOnNetworkStatusChange: true,
     // pollInterval: 500,
   });
-  console.log('data', data);
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
-
-  if (loading === true) {
+  console.log('data:', loading, error, data);
+  
+  if (loading) {
     return (
       <Spinner />
     );
   }
-  const { sensor: { readings } } = data;
+  if (error) return `Error! ${error.message}`;
+
+  // const { sensor: { readings } } = data;
+  console.log('data:', loading, error, data);
 
   const sensor1 = (
     <Aux>
@@ -32,12 +35,11 @@ const Sensor = ({
         {type}
       </div>
       <div className={classes.Sensor_Data}>
-        {readings[0].data}
+        {/* {readings[0].data} */}
         {unitOfMeasure}
       </div>
     </Aux>
   );
-
   return (sensor1);
 };
 

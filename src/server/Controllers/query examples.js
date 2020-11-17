@@ -9,14 +9,17 @@
 // }
 
 // gets you data from single sensor by id
-
 // query sensorQuery($id: ID!) {
-//   sensor(id: $id){
-//   id
-//     readings {
-//       id
-//       data
-//     }
+//   sensor(correlateid: $id){
+//    correlateid
+//    sensor_id
+//    location
+//    values {
+//      correlateid
+//      reading
+//      time
+//      date
+//    }
 //   }
 // }
 
@@ -33,7 +36,19 @@
 // create Sensor
 // mutation CreateSensor($input: CreateSensorInput) {
 //   user: createSensor(input: $input) {
-//      name
-//     location
+//    sensorname
+//    location
+//    correlateid
+//   }
 //  }
+
+// get value by id
+// query valueQuery($id: ID!) {
+//   value(reading_id: $id){
+//     reading
+//    reading_id
+//    correlateid
+//    date
+//    time
+//   }
 // }

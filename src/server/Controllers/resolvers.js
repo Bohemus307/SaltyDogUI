@@ -5,7 +5,7 @@
 // }
 
 const Query = {
-  sensor: async (parent, { correlateid }, context) => {
+  sensor: async (root, { correlateid }, context) => {
     const result = await context.prisma.sensors.findOne({ where: { correlateid } });
     return result;
   },
@@ -35,7 +35,7 @@ const Mutation = {
 
 const Sensor = {
   values: async (parent, { correlateid }, context) => {
-    const result = await context.prisma.values.findMany({ orderBy: { time: 'asc' }, where: { correlateid } });
+    const result = await context.prisma.values.findMany({ orderBy: { time: 'asc' }, where: { correlateid: parent.correlateid } });
     return result;
   },
 };

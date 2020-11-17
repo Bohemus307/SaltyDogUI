@@ -94,7 +94,7 @@ const Main = ({ displayItem }) => {
       //   mainElement = (
       //     <SensorOverview id="SJV0-wd" type="Moisture" loading={false} unitOfMeasure="VWC" />
       //   );
-      break;
+      // break;
     default:
       mainElement = overview;
   }
