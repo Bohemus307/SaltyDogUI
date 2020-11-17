@@ -35,7 +35,7 @@ const Mutation = {
 
 const Sensor = {
   values: async (parent, { correlateid }, context) => {
-    const result = await context.prisma.values.findMany({ orderBy: { time: 'asc' }, where: { correlateid: parent.correlateid } });
+    const result = await context.prisma.values.findMany({take: 1000, orderBy: { time: 'asc' }, where: { correlateid: parent.correlateid } });
     return result;
   },
 };

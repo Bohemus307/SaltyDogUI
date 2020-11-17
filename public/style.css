@@ -67,6 +67,7 @@ button[type="submit"]:disabled {
 input[type=range] {
   -webkit-appearance: none;
   /* margin: 18px 0; */
+  margin: 40px 10px;
   width: 95%;
 }
 

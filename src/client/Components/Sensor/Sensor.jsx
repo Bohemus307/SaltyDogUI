@@ -10,15 +10,13 @@ import classes from './Sensor.css';
 const Sensor = ({
   id, type, unitOfMeasure,
 }) => {
-  console.log('id', id);
-
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
+    polling: 2000,
     notifyOnNetworkStatusChange: true,
     // pollInterval: 500,
   });
-  console.log('data:', loading, error, data);
-  
+
   if (loading) {
     return (
       <Spinner />
@@ -26,16 +24,16 @@ const Sensor = ({
   }
   if (error) return `Error! ${error.message}`;
 
-  // const { sensor: { readings } } = data;
-  console.log('data:', loading, error, data);
+  const { sensor: { values } } = data;
 
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
         {type}
+        :
       </div>
       <div className={classes.Sensor_Data}>
-        {/* {readings[0].data} */}
+        {values[0].reading}
         {unitOfMeasure}
       </div>
     </Aux>
