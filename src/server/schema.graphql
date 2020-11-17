@@ -28,7 +28,8 @@
   }
 
   input CreateSensorInput {
-    name: String
+    correlateid: ID!
+    sensorname: String
     location: String
   }
 
