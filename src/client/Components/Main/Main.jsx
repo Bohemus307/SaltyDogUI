@@ -5,7 +5,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 
 import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
-import Alerts from '../Alerts/Alerts.jsx';
+import MyResponsiveLine from '../LineChart/LineChart.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
@@ -65,7 +65,7 @@ const Main = ({ displayItem }) => {
           Chart
         </div>
         <div className={classes.Feed}>
-          Readings History Feed
+          <MyResponsiveLine />
         </div>
       </div>
     </Aux>

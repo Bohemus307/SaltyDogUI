@@ -28,6 +28,7 @@
   width: 100%;
   height: 7%;
   margin: 30px;
+  cursor: pointer;
 }
 
 .Menu_Item:hover {

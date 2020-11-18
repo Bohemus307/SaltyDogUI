@@ -22,6 +22,8 @@
   "dependencies": {
     "@apollo/react-hooks": "^4.0.0",
     "@babel/cli": "^7.0.0",
+    "@nivo/core": "^0.65.0",
+    "@nivo/line": "^0.65.1",
     "@prisma/client": "^2.11.0",
     "apollo-boost": "^0.4.9",
     "apollo-link-ws": "^1.0.20",
