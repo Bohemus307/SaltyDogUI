@@ -1,115 +1,7 @@
 const data = [
   {
-    id: 'japan',
-    color: 'hsl(295, 70%, 50%)',
-    data: [
-      {
-        x: 'plane',
-        y: 57,
-      },
-      {
-        x: 'helicopter',
-        y: 85,
-      },
-      {
-        x: 'boat',
-        y: 157,
-      },
-      {
-        x: 'train',
-        y: 212,
-      },
-      {
-        x: 'subway',
-        y: 172,
-      },
-      {
-        x: 'bus',
-        y: 196,
-      },
-      {
-        x: 'car',
-        y: 180,
-      },
-      {
-        x: 'moto',
-        y: 185,
-      },
-      {
-        x: 'bicycle',
-        y: 161,
-      },
-      {
-        x: 'horse',
-        y: 169,
-      },
-      {
-        x: 'skateboard',
-        y: 200,
-      },
-      {
-        x: 'others',
-        y: 6,
-      },
-    ],
-  },
-  {
-    id: 'france',
-    color: 'hsl(332, 70%, 50%)',
-    data: [
-      {
-        x: 'plane',
-        y: 271,
-      },
-      {
-        x: 'helicopter',
-        y: 166,
-      },
-      {
-        x: 'boat',
-        y: 71,
-      },
-      {
-        x: 'train',
-        y: 161,
-      },
-      {
-        x: 'subway',
-        y: 44,
-      },
-      {
-        x: 'bus',
-        y: 283,
-      },
-      {
-        x: 'car',
-        y: 97,
-      },
-      {
-        x: 'moto',
-        y: 278,
-      },
-      {
-        x: 'bicycle',
-        y: 224,
-      },
-      {
-        x: 'horse',
-        y: 104,
-      },
-      {
-        x: 'skateboard',
-        y: 127,
-      },
-      {
-        x: 'others',
-        y: 54,
-      },
-    ],
-  },
-  {
-    id: 'us',
-    color: 'hsl(107, 70%, 50%)',
+    id: 'PH-1',
+    color: 'hsl(143, 70%, 50%)',
     data: [
       {
         x: 'plane',
@@ -162,7 +54,7 @@ const data = [
     ],
   },
   {
-    id: 'germany',
+    id: 'EC-1',
     color: 'hsl(65, 70%, 50%)',
     data: [
       {
@@ -216,7 +108,7 @@ const data = [
     ],
   },
   {
-    id: 'norway',
+    id: 'DO-1',
     color: 'hsl(302, 70%, 50%)',
     data: [
       {
