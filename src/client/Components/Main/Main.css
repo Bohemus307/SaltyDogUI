@@ -45,11 +45,11 @@
 }
 
 .Feed {
-  background-image: linear-gradient(to top right,#FF69B4, #9932CC); 
   width: 60%;
   height: 60%;
   border-radius: 9px;
   margin-left: 10px;
   box-shadow: 1px 2px;
-  color: #282e33;
+  background-color: #282e33;
+  color: #606468;
 }

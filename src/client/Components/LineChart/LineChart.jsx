@@ -27,7 +27,7 @@ const MyResponsiveLine = () => (
       tickSize: 5,
       tickPadding: 5,
       tickRotation: 0,
-      legend: 'transportation',
+      legend: 'Date',
       legendOffset: 36,
       legendPosition: 'middle',
     }}
@@ -40,12 +40,15 @@ const MyResponsiveLine = () => (
       legendOffset: -40,
       legendPosition: 'middle',
     }}
-    pointSize={10}
+    colors={{ scheme: 'dark2' }}
+    pointSize={12}
     pointColor={{ theme: 'background' }}
     pointBorderWidth={2}
-    pointBorderColor={{ from: 'serieColor' }}
+    pointBorderColor={{ from: 'serieColor', modifiers: [] }}
     pointLabelYOffset={-12}
+    enableSlices="x"
     useMesh
+    theme={{ textColor: 'white', axis: { legend: { text: { fill: 'white' } } } }}
     legends={[
       {
         anchor: 'bottom-right',
@@ -76,4 +79,3 @@ const MyResponsiveLine = () => (
 );
 
 export default MyResponsiveLine;
-
