@@ -1,0 +1,11 @@
+.Chart_Button {
+  width: 10%;
+}
+
+.Chart_Form {
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  margin: 15px 0px;
+  width: 80%;
+}

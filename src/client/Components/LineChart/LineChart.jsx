@@ -15,23 +15,25 @@ import classes from './LineChart.css';
 // you'll often use just a few of them.
 const MyResponsiveLine = () => {
   const [inputElements, setInputs] = useState({
-    chartDates: {
-      key: 1,
-      elementType: 'select',
-      elementConfig: {
-        options: [
-          { pastWeek: 'Past Week', displayValue: 'Past Week' },
-          { pastMonth: 'Past Month', displayValue: 'Past Month' },
-        ],
-        image: '/images/csv.svg',
-        alt: 'File Type',
+    chartForm: {
+      chartDates: {
+        key: 1,
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            { pastWeek: 'Past Week', displayValue: 'Past Week' },
+            { pastMonth: 'Past Month', displayValue: 'Past Month' },
+          ],
+          image: '/images/start.svg',
+          alt: 'File Type',
+        },
+        value: '',
+        valid: false,
+        validation: {
+          required: false,
+        },
+        touched: false,
       },
-      value: '',
-      valid: true,
-      validation: {
-        required: false,
-      },
-      touched: false,
     },
     loading: false,
   });
@@ -54,9 +56,13 @@ const MyResponsiveLine = () => {
     return isValid;
   };
 
+  const chartHandler = () => {
+    console.log('exported');
+  };
+
   // const { controls } = inputElements;
-  const keys = Object.keys(inputElements);
-  const values = Object.values(inputElements);
+  const keys = Object.keys(inputElements.chartForm);
+  const values = Object.values(inputElements.chartForm);
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
@@ -76,20 +82,35 @@ const MyResponsiveLine = () => {
     setInputs(updatedExportForm);
   };
 
+  // array of objects from controls in state
+  const inputElementsArray = keys.reduce((arr, key, idx) => {
+    const object = {
+      id: key,
+      config: values[idx],
+    };
+    arr.push(object);
+    return arr;
+  }, []);
+
   let dropDown = (
-    <Input
-      key={inputElements.chartDates.elementType}
-      elementType={inputElements.chartDates.elementType}
-      elementConfig={inputElements.chartDates.elementConfig}
-      value={inputElements.chartDates.value}
-      changed={(event) => inputChangedHandler(event, inputElements.chartDates.id)}
-      invalid={!inputElements.chartDates.valid}
-      shouldValidate={inputElements.chartDates.validation}
-      touched={inputElements.chartDates.touched}
-      label={inputElements.chartDates.elementConfig.image}
-      alt={inputElements.chartDates.elementConfig.alt}
-      dropdown
-    />
+    <form onSubmit={chartHandler} className={classes.Chart_Form}>
+      {inputElementsArray.map((formElement) => (
+        <Input
+          key={formElement.config.elementType}
+          elementType={formElement.config.elementType}
+          elementConfig={formElement.config.elementConfig}
+          value={formElement.config.value}
+          changed={(event) => inputChangedHandler(event, formElement.id)}
+          invalid={!formElement.config.valid}
+          shouldValidate={formElement.config.validation}
+          touched={formElement.config.touched}
+          label={formElement.config.elementConfig.image}
+          alt={formElement.config.elementConfig.alt}
+          dropdown
+        />
+      ))}
+      <button type="button" className={classes.Chart_Button} onClick={chartHandler}>Load Chart</button>
+    </form>
   );
   if (inputElements.loading) {
     dropDown = <Spinner />;

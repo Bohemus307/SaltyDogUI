@@ -45,7 +45,7 @@ after { clear: both; }
 button[type="submit"] {
   background: #b5cd60;
   border: 0;
-  width: 93%;
+  width: 99%;
   height: 40px;
   border-radius: 3px;
   color: white;

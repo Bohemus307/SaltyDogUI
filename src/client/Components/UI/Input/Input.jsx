@@ -23,9 +23,9 @@ const Input = ({
   }
 
   if (dropdown) {
-    inputClasses = [classes.ChartsDropdown];
+    inputClasses = [classes.ChartDropdown];
   }
-  console.log('input classes: ', inputClasses);
+
   switch (elementType) {
     case ('input'):
       inputElement = (

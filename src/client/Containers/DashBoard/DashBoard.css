@@ -16,6 +16,7 @@
   background-color: #606468;
   grid-area: main; 
   height: 100vh;
+  width: 80vw;
 }
 /* 
 background-image: linear-gradient(to left, #00BFFF, #8A2BE2); <=== blue to purple 

@@ -13,6 +13,7 @@
 
 .FormSpan {
   background-color: #363b41;
+  padding: 0px 2px;
   border-radius: 3px 0px 0px 3px;
   border-right: 3px solid #434a52;
   color: #606468;
@@ -26,7 +27,6 @@
 
 .Input_Div {
   display: flex;
-  width: 100%;
 }
 
 .InputImage {
@@ -48,6 +48,21 @@
   padding: 0 16px;
   width: 90%;
   height: 50px;
+}
+
+.ChartDropdown {
+  border: none;
+  font-family: futura-pt-bold;
+  font-size: 12px;
+  line-height: 1.5em;
+  padding: 0;
+  background-color: #3b4148;
+  border-radius: 0px 3px 3px 0px;
+  color: #a9a9a9;
+  margin-bottom: 1em;
+  padding: 0 16px;
+  height: 50px;
+  width: 100%;
 }
 
 .InputElement-text {
