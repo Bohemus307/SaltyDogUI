@@ -109,7 +109,7 @@ const MyResponsiveLine = () => {
           dropdown
         />
       ))}
-      <button type="button" className={classes.Chart_Button} onClick={chartHandler}>Load Chart</button>
+      <button type="button" className={classes.Chart_Button} onClick={chartHandler}>Load</button>
     </form>
   );
   if (inputElements.loading) {

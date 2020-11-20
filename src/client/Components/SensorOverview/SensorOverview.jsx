@@ -29,7 +29,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
-        <Sensor type={type} unitOfMeasure={unitOfMeasure} id="SJV0-wdOM" />
+        <Sensor type={type} unitOfMeasure={unitOfMeasure} id={id} />
       </div>
       <div className={classes.Sensor_Feed}>
         {values.map((item, index) => (
@@ -46,7 +46,6 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
         ))}
       </div>
       <DataExport />
-      <h3>Set Alerts</h3>
       <Alerts type={type} />
     </div>
   );

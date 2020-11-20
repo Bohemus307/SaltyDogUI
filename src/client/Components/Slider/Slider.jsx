@@ -43,10 +43,10 @@ const RangeSlider = ({
           {type}
           {label}
         </p>
-        <h3>
-          <span>Value: </span>
+        <span>
+          <span>Set Value: </span>
           { sliderVal }
-        </h3>
+        </span>
       </div>
       <input
         type="range"

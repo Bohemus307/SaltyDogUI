@@ -1,11 +1,10 @@
 .Alerts {
-  height: 100%;
+  height: 40%;
   display: flex;
   flex-wrap: wrap;
-  height: 60%;
+  margin-top: 20px;
   width: 100%;
   color: #282828;
-  margin-bottom: 20px;
 }
 
 .Value_Div {

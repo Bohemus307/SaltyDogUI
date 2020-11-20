@@ -15,7 +15,7 @@
 .Chart_Form {
   display: flex;
   align-items: flex-start;
-  justify-content: flex-start;
+  justify-content: flex-end;
   margin: 15px 0px;
-  width: 80%;
+  width: 95%;
 }

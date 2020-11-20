@@ -12,7 +12,7 @@
 }
 
 .FormSpan {
-  background-color: #363b41;
+  background-color: #282e33;
   padding: 0px 2px;
   border-radius: 3px 0px 0px 3px;
   border-right: 3px solid #434a52;
@@ -41,7 +41,7 @@
   line-height: 1.5em;
   padding: 0;
   -webkit-appearance: none;
-  background-color: #3b4148;
+  background-color: #282e33;
   border-radius: 0px 3px 3px 0px;
   color: #a9a9a9;
   margin-bottom: 1em;
@@ -56,7 +56,7 @@
   font-size: 12px;
   line-height: 1.5em;
   padding: 0;
-  background-color: #3b4148;
+  background-color: #282e33;
   border-radius: 0px 3px 3px 0px;
   color: #a9a9a9;
   margin-bottom: 1em;
