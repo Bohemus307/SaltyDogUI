@@ -48,9 +48,14 @@ button[type="submit"] {
   width: 99%;
   height: 40px;
   border-radius: 3px;
-  color: white;
+  color: #606468;
+  font-weight: bolder;
   cursor: pointer;
   transition: background 0.3s ease-in-out;
+}
+
+button[type="button"]:hover {
+  background: #16aa56;
 }
 
 button[type="submit"]:hover {
