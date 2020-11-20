@@ -51,7 +51,12 @@ const MyResponsiveLine = () => {
   }
   const { data: { sensor: { weekOfValues } } } = weekOfPhData;
   console.log('values', weekOfValues);
+  const filteredDayOfData = weekOfValues.filter((value) => value.date === weekOfValues[0].date);
+  const dayAverage = filteredDayOfData.reduce(
+    (total, next) => total + next.reading, 0,
+  ) / filteredDayOfData.length;
 
+  console.log('day', dayAverage.toFixed(2));
   const checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -105,7 +110,7 @@ const MyResponsiveLine = () => {
     arr.push(object);
     return arr;
   }, []);
-  console.log('iea in chart',inputElementsArray);
+  console.log('iea in chart', inputElementsArray);
   let dropDown = (
     <form onSubmit={chartHandler} className={classes.Chart_Form}>
       {inputElementsArray.map((formElement) => (

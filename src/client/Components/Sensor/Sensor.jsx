@@ -13,8 +13,6 @@ const Sensor = ({
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
     polling: 2000,
-    notifyOnNetworkStatusChange: true,
-    // pollInterval: 500,
   });
 
   if (loading) {
@@ -25,7 +23,7 @@ const Sensor = ({
   if (error) return `Error! ${error.message}`;
 
   const { sensor: { values } } = data;
-
+  console.log('values: ', values)
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
