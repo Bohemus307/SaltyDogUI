@@ -27,7 +27,7 @@ const MyResponsiveLine = () => {
         alt: 'File Type',
       },
       value: '',
-      valid: false,
+      valid: true,
       validation: {
         required: false,
       },
@@ -88,6 +88,7 @@ const MyResponsiveLine = () => {
       touched={inputElements.chartDates.touched}
       label={inputElements.chartDates.elementConfig.image}
       alt={inputElements.chartDates.elementConfig.alt}
+      dropdown
     />
   );
   if (inputElements.loading) {

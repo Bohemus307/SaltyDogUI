@@ -13,13 +13,19 @@ const Input = ({
   touched,
   label,
   alt,
+  dropdown,
 }) => {
   let inputElement = null;
-  const inputClasses = [classes.InputElement];
+  let inputClasses = [classes.InputElement];
 
   if (invalid && shouldValidate) {
     inputClasses.push(classes.Invalid);
   }
+
+  if (dropdown) {
+    inputClasses = [classes.ChartsDropdown];
+  }
+  console.log('input classes: ', inputClasses);
   switch (elementType) {
     case ('input'):
       inputElement = (
@@ -90,6 +96,7 @@ const Input = ({
 
 Input.propTypes = {
   invalid: propTypes.bool.isRequired,
+  dropdown: propTypes.bool,
   shouldValidate: propTypes.object.isRequired,
   elementType: propTypes.string.isRequired,
   changed: propTypes.func.isRequired,
@@ -102,6 +109,7 @@ Input.propTypes = {
 
 Input.defaultProps = {
   alt: 'Input image',
+  dropdown: false,
 };
 
 export default Input;
