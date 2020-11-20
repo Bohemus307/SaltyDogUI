@@ -50,7 +50,7 @@ const Input = ({
           value={value}
         >
           {elementConfig.options.map((option) => (
-            <option key={option.value} value={option.value}>
+            <option key={option.displayValue} value={option.value}>
               {option.displayValue}
             </option>
           ))}
