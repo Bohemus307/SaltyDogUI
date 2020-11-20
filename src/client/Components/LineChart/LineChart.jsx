@@ -2,8 +2,9 @@
 // yarn add @nivo/core @nivo/line
 import React, { useState } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-
-import data from './data.js';
+import { useQuery } from '@apollo/react-hooks';
+import { weekOfDataQuery } from '../../graphql/queries';
+import chartData from './data.js';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
@@ -25,7 +26,7 @@ const MyResponsiveLine = () => {
             { pastMonth: 'Past Month', displayValue: 'Past Month' },
           ],
           image: '/images/start.svg',
-          alt: 'File Type',
+          alt: 'Date Span',
         },
         value: '',
         valid: false,
@@ -37,6 +38,19 @@ const MyResponsiveLine = () => {
     },
     loading: false,
   });
+
+  const weekOfPhData = useQuery(weekOfDataQuery, {
+    variables: { id: 'BJenjRROw' },
+  });
+  if (weekOfPhData.loading) return null;
+  if (weekOfPhData.error) return `Error! ${weekOfPhData.error}`;
+  if (weekOfPhData.loading === true) {
+    return (
+      <Spinner />
+    );
+  }
+  const { data: { sensor: { weekOfValues } } } = weekOfPhData;
+  console.log('values', weekOfValues);
 
   const checkValidity = (value, rules) => {
     let isValid = true;
@@ -62,7 +76,7 @@ const MyResponsiveLine = () => {
 
   // const { controls } = inputElements;
   const keys = Object.keys(inputElements.chartForm);
-  const values = Object.values(inputElements.chartForm);
+  const objectValues = Object.values(inputElements.chartForm);
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
@@ -86,12 +100,12 @@ const MyResponsiveLine = () => {
   const inputElementsArray = keys.reduce((arr, key, idx) => {
     const object = {
       id: key,
-      config: values[idx],
+      config: objectValues[idx],
     };
     arr.push(object);
     return arr;
   }, []);
-
+  console.log('iea in chart',inputElementsArray);
   let dropDown = (
     <form onSubmit={chartHandler} className={classes.Chart_Form}>
       {inputElementsArray.map((formElement) => (
@@ -119,7 +133,7 @@ const MyResponsiveLine = () => {
   return (
     <Aux>
       <ResponsiveLine
-        data={data}
+        data={chartData}
         margin={{
           top: 50, right: 110, bottom: 50, left: 60,
         }}

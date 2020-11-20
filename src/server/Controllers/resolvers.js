@@ -34,8 +34,20 @@ const Mutation = {
 };
 
 const Sensor = {
+  weekOfValues: async (parent, { correlateid }, context) => {
+    const result = await context.prisma.values.findMany({
+      where: {
+        correlateid: { equals: correlateid },
+        date: {
+          lte: new Date(Date.now()),
+          gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),
+        },
+      },
+    });
+    return result;
+  },
   values: async (parent, { correlateid }, context) => {
-    const result = await context.prisma.values.findMany({take: 1000, orderBy: { time: 'asc' }, where: { correlateid: parent.correlateid } });
+    const result = await context.prisma.values.findMany({ take: 1000, orderBy: { time: 'asc' }, where: { correlateid } });
     return result;
   },
 };

@@ -16,6 +16,7 @@
     sensorname: String
     location: String
     values: [Value]
+    weekOfValues: [Value]
   }
 
   type Value {

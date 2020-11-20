@@ -25,7 +25,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
   }
 
   const { sensor: { values } } = data;
-  console.log(values);
+
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
