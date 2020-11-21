@@ -54,6 +54,16 @@ const Main = ({ displayItem }) => {
   );
 
   let mainElement = null;
+  const [isMonth, setInterval] = useState(false);
+
+  const chartHandler = () => {
+    console.log('i ran');
+    if (isMonth) {
+      setInterval(false);
+      return;
+    }
+    setInterval(true);
+  };
 
   const overview = (
     <Aux>
@@ -65,8 +75,8 @@ const Main = ({ displayItem }) => {
         <div className={classes.Chart}>
           Chart
         </div>
-        <div className={classes.Feed}>
-          <LineChartReducer />
+        <div className={(isMonth) ? classes.Month : classes.Feed}>
+          <LineChartReducer changeChartSize={chartHandler} />
         </div>
       </div>
     </Aux>

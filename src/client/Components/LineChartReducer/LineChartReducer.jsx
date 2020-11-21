@@ -5,7 +5,7 @@ import LineChart from '../LineChart/LineChart.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
-const LineChartReducer = () => {
+const LineChartReducer = ({ changeChartSize }) => {
   const [chartDuration, setDuration] = useState('Past Week');
   const queryMultiple = () => {
     const res1 = useQuery(weekOfDataQuery, { // ph
@@ -96,9 +96,11 @@ const LineChartReducer = () => {
   const inputChangeHandler = (value) => {
     if (value === 'Past Month') {
       setDuration('Past Month');
+      changeChartSize();
       return;
     }
     setDuration('Past Week');
+    changeChartSize();
   };
 
   return (
