@@ -78,15 +78,6 @@ const LineChart = ({ data, inputChanged }) => {
     inputChanged(event.target.value);
   };
 
-  // array of objects from controls in state
-  // const inputElementsArray = keys.reduce((arr, key, idx) => {
-  //   const object = {
-  //     id: key,
-  //     config: objectValues[idx],
-  //   };
-  //   arr.push(object);
-  //   return arr;
-  // }, []);
   const formElement = inputElements.chartForm;
 
   let dropDown = (
@@ -179,6 +170,16 @@ const LineChart = ({ data, inputChanged }) => {
           },
         ]}
       />
+
+      <span style={{
+        color: '#282e33',
+        fontWeight: 'bolder',
+        float: 'right',
+        marginRight: '145px',
+      }}
+      >
+        Duration:
+      </span>
       {dropDown}
     </Aux>
   );
