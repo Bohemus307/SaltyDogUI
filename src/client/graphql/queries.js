@@ -50,6 +50,24 @@ export const weekOfDataQuery = gql`
 }
 `;
 
+export const monthOfDataQuery = gql`
+  query monthQuery($id: ID!) {
+  sensor(correlateid: $id){
+   correlateid
+   sensor_id
+   sensorname
+   location
+   monthOfValues {
+     reading_id
+     correlateid
+     reading
+     time
+     date
+   }
+  }
+}
+`;
+
 export const getSensors = gql`{
     sensors {
       correlateid

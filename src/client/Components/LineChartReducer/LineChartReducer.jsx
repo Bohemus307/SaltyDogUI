@@ -74,9 +74,13 @@ const LineChartReducer = () => {
     },
   ];
 
+  const inputChangeHandler = (value) => {
+    console.log('changed', value);
+  };
+
   return (
     <Aux>
-      <LineChart data={allChartData} chartDuration='week' />
+      <LineChart data={allChartData} inputChanged={inputChangeHandler} />
     </Aux>
   );
 };

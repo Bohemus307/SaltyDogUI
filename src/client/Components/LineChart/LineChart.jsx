@@ -12,7 +12,7 @@ import classes from './LineChart.css';
 // no chart will be rendered.
 // website examples showcase many properties,
 // you'll often use just a few of them.
-const LineChart = ({ data }) => {
+const LineChart = ({ data, inputChanged }) => {
   const [inputElements, setInputs] = useState({
     chartForm: {
       chartDates: {
@@ -75,6 +75,7 @@ const LineChart = ({ data }) => {
     updatedFormELement.touched = true;
     updatedExportForm[inputIdentifier] = updatedFormELement;
     setInputs({ chartForm: updatedExportForm });
+    inputChanged(event.target.value);
   };
 
   // array of objects from controls in state
@@ -96,7 +97,7 @@ const LineChart = ({ data }) => {
         elementConfig={formElement.chartDates.elementConfig}
         value={formElement.chartDates.value}
         changed={(event) => inputChangedHandler(event, 'chartDates')}
-        invalid={!formElement.chartDates.valid}
+        invalid={formElement.chartDates.valid}
         shouldValidate={formElement.chartDates.validation}
         touched={formElement.chartDates.touched}
         label={formElement.chartDates.elementConfig.image}
