@@ -6,6 +6,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
 import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
+// import LineChart from '../LineChart/LineChart.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
