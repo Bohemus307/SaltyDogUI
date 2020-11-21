@@ -1,6 +1,6 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
-import { weekOfDataQuery } from '../../graphql/queries';
+import { useQuery, useLazyQuery } from '@apollo/react-hooks';
+import { weekOfDataQuery, monthOfDataQuery } from '../../graphql/queries';
 import LineChart from '../LineChart/LineChart.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
@@ -9,26 +9,46 @@ const LineChartReducer = () => {
   const queryMultiple = () => {
     const res1 = useQuery(weekOfDataQuery, { // ph
       variables: { id: 'BJenjRROw' },
+      skip: false,
     });
     const res2 = useQuery(weekOfDataQuery, { // ec
       variables: { id: 'HJRa-DOuG' },
+      skip: false,
     });
     const res3 = useQuery(weekOfDataQuery, { // do
       variables: { id: 'SJV0-wdOM' },
+      skip: false,
+    });
+    const res4 = useQuery(monthOfDataQuery, { // ph
+      variables: { id: 'BJenjRROw' },
+      skip: false,
+    });
+    const res5 = useQuery(monthOfDataQuery, { // ec
+      variables: { id: 'HJRa-DOuG' },
+      skip: false,
+    });
+    const res6 = useQuery(monthOfDataQuery, { // do
+      variables: { id: 'SJV0-wdOM' },
+      skip: false,
     });
 
-    return [res1, res2, res3];
+    return [res1, res2, res3, res4, res5, res6];
   };
 
   const [
     { loading: loading1, data: data1 },
     { loading: loading2, data: data2 },
     { loading: loading3, data: data3 },
+    { loading: loading4, data: data4 },
+    { loading: loading5, data: data5 },
+    { loading: loading6, data: data6 },
   ] = queryMultiple();
 
-  if (loading1 || loading2 || loading3) {
+  if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6) {
     return <Spinner />;
   }
+
+  console.log(data4, data5, data6);
 
   const dataCreator = (data) => {
     const averageCreator = (date) => {
@@ -74,8 +94,14 @@ const LineChartReducer = () => {
     },
   ];
 
+  // const [monthOfData, { loading, data }] = useLazyQuery(monthOfDataQuery);
+  // if (loading) return <p>Loading ...</p>;
+
+  // console.log('data from month: ', data);
+
   const inputChangeHandler = (value) => {
     console.log('changed', value);
+    // monthOfData({ variables: { id: 'BJenjRROw' } });
   };
 
   return (
