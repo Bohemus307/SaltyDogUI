@@ -1,8 +1,8 @@
 // install (please make sure versions match peerDependencies)
 // yarn add @nivo/core @nivo/line
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import { ResponsiveLine } from '@nivo/line';
-import chartData from './data.js';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
@@ -13,7 +13,6 @@ import classes from './LineChart.css';
 // website examples showcase many properties,
 // you'll often use just a few of them.
 const LineChart = ({ data }) => {
-  console.log('data from line: ', data);
   const [inputElements, setInputs] = useState({
     chartForm: {
       chartDates: {
@@ -25,9 +24,9 @@ const LineChart = ({ data }) => {
             { pastMonth: 'Past Month', displayValue: 'Past Month' },
           ],
           image: '/images/start.svg',
-          alt: 'Date Span',
+          alt: 'Chart Duration',
         },
-        value: '',
+        value: 'Past Week',
         valid: false,
         validation: {
           required: false,
@@ -56,62 +55,57 @@ const LineChart = ({ data }) => {
     return isValid;
   };
 
-  const chartHandler = () => {
-    console.log('exported');
-  };
-
   // const { controls } = inputElements;
-  const keys = Object.keys(inputElements.chartForm);
-  const objectValues = Object.values(inputElements.chartForm);
+  // const keys = Object.keys(inputElements.chartForm);
+  // const objectValues = Object.values(inputElements.chartForm);
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
-      ...inputElements.exportForm,
+      ...inputElements.chartForm,
     };
     // deeper clone
     const updatedFormELement = {
       ...updatedExportForm[inputIdentifier],
     };
     updatedFormELement.value = event.target.value;
-    updatedFormELement.valid = checkValidity(
-      updatedFormELement.value,
-      updatedFormELement.validation,
-    );
+    // updatedFormELement.valid = checkValidity(
+    //   updatedFormELement.value,
+    //   updatedFormELement.validation,
+    // );
     updatedFormELement.touched = true;
     updatedExportForm[inputIdentifier] = updatedFormELement;
-    setInputs(updatedExportForm);
+    setInputs({ chartForm: updatedExportForm });
   };
 
   // array of objects from controls in state
-  const inputElementsArray = keys.reduce((arr, key, idx) => {
-    const object = {
-      id: key,
-      config: objectValues[idx],
-    };
-    arr.push(object);
-    return arr;
-  }, []);
+  // const inputElementsArray = keys.reduce((arr, key, idx) => {
+  //   const object = {
+  //     id: key,
+  //     config: objectValues[idx],
+  //   };
+  //   arr.push(object);
+  //   return arr;
+  // }, []);
+  const formElement = inputElements.chartForm;
 
   let dropDown = (
-    <form onSubmit={chartHandler} className={classes.Chart_Form}>
-      {inputElementsArray.map((formElement) => (
-        <Input
-          key={formElement.config.elementType}
-          elementType={formElement.config.elementType}
-          elementConfig={formElement.config.elementConfig}
-          value={formElement.config.value}
-          changed={(event) => inputChangedHandler(event, formElement.id)}
-          invalid={!formElement.config.valid}
-          shouldValidate={formElement.config.validation}
-          touched={formElement.config.touched}
-          label={formElement.config.elementConfig.image}
-          alt={formElement.config.elementConfig.alt}
-          dropdown
-        />
-      ))}
-      <button type="button" className={classes.Chart_Button} onClick={chartHandler}>Load</button>
+    <form className={classes.Chart_Form}>
+      <Input
+        key={formElement.chartDates.elementType}
+        elementType={formElement.chartDates.elementType}
+        elementConfig={formElement.chartDates.elementConfig}
+        value={formElement.chartDates.value}
+        changed={(event) => inputChangedHandler(event, 'chartDates')}
+        invalid={!formElement.chartDates.valid}
+        shouldValidate={formElement.chartDates.validation}
+        touched={formElement.chartDates.touched}
+        label={formElement.chartDates.elementConfig.image}
+        alt={formElement.chartDates.elementConfig.alt}
+        dropdown
+      />
     </form>
   );
+
   if (inputElements.loading) {
     dropDown = <Spinner />;
   }
@@ -187,6 +181,15 @@ const LineChart = ({ data }) => {
       {dropDown}
     </Aux>
   );
+};
+
+LineChart.propTypes = {
+  data: propTypes.arrayOf(
+    propTypes.shape({
+      x: propTypes.string,
+      y: propTypes.number,
+    }),
+  ).isRequired,
 };
 
 export default LineChart;

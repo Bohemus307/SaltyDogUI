@@ -1,5 +1,4 @@
-import React, { useState } from 'react';
-import propTypes from 'prop-types';
+import React from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import { weekOfDataQuery } from '../../graphql/queries';
 import LineChart from '../LineChart/LineChart.jsx';
@@ -7,31 +6,6 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
 const LineChartReducer = () => {
-  const [chartTypes, setCharts] = useState([
-    {
-      chartType: 'week',
-      chartConfig: {
-        startDate: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
-        endDate: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
-        xValues: [],
-        yValues: [],
-      },
-      loading: false,
-
-    },
-    {
-      chartType: 'month',
-      chartConfig: {
-        startDate: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
-        endDate: new Date().toLocaleDateString('en-US', { weekday: 'long' }),
-        xValues: [],
-        yValues: [],
-      },
-      loading: false,
-
-    },
-  ]);
-
   const queryMultiple = () => {
     const res1 = useQuery(weekOfDataQuery, { // ph
       variables: { id: 'BJenjRROw' },
@@ -55,7 +29,7 @@ const LineChartReducer = () => {
   if (loading1 || loading2 || loading3) {
     return <Spinner />;
   }
-  console.log('data1:', data1);
+
   const dataCreator = (data) => {
     const averageCreator = (date) => {
       const filteredDayOfData = data.filter((value) => value.date === date);
@@ -75,10 +49,9 @@ const LineChartReducer = () => {
     const chartData = uniqueDays.map((value, index) => (
       { x: value, y: parseFloat(averages[index]) }
     ));
-
-    console.log('u:', unique, 'a:', averages, 'd:', days, 'cd:', chartData);
     return chartData;
   };
+
   const chartdataPh = dataCreator(data1.sensor.weekOfValues);
   const chartdataEC = dataCreator(data2.sensor.weekOfValues);
   const chartdataDO = dataCreator(data3.sensor.weekOfValues);
@@ -100,18 +73,12 @@ const LineChartReducer = () => {
       data: chartdataDO,
     },
   ];
-  // query for week of data by ID
-  // getDayAverage(weekOfValues[0].date);
 
   return (
     <Aux>
-      <LineChart data={allChartData} />
+      <LineChart data={allChartData} chartDuration='week' />
     </Aux>
   );
-};
-
-LineChartReducer.propTypes = {
-// name: propTypes.string.isRequired
 };
 
 export default LineChartReducer;
