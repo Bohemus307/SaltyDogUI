@@ -55,7 +55,7 @@ const LineChartReducer = () => {
   if (loading1 || loading2 || loading3) {
     return <Spinner />;
   }
-
+  console.log('data1:', data1);
   const dataCreator = (data) => {
     const averageCreator = (date) => {
       const filteredDayOfData = data.filter((value) => value.date === date);
@@ -66,13 +66,17 @@ const LineChartReducer = () => {
     };
     // takes one week of data and creates average
     // for each day in week and return array of days and averages
-    const uniqueDates = (array) => [...new Map(array.map((x) => [x.date, x])).values()];
-    const unique = uniqueDates(data1.sensor.weekOfValues);
-    const averages = unique.map((day) => averageCreator(day.date));
-    const days = unique.map((day) => new Date(parseInt(day.date, 10)).toLocaleDateString('en-US', { weekday: 'long' }));
-    const chartData = days.map((value, index) => ({ x: value, y: parseFloat(averages[index]) }));
+    // const uniqueDates = (array) => [...new Map(array.map((x) => [x.date, x])).values()];
+    const unique = [...new Set(data1.sensor.weekOfValues.map((item) => item.date))].sort();
+    // const unique = uniqueDates(data1.sensor.weekOfValues);
+    const averages = unique.map((day) => averageCreator(day));
+    const days = unique.map((day) => new Date(parseInt(day, 10)).toLocaleDateString('en-US', { weekday: 'long' }));
+    const uniqueDays = Array.from(new Set(days));
+    const chartData = uniqueDays.map((value, index) => (
+      { x: value, y: parseFloat(averages[index]) }
+    ));
 
-    // console.log(averages, days, chartData);
+    console.log('u:', unique, 'a:', averages, 'd:', days, 'cd:', chartData);
     return chartData;
   };
   const chartdataPh = dataCreator(data1.sensor.weekOfValues);
