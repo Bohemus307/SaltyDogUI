@@ -37,7 +37,7 @@ const Sensor = {
   weekOfValues: async (parent, { correlateid }, context) => {
     const result = await context.prisma.values.findMany({
       where: {
-        correlateid: { equals: correlateid },
+        correlateid: { equals: parent.correlateid },
         date: {
           lte: new Date(Date.now()),
           gte: new Date(Date.now() - 7 * 24 * 60 * 60 * 1000),

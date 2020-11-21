@@ -5,7 +5,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 
 import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
-import MyResponsiveLine from '../LineChart/LineChart.jsx';
+import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors, setSensor] = useState([
@@ -65,7 +65,7 @@ const Main = ({ displayItem }) => {
           Chart
         </div>
         <div className={classes.Feed}>
-          <MyResponsiveLine />
+          <LineChartReducer />
         </div>
       </div>
     </Aux>

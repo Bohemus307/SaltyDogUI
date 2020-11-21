@@ -2,8 +2,8 @@
 // yarn add @nivo/core @nivo/line
 import React, { useState } from 'react';
 import { ResponsiveLine } from '@nivo/line';
-import { useQuery } from '@apollo/react-hooks';
-import { weekOfDataQuery } from '../../graphql/queries';
+// import { useQuery } from '@apollo/react-hooks';
+// import { weekOfDataQuery } from '../../graphql/queries';
 import chartData from './data.js';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import Input from '../UI/Input/Input.jsx';
@@ -38,25 +38,26 @@ const MyResponsiveLine = () => {
     },
     loading: false,
   });
+  // // query for week of data by ID
+  // const weekOfPhData = useQuery(weekOfDataQuery, {
+  //   variables: { id: 'BJenjRROw' },
+  // });
+  // if (weekOfPhData.loading) return null;
+  // if (weekOfPhData.error) return `Error! ${weekOfPhData.error}`;
+  // if (weekOfPhData.loading === true) {
+  //   return (
+  //     <Spinner />
+  //   );
+  // }
+  // const { data: { sensor: { weekOfValues } } } = weekOfPhData;
 
-  const weekOfPhData = useQuery(weekOfDataQuery, {
-    variables: { id: 'BJenjRROw' },
-  });
-  if (weekOfPhData.loading) return null;
-  if (weekOfPhData.error) return `Error! ${weekOfPhData.error}`;
-  if (weekOfPhData.loading === true) {
-    return (
-      <Spinner />
-    );
-  }
-  const { data: { sensor: { weekOfValues } } } = weekOfPhData;
-  console.log('values', weekOfValues);
-  const filteredDayOfData = weekOfValues.filter((value) => value.date === weekOfValues[0].date);
-  const dayAverage = filteredDayOfData.reduce(
-    (total, next) => total + next.reading, 0,
-  ) / filteredDayOfData.length;
+  // const filteredDayOfData = weekOfValues.filter((value) => value.date === weekOfValues[0].date);
+  // const dayAverage = filteredDayOfData.reduce(
+  //   (total, next) => total + next.reading, 0,
+  // ) / filteredDayOfData.length;
 
-  console.log('day', dayAverage.toFixed(2));
+  // console.log('day', dayAverage.toFixed(2));
+  
   const checkValidity = (value, rules) => {
     let isValid = true;
 
@@ -110,7 +111,7 @@ const MyResponsiveLine = () => {
     arr.push(object);
     return arr;
   }, []);
-  console.log('iea in chart', inputElementsArray);
+
   let dropDown = (
     <form onSubmit={chartHandler} className={classes.Chart_Form}>
       {inputElementsArray.map((formElement) => (

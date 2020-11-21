@@ -1,8 +1,7 @@
 import React from 'react';
-import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
+import { useQuery } from '@apollo/react-hooks';
 import { sensorQuery } from '../../graphql/queries.js';
-
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
@@ -23,7 +22,6 @@ const Sensor = ({
   if (error) return `Error! ${error.message}`;
 
   const { sensor: { values } } = data;
-  console.log('values: ', values)
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
