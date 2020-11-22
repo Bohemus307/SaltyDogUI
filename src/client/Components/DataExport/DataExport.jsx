@@ -12,13 +12,15 @@ const DataExport = ({ id }) => {
         elementType: 'input',
         elementConfig: {
           type: 'Start',
-          placeholder: 'Start Date: 12/12/12',
+          placeholder: 'Start Date: 12-12-2020',
           image: '/images/start.svg',
           alt: 'Start Date',
         },
         value: '',
         validation: {
           required: true,
+          minLength: 10,
+          maxLength: 10,
         },
         valid: false,
         touched: false,
@@ -27,13 +29,15 @@ const DataExport = ({ id }) => {
         elementType: 'input',
         elementConfig: {
           type: 'End',
-          placeholder: 'End Date: 12/12/12',
+          placeholder: 'End Date: 12-12-2020',
           image: '/images/start.svg',
           alt: 'End Date',
         },
         value: '',
         validation: {
           required: true,
+          minLength: 10,
+          maxLength: 10,
         },
         valid: false,
         touched: false,
@@ -92,11 +96,11 @@ const DataExport = ({ id }) => {
     for (const formElementIdentifier in inputElements) {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
     }
-    console.log(formData);
     if (formData.start && formData.end) {
       const variables = {
-        start: formData.start, end: formData.end, id,
+        start: Date.parse(formData.start), end: Date.parse(formData.end), id,
       };
+      console.log(variables);
       getExportData({ variables });
     }
   };

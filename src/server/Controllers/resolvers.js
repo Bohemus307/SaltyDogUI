@@ -61,13 +61,12 @@ const Sensor = {
     return result;
   },
   exportValues: async (parent, args, context) => {
-    console.log('p:', parent, args);
     const result = await context.prisma.values.findMany({
       where: {
         correlateid: { equals: parent.correlateid },
         date: {
-          lte: parent.start,
-          gte: parent.end,
+          lte: new Date(parent.start),
+          gte: new Date(parent.end),
         },
       },
     });
