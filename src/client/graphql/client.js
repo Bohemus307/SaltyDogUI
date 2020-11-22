@@ -16,7 +16,7 @@ const httpLink = ApolloLink.from([
     }
     return forward(operation);
   }),
-  new HttpLink({ uri: httpUrl }),
+  new HttpLink({ uri: httpUrl, credentials: 'include' }),
 ]);
 
 const wsLink = new WebSocketLink({

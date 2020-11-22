@@ -68,6 +68,24 @@ export const monthOfDataQuery = gql`
 }
 `;
 
+export const exportDataQuery = gql`
+  query exportQuery($id: ID!, $start: String, $end: String) {
+  sensor(correlateid: $id){
+   correlateid
+   sensor_id
+   sensorname
+   location
+   exportValues {
+     reading_id
+     correlateid
+     reading
+     time
+     date
+   }
+  }
+}
+`;
+
 export const getSensors = gql`{
     sensors {
       correlateid

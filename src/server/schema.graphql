@@ -18,6 +18,7 @@
     values: [Value]
     weekOfValues: [Value]
     monthOfValues: [Value]
+    exportValues: [Value]
   }
 
   type Value {

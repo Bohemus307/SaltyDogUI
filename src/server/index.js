@@ -5,6 +5,7 @@ const expressJwt = require('express-jwt');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
 const bodyParser = require('body-parser');
+const cookieParser = require('cookie-parser');
 const { ApolloServer, gql } = require('apollo-server-express');
 const morgan = require('morgan');
 const path = require('path');
@@ -30,22 +31,8 @@ const PORT = config.app.port;
 
 app.use(express.static(path.join(__dirname, '/../../public')));
 app.use(morgan('dev'));
-app.use(cors());
 app.use(express.json());
-
-// const checkToken = async (req, res) => {
-//   // get authcookie from request
-//   const authcookie = await req.cookies.authcookie;
-//   // verify token which is in cookie value
-//   jwt.verify(authcookie, 'secret_key', (err, data) => {
-//     if (err) {
-//       res.sendStatus(403);
-//     } else if (data.user) {
-//       req.user = data.user;
-//       next();
-//     }
-//   });
-// };
+app.use(cookieParser());
 
 // for redirect of refresh in front end
 app.get('/*', (req, res) => {
@@ -77,8 +64,16 @@ app.post('/login', async (req, res) => {
       });
     }
     // const token = jwt.sign({ user: userName }, 'secret_key');
-    // res.cookie('authcookie', token, { maxAge: 900000, httpOnly: true });
     const token = jwt.sign({ sub: userName }, jwtSecret);
+
+    // res.cookie('authCookie', token, {
+    //   maxAge: 900000,
+    //   httpOnly: true,
+    //   signed: true,
+    //   // secure: true,
+    //   sameSite: true,
+    // }).send('Cookie Set');
+
     res.send({ token });
   } catch (err) {
     res.status(401).json({
@@ -115,6 +110,7 @@ const resolvers = require('./Controllers/resolvers');
 const prisma = new PrismaClient();
 
 async function context({ req, connection }) {
+  console.log(req.cookies);
   if (req && req.user) {
     return {
       userId: req.user.sub,

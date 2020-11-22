@@ -58,6 +58,18 @@ const Sensor = {
     });
     return result;
   },
+  exportValues: async (parent, args, context) => {
+    const result = await context.prisma.values.findMany({
+      where: {
+        correlateid: { equals: parent.correlateid },
+        date: {
+          lte: parent.start,
+          gte: parent.end,
+        },
+      },
+    });
+    return result;
+  },
   values: async (parent, args, context) => {
     const result = await context.prisma.values.findMany({ take: 1000, orderBy: { time: 'asc' }, where: { correlateid: parent.correlateid } });
     return result;
