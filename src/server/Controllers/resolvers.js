@@ -5,9 +5,11 @@
 // }
 
 const Query = {
-  sensor: async (root, { correlateid }, context) => {
-    const result = await context.prisma.sensors.findOne({ where: { correlateid } });
-    return result;
+  sensor: async (root, args, context) => {
+    const result = await context.prisma.sensors.findOne({
+      where: { correlateid: args.correlateid },
+    });
+    return { ...result, start: args.start, end: args.end };
   },
   sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
   values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
@@ -59,6 +61,7 @@ const Sensor = {
     return result;
   },
   exportValues: async (parent, args, context) => {
+    console.log('p:', parent, args);
     const result = await context.prisma.values.findMany({
       where: {
         correlateid: { equals: parent.correlateid },

@@ -1,62 +1,60 @@
 import React, { useState } from 'react';
-
+import { useLazyQuery } from '@apollo/react-hooks';
+import { exportDataQuery } from '../../graphql/queries.js';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
 
-const DataExport = () => {
+const DataExport = ({ id }) => {
   const [inputElements, setInputs] = useState(
     {
-      exportForm: {
-        Start: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'Start',
-            placeholder: 'Start Date: 12/12/12',
-            image: '/images/start.svg',
-            alt: 'Start Date',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-          touched: false,
+      start: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'Start',
+          placeholder: 'Start Date: 12/12/12',
+          image: '/images/start.svg',
+          alt: 'Start Date',
         },
-        End: {
-          elementType: 'input',
-          elementConfig: {
-            type: 'End',
-            placeholder: 'End Date: 12/12/12',
-            image: '/images/start.svg',
-            alt: 'End Date',
-          },
-          value: '',
-          validation: {
-            required: true,
-          },
-          valid: false,
-          touched: false,
+        value: '',
+        validation: {
+          required: true,
         },
-        exportMethod: {
-          elementType: 'select',
-          elementConfig: {
-            options: [
-              { value: '.CSV', displayValue: 'CSV' },
-              { value: 'JSON', displayValue: 'JSON' },
-            ],
-            image: '/images/csv.svg',
-            alt: 'File Type',
-          },
-          value: '',
-          valid: false,
-          validation: {
-            required: false,
-          },
-          touched: false,
-        },
+        valid: false,
+        touched: false,
       },
-      loading: false,
+      end: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'End',
+          placeholder: 'End Date: 12/12/12',
+          image: '/images/start.svg',
+          alt: 'End Date',
+        },
+        value: '',
+        validation: {
+          required: true,
+        },
+        valid: false,
+        touched: false,
+      },
+      exportMethod: {
+        elementType: 'select',
+        elementConfig: {
+          options: [
+            { value: '.CSV', displayValue: 'CSV' },
+            { value: 'JSON', displayValue: 'JSON' },
+          ],
+          image: '/images/csv.svg',
+          alt: 'File Type',
+        },
+        value: '',
+        valid: false,
+        validation: {
+          required: false,
+        },
+        touched: false,
+      },
     },
   );
   const checkValidity = (value, rules) => {
@@ -76,18 +74,40 @@ const DataExport = () => {
 
     return isValid;
   };
+  const [getExportData, { loading, error, data }] = useLazyQuery(exportDataQuery);
+
+  if (loading) {
+    return (
+      <Spinner />
+    );
+  }
+  if (error) return `Error! ${error.message}`;
+
+  // const { sensor: { exportValues } } = data;
+  console.log('data: ', data);
   // will export data to csv or json type file needs to open a save as modal
-  const exportHandler = () => {
-    console.log('exported');
+  const exportHandler = (event) => {
+    event.preventDefault();
+    const formData = {};
+    for (const formElementIdentifier in inputElements) {
+      formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
+    }
+    console.log(formData);
+    if (formData.start && formData.end) {
+      const variables = {
+        start: formData.start, end: formData.end, id,
+      };
+      getExportData({ variables });
+    }
   };
 
   // const { controls } = inputElements;
-  const keys = Object.keys(inputElements.exportForm);
-  const values = Object.values(inputElements.exportForm);
+  const keys = Object.keys(inputElements);
+  const values = Object.values(inputElements);
 
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
-      ...inputElements.exportForm,
+      ...inputElements,
     };
     // deeper clone
     const updatedFormELement = {
@@ -100,6 +120,7 @@ const DataExport = () => {
     );
     updatedFormELement.touched = true;
     updatedExportForm[inputIdentifier] = updatedFormELement;
+
     setInputs(updatedExportForm);
   };
 
@@ -112,7 +133,7 @@ const DataExport = () => {
     arr.push(object);
     return arr;
   }, []);
-
+  console.log('iea', inputElementsArray);
   let form = (
     <form onSubmit={exportHandler} className={classes.Export_Form}>
       {inputElementsArray.map((formElement) => (

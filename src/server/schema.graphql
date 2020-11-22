@@ -1,5 +1,5 @@
   type Query {
-    sensor(correlateid: ID!): Sensor
+    sensor(correlateid: ID!, start: String, end: String): Sensor
     sensors: [Sensor]
     value(reading_id: ID!): Value
     values: [Value]
