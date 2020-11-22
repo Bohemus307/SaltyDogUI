@@ -52,6 +52,7 @@
     "pg-hstore": "^2.3.3",
     "prop-types": "^15.7.2",
     "react": "^16.14.0",
+    "react-csv": "^2.0.3",
     "react-dom": "^16.14.0",
     "react-router-dom": "^5.2.0",
     "regenerator-runtime": "^0.13.7",

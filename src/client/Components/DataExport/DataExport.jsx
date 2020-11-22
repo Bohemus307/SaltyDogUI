@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
+import { CSVLink } from 'react-csv';
 import { exportDataQuery } from '../../graphql/queries.js';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
@@ -38,6 +39,21 @@ const DataExport = ({ id }) => {
           required: true,
           minLength: 10,
           maxLength: 10,
+        },
+        valid: false,
+        touched: false,
+      },
+      filename: {
+        elementType: 'input',
+        elementConfig: {
+          type: 'filename',
+          placeholder: 'File Name: my-file.csv',
+          image: '/images/start.svg',
+          alt: 'File Name',
+        },
+        value: '',
+        validation: {
+          required: true,
         },
         valid: false,
         touched: false,
@@ -100,8 +116,8 @@ const DataExport = ({ id }) => {
       const variables = {
         start: Date.parse(formData.start), end: Date.parse(formData.end), id,
       };
-      console.log(variables);
       getExportData({ variables });
+      // CSVLink.link.click();
     }
   };
 
@@ -137,7 +153,6 @@ const DataExport = ({ id }) => {
     arr.push(object);
     return arr;
   }, []);
-  console.log('iea', inputElementsArray);
   let form = (
     <form onSubmit={exportHandler} className={classes.Export_Form}>
       {inputElementsArray.map((formElement) => (
@@ -154,6 +169,10 @@ const DataExport = ({ id }) => {
           alt={formElement.config.elementConfig.alt}
         />
       ))}
+      <CSVLink
+        data={data?.sensor?.exportValues || []}
+        filename={inputElements.filename.value}
+      />
       <button type="submit" onClick={exportHandler}>Export</button>
     </form>
   );
