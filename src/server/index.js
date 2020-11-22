@@ -33,6 +33,20 @@ app.use(morgan('dev'));
 app.use(cors());
 app.use(express.json());
 
+// const checkToken = async (req, res) => {
+//   // get authcookie from request
+//   const authcookie = await req.cookies.authcookie;
+//   // verify token which is in cookie value
+//   jwt.verify(authcookie, 'secret_key', (err, data) => {
+//     if (err) {
+//       res.sendStatus(403);
+//     } else if (data.user) {
+//       req.user = data.user;
+//       next();
+//     }
+//   });
+// };
+
 // for redirect of refresh in front end
 app.get('/*', (req, res) => {
   res.sendFile(path.join(__dirname, '/../../public/index.html'), (err) => {
@@ -62,6 +76,8 @@ app.post('/login', async (req, res) => {
         message: 'Bad request - Password is incorrect',
       });
     }
+    // const token = jwt.sign({ user: userName }, 'secret_key');
+    // res.cookie('authcookie', token, { maxAge: 900000, httpOnly: true });
     const token = jwt.sign({ sub: userName }, jwtSecret);
     res.send({ token });
   } catch (err) {

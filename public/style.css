@@ -63,7 +63,7 @@ button[type="submit"]:hover {
 }
 
 button[type="submit"]:disabled {
-  background: salmon;
+  /* background: salmon; */
   cursor: not-allowed;
 }
 

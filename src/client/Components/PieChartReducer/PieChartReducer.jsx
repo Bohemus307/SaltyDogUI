@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import propTypes from 'prop-types';
+// import propTypes from 'prop-types';
 import PieChart from '../PieChart/PieChart.jsx';
 
 const PieChartReducer = () => {
@@ -7,7 +7,7 @@ const PieChartReducer = () => {
 
   return (
     <div style={{ height: '100%', width: '95%' }}>
-      <PieChart />
+      <PieChart duration={chartDuration} />
     </div>
   );
 };

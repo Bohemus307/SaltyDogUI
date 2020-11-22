@@ -35,7 +35,7 @@
 
 .Chart {
   background-color: #282e33;
-  width: 80%;
+  width: 40%;
   height: 60%;
   margin-left: 8px;
   margin-right: 20px;
@@ -55,7 +55,7 @@
 }
 
 .Month {
-  width: 200%;
+  width: 160%;
   height: 60%;
   border-radius: 9px;
   margin-left: 10px;
