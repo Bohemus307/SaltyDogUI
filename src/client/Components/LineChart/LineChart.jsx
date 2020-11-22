@@ -37,28 +37,6 @@ const LineChart = ({ data, inputChanged }) => {
     loading: false,
   });
 
-  const checkValidity = (value, rules) => {
-    let isValid = true;
-
-    if (rules.required) {
-      isValid = value.trim() !== '' && isValid;
-    }
-
-    if (rules.minLength) {
-      isValid = value.length >= rules.minLength && isValid;
-    }
-
-    if (rules.maxLength) {
-      isValid = value.length <= rules.maxLength && isValid;
-    }
-
-    return isValid;
-  };
-
-  // const { controls } = inputElements;
-  // const keys = Object.keys(inputElements.chartForm);
-  // const objectValues = Object.values(inputElements.chartForm);
-
   const inputChangedHandler = (event, inputIdentifier) => {
     const updatedExportForm = {
       ...inputElements.chartForm,
@@ -68,10 +46,6 @@ const LineChart = ({ data, inputChanged }) => {
       ...updatedExportForm[inputIdentifier],
     };
     updatedFormELement.value = event.target.value;
-    // updatedFormELement.valid = checkValidity(
-    //   updatedFormELement.value,
-    //   updatedFormELement.validation,
-    // );
     updatedFormELement.touched = true;
     updatedExportForm[inputIdentifier] = updatedFormELement;
     setInputs({ chartForm: updatedExportForm });
@@ -192,6 +166,7 @@ LineChart.propTypes = {
       y: propTypes.number,
     }),
   ).isRequired,
+  inputChanged: propTypes.func.isRequired,
 };
 
 export default LineChart;

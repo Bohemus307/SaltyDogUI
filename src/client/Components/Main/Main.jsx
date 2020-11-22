@@ -6,10 +6,11 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
 import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
+import PieChartReducer from '../PieChartReducer/PieChartReducer.jsx';
 // import LineChart from '../LineChart/LineChart.jsx';
 
 const Main = ({ displayItem }) => {
-  const [sensors, setSensor] = useState([
+  const [sensors] = useState([
     {
       type: 'PH-1',
       id: 'BJenjRROw',
@@ -57,7 +58,6 @@ const Main = ({ displayItem }) => {
   const [isMonth, setInterval] = useState(false);
 
   const chartHandler = () => {
-    console.log('i ran');
     if (isMonth) {
       setInterval(false);
       return;
@@ -73,7 +73,7 @@ const Main = ({ displayItem }) => {
       </div>
       <div className={classes.Data_Wrapper}>
         <div className={classes.Chart}>
-          Chart
+          <PieChartReducer />
         </div>
         <div className={(isMonth) ? classes.Month : classes.Feed}>
           <LineChartReducer changeChartSize={chartHandler} />

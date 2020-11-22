@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import propTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
 import { weekOfDataQuery, monthOfDataQuery } from '../../graphql/queries';
 import LineChart from '../LineChart/LineChart.jsx';
@@ -37,12 +38,12 @@ const LineChartReducer = ({ changeChartSize }) => {
   };
 
   const [
-    { loading: loading1, data: data1, refetch1 },
-    { loading: loading2, data: data2, refetch2 },
-    { loading: loading3, data: data3, refetch3 },
-    { loading: loading4, data: data4, refetch4 },
-    { loading: loading5, data: data5, refetch5 },
-    { loading: loading6, data: data6, refetch6 },
+    { loading: loading1, data: data1 },
+    { loading: loading2, data: data2 },
+    { loading: loading3, data: data3 },
+    { loading: loading4, data: data4 },
+    { loading: loading5, data: data5 },
+    { loading: loading6, data: data6 },
   ] = queryMultiple();
 
   if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6) {
@@ -108,6 +109,10 @@ const LineChartReducer = ({ changeChartSize }) => {
       <LineChart data={allChartData} inputChanged={inputChangeHandler} />
     </Aux>
   );
+};
+
+LineChartReducer.propTypes = {
+  changeChartSize: propTypes.func.isRequired,
 };
 
 export default LineChartReducer;

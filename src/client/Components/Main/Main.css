@@ -34,8 +34,8 @@
 }
 
 .Chart {
-  background-image: linear-gradient(to bottom right, #ff0066, #FF4500);
-  width: 30%;
+  background-color: #282e33;
+  width: 80%;
   height: 60%;
   margin-left: 8px;
   margin-right: 20px;
