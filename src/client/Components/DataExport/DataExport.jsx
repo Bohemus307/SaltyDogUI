@@ -7,7 +7,8 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
 
 const DataExport = ({ id }) => {
-  const csvLink = useRef(null); // setup the ref that we'll use for the hidden CsvLink
+  const [active, setActive] = useState(false);
+  const csvLink = useRef();
   const [inputElements, setInputs] = useState(
     {
       start: {
@@ -75,6 +76,7 @@ const DataExport = ({ id }) => {
           required: false,
         },
         touched: false,
+        active: false,
       },
     },
   );
@@ -104,8 +106,12 @@ const DataExport = ({ id }) => {
   }
   if (error) return `Error! ${error.message}`;
 
-  console.log('data: ', data);
-
+  if (data) {
+    console.log('data: ', data);
+    setActive(true)
+      csvLink.current.link.click()
+      setActive(false)
+  }
   // will export data to csv or json type file needs to open a save as modal
   const exportHandler = async (event) => {
     event.preventDefault();
@@ -118,12 +124,9 @@ const DataExport = ({ id }) => {
         start: Date.parse(formData.start), end: Date.parse(formData.end), id,
       };
       getExportData({ variables });
-
-      csvLink.current.link.click();
     }
   };
 
-  // const { controls } = inputElements;
   const keys = Object.keys(inputElements);
   const values = Object.values(inputElements);
 
@@ -172,13 +175,24 @@ const DataExport = ({ id }) => {
         />
       ))}
       <button type="submit" onClick={exportHandler}>Export</button>
-      <CSVLink
-        data={data?.sensor.length !== 0 ? data.sensor.exportValues : [error]}
+      {
+    active
+      ? (
+        <CSVLink
+          data={data?.sensor?.exportValues}
+          filename={inputElements.filename.value}
+          ref={csvLink}
+        />
+      )
+      : null
+      }
+      {/* <CSVLink
+        data={data?.sensor?.exportValues || 'error'}
         filename={inputElements.filename.value}
         className="hidden"
         ref={csvLink}
         target="_blank"
-      />
+      /> */}
     </form>
   );
   if (inputElements.loading) {
