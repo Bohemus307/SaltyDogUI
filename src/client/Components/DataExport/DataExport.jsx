@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { CSVLink } from 'react-csv';
 import { exportDataQuery } from '../../graphql/queries.js';
@@ -7,7 +7,6 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
 
 const DataExport = ({ id }) => {
-  const [active, setActive] = useState(false);
   const csvLink = useRef();
   const [inputElements, setInputs] = useState(
     {
@@ -106,12 +105,6 @@ const DataExport = ({ id }) => {
   }
   if (error) return `Error! ${error.message}`;
 
-  if (data) {
-    console.log('data: ', data);
-    setActive(true)
-      csvLink.current.link.click()
-      setActive(false)
-  }
   // will export data to csv or json type file needs to open a save as modal
   const exportHandler = async (event) => {
     event.preventDefault();
@@ -175,26 +168,20 @@ const DataExport = ({ id }) => {
         />
       ))}
       <button type="submit" onClick={exportHandler}>Export</button>
-      {
-    active
-      ? (
-        <CSVLink
-          data={data?.sensor?.exportValues}
-          filename={inputElements.filename.value}
-          ref={csvLink}
-        />
-      )
-      : null
-      }
-      {/* <CSVLink
-        data={data?.sensor?.exportValues || 'error'}
-        filename={inputElements.filename.value}
-        className="hidden"
-        ref={csvLink}
-        target="_blank"
-      /> */}
+      <div className={classes.CsvLink}>
+        {data
+          ? (
+            <CSVLink
+              data={data?.sensor?.exportValues}
+              filename={inputElements.filename.value}
+              ref={csvLink}
+            />
+          )
+          : undefined}
+      </div>
     </form>
   );
+
   if (inputElements.loading) {
     form = <Spinner />;
   }
