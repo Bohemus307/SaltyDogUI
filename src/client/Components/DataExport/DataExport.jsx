@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+import React, { useState, useRef, useCallback } from 'react';
 import { useLazyQuery } from '@apollo/react-hooks';
 import { CSVLink } from 'react-csv';
 import { exportDataQuery } from '../../graphql/queries.js';
@@ -122,10 +122,6 @@ const DataExport = ({ id }) => {
       };
       getExportData({ variables });
     }
-    if (data) {
-      console.log('i ran with data:', data);
-      csvLink.current.link.click();
-    }
   };
 
   const keys = Object.keys(inputElements);
@@ -176,9 +172,9 @@ const DataExport = ({ id }) => {
         />
       ))}
       <button type="submit" onClick={exportHandler}>Export</button>
-      { (data) ? (
+      { (data !== undefined) ? (
         <CSVLink
-          data={data?.sensor?.exportVlaues}
+          data={data?.sensor?.exportValues}
           filename={inputElements.filename.value}
           ref={csvLink}
           className="hidden"
