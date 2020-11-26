@@ -7,6 +7,7 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './DataExport.css';
 
 const DataExport = ({ id }) => {
+  const [exportData, setData] = useState([]);
   const csvLink = useRef();
   const [inputElements, setInputs] = useState(
     {
@@ -96,7 +97,10 @@ const DataExport = ({ id }) => {
 
     return isValid;
   };
-  const [getExportData, { loading, error, data }] = useLazyQuery(exportDataQuery);
+  const [getExportData, { loading, error, data }] = useLazyQuery(exportDataQuery,
+    {
+      onCompleted: () => asyncExport(data),
+    });
 
   if (loading) {
     return (
@@ -108,10 +112,16 @@ const DataExport = ({ id }) => {
   if (data) {
     console.log('csvdata: ', data?.sensor?.exportValues);
   }
-
+  const asyncExport = async (data) => {
+    try {
+      await setData(data.sensor.exportValues);
+      const click = await csvLink.current.link.click();
+      return click;
+    } catch (err) { console.log(err); }
+  };
   // will export data to csv or json type file needs to open a save as modal
-  const exportHandler = async (event) => {
-    await event.preventDefault();
+  const exportHandler = (event) => {
+    event.preventDefault();
     const formData = {};
     for (const formElementIdentifier in inputElements) {
       formData[formElementIdentifier] = inputElements[formElementIdentifier].value;
@@ -172,15 +182,12 @@ const DataExport = ({ id }) => {
         />
       ))}
       <button type="submit" onClick={exportHandler}>Export</button>
-      { (data !== undefined) ? (
-        <CSVLink
-          data={data?.sensor?.exportValues}
-          filename={inputElements.filename.value}
-          ref={csvLink}
-          className="hidden"
-          target="_blank"
-        />
-      ) : null}
+      <CSVLink
+        data={exportData}
+        filename={inputElements.filename.value}
+        ref={csvLink}
+        className="hidden"
+      />
     </form>
   );
 
