@@ -106,7 +106,10 @@ const Alerts = ({ type }) => {
 
   return (
     <div className={classes.Alerts}>
-      {sliderList}
+      <h4>Set Alerts</h4>
+      <div className={classes.List_Div}>
+        {sliderList}
+      </div>
     </div>
   );
 };

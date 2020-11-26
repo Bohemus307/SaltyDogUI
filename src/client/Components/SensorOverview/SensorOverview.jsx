@@ -32,7 +32,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
         <Sensor type={type} unitOfMeasure={unitOfMeasure} id={id} />
       </div>
       <div className={classes.Sensor_Feed}>
-        {values.map((item, index) => (
+        {values.map((item) => (
           <div key={item.reading_id} className={classes.Data_Reading}>
             <span style={{ marginRight: '5%' }}> Sensor Reading: </span>
             <span style={{ marginRight: '5%' }}>
