@@ -48,8 +48,8 @@ const values = () => {
 const alerts = () => {
   const sqlString = `CREATE TABLE alerts(
     _id SERIAL PRIMARY KEY,
-    sensor_id VARCHAR (20) NOT NULL UNIQUE,
-    settingsId VARCHAR (20) NOT NULL UNIQUE,
+    sensor_id VARCHAR (20) NOT NULL,
+    settingsId VARCHAR (20) NOT NULL,
     setvalue DOUBLE PRECISION NOT NULL,
     dateSet DATE NOT NULL
     )`;

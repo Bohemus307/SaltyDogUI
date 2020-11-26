@@ -3,13 +3,15 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import propTypes from 'prop-types';
-import { createAlert } from '../../graphql/queries.js';
+import { createAlert, getAlerts } from '../../graphql/queries.js';
 import classes from './Alerts.css';
 import RangeSlider from '../Slider/Slider.jsx';
+import Spinner from '../UI/Spinner/Spinner.jsx';
 
 const Alerts = ({ type, unitOfMeasure, currValue }) => {
+  const [addAlert] = useMutation(createAlert);
   const [sliders, setSliders] = useState([
     {
       key: 'MinSlider',
@@ -39,7 +41,13 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
     },
   ]);
 
-  const [addAlert, { data }] = useMutation(createAlert);
+  // const { loading, error, data } = useQuery(getAlerts);
+  // if (loading) return <Spinner />;
+  // if (error) return <p>Error :(</p>;
+
+  // if (data) {
+  //   console.log(data);
+  // }
 
   const setAlertHandler = (index) => {
     const newAlert = {
@@ -70,14 +78,14 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
     }
     setSliders(newSliders);
   },
-  [sliders]);
+  [sliders, setAlertHandler]);
 
   const sliderValueChanged = useCallback((val, key) => {
     // console.log('NEW VALUE', val, key);
     // change value in sliders based on label and new value
     const index = sliders.map((slider) => slider.label).indexOf(key);
     const newSliders = [...sliders];
-    newSliders[index].value = val;
+    newSliders[index].value = parseFloat(val);
     setSliders(newSliders);
   });
 
@@ -134,6 +142,8 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
 
 Alerts.propTypes = {
   type: propTypes.string.isRequired,
+  unitOfMeasure: propTypes.string,
+  currValue: propTypes.number.isRequired,
 };
 
 export default Alerts;

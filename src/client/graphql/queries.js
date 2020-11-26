@@ -95,12 +95,23 @@ export const getSensors = gql`{
 }
 `;
 
+export const getAlerts = gql`{
+  alerts {
+    sensor_id
+    settingsid
+    setvalue
+    dateset
+  }
+}
+`;
+
 export const createAlert = gql`
   mutation CreateAlert($input: CreateAlertInput!) {
     alert: createAlert(input: $input) {
       sensor_id
       settingsid
       setvalue
+
     }
   }
 `;
