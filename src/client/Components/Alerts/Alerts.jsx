@@ -46,6 +46,7 @@ const Alerts = ({ type }) => {
         break;
       case false:
         newSliders[index].locked = true;
+        // here call usemutation with sliders object
         break;
       default:
         console.log('lock must be broken');

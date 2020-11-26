@@ -45,6 +45,20 @@ const values = () => {
     .then(() => db.query(sqlString));
 };
 
+const alerts = () => {
+  const sqlString = `CREATE TABLE alerts(
+    _id SERIAL PRIMARY KEY,
+    sensor_id VARCHAR (20) NOT NULL UNIQUE,
+    settingsId VARCHAR (20) NOT NULL UNIQUE,
+    minvalue DOUBLE PRECISION NOT NULL,
+    maxvalue DOUBLE PRECISION NOT NULL,
+    dateSet DATE NOT NULL
+    )`;
+
+  return db.query('DROP TABLE IF EXISTS alerts')
+    .then(() => db.query(sqlString));
+};
+
 const hyperTable = () => {
   const sqlString = 'SELECT create_hypertable(\'Values\', \'time\', chunk_time_interval => INTERVAL \'1 day\')';
   db.query(sqlString);
@@ -67,22 +81,19 @@ const indexValueCorrelateIdSensor = () => {
   return db.query(sqlString);
 };
 
-// sensors()
-//   .then(() => console.log('Created table values users and sensors'))
-//   .then(values)
-// values()
-//   .then(() => console.log('Created table values users and sensors'))
-//   .then(hyperTable)
-//   .then(() => console.log('Created hypertable now importing data'))
-seedPgDatabase()
-  // .then(() => console.log('Imported all records now creating index on correlateId'))
-  // .then(indexValueCorrelateIdValue)
-  // .then(indexValueCorrelateIdSensor)
+sensors()
+  .then(() => console.log('Created table values users and sensors'))
+  .then(values)
+  .then(() => console.log('Created table values users and sensors'))
+  .then(hyperTable)
+  .then(() => console.log('Created hypertable now importing data'))
+  .then(seedPgDatabase)
+  .then(() => console.log('Imported all records now creating index on correlateId'))
+  .then(indexValueCorrelateIdValue)
+  .then(indexValueCorrelateIdSensor)
   .then(() => console.log('Success on script !!!!'))
   .catch((err) => console.log(err));
 
 module.exports = {
-  users, sensors, values, hyperTable, seedPgDatabase,
+  users, sensors, values, alerts, hyperTable, seedPgDatabase,
 };
-
-

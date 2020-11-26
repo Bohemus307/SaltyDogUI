@@ -6,26 +6,37 @@
 
 const Query = {
   sensor: async (root, args, context) => {
-    const result = await context.prisma.sensors.findOne({
+    const result = await context.prisma.sensors.findUnique({
       where: { correlateid: args.correlateid },
     });
-    return { ...result, start: args.start, end: args.end };
+    if (args.start && args.end) {
+      return { result, start: args.start, end: args.end };
+    }
+    return result;
   },
   sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
   values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
   value: async (root, { reading_id }, context) => {
     const id = parseInt(reading_id, 10);
-    const result = await context.prisma.values.findOne({ where: { reading_id: id } });
+    const result = await context.prisma.values.findUnique({ where: { reading_id: id } });
     return result;
   }, // gets values by sensor_Id
 };
 
 const Mutation = {
   createSensor: async (root, { input }, context, { user }) => {
-    // if (!user) {
-    //   throw new Error('Unauthorized!');
-    // }
+    if (!user) {
+      throw new Error('Unauthorized!');
+    }
     const result = await context.prisma.sensors.create({ data: { ...input } });
+    return result;
+  },
+
+  createAlert: async (root, { input }, context, { user }) => {
+    if (!user) {
+      throw new Error('Unauthorized!');
+    }
+    const result = await context.prisma.alerts.create({ data: { ...input } });
     return result;
   },
 
