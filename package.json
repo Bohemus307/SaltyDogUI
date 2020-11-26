@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/Bohemus307/SaltyDogUI#readme",
   "dependencies": {
+    "@apollo/client": "^3.2.9",
     "@apollo/react-hooks": "^4.0.0",
     "@babel/cli": "^7.0.0",
     "@nivo/core": "^0.65.0",

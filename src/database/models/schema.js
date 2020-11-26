@@ -50,8 +50,7 @@ const alerts = () => {
     _id SERIAL PRIMARY KEY,
     sensor_id VARCHAR (20) NOT NULL UNIQUE,
     settingsId VARCHAR (20) NOT NULL UNIQUE,
-    minvalue DOUBLE PRECISION NOT NULL,
-    maxvalue DOUBLE PRECISION NOT NULL,
+    setvalue DOUBLE PRECISION NOT NULL,
     dateSet DATE NOT NULL
     )`;
 

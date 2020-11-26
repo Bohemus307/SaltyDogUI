@@ -3,22 +3,21 @@
     sensors: [Sensor]
     value(reading_id: ID!): Value
     values: [Value]
-    alert(sensor_id: ID!): ALert
+    alert(sensor_id: ID!): Alert
     alerts: [Alert]
   }
 
   type Mutation {
     createSensor(input: CreateSensorInput): Sensor
     createValue(input: CreateValueInput): Value
-    createAlert(input: CreateAlertInput): Alert
+    createAlert(input: CreateAlertInput!): Alert
   }
 
   type Alert {
     sensor_id: ID!
-    settingsId: ID!
-    minvalue: Float
-    maxvalue: Float
-    dateSet:  String
+    settingsid: ID!
+    setvalue: Float
+    dateset:  String
   }
 
   type Sensor {
@@ -56,8 +55,7 @@
 
   input CreateAlertInput {
     sensor_id: ID!
-    settingsId: ID!
-    minvalue: Float
-    maxvalue: Float
-    dateSet:  String
+    settingsid: String
+    setvalue: Float
+    dateset:  String
   }

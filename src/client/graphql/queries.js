@@ -95,6 +95,16 @@ export const getSensors = gql`{
 }
 `;
 
+export const createAlert = gql`
+  mutation CreateAlert($input: CreateAlertInput!) {
+    alert: createAlert(input: $input) {
+      sensor_id
+      settingsid
+      setvalue
+    }
+  }
+`;
+
 export const loadValue = async (id) => {
   const { data: { value } } = await client.query({ query: valueQuery, variables: { id } });
   return value;

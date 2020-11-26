@@ -31,12 +31,10 @@ const Mutation = {
     const result = await context.prisma.sensors.create({ data: { ...input } });
     return result;
   },
-
-  createAlert: async (root, { input }, context, { user }) => {
-    if (!user) {
-      throw new Error('Unauthorized!');
-    }
-    const result = await context.prisma.alerts.create({ data: { ...input } });
+  createAlert: async (root, { input }, context) => {
+    const result = await context.prisma.alerts.create(
+      { data: { ...input, dateset: new Date(Date.now()) } },
+    );
     return result;
   },
 

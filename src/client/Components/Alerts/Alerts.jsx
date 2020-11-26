@@ -3,17 +3,21 @@ import React, {
   useState,
   useMemo,
 } from 'react';
+import { useMutation } from '@apollo/client';
 import propTypes from 'prop-types';
+import { createAlert } from '../../graphql/queries.js';
 import classes from './Alerts.css';
 import RangeSlider from '../Slider/Slider.jsx';
 
-const Alerts = ({ type }) => {
+const Alerts = ({ type, unitOfMeasure, currValue }) => {
   const [sliders, setSliders] = useState([
     {
       key: 'MinSlider',
+      unit: unitOfMeasure,
       divKey: 1,
       min: 0,
       max: 100,
+      currValue,
       value: 50,
       step: 1,
       label: ' Min',
@@ -22,9 +26,11 @@ const Alerts = ({ type }) => {
     },
     {
       key: 'MaxSlider',
+      unit: unitOfMeasure,
       divKey: 2,
       min: 0,
       max: 100,
+      currValue,
       value: 50,
       step: 1,
       label: ' Max',
@@ -33,8 +39,18 @@ const Alerts = ({ type }) => {
     },
   ]);
 
+  const [addAlert, { data }] = useMutation(createAlert);
+
+  const setAlertHandler = (index) => {
+    const newAlert = {
+      sensor_id: type,
+      settingsid: sliders[index].key,
+      setvalue: sliders[index].value,
+    };
+    addAlert({ variables: { input: { ...newAlert } } });
+  };
+
   const lockSlider = useCallback((label) => {
-    // console.log('LOCKED SLIDER', label);
     // get index of item with key = label
     const index = sliders.map((slider) => slider.label).indexOf(label);
     const expr = sliders[index].locked;
@@ -46,10 +62,11 @@ const Alerts = ({ type }) => {
         break;
       case false:
         newSliders[index].locked = true;
-        // here call usemutation with sliders object
+        setAlertHandler(index);
+        // run func to set alerts
         break;
       default:
-        console.log('lock must be broken');
+        newSliders[index].locked = false;
     }
     setSliders(newSliders);
   },

@@ -46,7 +46,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
         ))}
       </div>
       <DataExport id={id} />
-      <Alerts type={type} />
+      <Alerts type={type} unitOfMeasure={unitOfMeasure} currValue={values[0].reading} />
     </div>
   );
 }
