@@ -50,7 +50,7 @@ const DataExport = ({ id }) => {
         elementConfig: {
           type: 'filename',
           placeholder: 'File Name: my-file.csv',
-          image: '/images/start.svg',
+          image: '/images/document.svg',
           alt: 'File Name',
         },
         value: '',
@@ -59,24 +59,6 @@ const DataExport = ({ id }) => {
         },
         valid: false,
         touched: false,
-      },
-      exportMethod: {
-        elementType: 'select',
-        elementConfig: {
-          options: [
-            { value: '.CSV', displayValue: 'CSV' },
-            { value: 'JSON', displayValue: 'JSON' },
-          ],
-          image: '/images/csv.svg',
-          alt: 'File Type',
-        },
-        value: '',
-        valid: false,
-        validation: {
-          required: false,
-        },
-        touched: false,
-        active: false,
       },
     },
   );
