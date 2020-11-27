@@ -18,7 +18,6 @@ const Query = {
     return result;
   },
   alert: async (root, args, context) => {
-    console.log(args);
     const result = await context.prisma.alerts.findUnique({
       where: { sensor_id: args.sensor_id },
     });
@@ -45,7 +44,12 @@ const Mutation = {
     );
     return result;
   },
-
+  updateAlert: async (root, { id, input }, context) => {
+    const result = await context.prisma.alerts.update(
+      { where: { sensor_id: id }, data: { ...input, dateset: new Date(Date.now()) } },
+    );
+    return result;
+  },
   createValue: async (root, { input }, context) => {
     const newValue = await context.prisma.values.create({ data: { ...input } });
     return newValue;

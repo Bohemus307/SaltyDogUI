@@ -1,5 +1,7 @@
 import React, { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import {
+  Switch, useRouteMatch, NavLink, Link, Route,
+} from 'react-router-dom';
 import propTypes from 'prop-types';
 import classes from './Menu.css';
 
@@ -63,19 +65,22 @@ const Menu = ({ displayItem }) => {
     };
     setMenuItems(newArray);
   };
+  const { path, url } = useRouteMatch();
 
   const menu = (
     menuItems.map((item) => (
       <div key={item.key} className={classes.Menu_Item} style={{ backgroundImage: item.clicked ? 'linear-gradient(to left, #00BFFF, #8A2BE2)' : 'none' }}>
-        <MenuItem
-          key={item.key}
-          image={item.image}
-          alt={item.alt}
-          title={item.title}
-          value={item.key}
-          click={clickHandler}
-          displayItem={displayItem}
-        />
+        <NavLink to={`${url}/${item.key}sensor`} className={classes.Menu_Link}>
+          <MenuItem
+            key={item.key}
+            image={item.image}
+            alt={item.alt}
+            title={item.title}
+            value={item.key}
+            click={clickHandler}
+            displayItem={displayItem}
+          />
+        </NavLink>
       </div>
     ))
   );
@@ -88,6 +93,10 @@ const Menu = ({ displayItem }) => {
           <img className={classes.Menu_Image} src="/images/logout.svg" alt="LogOut" />
           <span className={classes.Logout}>Log Out</span>
         </NavLink>
+        <Switch>
+          <Route exact path={path} />
+          <Route path={`${path}/:sensorId`} />
+        </Switch>
       </div>
     </div>
   );

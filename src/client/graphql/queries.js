@@ -129,6 +129,19 @@ export const createAlert = gql`
   }
 `;
 
+export const updateAlert = gql`
+  mutation updateAlert($input: CreateAlertInput!, $id: ID!) {
+    alert: updateAlert(input: $input,  id: $id) {
+      id
+      type
+      sensor_id
+      settingsid
+      maxsetvalue
+      minsetvalue
+    }
+  }
+`;
+
 export const loadValue = async (id) => {
   const { data: { value } } = await client.query({ query: valueQuery, variables: { id } });
   return value;

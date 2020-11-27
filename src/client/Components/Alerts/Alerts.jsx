@@ -129,7 +129,7 @@ const Alerts = ({
       <h4>Set Alerts</h4>
       <div className={classes.List_Div}>
         {sliderList}
-        <AlertsHandler type={type} minValue={values.Min} maxvalue={values.max} />
+        <AlertsHandler sensorType={type} minValue={values.Min} maxvalue={values.max} />
       </div>
     </div>
   );

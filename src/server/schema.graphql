@@ -11,6 +11,7 @@
     createSensor(input: CreateSensorInput): Sensor
     createValue(input: CreateValueInput): Value
     createAlert(input: CreateAlertInput!): Alert
+    updateAlert(input: UpdateAlertInput!, id: ID!): Alert
   }
 
   type Alert {
@@ -55,6 +56,14 @@
   }
 
   input CreateAlertInput {
+    sensor_id: ID!
+    settingsid: ID!
+    maxsetvalue: Float
+    minsetvalue: Float
+    dateset: String
+  }
+
+  input UpdateAlertInput {
     sensor_id: ID!
     settingsid: ID!
     maxsetvalue: Float
