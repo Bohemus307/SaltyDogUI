@@ -33,7 +33,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
   }
 
   const { sensor: { values } } = data1;
-  console.log(alerts);
+
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>

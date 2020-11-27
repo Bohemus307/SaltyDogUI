@@ -3,19 +3,15 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import propTypes from 'prop-types';
-import { createAlert, alertQuery } from '../../graphql/queries.js';
 
+import propTypes from 'prop-types';
 import classes from './Alerts.css';
 import RangeSlider from '../Slider/Slider.jsx';
-import Spinner from '../UI/Spinner/Spinner.jsx';
-import AlertsHandler from '../AlertsHandler/AlertsHandler.jsx.jsx';
+import AlertsHandler from '../AlertsHandler/AlertsHandler.jsx';
 
 const Alerts = ({
   type, unitOfMeasure, minValue, maxValue,
 }) => {
-  console.log(minValue, maxValue)
   const [sliders, setSliders] = useState([
     {
       key: 'MinSlider',
@@ -116,13 +112,25 @@ const Alerts = ({
     })
   );
 
+  const groupBy = (property, label) => sliders.reduce((acc, obj) => {
+    const value = obj[property];
+    const key = obj[label];
+    if (!acc[key]) {
+      acc[key] = value;
+    }
+    // acc[key].push(obj);
+    return acc;
+  }, {});
+
+  const values = groupBy('value', 'label');
+
   return (
     <div className={classes.Alerts}>
       <h4>Set Alerts</h4>
       <div className={classes.List_Div}>
         {sliderList}
+        <AlertsHandler type={type} minValue={values.Min} maxvalue={values.max} />
       </div>
-      <AlertsHandler />
     </div>
   );
 };
@@ -130,6 +138,8 @@ const Alerts = ({
 Alerts.propTypes = {
   type: propTypes.string.isRequired,
   unitOfMeasure: propTypes.string,
+  minValue: propTypes.number.isRequired,
+  maxValue: propTypes.number.isRequired,
 };
 
 Alerts.defaultProps = {
