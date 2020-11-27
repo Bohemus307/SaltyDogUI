@@ -36,9 +36,10 @@ model values {
 }
 
 model alerts {
-  id         Int      @id @default(autoincrement()) @map("_id") @db.Integer
-  sensor_id  String   @db.VarChar(20)
-  settingsid String   @db.VarChar(20)
-  setvalue   Float    @db.DoublePrecision
-  dateset    DateTime @db.Date
+  id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
+  sensor_id   String   @unique @db.VarChar(20)
+  settingsid  String   @db.VarChar(20)
+  maxsetvalue Float    @db.DoublePrecision
+  minsetvalue Float    @db.DoublePrecision
+  dateset     DateTime @db.Date
 }

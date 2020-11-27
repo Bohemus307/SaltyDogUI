@@ -5,6 +5,9 @@
 // }
 
 const Query = {
+  sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
+  alerts: async (parent, args, context) => context.prisma.alerts.findMany(),
+  values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
   sensor: async (root, args, context) => {
     const result = await context.prisma.sensors.findUnique({
       where: { correlateid: args.correlateid },
@@ -14,9 +17,12 @@ const Query = {
     }
     return result;
   },
-  sensors: async (parent, args, context) => context.prisma.sensors.findMany({ take: 10 }),
-  alerts: async (parent, args, context) => context.prisma.alerts.findMany(),
-  values: async (parent, args, context) => context.prisma.values.findMany({ take: 100 }),
+  alert: async (root, args, context) => {
+    const result = await context.prisma.alerts.findUnique({
+      where: { sensor_id: args.sensor_id },
+    });
+    return result;
+  },
   value: async (root, { reading_id }, context) => {
     const id = parseInt(reading_id, 10);
     const result = await context.prisma.values.findUnique({ where: { reading_id: id } });

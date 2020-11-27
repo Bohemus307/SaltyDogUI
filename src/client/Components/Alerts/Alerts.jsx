@@ -3,15 +3,12 @@ import React, {
   useState,
   useMemo,
 } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
+
 import propTypes from 'prop-types';
-import { createAlert, getAlerts } from '../../graphql/queries.js';
 import classes from './Alerts.css';
 import RangeSlider from '../Slider/Slider.jsx';
-import Spinner from '../UI/Spinner/Spinner.jsx';
 
 const Alerts = ({ type, unitOfMeasure, currValue }) => {
-  const [addAlert] = useMutation(createAlert);
   const [sliders, setSliders] = useState([
     {
       key: 'MinSlider',
@@ -41,23 +38,6 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
     },
   ]);
 
-  // const { loading, error, data } = useQuery(getAlerts);
-  // if (loading) return <Spinner />;
-  // if (error) return <p>Error :(</p>;
-
-  // if (data) {
-  //   console.log(data);
-  // }
-
-  const setAlertHandler = (index) => {
-    const newAlert = {
-      sensor_id: type,
-      settingsid: sliders[index].key,
-      setvalue: sliders[index].value,
-    };
-    addAlert({ variables: { input: { ...newAlert } } });
-  };
-
   const lockSlider = useCallback((label) => {
     // get index of item with key = label
     const index = sliders.map((slider) => slider.label).indexOf(label);
@@ -70,7 +50,6 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
         break;
       case false:
         newSliders[index].locked = true;
-        setAlertHandler(index);
         // run func to set alerts
         break;
       default:
@@ -78,7 +57,7 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
     }
     setSliders(newSliders);
   },
-  [sliders, setAlertHandler]);
+  [sliders]);
 
   const sliderValueChanged = useCallback((val, key) => {
     // console.log('NEW VALUE', val, key);
@@ -87,7 +66,8 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
     const newSliders = [...sliders];
     newSliders[index].value = parseFloat(val);
     setSliders(newSliders);
-  });
+  },
+  [sliders]);
 
   const sliderList = (
     sliders.map((slider) => {
@@ -97,11 +77,11 @@ const Alerts = ({ type, unitOfMeasure, currValue }) => {
           min: slider.min,
           max: slider.max,
           value: slider.value,
-          step: slider.step,
+          step: slider.value,
           label: slider.label,
           onChange: (e, key) => sliderValueChanged(e, key),
         }),
-        [sliders],
+        [slider.divKey, slider.min, slider.max, slider.value, slider.label],
       );
       return (
         <div className={classes.Value_Div} key={slideProps.divkey}>
@@ -144,6 +124,10 @@ Alerts.propTypes = {
   type: propTypes.string.isRequired,
   unitOfMeasure: propTypes.string,
   currValue: propTypes.number.isRequired,
+};
+
+Alerts.defaultProps = {
+  unitOfMeasure: null,
 };
 
 export default Alerts;

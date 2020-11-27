@@ -16,7 +16,8 @@
   type Alert {
     sensor_id: ID!
     settingsid: ID!
-    setvalue: Float
+    minsetvalue: Float
+    maxsetvalue: Float
     dateset:  String
   }
 
@@ -55,7 +56,8 @@
 
   input CreateAlertInput {
     sensor_id: ID!
-    settingsid: String
-    setvalue: Float
-    dateset:  String
+    settingsid: ID!
+    maxsetvalue: Float
+    minsetvalue: Float
+    dateset: String
   }
