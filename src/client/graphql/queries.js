@@ -14,6 +14,18 @@ export const valueQuery = gql`
  }
 `;
 
+export const alertQuery = gql`
+ query alertQuery($id: ID!) {
+  alert(sensor_id: $id){
+    sensor_id
+    settingsid
+    maxsetvalue
+    minsetvalue
+    dateset
+  }
+ }
+`;
+
 export const sensorQuery = gql`
   query sensorQuery($id: ID!) {
   sensor(correlateid: $id){
@@ -99,7 +111,8 @@ export const getAlerts = gql`{
   alerts {
     sensor_id
     settingsid
-    setvalue
+    maxsetvalue
+    minsetvalue
     dateset
   }
 }
@@ -110,8 +123,8 @@ export const createAlert = gql`
     alert: createAlert(input: $input) {
       sensor_id
       settingsid
-      setvalue
-
+      maxsetvalue
+      minsetvalue
     }
   }
 `;

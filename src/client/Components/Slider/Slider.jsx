@@ -8,7 +8,7 @@ import styles from './Slider.css';
 
 // destructive props
 const RangeSlider = ({
-  classes, label, onChange, value, type, ...slideProps
+  classes, label, onChange, value, type, UOM, ...slideProps
 }) => {
   // set initial value to 0 this will change inside useEffect in first render also | or you can directly set useState(value)
   const [sliderVal, setSliderVal] = useState(0);
@@ -48,6 +48,7 @@ const RangeSlider = ({
         <span>
           <span>Set Value: </span>
           { sliderVal }
+          { UOM }
         </span>
       </div>
       <input

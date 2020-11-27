@@ -88,17 +88,17 @@ const Main = ({ displayItem }) => {
       break;
     case ('Ph'):
       mainElement = (
-        <SensorOverview id="BJenjRROw" type="Ph" loading={false} unitOfMeasure={null} />
+        <SensorOverview id="BJenjRROw" type="PH-1" loading={false} unitOfMeasure={null} />
       );
       break;
     case ('EC'):
       mainElement = (
-        <SensorOverview id="HJRa-DOuG" type="Ec" loading={false} unitOfMeasure="mS/cm" />
+        <SensorOverview id="HJRa-DOuG" type="EC-1" loading={false} unitOfMeasure="mS/cm" />
       );
       break;
     case ('DO'):
       mainElement = (
-        <SensorOverview id="SJV0-wdOM" type="Do" loading={false} unitOfMeasure="mg/L" />
+        <SensorOverview id="SJV0-wdOM" type="DO-1" loading={false} unitOfMeasure="mg/L" />
       );
       break;
       // case ('Moisture'):

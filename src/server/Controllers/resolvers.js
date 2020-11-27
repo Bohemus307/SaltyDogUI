@@ -18,6 +18,7 @@ const Query = {
     return result;
   },
   alert: async (root, args, context) => {
+    console.log(args);
     const result = await context.prisma.alerts.findUnique({
       where: { sensor_id: args.sensor_id },
     });

@@ -124,3 +124,6 @@ module.exports = {
 
 //   return db.query(sqlString, [artistId]);
 // },
+
+// INSERT INTO alerts(sensor_id, settingsid, maxsetvalue, minsetvalue, dateset)
+//  VALUES('PH-1', 'aZx-123', 7.8, 3.2, now())

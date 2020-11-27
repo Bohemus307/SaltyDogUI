@@ -1,7 +1,7 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
-import { sensorQuery } from '../../graphql/queries';
+import { sensorQuery, alertQuery } from '../../graphql/queries';
 
 import classes from './SensorOverview.css';
 import Sensor from '../Sensor/Sensor.jsx';
@@ -10,22 +10,30 @@ import Spinner from '../UI/Spinner/Spinner.jsx';
 import Alerts from '../Alerts/Alerts.jsx';
 
 export default function SensorOverview({ id, type, unitOfMeasure }) {
-  const { loading, error, data } = useQuery(sensorQuery, {
-    variables: { id },
-    pollInterval: 5000,
-  });
+  const [alerts, setAlerts] = useState({});
+  const QueryMultiple = () => {
+    const res1 = useQuery(sensorQuery, {
+      variables: { id },
+      pollInterval: 5000,
+    });
+    const res2 = useQuery(alertQuery, {
+      variables: { id: type },
+      onCompleted: (data2) => setAlerts(data2),
+    });
+    return [res1, res2];
+  };
 
-  if (loading) return null;
-  if (error) return `Error! ${error}`;
+  const [
+    { loading: loading1, data: data1 },
+    { loading: loading2, data: data2 },
+  ] = QueryMultiple();
 
-  if (loading === true) {
-    return (
-      <Spinner />
-    );
+  if (loading1 || loading2) {
+    return <Spinner />;
   }
 
-  const { sensor: { values } } = data;
-
+  const { sensor: { values } } = data1;
+  console.log(alerts);
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
@@ -46,7 +54,15 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
         ))}
       </div>
       <DataExport id={id} />
-      <Alerts type={type} unitOfMeasure={unitOfMeasure} currValue={values[0].reading} />
+      {(alerts.alert && !loading2) ? (
+        <Alerts
+          type={type}
+          unitOfMeasure={unitOfMeasure}
+          maxValue={alerts.alert.maxsetvalue}
+          minValue={alerts.alert.minsetvalue}
+        />
+      ) : <Spinner />}
+
     </div>
   );
 }
