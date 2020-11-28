@@ -39,14 +39,14 @@ const RangeSlider = ({
           backgroundColor: '#606468',
           color: '#282e33',
           borderRadius: '9px',
-          padding: '10px 10px',
+          padding: '5px 5px',
         }}
         >
           {type}
           {label}
         </p>
         <span>
-          <span>Set Value: </span>
+          <span>Value: </span>
           { sliderVal }
           { UOM }
         </span>

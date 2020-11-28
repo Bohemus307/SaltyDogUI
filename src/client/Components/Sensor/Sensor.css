@@ -10,3 +10,11 @@
   margin-top: auto;
   padding-left: 5px;
 }
+
+.Sensor_Alarm {
+  color:red;
+  font-family: futura-pt-bold;
+  font-size: 3vw;
+  margin-top: auto;
+  padding-left: 5px;
+}

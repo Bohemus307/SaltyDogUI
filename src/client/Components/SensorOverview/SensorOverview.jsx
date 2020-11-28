@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
 import { sensorQuery, alertQuery } from '../../graphql/queries';
@@ -11,6 +11,11 @@ import Alerts from '../Alerts/Alerts.jsx';
 
 export default function SensorOverview({ id, type, unitOfMeasure }) {
   const [alerts, setAlerts] = useState({});
+  const [alarms, setAlarms] = useState({
+    maxAlarm: false,
+    minAlarm: false,
+  });
+
   const QueryMultiple = () => {
     const res1 = useQuery(sensorQuery, {
       variables: { id },
@@ -33,25 +38,62 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
   }
 
   const { sensor: { values } } = data1;
+  console.log(data2);
 
+  const alertHandler = (reading) => {
+    const limits = data2.alert;
+    // const current = values[0];
+    if (alarms.maxAlarm && alarms.minAlarm) {
+      return true;
+    }
+    if (reading > limits.maxsetvalue) {
+      console.log('max alarm');
+      setAlarms({ ...alarms, maxAlarm: true });
+    }
+    if (reading < limits.minsetvalue) {
+      console.log('min alarm');
+      setAlarms({ ...alarms, minAlarm: true });
+      return true;
+    }
+    return false;
+  };
+  
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
-        <Sensor type={type} unitOfMeasure={unitOfMeasure} id={id} />
+        <Sensor
+          type={type}
+          unitOfMeasure={unitOfMeasure}
+          id={id}
+          alarmCheck={alertHandler}
+        />
       </div>
       <div className={classes.Sensor_Feed}>
         {values.map((item) => (
-          <div key={item.reading_id} className={classes.Data_Reading}>
-            <span style={{ marginRight: '5%' }}> Sensor Reading: </span>
-            <span style={{ marginRight: '5%' }}>
-              (
-              {item.reading}
-              {unitOfMeasure}
-              )
-            </span>
-            <span style={{ marginRight: '5%' }}>{new Date(parseInt(item.time, 10)).toISOString()}</span>
-          </div>
-        ))}
+          (item.reading > data2.alert.maxsetvalue || item.reading < data2.alert.minsetvalue)
+            ? (
+              <div key={item.reading_id} className={classes.Data_Reading}>
+                <span style={{ marginRight: '5%', color: 'red' }}> Sensor Reading: </span>
+                <span style={{ marginRight: '5%', color: 'red' }}>
+                  (
+                  {item.reading}
+                  {unitOfMeasure}
+                  )
+                </span>
+                <span style={{ marginRight: '5%', color: 'red' }}>{new Date(parseInt(item.time, 10)).toISOString()}</span>
+              </div>
+            ) : (
+              <div key={item.reading_id} className={classes.Data_Reading}>
+                <span style={{ marginRight: '5%' }}> Sensor Reading: </span>
+                <span style={{ marginRight: '5%' }}>
+                  (
+                  {item.reading}
+                  {unitOfMeasure}
+                  )
+                </span>
+                <span style={{ marginRight: '5%' }}>{new Date(parseInt(item.time, 10)).toISOString()}</span>
+              </div>
+            )))}
       </div>
       <DataExport id={id} />
       {(alerts.alert && !loading2) ? (

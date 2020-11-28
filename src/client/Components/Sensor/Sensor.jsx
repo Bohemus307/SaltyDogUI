@@ -7,7 +7,7 @@ import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
 const Sensor = ({
-  id, type, unitOfMeasure,
+  id, type, unitOfMeasure, alarmCheck,
 }) => {
   const { loading, error, data } = useQuery(sensorQuery, {
     variables: { id },
@@ -34,11 +34,28 @@ const Sensor = ({
       </div>
     </Aux>
   );
-  return (sensor1);
+  const sensorinAlarm = (
+    <Aux>
+      <div className={classes.Sensor_Type}>
+        {type}
+        :
+      </div>
+      <div className={classes.Sensor_Alarm}>
+        {values[0].reading}
+        {unitOfMeasure}
+      </div>
+    </Aux>
+  );
+  console.log('ac in sensor', alarmCheck);
+  return ((alarmCheck(values[0].reading)) ? sensorinAlarm : sensor1);
 };
 
 Sensor.propTypes = {
   type: propTypes.string.isRequired,
+  // alarmCheckHandler: propTypes.func,
 };
 
+Sensor.proptypes = {
+  alarmCheckHandler: null,
+};
 export default Sensor;
