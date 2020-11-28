@@ -92,7 +92,7 @@ input[type=range] {
 }
 
 input[type=range]:disabled::-webkit-slider-runnable-track {
-  background: rgb(194, 43, 16);
+  background: #e7298a;
   cursor: not-allowed;
 }
 
@@ -102,7 +102,7 @@ input[type=range]::-webkit-slider-runnable-track {
   cursor: pointer;
   /* box-shadow: 1px 1px 1px #000000, 0px 0px 1px #0d0d0d; */
   background: #606468;
-  border-radius: 1.3px;
+  border-radius: 9px;
   border: 0.2px solid #010101;
 }
 

@@ -21,23 +21,20 @@
 }
 
 .Sensor_Feed {
-  display: flex;
-  flex-direction: column-reverse;
-  align-items: flex-start;
   height: 60%;
   width: 80%;
   margin: 20px 0px;
-  padding: 15px 10px;
+  padding: 125px 10px 0px 10px;
   background-color: #282e33;
   border-radius: 9px;
   color: #606468;
   overflow-y: auto;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+  position: relative;
 }
 
 .Data_Reading {
-  width: 90%;
   font-family: futura-pt-bold;
-  font-size: 20px;
+  font-size: 18px;
   text-align: justify;
 }

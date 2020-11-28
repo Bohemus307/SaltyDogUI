@@ -72,25 +72,25 @@ const SensorOverview = ({ id, type, unitOfMeasure }) => {
           (item.reading > data2.alert.maxsetvalue || item.reading < data2.alert.minsetvalue)
             ? (
               <div key={item.reading_id} className={classes.Data_Reading}>
-                <span style={{ marginRight: '5%', color: 'red' }}> Sensor Reading: </span>
-                <span style={{ marginRight: '5%', color: 'red' }}>
+                <span style={{ marginRight: '2%', color: '#e7298a' }}> Sensor Reading: </span>
+                <span style={{ marginRight: '2%', color: '#e7298a' }}>
                   (
                   {item.reading}
                   {unitOfMeasure}
                   )
                 </span>
-                <span style={{ marginRight: '5%', color: 'red' }}>{new Date(parseInt(item.time, 10)).toISOString()}</span>
+                <span style={{ marginRight: '2%', color: '#e7298a' }}>{new Date(parseInt(item.time, 10)).toString()}</span>
               </div>
             ) : (
               <div key={item.reading_id} className={classes.Data_Reading}>
-                <span style={{ marginRight: '5%' }}> Sensor Reading: </span>
-                <span style={{ marginRight: '5%' }}>
+                <span style={{ marginRight: '2%' }}> Sensor Reading: </span>
+                <span style={{ marginRight: '2%' }}>
                   (
                   {item.reading}
                   {unitOfMeasure}
                   )
                 </span>
-                <span style={{ marginRight: '5%' }}>{new Date(parseInt(item.time, 10)).toISOString()}</span>
+                <span style={{ marginRight: '2%' }}>{new Date(parseInt(item.time, 10)).toString()}</span>
               </div>
             )))}
       </div>
