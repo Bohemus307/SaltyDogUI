@@ -7,7 +7,6 @@ import Sensor from '../Sensor/Sensor.jsx';
 import SensorOverview from '../SensorOverview/SensorOverview.jsx';
 import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
 import PieChartReducer from '../PieChartReducer/PieChartReducer.jsx';
-// import LineChart from '../LineChart/LineChart.jsx';
 
 const Main = ({ displayItem }) => {
   const [sensors] = useState([
@@ -36,7 +35,7 @@ const Main = ({ displayItem }) => {
     //   type: 'Mo',
     //   id: 'AVR0-MODw',
     //   unitOfMeasure: 'VWC',
-    //   connected: false,
+    //   connected: false, // moisture sensor for future
     //   location: 'farm-row-1',
     // },
   ]);

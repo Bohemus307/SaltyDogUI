@@ -70,7 +70,7 @@ const Menu = ({ displayItem }) => {
   const menu = (
     menuItems.map((item) => (
       <div key={item.key} className={classes.Menu_Item} style={{ backgroundImage: item.clicked ? 'linear-gradient(to left, #00BFFF, #8A2BE2)' : 'none' }}>
-        <NavLink to={`${url}/${item.key}sensor`} className={classes.Menu_Link}>
+        <NavLink to={`${url}/:${item.key}sensor`} className={classes.Menu_Link}>
           <MenuItem
             key={item.key}
             image={item.image}
@@ -94,7 +94,7 @@ const Menu = ({ displayItem }) => {
           <span className={classes.Logout}>Log Out</span>
         </NavLink>
         <Switch>
-          <Route exact path={path} />
+          <Route path={path} />
           <Route path={`${path}/:sensorId`} />
         </Switch>
       </div>
