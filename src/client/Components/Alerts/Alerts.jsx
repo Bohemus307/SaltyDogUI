@@ -111,6 +111,7 @@ const Alerts = ({
               backgroundPosition: 'center',
               backgroundSize: 'contain',
               backgroundRepeat: 'no-repeat',
+              backgroundColor: '#282e33',
             }}
             type="button"
             name="Lock"

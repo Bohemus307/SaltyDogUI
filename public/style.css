@@ -54,8 +54,23 @@ button[type="submit"] {
   transition: background 0.3s ease-in-out;
 }
 
+button[type="button"] {
+  background: #b5cd60;
+  border: 0;
+  border-radius: 3px;
+  color: #606468;
+  font-weight: bolder;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
 button[type="button"]:hover {
   background: #16aa56;
+}
+
+button[type="button"]:disabled {
+  /* background: salmon; */
+  cursor: not-allowed;
 }
 
 button[type="submit"]:hover {

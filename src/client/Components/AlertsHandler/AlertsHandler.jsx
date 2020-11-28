@@ -3,6 +3,8 @@ import propTypes from 'prop-types';
 import { useMutation, useQuery } from '@apollo/client';
 import { updateAlert, alertQuery } from '../../graphql/queries.js';
 
+import classes from './AlertsHandler.css';
+
 const AlertsHandler = ({
   sensorType, minValue, maxValue, valueChanged,
 }) => {
@@ -28,20 +30,26 @@ const AlertsHandler = ({
   let input;
 
   return (
-    <div key={data.sensor_id}>
+    <div key={data.sensor_id} className={classes.Alert_Button_Div}>
       <p>{data.sensor_id}</p>
-      <form>
-        <button
-          ref={(node) => {
-            input = node;
-          }}
-          type="button"
-          onClick={() => setAlerts()}
-          disabled={!valueChanged}
-        >
-          Set Alerts
-        </button>
-      </form>
+      <button
+        style={{
+          color: '#282e33',
+          height: '80%',
+          width: '80%',
+          padding: '5px 5px',
+          borderRadius: '9px',
+          boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
+        }}
+        ref={(node) => {
+          input = node;
+        }}
+        type="button"
+        onClick={() => setAlerts()}
+        disabled={!valueChanged}
+      >
+        Set Alerts
+      </button>
     </div>
   );
 };
