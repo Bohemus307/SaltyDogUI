@@ -1,27 +1,39 @@
-import React from 'react';
+import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { useQuery } from '@apollo/react-hooks';
-import { sensorQuery } from '../../graphql/queries.js';
+import { sensorQuery, alertQuery } from '../../graphql/queries.js';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Sensor.css';
 
 const Sensor = ({
-  id, type, unitOfMeasure, alarmCheck,
+  id, type, unitOfMeasure,
 }) => {
-  const { loading, error, data } = useQuery(sensorQuery, {
-    variables: { id },
-    polling: 2000,
-  });
+  const [alerts, setAlerts] = useState({});
 
-  if (loading) {
-    return (
-      <Spinner />
-    );
+  const QueryMultiple = () => {
+    const res1 = useQuery(sensorQuery, {
+      variables: { id },
+      pollInterval: 5000,
+    });
+    const res2 = useQuery(alertQuery, {
+      variables: { id: type },
+      onCompleted: (data2) => setAlerts(data2),
+    });
+    return [res1, res2];
+  };
+
+  const [
+    { loading: loading1, data: data1 },
+    { loading: loading2, data: data2 },
+  ] = QueryMultiple();
+
+  if (loading1 || loading2) {
+    return <Spinner />;
   }
-  if (error) return `Error! ${error.message}`;
 
-  const { sensor: { values } } = data;
+  const { sensor: { values } } = data1;
+
   const sensor1 = (
     <Aux>
       <div className={classes.Sensor_Type}>
@@ -46,16 +58,12 @@ const Sensor = ({
       </div>
     </Aux>
   );
-  console.log('ac in sensor', alarmCheck);
-  return ((alarmCheck(values[0].reading)) ? sensorinAlarm : sensor1);
+  // return ((alertHandler(values[0].reading)) ? sensorinAlarm : sensor1);
+  return (values[0].reading > data2.alert.maxsetvalue || values[0].reading < data2.alert.minsetvalue) ? sensorinAlarm : sensor1;
 };
 
 Sensor.propTypes = {
   type: propTypes.string.isRequired,
-  // alarmCheckHandler: propTypes.func,
 };
 
-Sensor.proptypes = {
-  alarmCheckHandler: null,
-};
 export default Sensor;

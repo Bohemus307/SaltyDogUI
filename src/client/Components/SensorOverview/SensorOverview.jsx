@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/react-hooks';
 import propTypes from 'prop-types';
 import { sensorQuery, alertQuery } from '../../graphql/queries';
@@ -9,7 +9,7 @@ import DataExport from '../DataExport/DataExport.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Alerts from '../Alerts/Alerts.jsx';
 
-export default function SensorOverview({ id, type, unitOfMeasure }) {
+const SensorOverview = ({ id, type, unitOfMeasure }) => {
   const [alerts, setAlerts] = useState({});
   const [alarms, setAlarms] = useState({
     maxAlarm: false,
@@ -38,7 +38,6 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
   }
 
   const { sensor: { values } } = data1;
-  console.log(data2);
 
   const alertHandler = (reading) => {
     const limits = data2.alert;
@@ -57,7 +56,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
     }
     return false;
   };
-  
+
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
@@ -107,7 +106,7 @@ export default function SensorOverview({ id, type, unitOfMeasure }) {
 
     </div>
   );
-}
+};
 
 SensorOverview.propTypes = {
   type: propTypes.string.isRequired,
@@ -118,3 +117,5 @@ SensorOverview.propTypes = {
 SensorOverview.defaultProps = {
   unitOfMeasure: null,
 };
+
+export default SensorOverview;
