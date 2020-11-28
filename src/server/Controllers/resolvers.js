@@ -44,9 +44,9 @@ const Mutation = {
     );
     return result;
   },
-  updateAlert: async (root, { id, input }, context) => {
+  updateAlert: async (root, { input }, context) => {
     const result = await context.prisma.alerts.update(
-      { where: { sensor_id: id }, data: { ...input, dateset: new Date(Date.now()) } },
+      { where: { sensor_id: input.sensor_id }, data: { ...input, dateset: new Date(Date.now()) } },
     );
     return result;
   },

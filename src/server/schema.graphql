@@ -11,7 +11,7 @@
     createSensor(input: CreateSensorInput): Sensor
     createValue(input: CreateValueInput): Value
     createAlert(input: CreateAlertInput!): Alert
-    updateAlert(input: UpdateAlertInput!, id: ID!): Alert
+    updateAlert(input: UpdateAlertInput!): Alert
   }
 
   type Alert {

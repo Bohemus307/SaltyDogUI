@@ -70,17 +70,17 @@ const Menu = ({ displayItem }) => {
   const menu = (
     menuItems.map((item) => (
       <div key={item.key} className={classes.Menu_Item} style={{ backgroundImage: item.clicked ? 'linear-gradient(to left, #00BFFF, #8A2BE2)' : 'none' }}>
-        <NavLink to={`${url}/:${item.key}sensor`} className={classes.Menu_Link}>
-          <MenuItem
-            key={item.key}
-            image={item.image}
-            alt={item.alt}
-            title={item.title}
-            value={item.key}
-            click={clickHandler}
-            displayItem={displayItem}
-          />
-        </NavLink>
+        {/* <NavLink to={`${url}/${item.key}sensor`} className={classes.Menu_Link}> */}
+        <MenuItem
+          key={item.key}
+          image={item.image}
+          alt={item.alt}
+          title={item.title}
+          value={item.key}
+          click={clickHandler}
+          displayItem={displayItem}
+        />
+        {/* </NavLink> */}
       </div>
     ))
   );
@@ -93,10 +93,9 @@ const Menu = ({ displayItem }) => {
           <img className={classes.Menu_Image} src="/images/logout.svg" alt="LogOut" />
           <span className={classes.Logout}>Log Out</span>
         </NavLink>
-        <Switch>
-          <Route path={path} />
+        {/* <Switch>
           <Route path={`${path}/:sensorId`} />
-        </Switch>
+        </Switch> */}
       </div>
     </div>
   );

@@ -79,6 +79,7 @@ const DataExport = ({ id }) => {
 
     return isValid;
   };
+
   const [getExportData, { loading, error, data }] = useLazyQuery(exportDataQuery,
     {
       onCompleted: () => asyncExport(data),

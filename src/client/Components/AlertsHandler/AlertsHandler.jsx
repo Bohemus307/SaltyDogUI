@@ -1,34 +1,42 @@
-import React, { useState } from 'react';
+import React from 'react';
 import propTypes from 'prop-types';
 import { useMutation, useQuery } from '@apollo/client';
-import {
-  createAlert, alertQuery, getAlerts, sensorQuery,
-} from '../../graphql/queries.js';
+import { updateAlert, alertQuery } from '../../graphql/queries.js';
 
 const AlertsHandler = ({ sensorType, minValue, maxValue }) => {
   const { loading, error, data } = useQuery(alertQuery, { variables: { id: sensorType } });
-  const [updateAlert] = useMutation(createAlert);
+  const [changeAlert] = useMutation(updateAlert);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
   console.log(data);
+
+  const setAlerts = async () => {
+    const { maxsetvalue, minsetvalue } = data.alert;
+    if (maxsetvalue && minsetvalue) {
+      const newAlert = {
+        sensor_id: data.alert.sensor_id,
+        settingsid: data.alert.settingsid,
+        maxsetvalue: maxValue,
+        minsetvalue: minValue,
+      };
+      console.log(newAlert);
+      changeAlert({ variables: { input: { ...newAlert } } });
+    }
+  };
 
   let input;
 
   return (
     <div key={data.sensor_id}>
       <p>{data.sensor_id}</p>
-      <form
-        onSubmit={() => {
-          console.log(input);
-          // updateAlert({ variables: { id: sensorType, input } });
-        }}
-      >
+      <form>
         <button
           ref={(node) => {
             input = node;
           }}
-          type="submit"
+          type="button"
+          onClick={() => setAlerts()}
         >
           Set Alerts
         </button>
@@ -38,9 +46,9 @@ const AlertsHandler = ({ sensorType, minValue, maxValue }) => {
 };
 
 AlertsHandler.propTypes = {
-};
-
-AlertsHandler.defaultProps = {
+  sensorType: propTypes.string.isRequired,
+  minValue: propTypes.number.isRequired,
+  maxValue: propTypes.number.isRequired,
 };
 
 export default AlertsHandler;

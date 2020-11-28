@@ -130,10 +130,8 @@ export const createAlert = gql`
 `;
 
 export const updateAlert = gql`
-  mutation updateAlert($input: CreateAlertInput!, $id: ID!) {
-    alert: updateAlert(input: $input,  id: $id) {
-      id
-      type
+  mutation updateAlert($input: UpdateAlertInput!) {
+    alert: updateAlert(input: $input) {
       sensor_id
       settingsid
       maxsetvalue

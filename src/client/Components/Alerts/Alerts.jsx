@@ -21,7 +21,7 @@ const Alerts = ({
       max: 10,
       value: minValue,
       step: 0.10,
-      label: ' Min',
+      label: 'Min',
       locked: false,
       alarm: false,
     },
@@ -33,7 +33,7 @@ const Alerts = ({
       max: 10,
       value: maxValue,
       step: 0.10,
-      label: ' Max',
+      label: 'Max',
       locked: false,
       alarm: false,
     },
@@ -129,7 +129,7 @@ const Alerts = ({
       <h4>Set Alerts</h4>
       <div className={classes.List_Div}>
         {sliderList}
-        <AlertsHandler sensorType={type} minValue={values.Min} maxvalue={values.max} />
+        <AlertsHandler sensorType={type} minValue={values.Min} maxValue={values.Max} />
       </div>
     </div>
   );
