@@ -3,13 +3,14 @@ import propTypes from 'prop-types';
 import { useMutation, useQuery } from '@apollo/client';
 import { updateAlert, alertQuery } from '../../graphql/queries.js';
 
-const AlertsHandler = ({ sensorType, minValue, maxValue }) => {
+const AlertsHandler = ({
+  sensorType, minValue, maxValue, valueChanged,
+}) => {
   const { loading, error, data } = useQuery(alertQuery, { variables: { id: sensorType } });
   const [changeAlert] = useMutation(updateAlert);
 
   if (loading) return <p>Loading...</p>;
   if (error) return <p>Error :(</p>;
-  console.log(data);
 
   const setAlerts = async () => {
     const { maxsetvalue, minsetvalue } = data.alert;
@@ -17,10 +18,9 @@ const AlertsHandler = ({ sensorType, minValue, maxValue }) => {
       const newAlert = {
         sensor_id: data.alert.sensor_id,
         settingsid: data.alert.settingsid,
-        maxsetvalue: maxValue,
-        minsetvalue: minValue,
+        maxsetvalue: parseFloat(maxValue),
+        minsetvalue: parseFloat(minValue),
       };
-      console.log(newAlert);
       changeAlert({ variables: { input: { ...newAlert } } });
     }
   };
@@ -37,6 +37,7 @@ const AlertsHandler = ({ sensorType, minValue, maxValue }) => {
           }}
           type="button"
           onClick={() => setAlerts()}
+          disabled={!valueChanged}
         >
           Set Alerts
         </button>
@@ -49,6 +50,7 @@ AlertsHandler.propTypes = {
   sensorType: propTypes.string.isRequired,
   minValue: propTypes.number.isRequired,
   maxValue: propTypes.number.isRequired,
+  valueChanged: propTypes.bool.isRequired,
 };
 
 export default AlertsHandler;

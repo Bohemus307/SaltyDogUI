@@ -22,8 +22,9 @@ const Alerts = ({
       value: minValue,
       step: 0.10,
       label: 'Min',
-      locked: false,
+      locked: true,
       alarm: false,
+      valueChanged: false,
     },
     {
       key: 'MaxSlider',
@@ -34,8 +35,9 @@ const Alerts = ({
       value: maxValue,
       step: 0.10,
       label: 'Max',
-      locked: false,
+      locked: true,
       alarm: false,
+      valueChanged: false,
     },
   ]);
 
@@ -51,10 +53,9 @@ const Alerts = ({
         break;
       case false:
         newSliders[index].locked = true;
-        // run func to set alerts
         break;
       default:
-        newSliders[index].locked = false;
+        newSliders[index].locked = true;
     }
     setSliders(newSliders);
   },
@@ -66,6 +67,7 @@ const Alerts = ({
     const index = sliders.map((slider) => slider.label).indexOf(key);
     const newSliders = [...sliders];
     newSliders[index].value = parseFloat(val);
+    newSliders[index].valueChanged = true;
     setSliders(newSliders);
   },
   [sliders]);
@@ -82,7 +84,14 @@ const Alerts = ({
           label: slider.label,
           onChange: (e, key) => sliderValueChanged(e, key),
         }),
-        [slider.divKey, slider.min, slider.max, slider.step, slider.value, slider.label],
+        [
+          slider.divKey,
+          slider.min,
+          slider.max,
+          slider.step,
+          slider.value,
+          slider.label,
+        ],
       );
       return (
         <div className={classes.Value_Div} key={slideProps.divkey}>
@@ -123,13 +132,26 @@ const Alerts = ({
   }, {});
 
   const values = groupBy('value', 'label');
+  const valueChecker = sliders.reduce((acc, obj) => {
+    const value = obj.valueChanged;
+    const key = 'valueChanged';
+    if (!acc[key]) {
+      acc[key] = value;
+    }
+    return acc;
+  }, {});
 
   return (
     <div className={classes.Alerts}>
       <h4>Set Alerts</h4>
       <div className={classes.List_Div}>
         {sliderList}
-        <AlertsHandler sensorType={type} minValue={values.Min} maxValue={values.Max} />
+        <AlertsHandler
+          sensorType={type}
+          minValue={values.Min}
+          maxValue={values.Max}
+          valueChanged={valueChecker.valueChanged}
+        />
       </div>
     </div>
   );

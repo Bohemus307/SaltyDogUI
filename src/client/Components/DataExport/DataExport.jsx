@@ -164,7 +164,7 @@ const DataExport = ({ id }) => {
           alt={formElement.config.elementConfig.alt}
         />
       ))}
-      <button type="submit" onClick={exportHandler}>Export</button>
+      <button type="submit" onClick={exportHandler} disabled={!inputElements.valid}>Export</button>
       <CSVLink
         data={exportData}
         filename={inputElements.filename.value}

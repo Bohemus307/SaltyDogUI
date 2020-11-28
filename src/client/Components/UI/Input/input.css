@@ -41,7 +41,7 @@
   line-height: 1.5em;
   padding: 0;
   -webkit-appearance: none;
-  background-color: #282e33;
+  background-color: #434a52;
   border-radius: 0px 3px 3px 0px;
   color: #a9a9a9;
   margin-bottom: 1em;
@@ -76,7 +76,7 @@
 }
 
 .InputElement-password {
-  background-color: #3b4148;
+  background-color: #282e33;
   border-radius: 0px 3px 3px 0px;
   color: #a9a9a9;
   margin-bottom: 1em;
@@ -91,8 +91,8 @@
 } 
 
 .Invalid {
-  border: 1px solid red;
-  background-color: salmon;
+  /* border: 1px solid red; */
+  /* background-color: salmon; */
 }
 
 .ValidationError {
