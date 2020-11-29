@@ -1,7 +1,7 @@
 .Main {
   display: flex;
   flex-direction: column;
-  height: 1000px;
+  height: 1400px;
   width: 100%;
 }
 
@@ -11,7 +11,7 @@
   justify-content: center;
   align-items: center;
   width: 100%;
-  height: 20%;
+  height: 10%;
 }
 
 .Sensor {
@@ -29,8 +29,8 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  height: 100%;
+  justify-content: space-around;
+  height: 80%;
   width: 100%;
 }
 
@@ -39,7 +39,7 @@
   flex-direction: column;
   background-color: #282e33;
   width: 60%;
-  height: 50%;
+  height: 40%;
   border-radius: 9px;
   box-shadow: 1px 2px;
   color: #282e33;
@@ -48,8 +48,8 @@
 .Line_Chart {
   display: flex;
   flex-direction: column;
-  width: 90%;
-  height: 40%;
+  width: 70%;
+  height: 30%;
   border-radius: 9px;
   margin-left: 10px;
   box-shadow: 1px 2px;

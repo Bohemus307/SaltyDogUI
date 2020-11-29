@@ -56,13 +56,17 @@ const Main = ({ displayItem }) => {
   let mainElement = null;
   const [isMonth, setInterval] = useState(false);
 
-  const chartHandler = () => {
+  const lineChartHandler = () => {
     if (isMonth) {
       setInterval(false);
       return;
     }
     setInterval(true);
   };
+
+  const pieChartHandler = () => {
+
+  }
 
   const overview = (
     <Aux>
@@ -72,10 +76,10 @@ const Main = ({ displayItem }) => {
       </div>
       <div className={classes.Chart_Wrapper}>
         <div className={(isMonth) ? classes.Line_Month : classes.Line_Chart}>
-          <LineChartReducer changeChartSize={chartHandler} />
+          <LineChartReducer changeChartDuration={lineChartHandler} />
         </div>
         <div className={classes.Pie_Chart}>
-          <PieChartReducer />
+          <PieChartReducer changeChartValues={lineChartHandler} />
         </div>
       </div>
     </Aux>

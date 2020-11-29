@@ -6,9 +6,9 @@ import LineChart from '../LineChart/LineChart.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
-const LineChartReducer = ({ changeChartSize }) => {
+const LineChartReducer = ({ changeChartDuration }) => {
   const [chartDuration, setDuration] = useState('Past Week');
-  const queryMultiple = () => {
+  const QueryMultiple = () => {
     const res1 = useQuery(weekOfDataQuery, { // ph
       variables: { id: 'BJenjRROw' },
       skip: false,
@@ -44,7 +44,7 @@ const LineChartReducer = ({ changeChartSize }) => {
     { loading: loading4, data: data4 },
     { loading: loading5, data: data5 },
     { loading: loading6, data: data6 },
-  ] = queryMultiple();
+  ] = QueryMultiple();
 
   if (loading1 || loading2 || loading3 || loading4 || loading5 || loading6) {
     return <Spinner />;
@@ -97,11 +97,11 @@ const LineChartReducer = ({ changeChartSize }) => {
   const inputChangeHandler = (value) => {
     if (value === 'Past Month') {
       setDuration('Past Month');
-      changeChartSize();
+      changeChartDuration();
       return;
     }
     setDuration('Past Week');
-    changeChartSize();
+    changeChartDuration();
   };
 
   return (
@@ -112,7 +112,7 @@ const LineChartReducer = ({ changeChartSize }) => {
 };
 
 LineChartReducer.propTypes = {
-  changeChartSize: propTypes.func.isRequired,
+  changeChartDuration: propTypes.func.isRequired,
 };
 
 export default LineChartReducer;

@@ -2,13 +2,12 @@ import React, { useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import propTypes from 'prop-types';
 
-import data from './data.js';
+import fakedata from './data.js';
 import classes from './PieChart.css';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
-import Aux from '../../Hoc/Aux/Aux.jsx';
 
-const PieChart = () => {
+const PieChart = ({ inputChanged, data }) => {
   const [inputElements, setInputs] = useState({
     chartForm: {
       chartDates: {
@@ -16,13 +15,14 @@ const PieChart = () => {
         elementType: 'select',
         elementConfig: {
           options: [
-            { pastWeek: 'Past Week', displayValue: 'Past Week' },
-            { pastMonth: 'Past Month', displayValue: 'Past Month' },
+            { ph: 'PH Values', displayValue: 'PH-1' },
+            { ec: 'EC Values', displayValue: 'EC-1' },
+            { do: 'DO Values', displayValue: 'DO-1' },
           ],
-          image: '/images/start.svg',
-          alt: 'Chart Duration',
+          image: '/images/sensor.svg',
+          alt: 'Sensor Values',
         },
-        value: 'Past Week',
+        value: 'Ph',
         valid: false,
         validation: {
           required: false,
@@ -73,7 +73,7 @@ const PieChart = () => {
   }
 
   return (
-    <div className={classes.Chart_Wrapper}>
+    <div className={classes.Chart_Div}>
       <ResponsivePie
         data={data}
         margin={{
@@ -187,15 +187,15 @@ const PieChart = () => {
           },
         ]}
       />
-      <div>
+      <div style={{ marginTop: '10px' }}>
         <span style={{
           color: '#282e33',
           fontWeight: 'bolder',
           float: 'right',
-          marginRight: '60px',
+          marginRight: '5%',
         }}
         >
-          Chart Time Duration
+          Chart Sensor Values
         </span>
         {dropDown}
       </div>

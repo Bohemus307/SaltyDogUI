@@ -3,7 +3,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
 import { ResponsiveLine } from '@nivo/line';
-import Aux from '../../Hoc/Aux/Aux.jsx';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import classes from './LineChart.css';
@@ -77,7 +76,7 @@ const LineChart = ({ data, inputChanged }) => {
   }
 
   return (
-    <div className={classes.Chart_Wrapper}>
+    <div className={classes.Chart_Div}>
       <ResponsiveLine
         data={data}
         margin={{
@@ -144,12 +143,12 @@ const LineChart = ({ data, inputChanged }) => {
           },
         ]}
       />
-      <div>
+      <div style={{ marginTop: '20px' }}>
         <span style={{
           color: '#282e33',
           fontWeight: 'bolder',
           float: 'right',
-          marginRight: '70px',
+          marginRight: '8.5%',
         }}
         >
           Chart Time Duration
