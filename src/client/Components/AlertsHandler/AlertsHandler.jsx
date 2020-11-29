@@ -34,9 +34,9 @@ const AlertsHandler = ({
       <p>{data.sensor_id}</p>
       <button
         style={{
-          color: '#282e33',
+          color: '#434a52',
           height: '80%',
-          width: '80%',
+          width: '100%',
           padding: '5px 5px',
           borderRadius: '9px',
           boxShadow: '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
@@ -48,7 +48,7 @@ const AlertsHandler = ({
         onClick={() => setAlerts()}
         disabled={!valueChanged}
       >
-        Set Alerts
+        Submit
       </button>
     </div>
   );

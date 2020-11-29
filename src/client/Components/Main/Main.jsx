@@ -70,12 +70,12 @@ const Main = ({ displayItem }) => {
       <div className={classes.Sensor_Wrapper}>
         {currentSensors}
       </div>
-      <div className={classes.Data_Wrapper}>
-        <div className={classes.Chart}>
-          <PieChartReducer />
-        </div>
-        <div className={(isMonth) ? classes.Month : classes.Feed}>
+      <div className={classes.Chart_Wrapper}>
+        <div className={(isMonth) ? classes.Line_Month : classes.Line_Chart}>
           <LineChartReducer changeChartSize={chartHandler} />
+        </div>
+        <div className={classes.Pie_Chart}>
+          <PieChartReducer />
         </div>
       </div>
     </Aux>

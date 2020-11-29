@@ -11,10 +11,6 @@ import Alerts from '../Alerts/Alerts.jsx';
 
 const SensorOverview = ({ id, type, unitOfMeasure }) => {
   const [alerts, setAlerts] = useState({});
-  const [alarms, setAlarms] = useState({
-    maxAlarm: false,
-    minAlarm: false,
-  });
 
   const QueryMultiple = () => {
     const res1 = useQuery(sensorQuery, {
@@ -39,24 +35,6 @@ const SensorOverview = ({ id, type, unitOfMeasure }) => {
 
   const { sensor: { values } } = data1;
 
-  const alertHandler = (reading) => {
-    const limits = data2.alert;
-    // const current = values[0];
-    if (alarms.maxAlarm && alarms.minAlarm) {
-      return true;
-    }
-    if (reading > limits.maxsetvalue) {
-      console.log('max alarm');
-      setAlarms({ ...alarms, maxAlarm: true });
-    }
-    if (reading < limits.minsetvalue) {
-      console.log('min alarm');
-      setAlarms({ ...alarms, minAlarm: true });
-      return true;
-    }
-    return false;
-  };
-
   return (
     <div className={classes.Overview}>
       <div className={classes.Sensor_Div}>
@@ -64,7 +42,6 @@ const SensorOverview = ({ id, type, unitOfMeasure }) => {
           type={type}
           unitOfMeasure={unitOfMeasure}
           id={id}
-          alarmCheck={alertHandler}
         />
       </div>
       <div className={classes.Sensor_Feed}>

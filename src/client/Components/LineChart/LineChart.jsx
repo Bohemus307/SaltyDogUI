@@ -77,7 +77,7 @@ const LineChart = ({ data, inputChanged }) => {
   }
 
   return (
-    <Aux>
+    <div className={classes.Chart_Wrapper}>
       <ResponsiveLine
         data={data}
         margin={{
@@ -144,18 +144,19 @@ const LineChart = ({ data, inputChanged }) => {
           },
         ]}
       />
-
-      <span style={{
-        color: '#282e33',
-        fontWeight: 'bolder',
-        float: 'right',
-        marginRight: '145px',
-      }}
-      >
-        Duration:
-      </span>
-      {dropDown}
-    </Aux>
+      <div>
+        <span style={{
+          color: '#282e33',
+          fontWeight: 'bolder',
+          float: 'right',
+          marginRight: '70px',
+        }}
+        >
+          Chart Time Duration
+        </span>
+        {dropDown}
+      </div>
+    </div>
   );
 };
 
