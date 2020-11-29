@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import { ResponsivePie } from '@nivo/pie';
 import propTypes from 'prop-types';
 
-import fakedata from './data.js';
 import classes from './PieChart.css';
 import Input from '../UI/Input/Input.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
@@ -203,14 +202,14 @@ const PieChart = ({ inputChanged, data }) => {
   );
 };
 
-// PieChart.propTypes = {
-//   data: propTypes.arrayOf(
-//     propTypes.shape({
-//       x: propTypes.string,
-//       y: propTypes.number,
-//     }),
-//   ).isRequired,
-//   inputChanged: propTypes.func.isRequired,
-// };
+PieChart.propTypes = {
+  data: propTypes.arrayOf(
+    propTypes.shape({
+      x: propTypes.string,
+      y: propTypes.number,
+    }),
+  ).isRequired,
+  inputChanged: propTypes.func.isRequired,
+};
 
 export default PieChart;

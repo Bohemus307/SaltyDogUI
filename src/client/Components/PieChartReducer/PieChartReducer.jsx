@@ -1,14 +1,24 @@
-import React, { useState, useCallback } from 'react';
-import propTypes from 'prop-types';
+import React, { useState } from 'react';
 import { useQuery } from '@apollo/client';
 import { sensorQuery, alertQuery } from '../../graphql/queries.js';
 
 import PieChart from '../PieChart/PieChart.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 
-const PieChartReducer = ({ changeChartValues }) => {
-  const [alerts, setAlerts] = useState({});
-  const [chartData, setChartData] = useState([]);
+const PieChartReducer = () => {
+  const [alerts, setAlerts] = useState(
+    {
+      alert: {
+        dateset: '1606521600000',
+        maxsetvalue: 7.9,
+        minsetvalue: 5.2,
+        sensor_id: 'PH-1',
+        settingsid: 'aZx-123',
+        __typename: 'Alert',
+      },
+    },
+  );
+  const [chartData, setChartData] = useState();
   const [currSensor, setCurrSensor] = useState({
     type: 'PH-1',
     id: 'BJenjRROw',
@@ -31,11 +41,11 @@ const PieChartReducer = ({ changeChartValues }) => {
       unitOfMeasure: 'mg/L',
     },
   ]);
-
+  console.log(alerts);
   const rangeFilter = (data) => {
     // filter data 2 for in range
     const inRange = data.sensor.values.filter((item) => {
-      if (item.reading > alerts.alert.minsetvalue && item.reading < alerts.alert.maxsetvalue) {
+      if (item.reading >= alerts.alert.minsetvalue && item.reading <= alerts.alert.maxsetvalue) {
         return item;
       }
     });
@@ -82,13 +92,12 @@ const PieChartReducer = ({ changeChartValues }) => {
       variables: { id: currSensor.id },
       onCompleted: (data) => rangeFilter(data),
     });
-
     return [res1, res2];
   };
 
   const [
-    { loading: loading1 },
-    { loading: loading2, data: data2 },
+    { loading: loading1, refetch: refetch1 },
+    { loading: loading2, data: data2, refetch: refetch2 },
   ] = QueryMultiple();
 
   if (loading1 || loading2) {
@@ -99,19 +108,17 @@ const PieChartReducer = ({ changeChartValues }) => {
     const index = sensors.map((sensor) => sensor.type).indexOf(value);
     if (sensors[index]) {
       setCurrSensor(sensors[index]);
-      //rangeFilter(data2);
+      // rangeFilter(data2);
+      refetch1({ variables: { id: currSensor.type } });
+      refetch2({ variables: { id: currSensor.id } });
     }
   };
 
   return (
     <div style={{ height: '100%', width: '95%' }}>
-      <PieChart data={chartData} inputChanged={inputChangeHandler} />
+      {(chartData) ? <PieChart data={chartData} inputChanged={inputChangeHandler} /> : <Spinner />}
     </div>
   );
-};
-
-PieChartReducer.propTypes = {
-  changeChartValues: propTypes.func.isRequired,
 };
 
 export default PieChartReducer;

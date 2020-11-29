@@ -64,10 +64,6 @@ const Main = ({ displayItem }) => {
     setInterval(true);
   };
 
-  const pieChartHandler = () => {
-
-  }
-
   const overview = (
     <Aux>
       <h2>{displayItem}</h2>
@@ -79,7 +75,7 @@ const Main = ({ displayItem }) => {
           <LineChartReducer changeChartDuration={lineChartHandler} />
         </div>
         <div className={classes.Pie_Chart}>
-          <PieChartReducer changeChartValues={lineChartHandler} />
+          <PieChartReducer />
         </div>
       </div>
     </Aux>
