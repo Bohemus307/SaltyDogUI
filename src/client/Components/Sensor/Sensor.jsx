@@ -9,7 +9,7 @@ import classes from './Sensor.css';
 const Sensor = ({
   id, type, unitOfMeasure,
 }) => {
-  const [alerts, setAlerts] = useState({});
+  const [alerts, setAlerts] = useState();
 
   const QueryMultiple = () => {
     const res1 = useQuery(sensorQuery, {
@@ -59,7 +59,9 @@ const Sensor = ({
     </Aux>
   );
   // return ((alertHandler(values[0].reading)) ? sensorinAlarm : sensor1);
-  return (values[0].reading > data2.alert.maxsetvalue || values[0].reading < data2.alert.minsetvalue) ? sensorinAlarm : sensor1;
+  return (
+    values[0].reading > data2.alert.maxsetvalue
+     || values[0].reading < data2.alert.minsetvalue) ? sensorinAlarm : sensor1;
 };
 
 Sensor.propTypes = {

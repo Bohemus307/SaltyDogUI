@@ -63,16 +63,8 @@ app.post('/login', async (req, res) => {
         message: 'Bad request - Password is incorrect',
       });
     }
-    // const token = jwt.sign({ user: userName }, 'secret_key');
-    const token = jwt.sign({ sub: userName }, jwtSecret);
 
-    // res.cookie('authCookie', token, {
-    //   maxAge: 900000,
-    //   httpOnly: true,
-    //   signed: true,
-    //   // secure: true,
-    //   sameSite: true,
-    // }).send('Cookie Set');
+    const token = jwt.sign({ sub: userName }, jwtSecret);
 
     res.send({ token });
   } catch (err) {
@@ -110,7 +102,6 @@ const resolvers = require('./Controllers/resolvers');
 const prisma = new PrismaClient();
 
 async function context({ req, connection }) {
-  console.log(req.cookies);
   if (req && req.user) {
     return {
       userId: req.user.sub,

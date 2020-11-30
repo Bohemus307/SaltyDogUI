@@ -3,13 +3,11 @@ import { Link, useHistory } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Input from '../UI/Input/Input.jsx';
 
-import { createAccount } from '../Auth/auth';
+import { createAccount, isLoggedIn } from '../Auth/auth';
 import classes from './SignUp.css';
 
 const SignUp = () => {
   const history = useHistory();
-  const [signedIn, setSignedIn] = useState(true);
-
   const [formIsValid, setValid] = useState(false);
   // rules for input content
   const checkValidity = (value, rules) => {
@@ -155,12 +153,8 @@ const SignUp = () => {
     setInputElements(updatedLoginForm);
   };
 
-  const [loading, setLoading] = useState(false);
-
   const loginHandler = (event) => {
     event.preventDefault();
-    // request
-    // setLoading(true);
 
     const formData = {};
     for (const formElementIdentifier in inputElements) {
@@ -222,15 +216,16 @@ const SignUp = () => {
           label={inputElement.config.elementConfig.image}
         />
       ))}
-      {/* <input type="submit" value="Login" /> */}
       <button type="submit" onSubmit={loginHandler} disabled={!formIsValid}>Sign Up</button>
-      <Link className={classes.Redirect} to="/login">Already have an account?</Link>
+      <Link className={classes.Redirect} to="/login">
+        Already have an account?
+      </Link>
     </form>
   );
 
   return (
     <div>
-      <Modal show={signedIn} modalClosed={handleClick}>
+      <Modal show={!(isLoggedIn)} modalClosed={handleClick}>
         <div className={classes.Form_Div}>
           <h1 style={{ marginBottom: '0px', marginLeft: '20px' }}>
             Create Account

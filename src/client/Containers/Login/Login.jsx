@@ -1,14 +1,8 @@
-import React, { useState } from 'react';
+import React from 'react';
 import {
   BrowserRouter as Router,
-  Switch,
-  Route,
   NavLink,
-  Redirect,
-  useHistory,
-  useLocation,
 } from 'react-router-dom';
-import axios from 'axios';
 import { login } from '../../Components/Auth/auth';
 
 import classes from './Login.css';
@@ -174,7 +168,6 @@ class Login extends React.Component {
             label={formElement.config.elementConfig.image}
           />
         ))}
-        {/* <input type="submit" value="Login" /> */}
         <button type="submit" disabled={!this.state.formIsValid}>Login</button>
       </form>
     );

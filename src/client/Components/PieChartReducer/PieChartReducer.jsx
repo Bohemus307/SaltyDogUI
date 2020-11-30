@@ -41,7 +41,7 @@ const PieChartReducer = () => {
       unitOfMeasure: 'mg/L',
     },
   ]);
-  console.log(alerts);
+
   const rangeFilter = (data) => {
     // filter data 2 for in range
     const inRange = data.sensor.values.filter((item) => {
@@ -97,7 +97,7 @@ const PieChartReducer = () => {
 
   const [
     { loading: loading1, refetch: refetch1 },
-    { loading: loading2, data: data2, refetch: refetch2 },
+    { loading: loading2, refetch: refetch2 },
   ] = QueryMultiple();
 
   if (loading1 || loading2) {
@@ -108,7 +108,6 @@ const PieChartReducer = () => {
     const index = sensors.map((sensor) => sensor.type).indexOf(value);
     if (sensors[index]) {
       setCurrSensor(sensors[index]);
-      // rangeFilter(data2);
       refetch1({ variables: { id: currSensor.type } });
       refetch2({ variables: { id: currSensor.id } });
     }

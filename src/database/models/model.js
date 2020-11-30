@@ -109,21 +109,3 @@ module.exports = {
       .catch((e) => console.error(e.stack));
   },
 };
-
-// getRelatedArtists: (artistId) => {
-//   console.log(artistId);
-//   const sqlString = `SELECT
-//   a.artistname AS main_artist,
-//   b.artistname AS related_artist_name,
-//   b.bio AS related_artist_bio,
-//   b.avatar AS related_artist_avatar
-//   FROM relatedartists AS ra
-//   JOIN artists as a ON ra.artistid1 = a.artistid
-//   JOIN artists as b ON ra.artistid2 = b.artistid
-//   WHERE a.artistid = $1`;
-
-//   return db.query(sqlString, [artistId]);
-// },
-
-// INSERT INTO alerts(sensor_id, settingsid, maxsetvalue, minsetvalue, dateset)
-//  VALUES('PH-1', 'aZx-123', 7.8, 3.2, now())
