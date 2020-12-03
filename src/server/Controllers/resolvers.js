@@ -27,7 +27,7 @@ const Query = {
     const id = parseInt(reading_id, 10);
     const result = await context.prisma.values.findUnique({ where: { reading_id: id } });
     return result;
-  }, // gets values by sensor_Id
+  },
 };
 
 const Mutation = {

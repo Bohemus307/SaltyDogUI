@@ -1,0 +1,9 @@
+node_modules
+npm-debug.log
+.eslintrc.js
+.gitignore
+babel.config.js
+bundle.js
+.env
+.git
+.csv

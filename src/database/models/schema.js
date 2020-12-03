@@ -82,11 +82,9 @@ const indexValueCorrelateIdSensor = () => {
 };
 
 sensors()
-  .then(() => console.log('Created table values users and sensors'))
   .then(values)
-  .then(() => console.log('Created table values users and sensors'))
-  .then(hyperTable)
-  .then(() => console.log('Created hypertable now importing data'))
+  .then(alerts)
+  .then(() => console.log('Created table values users alerts and sensors'))
   .then(seedPgDatabase)
   .then(() => console.log('Imported all records now creating index on correlateId'))
   .then(indexValueCorrelateIdValue)

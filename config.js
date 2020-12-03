@@ -11,8 +11,8 @@ const dev = {
     host: process.env.DEV_DB_HOST || 'localhost',
     port: parseInt(process.env.DEV_DB_PORT, 10) || 5432,
     database: process.env.DEV_DB_NAME || 'saltydog1',
-    user: 'postgres',
-    password: null,
+    user: process.env.PGUSER,
+    password: process.env.PG_PASSWORD || null,
   },
   cache: {
     port: 6379,
@@ -22,7 +22,7 @@ const dev = {
 
 const prod = {
   app: {
-    port: parseInt(process.env.PROD_APP_PORT, 10) || 3000,
+    port: parseInt(process.env.PROD_APP_PORT, 10) || 3030,
     secret: process.env.SECRET || 'helloWorld',
   },
   db: {
@@ -30,11 +30,7 @@ const prod = {
     port: parseInt(process.env.TEST_DB_PORT, 10) || 5432,
     database: process.env.TEST_DB_NAME || 'saltydog1',
     user: process.env.PGUSER,
-    password: process.env.PG_AWS_PASSWORD,
-  },
-  cache: {
-    port: 6379,
-    host: 'cache',
+    password: process.env.PG_AWS_PASSWORD || null,
   },
 };
 

@@ -4,7 +4,8 @@
   "description": "Ui for salty dog salinity sensor",
   "main": "index.js",
   "scripts": {
-    "start": "nodemon --ext js,graphql --ignore data/ src/server/index.js",
+    "build": "webpack --mode production --config webpack.config.js",
+    "start": "node src/server/index.js",
     "react-dev": "webpack --mode development --config webpack.config.js --watch --progress",
     "server-dev": "nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
