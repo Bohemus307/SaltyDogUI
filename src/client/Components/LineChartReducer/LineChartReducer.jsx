@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { weekOfDataQuery, monthOfDataQuery } from '../../graphql/queries';
 import LineChart from '../LineChart/LineChart.jsx';
 import Spinner from '../UI/Spinner/Spinner.jsx';

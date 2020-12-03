@@ -1,5 +1,5 @@
 import React, { useState, useRef, useCallback } from 'react';
-import { useLazyQuery } from '@apollo/react-hooks';
+import { useLazyQuery } from '@apollo/client';
 import { CSVLink } from 'react-csv';
 import { exportDataQuery } from '../../graphql/queries.js';
 import Input from '../UI/Input/Input.jsx';

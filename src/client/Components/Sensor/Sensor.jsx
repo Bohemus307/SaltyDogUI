@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import propTypes from 'prop-types';
-import { useQuery } from '@apollo/react-hooks';
+import { useQuery } from '@apollo/client';
 import { sensorQuery, alertQuery } from '../../graphql/queries.js';
 import Spinner from '../UI/Spinner/Spinner.jsx';
 import Aux from '../../Hoc/Aux/Aux.jsx';

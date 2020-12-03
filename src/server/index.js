@@ -12,11 +12,9 @@ const path = require('path');
 const cors = require('cors');
 const { PrismaClient } = require('@prisma/client');
 const config = require('../../config');
-const db = require('../database/connection');
+// const db = require('../database/connection');
 
 const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
-
-// const db = require('../../db');
 
 const jwtSecret = Buffer.from(config.app.secret, 'base64');
 

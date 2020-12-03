@@ -12,7 +12,7 @@ const dev = {
     port: parseInt(process.env.DEV_DB_PORT, 10) || 5432,
     database: process.env.DEV_DB_NAME || 'saltydog1',
     user: process.env.PGUSER,
-    password: process.env.PG_PASSWORD || null,
+    password: null,
   },
   cache: {
     port: 6379,

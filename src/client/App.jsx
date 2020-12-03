@@ -4,7 +4,7 @@ import {
   Switch,
   Route,
 } from 'react-router-dom';
-import { ApolloProvider } from '@apollo/react-hooks';
+import { ApolloProvider } from '@apollo/client';
 
 import Login from './Containers/Login/Login.jsx';
 import DashBoard from './Containers/DashBoard/DashBoard.jsx';

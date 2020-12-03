@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 import { Link, useHistory } from 'react-router-dom';
 import Modal from '../Modal/Modal.jsx';
 import Input from '../UI/Input/Input.jsx';
