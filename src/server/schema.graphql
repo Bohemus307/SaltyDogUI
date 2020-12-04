@@ -1,4 +1,4 @@
-  type Query {
+type Query {
     sensor(correlateid: ID!, start: Float, end: Float): Sensor
     sensors: [Sensor]
     value(reading_id: ID!): Value

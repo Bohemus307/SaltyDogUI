@@ -94,7 +94,7 @@ app.post('/signup', async (req, res) => {
 });
 
 // graphQL connect
-const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
+const typeDefs = gql(fs.readFileSync(path.join(__dirname, '/schema.graphql'), { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
 
 const prisma = new PrismaClient();

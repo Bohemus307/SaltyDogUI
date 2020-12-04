@@ -4,7 +4,7 @@ import classes from './Main.css';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
 import ErrorBoundary from '../Error Boundary/ErrorBoundary.jsx';
-import Sensor from '../Sensor/Sensor.jsx';
+// import Sensor from '../Sensor/Sensor.jsx';
 // import SensorOverview from '../SensorOverview/SensorOverview.jsx';
 // import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
 // import PieChartReducer from '../PieChartReducer/PieChartReducer.jsx';
@@ -12,6 +12,7 @@ import Sensor from '../Sensor/Sensor.jsx';
 const LineChartReducer = React.lazy(() => import('../LineChartReducer/LineChartReducer.jsx'));
 const PieChartReducer = React.lazy(() => import('../PieChartReducer/PieChartReducer.jsx'));
 const SensorOverview = React.lazy(() => import('../SensorOverview/SensorOverview.jsx'));
+const Sensor = React.lazy(() => import('../Sensor/Sensor.jsx'));
 
 const Main = ({ displayItem }) => {
   const [sensors] = useState([
@@ -48,12 +49,16 @@ const Main = ({ displayItem }) => {
   const currentSensors = (
     sensors.map((sensor) => (
       <div key={sensor.type} className={classes.Sensor}>
-        <Sensor
-          id={sensor.id}
-          key={sensor.type}
-          type={sensor.type}
-          unitOfMeasure={sensor.unitOfMeasure}
-        />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Sensor
+              id={sensor.id}
+              key={sensor.type}
+              type={sensor.type}
+              unitOfMeasure={sensor.unitOfMeasure}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     ))
   );
