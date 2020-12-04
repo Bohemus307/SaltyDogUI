@@ -3,7 +3,7 @@ import {
   BrowserRouter as Router,
   NavLink,
 } from 'react-router-dom';
-import { login } from '../../Components/Auth/auth';
+import { login, isLoggedIn } from '../../Components/Auth/auth';
 
 import classes from './Login.css';
 import Logo from '../../Components/Logo/Logo.jsx';
@@ -50,7 +50,7 @@ class Login extends React.Component {
       },
       formIsValid: false,
       loading: false,
-      isLoggedIn: false,
+      isLoggedIn: isLoggedIn(),
       authToken: null,
       isError: false
     };
@@ -126,7 +126,7 @@ class Login extends React.Component {
     login(email, password)
       .then((ok) => {
       if (ok) {
-        this.setState({ isloggedIn: true });
+        this.setState({ isLoggedIn: true });
         this.props.history.replace('/dashboard'); 
       } else {
         this.setState({
@@ -186,7 +186,7 @@ class Login extends React.Component {
         <div className={classes.Login}>
         {form}
         </div>
-        <NavLink className={classes.Signup} to="/signup">Don't have an account?</NavLink>
+        {(this.state.isLoggedIn) ? null : <NavLink className={classes.Signup} to="/signup">Don't have an account?</NavLink>}
       </div>
     );
   }

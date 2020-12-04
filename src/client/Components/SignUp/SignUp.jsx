@@ -222,10 +222,9 @@ const SignUp = () => {
       </Link>
     </form>
   );
-
   return (
     <div>
-      <Modal show={!(isLoggedIn)} modalClosed={handleClick}>
+      <Modal show={!(isLoggedIn())} modalClosed={handleClick}>
         <div className={classes.Form_Div}>
           <h1 style={{ marginBottom: '0px', marginLeft: '20px' }}>
             Create Account

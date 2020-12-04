@@ -1,14 +1,16 @@
-/* eslint-disable jsx-a11y/click-events-have-key-events */
-/* eslint-disable jsx-a11y/no-static-element-interactions */
-
-// research best practice in backdrop construction !!!!!!!!!!!!!
-
 import React from 'react';
 import propTypes from 'prop-types';
 import classes from './backdrop.css';
 
 const Backdrop = ({ show, clicked }) => (
-  show ? <div className={classes.Backdrop} onClick={clicked} /> : null
+  show ? (
+    <div
+      className={classes.Backdrop}
+      onClick={clicked}
+      role="button"
+      tabIndex="0"
+    />
+  ) : null
 );
 
 Backdrop.propTypes = {
