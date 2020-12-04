@@ -1,8 +1,12 @@
-import React from 'react';
+import React, { Suspense } from 'react';
 
 import classes from './DashBoard.css';
-import Menu from '../../Components/Menu/Menu.jsx';
-import Main from '../../Components/Main/Main.jsx';
+import ErrorBoundary from '../../Components/Error Boundary/ErrorBoundary.jsx';
+// import Menu from '../../Components/Menu/Menu.jsx';
+// import Main from '../../Components/Main/Main.jsx';
+
+const Menu = React.lazy(() => import('../../Components/Menu/Menu.jsx'));
+const Main = React.lazy(() => import('../../Components/Main/Main.jsx'));
 
 class DashBoard extends React.Component {
   constructor(props) {
@@ -30,10 +34,18 @@ class DashBoard extends React.Component {
     return (
       <div className={classes.DashBoard}>
         <div className={classes.Menu_Div}>
-          <Menu  displayItem={ this.menuClickHandler } />
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Menu  displayItem={ this.menuClickHandler } />
+            </Suspense>
+          </ErrorBoundary>
         </div>
         <div className={classes.Main_Div}>
-          <Main displayItem={this.state.value} />
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <Main displayItem={this.state.value} />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       
       </div>
