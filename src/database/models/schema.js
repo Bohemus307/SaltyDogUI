@@ -59,10 +59,10 @@ const alerts = () => {
     .then(() => db.query(sqlString));
 };
 
-const hyperTable = () => {
-  const sqlString = 'SELECT create_hypertable(\'Values\', \'time\', chunk_time_interval => INTERVAL \'1 day\')';
-  db.query(sqlString);
-};
+// const hyperTable = () => {
+//   const sqlString = 'SELECT create_hypertable(\'Values\', \'time\', chunk_time_interval => INTERVAL \'1 day\')';
+//   db.query(sqlString);
+// };
 
 const seedPgDatabase = () => {
   const pathToCSV = process.env.NODE_ENV === 'prod' ? '/home/bitnami/seed_files/readings.csv' : path.resolve(__dirname, '../../../readings.csv');
@@ -93,5 +93,5 @@ sensors()
   .catch((err) => console.log(err));
 
 module.exports = {
-  users, sensors, values, alerts, hyperTable, seedPgDatabase,
+  users, sensors, values, alerts, seedPgDatabase,
 };

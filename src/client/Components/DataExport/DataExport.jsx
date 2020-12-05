@@ -102,7 +102,7 @@ const DataExport = ({ id }) => {
       return click;
     } catch (err) { console.log(err); }
   };
-  // will export data to csv or json type file needs to open a save as modal
+
   const exportHandler = (event) => {
     event.preventDefault();
     const formData = {};

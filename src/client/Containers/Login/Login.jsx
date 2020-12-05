@@ -103,7 +103,19 @@ class Login extends React.Component {
     updatedFormELement.touched = true;
     updatedLoginForm[inputIdentifier] = updatedFormELement;
     
-   let formIsValid = true;
+    let formIsValid = false;
+    const keys = Object.keys(this.state.controls);
+    const values = Object.values(this.state.controls);
+    const areAllValid = values.filter((value) => {
+      if (value.valid) {
+        return true;
+      }
+      return false;
+    });
+    if (areAllValid.length === keys.length) {
+      formIsValid = true;
+    }
+
     for (let inputIdentifiers in updatedLoginForm) {
       formIsValid = updatedLoginForm[inputIdentifier].valid && formIsValid
     }
