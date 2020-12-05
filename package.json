@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.config.js",
     "start": "node src/server/index.js",
+    "create-csv": "node src/database/scripts/seedPgDo.js && node src/database/scripts/seedPgPh.js && node src/database/scripts/seedPgEc.js ",
+    "create-db-schema": "node src/database/models/schema.js",
     "react-dev": "webpack --mode development --config webpack.config.js --watch --progress",
     "server-dev": "nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"

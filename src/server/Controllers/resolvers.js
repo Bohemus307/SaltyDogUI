@@ -23,11 +23,6 @@ const Query = {
     });
     return result;
   },
-  value: async (root, { reading_id }, context) => {
-    const id = parseInt(reading_id, 10);
-    const result = await context.prisma.values.findUnique({ where: { reading_id: id } });
-    return result;
-  },
 };
 
 const Mutation = {
