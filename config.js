@@ -30,7 +30,7 @@ const prod = {
     port: parseInt(process.env.TEST_DB_PORT, 10) || 5432,
     database: process.env.TEST_DB_NAME || 'saltydog1',
     user: process.env.PGUSER,
-    password: process.env.PG_AWS_PASSWORD || null,
+    password: process.env.PG_AWS_PASSWORD,
   },
 };
 

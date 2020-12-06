@@ -1,16 +1,13 @@
-import React, { Component } from 'react';
+import React, { PureComponent } from 'react';
 import propTypes from 'prop-types';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 import classes from './Modal.css';
 import Backdrop from '../Backdrop/Backdrop.jsx';
 
-class Modal extends Component {
-  shouldComponentUpdate(nextProps, { show, children }) {
-    return nextProps.show !== show || nextProps.children !== children;
-  }
-
+class Modal extends PureComponent {
   render() {
     const { show, modalClosed, children } = this.props;
+
     return (
       <Aux>
         <Backdrop show={show} clicked={modalClosed} />
@@ -29,9 +26,13 @@ class Modal extends Component {
 }
 
 Modal.propTypes = {
-  show: propTypes.bool.isRequired,
+  show: propTypes.bool,
   modalClosed: propTypes.func.isRequired,
-  children: propTypes.object.isRequired,
+  children: propTypes.node.isRequired,
+};
+
+Modal.defaultProps = {
+  show: true,
 };
 
 export default Modal;

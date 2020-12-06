@@ -1,12 +1,18 @@
-import React, { useState } from 'react';
+import React, { useState, Suspense } from 'react';
 import propTypes from 'prop-types';
 import classes from './Main.css';
 import Aux from '../../Hoc/Aux/Aux.jsx';
 
-import Sensor from '../Sensor/Sensor.jsx';
-import SensorOverview from '../SensorOverview/SensorOverview.jsx';
-import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
-import PieChartReducer from '../PieChartReducer/PieChartReducer.jsx';
+import ErrorBoundary from '../Error Boundary/ErrorBoundary.jsx';
+// import Sensor from '../Sensor/Sensor.jsx';
+// import SensorOverview from '../SensorOverview/SensorOverview.jsx';
+// import LineChartReducer from '../LineChartReducer/LineChartReducer.jsx';
+// import PieChartReducer from '../PieChartReducer/PieChartReducer.jsx';
+
+const LineChartReducer = React.lazy(() => import('../LineChartReducer/LineChartReducer.jsx'));
+const PieChartReducer = React.lazy(() => import('../PieChartReducer/PieChartReducer.jsx'));
+const SensorOverview = React.lazy(() => import('../SensorOverview/SensorOverview.jsx'));
+const Sensor = React.lazy(() => import('../Sensor/Sensor.jsx'));
 
 const Main = ({ displayItem }) => {
   const [sensors] = useState([
@@ -43,12 +49,16 @@ const Main = ({ displayItem }) => {
   const currentSensors = (
     sensors.map((sensor) => (
       <div key={sensor.type} className={classes.Sensor}>
-        <Sensor
-          id={sensor.id}
-          key={sensor.type}
-          type={sensor.type}
-          unitOfMeasure={sensor.unitOfMeasure}
-        />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <Sensor
+              id={sensor.id}
+              key={sensor.type}
+              type={sensor.type}
+              unitOfMeasure={sensor.unitOfMeasure}
+            />
+          </Suspense>
+        </ErrorBoundary>
       </div>
     ))
   );
@@ -72,10 +82,18 @@ const Main = ({ displayItem }) => {
       </div>
       <div className={classes.Chart_Wrapper}>
         <div className={(isMonth) ? classes.Line_Month : classes.Line_Chart}>
-          <LineChartReducer changeChartDuration={lineChartHandler} />
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <LineChartReducer changeChartDuration={lineChartHandler} />
+            </Suspense>
+          </ErrorBoundary>
         </div>
         <div className={classes.Pie_Chart}>
-          <PieChartReducer />
+          <ErrorBoundary>
+            <Suspense fallback={<div>Loading...</div>}>
+              <PieChartReducer />
+            </Suspense>
+          </ErrorBoundary>
         </div>
       </div>
     </Aux>
@@ -87,17 +105,29 @@ const Main = ({ displayItem }) => {
       break;
     case ('Ph'):
       mainElement = (
-        <SensorOverview id="BJenjRROw" type="PH-1" loading={false} unitOfMeasure={null} />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SensorOverview id="BJenjRROw" type="PH-1" loading={false} unitOfMeasure={null} />
+          </Suspense>
+        </ErrorBoundary>
       );
       break;
     case ('EC'):
       mainElement = (
-        <SensorOverview id="HJRa-DOuG" type="EC-1" loading={false} unitOfMeasure="mS/cm" />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SensorOverview id="HJRa-DOuG" type="EC-1" loading={false} unitOfMeasure="mS/cm" />
+          </Suspense>
+        </ErrorBoundary>
       );
       break;
     case ('DO'):
       mainElement = (
-        <SensorOverview id="SJV0-wdOM" type="DO-1" loading={false} unitOfMeasure="mg/L" />
+        <ErrorBoundary>
+          <Suspense fallback={<div>Loading...</div>}>
+            <SensorOverview id="SJV0-wdOM" type="DO-1" loading={false} unitOfMeasure="mg/L" />
+          </Suspense>
+        </ErrorBoundary>
       );
       break;
       // case ('Moisture'):

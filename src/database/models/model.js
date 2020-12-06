@@ -16,6 +16,7 @@ module.exports = {
 
   addNewUser: (newUser) => {
     const values = Object.values(newUser);
+    console.log('in db', values);
     const sqlString = 'INSERT INTO Users(userName, email, password, employeeId, userId) VALUES ($1, $2, $3, $4, $5)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));

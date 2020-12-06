@@ -6,6 +6,8 @@
   "scripts": {
     "build": "webpack --mode production --config webpack.config.js",
     "start": "node src/server/index.js",
+    "create-csv": "node src/database/scripts/seedPgDo.js && node src/database/scripts/seedPgPh.js && node src/database/scripts/seedPgEc.js ",
+    "create-db-schema": "node src/database/models/schema.js",
     "react-dev": "webpack --mode development --config webpack.config.js --watch --progress",
     "server-dev": "nodemon src/server/index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -29,6 +31,7 @@
     "@prisma/client": "^2.12.1",
     "apollo-boost": "^0.4.9",
     "apollo-link-ws": "^1.0.20",
+    "apollo-server": "^2.19.0",
     "apollo-server-express": "^2.18.2",
     "apollo-utilities": "^1.3.4",
     "axios": "^0.20.0",

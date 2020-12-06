@@ -1,19 +1,6 @@
 import gql from 'graphql-tag';
 import client from './client';
 
-// needs checked for single value by id
-export const valueQuery = gql`
- query valueQuery($id: ID!) {
-  value(reading_id: $id){
-   reading
-   reading_id
-   correlateid
-   date
-   time
-  }
- }
-`;
-
 export const alertQuery = gql`
  query alertQuery($id: ID!) {
   alert(sensor_id: $id){
@@ -34,7 +21,6 @@ export const sensorQuery = gql`
    sensorname
    location
    values {
-     reading_id
      correlateid
      reading
      time
@@ -52,7 +38,6 @@ export const weekOfDataQuery = gql`
    sensorname
    location
    weekOfValues {
-     reading_id
      correlateid
      reading
      time
@@ -70,7 +55,6 @@ export const monthOfDataQuery = gql`
    sensorname
    location
    monthOfValues {
-     reading_id
      correlateid
      reading
      time
@@ -88,7 +72,6 @@ export const exportDataQuery = gql`
    sensorname
    location
    exportValues {
-     reading_id
      correlateid
      reading
      time

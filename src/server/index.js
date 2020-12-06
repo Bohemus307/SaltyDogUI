@@ -55,6 +55,9 @@ app.post('/login', async (req, res) => {
         message: 'Bad request - Email is incorrect',
       });
     }
+    let hashCheck = await bcrypt.compare(password, hash).then((result) => {
+      // result == true
+    });
     const passwordCheck = await getUserByPassword(password);
     if (passwordCheck.rows.length === 0) {
       res.status(401).json({
@@ -75,26 +78,33 @@ app.post('/login', async (req, res) => {
 
 app.post('/signup', async (req, res) => {
   try {
-    const newUser = req.body.user;
+    let newUser = req.body.user;
     if (newUser === undefined) {
       res.status(400).json({
         message: 'Bad request - must include all form fields',
       });
     }
-    newUser.userId = 'asdfghjkl';
-    newUser.password = await bcrypt.hash(req.body.password, 5);
+    // const password = await bcrypt.hash(req.body.password, 5);
+    console.log('in server', newUser);
+    const hashPassword = await bcrypt.hash(newUser.password, 5, (err, hash) => {
+      newUser = { ...newUser, password: hash };
+      return newUser;
+    });
+    console.log('in server', newUser);
+    newUser = { ...newUser, userId: 'asdfghjkl' };
+    console.log('in server', newUser);
     const addUser = await addNewUser({ ...newUser });
     res.sendStatus(200).json({ newUser: addUser });
   } catch (err) {
     res.status(400).json({
-      message: 'Failed to Signup User',
+      message: 'Failed to Signup User in server',
       error: err,
     });
   }
 });
 
 // graphQL connect
-const typeDefs = gql(fs.readFileSync('/Users/joshuaoxner/SaltyDogUI/src/server/schema.graphql', { encoding: 'utf8' }));
+const typeDefs = gql(fs.readFileSync(path.join(__dirname, '/schema.graphql'), { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
 
 const prisma = new PrismaClient();

@@ -33,6 +33,7 @@ export async function login(email, password) {
 }
 
 export async function createAccount(user) {
+  console.log('in auth',user)
   const response = await fetch('http://localhost:3030/signup', {
     method: 'POST',
     headers: { 'content-type': 'application/json' },

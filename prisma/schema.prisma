@@ -9,25 +9,27 @@ datasource db {
 }
 
 model sensors {
-  sensor_id   Int      @id @default(autoincrement()) @db.Integer
-  correlateid String   @unique @db.VarChar(20)
-  sensorname  String   @unique @db.VarChar(80)
-  location    String   @db.VarChar(100)
-  values      values[]
+  sensor_id     Int      @id @default(autoincrement()) @db.Integer
+  correlateid   String   @unique @db.VarChar(20)
+  sensorname    String   @unique @db.VarChar(80)
+  location      String   @db.VarChar(25)
+  unitofmeasure String   @db.VarChar(20)
+  values        values[]
+
+  @@index([correlateid], name: "idx_correlateid")
 }
 
 model users {
-  id         Int     @id @default(autoincrement()) @map("_id") @db.Integer
-  userid     String  @db.VarChar(20)
-  username   String  @db.VarChar(80)
-  employeeid String  @db.VarChar(15)
-  email      String? @unique @db.VarChar(35)
-  password   String  @db.VarChar(10)
+  id         Int    @id @default(autoincrement()) @map("_id") @db.Integer
+  userid     String @db.VarChar(20)
+  username   String @db.VarChar(80)
+  employeeid String @db.VarChar(15)
+  email      String @unique @db.VarChar(35)
+  password   String @db.VarChar(10)
 }
 
 model values {
   id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
-  reading_id  Int      @unique @default(dbgenerated()) @db.Integer
   correlateid String   @db.VarChar(20)
   time        DateTime @db.Timestamp(6)
   reading     Float    @db.DoublePrecision

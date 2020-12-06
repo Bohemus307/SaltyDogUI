@@ -116,8 +116,8 @@ const SignUp = () => {
         value: '',
         validation: {
           required: true,
-          minLength: 7,
-          maxLength: 12,
+          minLength: 5,
+          maxLength: 15,
         },
         valid: false,
         touched: false,
@@ -143,12 +143,22 @@ const SignUp = () => {
     updatedLoginForm[inputIdentifier] = updatedFormELement;
 
     let valid = true;
+    const keys = Object.keys(inputElements);
+    const values = Object.values(inputElements);
+    const areAllValid = values.filter((value) => {
+      if (value.valid) {
+        return true;
+      }
+      return false;
+    });
+    if (areAllValid.length === keys.length) {
+      setValid(true);
+    }
+    console.log(areAllValid.length === keys.length);
 
     for (const inputIdentifiers in updatedLoginForm) {
       valid = updatedLoginForm[inputIdentifier].valid && formIsValid;
     }
-
-    setValid(valid);
 
     setInputElements(updatedLoginForm);
   };
@@ -216,7 +226,7 @@ const SignUp = () => {
           label={inputElement.config.elementConfig.image}
         />
       ))}
-      <button type="submit" onSubmit={loginHandler} disabled={!formIsValid}>Sign Up</button>
+      <button type="submit" disabled={!formIsValid}>Sign Up</button>
       <Link className={classes.Redirect} to="/login">
         Already have an account?
       </Link>
@@ -225,7 +235,7 @@ const SignUp = () => {
 
   return (
     <div>
-      <Modal show={!(isLoggedIn)} modalClosed={handleClick}>
+      <Modal show={!(isLoggedIn())} modalClosed={handleClick}>
         <div className={classes.Form_Div}>
           <h1 style={{ marginBottom: '0px', marginLeft: '20px' }}>
             Create Account
