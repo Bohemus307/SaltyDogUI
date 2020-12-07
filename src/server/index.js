@@ -14,7 +14,7 @@ const { PrismaClient } = require('@prisma/client');
 const config = require('../../config');
 // const db = require('../database/connection');
 
-const { getUserByEmail, addNewUser, getUserByPassword, getUserByUserName } = require('../database/models/model.js');
+const { getUserByEmail, addNewUser } = require('../database/models/model.js');
 
 const jwtSecret = Buffer.from(config.app.secret, 'base64');
 
@@ -44,15 +44,14 @@ app.get('/*', (req, res) => {
 const passwordCompareHash = async (password, email) => {
   // grab user from db
   const getUser = await getUserByEmail(email);
-    console.log('rows:', getUser.rows);
+  // compare pass and hash
   const compare = await bcrypt.compare(password, getUser.rows[0].password);
   return compare;
 };
 
 app.post('/login', async (req, res) => {
   try {
-    const { email, password, userName } = req.body;
-    console.log('user', email);
+    const { email, password } = req.body;
     if (email.length === 0 || password.length === 0) {
       res.status(400).json({
         message: 'Bad request - must include Email and Password',
@@ -70,14 +69,8 @@ app.post('/login', async (req, res) => {
         message: 'Bad request - Password is incorrect',
       });
     }
-    // const passwordCheck = await getUserByPassword(password);
-    // if (passwordCheck.rows.length === 0) {
-    //   res.status(401).json({
-    //     message: 'Bad request - Password is incorrect',
-    //   });
-    // }
-    const token = jwt.sign({ sub: 'userName' }, jwtSecret);
-
+    const getUser = await getUserByEmail(email);
+    const token = await jwt.sign({ sub: getUser.rows[0].username }, jwtSecret);
     res.send({ token });
   } catch (err) {
     res.status(401).json({
@@ -100,10 +93,8 @@ app.post('/signup', async (req, res) => {
         message: 'Bad request - must include all form fields',
       });
     }
-
     newUser.userId = 'asdfgghjkl';
     newUser.password = await passwordHasher(newUser.password);
-    console.log('in server2', newUser);
     const addUser = await addNewUser({ ...newUser });
     res.sendStatus(200);
   } catch (err) {
@@ -117,7 +108,6 @@ app.post('/signup', async (req, res) => {
 // graphQL connect
 const typeDefs = gql(fs.readFileSync(path.join(__dirname, '/schema.graphql'), { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
-const { resolve } = require('path');
 
 const prisma = new PrismaClient();
 
