@@ -14,7 +14,7 @@ const { PrismaClient } = require('@prisma/client');
 const config = require('../../config');
 // const db = require('../database/connection');
 
-const { getUserByEmail, addNewUser, getUserByPassword } = require('../database/models/model.js');
+const { getUserByEmail, addNewUser, getUserByPassword, getUserByUserName } = require('../database/models/model.js');
 
 const jwtSecret = Buffer.from(config.app.secret, 'base64');
 
@@ -41,9 +41,18 @@ app.get('/*', (req, res) => {
   });
 });
 
+const passwordCompareHash = async (password, email) => {
+  // grab user from db
+  const getUser = await getUserByEmail(email);
+    console.log('rows:', getUser.rows);
+  const compare = await bcrypt.compare(password, getUser.rows[0].password);
+  return compare;
+};
+
 app.post('/login', async (req, res) => {
   try {
     const { email, password, userName } = req.body;
+    console.log('user', email);
     if (email.length === 0 || password.length === 0) {
       res.status(400).json({
         message: 'Bad request - must include Email and Password',
@@ -55,17 +64,19 @@ app.post('/login', async (req, res) => {
         message: 'Bad request - Email is incorrect',
       });
     }
-    let hashCheck = await bcrypt.compare(password, hash).then((result) => {
-      // result == true
-    });
-    const passwordCheck = await getUserByPassword(password);
-    if (passwordCheck.rows.length === 0) {
+    const passwordHashCheck = await passwordCompareHash(password, email);
+    if (!passwordHashCheck) {
       res.status(401).json({
         message: 'Bad request - Password is incorrect',
       });
     }
-
-    const token = jwt.sign({ sub: userName }, jwtSecret);
+    // const passwordCheck = await getUserByPassword(password);
+    // if (passwordCheck.rows.length === 0) {
+    //   res.status(401).json({
+    //     message: 'Bad request - Password is incorrect',
+    //   });
+    // }
+    const token = jwt.sign({ sub: 'userName' }, jwtSecret);
 
     res.send({ token });
   } catch (err) {
@@ -76,25 +87,25 @@ app.post('/login', async (req, res) => {
   }
 });
 
+const passwordHasher = async (password) => {
+  const hash = await bcrypt.hash(password, 5);
+  return hash;
+};
+
 app.post('/signup', async (req, res) => {
   try {
-    let newUser = req.body.user;
+    const newUser = req.body.user;
     if (newUser === undefined) {
       res.status(400).json({
         message: 'Bad request - must include all form fields',
       });
     }
-    // const password = await bcrypt.hash(req.body.password, 5);
-    console.log('in server', newUser);
-    const hashPassword = await bcrypt.hash(newUser.password, 5, (err, hash) => {
-      newUser = { ...newUser, password: hash };
-      return newUser;
-    });
-    console.log('in server', newUser);
-    newUser = { ...newUser, userId: 'asdfghjkl' };
-    console.log('in server', newUser);
+
+    newUser.userId = 'asdfgghjkl';
+    newUser.password = await passwordHasher(newUser.password);
+    console.log('in server2', newUser);
     const addUser = await addNewUser({ ...newUser });
-    res.sendStatus(200).json({ newUser: addUser });
+    res.sendStatus(200);
   } catch (err) {
     res.status(400).json({
       message: 'Failed to Signup User in server',
@@ -106,6 +117,7 @@ app.post('/signup', async (req, res) => {
 // graphQL connect
 const typeDefs = gql(fs.readFileSync(path.join(__dirname, '/schema.graphql'), { encoding: 'utf8' }));
 const resolvers = require('./Controllers/resolvers');
+const { resolve } = require('path');
 
 const prisma = new PrismaClient();
 

@@ -2,6 +2,12 @@ const db = require('../connection.js');
 
 module.exports = {
   // crud for users
+  getUserByUserName: (userName) => {
+    const sqlString = 'SELECT * FROM Users WHERE userName = $1';
+    return db.query(sqlString, [userName])
+      .catch((e) => console.error(e.stack));
+  },
+
   getUserByEmail: (email) => {
     const sqlString = 'SELECT * FROM Users WHERE email = $1';
     return db.query(sqlString, [email])
@@ -16,7 +22,6 @@ module.exports = {
 
   addNewUser: (newUser) => {
     const values = Object.values(newUser);
-    console.log('in db', values);
     const sqlString = 'INSERT INTO Users(userName, email, password, employeeId, userId) VALUES ($1, $2, $3, $4, $5)';
     return db.query(sqlString, [...values])
       .catch((e) => console.error(e.stack));
