@@ -50,8 +50,9 @@
 * [React](React.js)
 * [GraphQL](GraphQL)
 * [TypeScript](TypeScript)
-
-
+* [Prisma](Prisma)
+* [PostgresQL](Postgresql)
+* [Express](Express)
 
 <!-- GETTING STARTED -->
 ## Getting Started
