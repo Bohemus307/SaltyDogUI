@@ -103,7 +103,6 @@ const LineChartReducer = ({ changeChartDuration }) => {
     setDuration('Past Week');
     changeChartDuration();
   };
-
   return (
     <Aux>
       <LineChart data={allChartData} inputChanged={inputChangeHandler} />
