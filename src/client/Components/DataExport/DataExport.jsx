@@ -80,6 +80,14 @@ const DataExport = ({ id }) => {
     return isValid;
   };
 
+  const asyncExport = async (asyncData) => {
+    try {
+      await setData(asyncData.sensor.exportValues);
+      const click = await csvLink.current.link.click();
+      return click;
+    } catch (err) { console.log(err); }
+  };
+
   const [getExportData, { loading, error, data }] = useLazyQuery(exportDataQuery,
     {
       onCompleted: () => asyncExport(data),
@@ -95,13 +103,6 @@ const DataExport = ({ id }) => {
   if (data) {
     console.log('csvdata: ', data?.sensor?.exportValues);
   }
-  const asyncExport = async (data) => {
-    try {
-      await setData(data.sensor.exportValues);
-      const click = await csvLink.current.link.click();
-      return click;
-    } catch (err) { console.log(err); }
-  };
 
   const exportHandler = (event) => {
     event.preventDefault();

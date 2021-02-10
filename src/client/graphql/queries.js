@@ -123,10 +123,10 @@ export const updateAlert = gql`
   }
 `;
 
-export const loadValue = async (id) => {
-  const { data: { value } } = await client.query({ query: valueQuery, variables: { id } });
-  return value;
-};
+// export const loadValue = async (id) => {
+//   const { data: { value } } = await client.query({ query: valueQuery, variables: { id } });
+//   return value;
+// };
 
 export const loadSensorData = async (id) => {
   const { data: { sensor } } = await client.query({ query: sensorQuery, variables: { id } });
