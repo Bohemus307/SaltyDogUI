@@ -1,4 +1,3 @@
-<!-- PROJECT LOGO -->
 <br />
 <p align="center">
   <a href="https://github.com/bohemus307/SaltyDogUI">
@@ -8,7 +7,7 @@
   <h3 align="center">SaltyDog UI</h3>
 
   <p align="center">
-    This is the user interface software for a salinity sensor system that tracks EC, PH, and DO levels in nutrient saltwater in a Heron Farms indoor grow enviroment. It Use Atlas Scientific sensors and communicates trhough wifi to an AWS thing instance where it transmits data via and API call to our application. This User interface uses React and GraphQL with an Express Server that utilizes a PG Database instance with Timescale DB organizing the time series data.
+    This is the user interface software for a salinity sensor system that tracks EC, PH, and DO levels in nutrient saltwater used in an Heron Farms indoor farm. It Uses Atlas Scientific sensors and communicates through wifi to an AWS IoT core where it transmits data to aurora DB through event actions. This User interface uses React and Apollo GraphQL utilizing Prisma with an Express Server that utilizes a PG Database instance with Timescale DB organizing the time series data. In deployment the DB is replaced with an AWS aurora DB instance with data coming from an AWS IoT Thing action.
     <br />
     <a href="https://github.com/bohemus307/SaltyDogUI"><strong>Explore the docs »</strong></a>
     <br />
@@ -21,9 +20,6 @@
   </p>
 </p>
 
-
-
-<!-- TABLE OF CONTENTS -->
 ## Table of Contents
 
 * [About the Project](#about-the-project)
@@ -38,9 +34,6 @@
 * [Contact](#contact)
 * [Acknowledgements](#acknowledgements)
 
-
-
-<!-- ABOUT THE PROJECT -->
 ## About The Project
 
 [![Product Name Screen Shot][product-screenshot]](https://example.com)
@@ -54,7 +47,6 @@
 * [PostgresQL](Postgresql)
 * [Express](Express)
 
-<!-- GETTING STARTED -->
 ## Getting Started
 
 To get a local copy up and running follow these simple steps.
@@ -78,21 +70,16 @@ git clone https://github.com/bohemus307/SaltyDogUI.git
 npm install
 ```
 
-
-
-<!-- USAGE EXAMPLES -->
 ## Usage
 
 Use this space to show useful examples of how a project can be used. Additional screenshots, code examples and demos work well in this space. You may also link to more resources.
 
 _For more examples, please refer to the [Documentation](https://example.com)_
 
-<!-- ROADMAP -->
 ## Roadmap
 
 See the [open issues](https://github.com/github_username/repo_name/issues) for a list of proposed features (and known issues).
 
-<!-- CONTRIBUTING -->
 ## Contributing
 
 Contributions are what make the open source community such an amazing place to be learn, inspire, and create. Any contributions you make are **greatly appreciated**.
