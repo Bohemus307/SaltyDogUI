@@ -9,7 +9,7 @@ const users = () => {
     userName VARCHAR(80) NOT NULL,
     employeeId VARCHAR(15) NOT NULL,
     email VARCHAR(35) UNIQUE NOT NULL,
-    password VARCHAR(10) NOT NULL
+    password VARCHAR(100) NOT NULL
    )`;
 
   return db.query('DROP TABLE IF EXISTS users')
@@ -94,11 +94,6 @@ const seedPgDatabaseWithPhValues = () => {
   const sqlString = `COPY values(correlateId, time, reading, date) FROM '${pathToCSV}' DELIMITER '${delimiter}' CSV HEADER`;
   return db.query(sqlString);
 };
-
-// const indexValueCorrelateIdValue = () => {
-//   const sqlString = 'CREATE INDEX idx_correlateId ON values(correlateID)';
-//   return db.query(sqlString);
-// };
 
 const indexValueCorrelateIdSensor = () => {
   const sqlString = 'CREATE INDEX idx_correlateId ON sensors(correlateID)';

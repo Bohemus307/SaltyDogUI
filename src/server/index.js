@@ -52,6 +52,7 @@ const passwordCompareHash = async (password, email) => {
 app.post('/login', async (req, res) => {
   try {
     const { email, password } = req.body;
+    console.log(email, password);
     if (email.length === 0 || password.length === 0) {
       res.status(400).json({
         message: 'Bad request - must include Email and Password',
@@ -90,16 +91,17 @@ app.post('/signup', async (req, res) => {
     const newUser = req.body.user;
     if (newUser === undefined) {
       res.status(400).json({
-        message: 'Bad request - must include all form fields',
+        message: 'Bad req',
       });
     }
     newUser.userId = 'asdfgghjkl';
     newUser.password = await passwordHasher(newUser.password);
     const addUser = await addNewUser({ ...newUser });
     res.sendStatus(200);
+    return addUser;
   } catch (err) {
     res.status(400).json({
-      message: 'Failed to Signup User in server',
+      message: 'Failed',
       error: err,
     });
   }

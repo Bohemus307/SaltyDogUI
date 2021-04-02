@@ -9,7 +9,7 @@ datasource db {
 }
 
 model sensors {
-  sensor_id     Int      @id @default(autoincrement()) @db.Integer
+  sensor_id     Int      @id @default(autoincrement())
   correlateid   String   @unique @db.VarChar(20)
   sensorname    String   @unique @db.VarChar(80)
   location      String   @db.VarChar(25)
@@ -20,7 +20,7 @@ model sensors {
 }
 
 model users {
-  id         Int    @id @default(autoincrement()) @map("_id") @db.Integer
+  id         Int    @id @default(autoincrement()) @map("_id")
   userid     String @db.VarChar(20)
   username   String @db.VarChar(80)
   employeeid String @db.VarChar(15)
@@ -29,19 +29,19 @@ model users {
 }
 
 model values {
-  id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
+  id          Int      @id @default(autoincrement()) @map("_id")
   correlateid String   @db.VarChar(20)
   time        DateTime @db.Timestamp(6)
-  reading     Float    @db.DoublePrecision
+  reading     Float
   date        DateTime @db.Date
   sensors     sensors  @relation(fields: [correlateid], references: [correlateid])
 }
 
 model alerts {
-  id          Int      @id @default(autoincrement()) @map("_id") @db.Integer
+  id          Int      @id @default(autoincrement()) @map("_id")
   sensor_id   String   @unique @db.VarChar(20)
   settingsid  String   @db.VarChar(20)
-  maxsetvalue Float    @db.DoublePrecision
-  minsetvalue Float    @db.DoublePrecision
+  maxsetvalue Float
+  minsetvalue Float
   dateset     DateTime @db.Date
 }
